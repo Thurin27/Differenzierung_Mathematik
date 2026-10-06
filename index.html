@@ -11,7 +11,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html" aria-current="page">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html">M2 Einheiten</a><a href="modul-04.html">M4 Umstellen</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html" aria-current="page">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -19,7 +19,7 @@
   <div class="eyebrow">Differenzierungsfach · Unterstufe · alle Fachrichtungen</div>
   <h1>Mathe für den Betrieb</h1>
   <p class="lead">Dieser Kurs übt die Mathematik, die du in den drei Ausbildungsjahren immer wieder brauchst: Einheiten umrechnen, Formeln umstellen, Flächen und Volumen berechnen. Du arbeitest selbstständig in deinem Tempo und auf deinem Niveau. Die Lehrkraft begleitet dich und hilft, wenn du nicht weiterkommst.</p>
-  <p class="muted">Alle Aufgaben spielen im Entsorgungs- und Wasserbetrieb Emscherstadt – mit Kläranlage, Wertstoffhof, Kanalnetz und Wasserwerk.</p>
+  <p class="muted">Alle Aufgaben spielen in Schwierbach – in der Kläranlage Schwierbach mit dem Pumpwerk Talstraße, im Abfall- &amp; Energiezentrum Schwierbach, im Kanalnetz und im Wasserwerk. Dieselben Anlagen kennst du aus den Simulationen.</p>
 </div>
 
 <section id="ablauf">
@@ -45,11 +45,11 @@
     <a class="mod" href="rechenweg.html" data-mod="rw"><span class="nr">0</span><h3>Der Rechenweg</h3><p class="desc">Gegeben – gesucht – Formel – Umstellung – Rechnung – Antwortsatz</p><div class="st"><span class="pill pflicht">Pflichtkern</span></div></a>
     <div class="mod later"><span class="nr">1</span><h3>Zahlen &amp; Rechenregeln</h3><p class="desc">Brüche, Zehnerpotenzen, Runden, Taschenrechner</p><div class="st"><span class="pill">in Arbeit</span></div></div>
     <a class="mod" href="modul-02.html" data-mod="m2"><span class="nr">2</span><h3>Einheiten umrechnen</h3><p class="desc">m³ und Liter, L/s und m³/h, mg/L und g/m³</p><div class="st"><span class="pill pflicht">Pflichtkern</span></div></a>
-    <div class="mod later"><span class="nr">3</span><h3>Dreisatz, Prozent, Verhältnisse</h3><p class="desc">Abbaugrad, Recyclingquote, Dosierung, Promille</p><div class="st"><span class="pill">in Arbeit</span></div></div>
+    <a class="mod" href="modul-03.html" data-mod="m3"><span class="nr">3</span><h3>Dreisatz, Prozent, Verhältnisse</h3><p class="desc">Fällmittel, Sortierquote, Entwässerung, Promille, ppm</p><div class="st"></div></a>
     <a class="mod" href="modul-04.html" data-mod="m4"><span class="nr">4</span><h3>Formeln umstellen</h3><p class="desc">Gegenoperationen, Klammern, Quadrat und Wurzel</p><div class="st"><span class="pill pflicht">Pflichtkern</span></div></a>
     <div class="mod later"><span class="nr">5</span><h3>Mit Formeln rechnen</h3><p class="desc">Werte mit Einheiten einsetzen, Einheitenkontrolle</p><div class="st"><span class="pill pflicht">Pflichtkern</span><span class="pill">in Arbeit</span></div></div>
     <div class="mod later"><span class="nr">6</span><h3>Flächen</h3><p class="desc">Trapez, Kreis, Kreisring, zusammengesetzte Flächen</p><div class="st"><span class="pill">in Arbeit</span></div></div>
-    <div class="mod later"><span class="nr">7</span><h3>Volumen &amp; Masse</h3><p class="desc">Becken, Rohre, Schüttkegel, Halden, Dichte</p><div class="st"><span class="pill pflicht">Pflichtkern</span><span class="pill">in Arbeit</span></div></div>
+    <a class="mod" href="modul-07.html" data-mod="m7"><span class="nr">7</span><h3>Volumen &amp; Masse</h3><p class="desc">Becken, Rohre, Silos, Schüttkegel, Halden, Dichte</p><div class="st"><span class="pill pflicht">Pflichtkern</span></div></a>
     <div class="mod later"><span class="nr">8</span><h3>Diagramme</h3><p class="desc">Ganglinien, Kennlinien, lineare Zusammenhänge</p><div class="st"><span class="pill">in Arbeit</span></div></div>
     <div class="mod later"><span class="nr">9</span><h3>Die Berufsformeln</h3><p class="desc">Durchfluss, Verweilzeit, Fracht, Massenbilanz, Gefälle</p><div class="st"><span class="pill">in Arbeit</span></div></div>
     <div class="mod later"><span class="nr">10</span><h3>Vertiefung</h3><p class="desc">pH und Logarithmus, Abbau, Böschungswinkel</p><div class="st"><span class="pill">in Arbeit</span></div></div>
@@ -82,7 +82,7 @@
 
 <script src="assets/kurs.js"></script>
 <script>
-K.overview([{id:'rw',need:4},{id:'m2',nr:2},{id:'m4',nr:4}]);
+K.overview([{id:'rw',need:4},{id:'m2',nr:2},{id:'m3',nr:3},{id:'m4',nr:4},{id:'m7',nr:7}]);
 </script>
 </body>
 </html>

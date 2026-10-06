@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modul 7 Volumen und Masse – Mathe-Aufbaukurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="assets/kurs.css">
+</head>
+<body>
+<header class="site"><div class="wrap sitebar">
+  <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-07.html" aria-current="page" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
+</div></header>
+
+<main class="wrap">
+<header class="top">
+  <div class="modnum" aria-hidden="true">7</div>
+  <div class="eyebrow">Mathe-Aufbaukurs · Modul 7</div>
+  <h1>Volumen &amp; Masse</h1>
+  <p class="ctx">Becken, Rohre, Silos, Container und Halden: In Schwierbach musst du ständig wissen, wie viel hineinpasst und wie schwer es ist. Fast alle Körper berechnest du mit derselben Idee – Grundfläche mal Höhe.</p>
+</header>
+
+<div class="bar">
+  <nav aria-label="Abschnitte"><a href="#ziele">Ziele</a><a href="#idee">Grundidee</a><a href="#koerper">Körper</a><a href="#masse">Masse</a><a href="#beispiel">Schritt für Schritt</a><a href="#trainer">Trainer</a><a href="#rechnen">Rechnen</a><a href="#stand">Lernstand</a></nav>
+  <div data-k="niveau"></div>
+</div>
+
+<section id="ziele">
+  <h2>Das kannst du nach diesem Modul</h2>
+  <div class="raster">
+    <div><span class="lvl B">Basis</span><ul><li>Ich kann das Volumen von Quader und Zylinder berechnen.</li><li>Ich kann mit <span class="f"><i>m</i> = <i>ρ</i> · <i>V</i></span> die Masse bestimmen.</li></ul></div>
+    <div><span class="lvl S">Standard</span><ul><li>Ich kann Kegel, Rohrinhalte und Grabenprismen berechnen.</li><li>Ich rechne Maße vorher in passende Einheiten um.</li></ul></div>
+    <div><span class="lvl V">Vertiefung</span><ul><li>Ich kann zusammengesetzte Körper, Stümpfe und Hohlzylinder berechnen.</li><li>Ich verbinde Volumen mit Masse und Füllzeit.</li></ul></div>
+  </div>
+</section>
+
+<section id="idee">
+  <h2>Die Grundidee: Grundfläche mal Höhe</h2>
+  <div class="figure">
+  <svg viewBox="0 0 600 220" role="img" aria-label="Quader, Zylinder und Kegel mit gleicher Grundfläche und Höhe. Quader und Zylinder: V gleich A mal h. Kegel: ein Drittel davon." style="max-width:100%;min-width:420px">
+    <!-- Quader -->
+    <polygon points="30,170 130,170 160,145 60,145" fill="var(--blue)" opacity=".85"/>
+    <polygon points="30,70 130,70 130,170 30,170" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <polygon points="130,70 160,45 160,145 130,170" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <polygon points="30,70 60,45 160,45 130,70" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <line x1="30" y1="170" x2="130" y2="170" stroke="var(--blue)" stroke-width="1.5"/>
+    <text x="95" y="205" text-anchor="middle" font-size="15" fill="var(--ink)">V = A · h</text>
+    <!-- Zylinder -->
+    <path d="M240 60 V160 A60 16 0 0 0 360 160 V60" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="160" rx="60" ry="16" fill="var(--blue)" opacity=".85"/>
+    <ellipse cx="300" cy="60" rx="60" ry="16" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <line x1="372" y1="60" x2="372" y2="160" stroke="var(--navy)" stroke-width="1.2"/>
+    <text x="380" y="115" font-size="15" fill="var(--navy)" font-style="italic">h</text>
+    <text x="300" y="205" text-anchor="middle" font-size="15" fill="var(--ink)">V = A · h</text>
+    <!-- Kegel -->
+    <path d="M440 160 L500 52 L560 160 A60 16 0 0 1 440 160Z" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <ellipse cx="500" cy="160" rx="60" ry="16" fill="var(--blue)" opacity=".85"/>
+    <text x="500" y="205" text-anchor="middle" font-size="15" fill="var(--ink)">V = ⅓ · A · h</text>
+    <text x="300" y="22" text-anchor="middle" font-size="13" fill="var(--muted)">dunkel = Grundfläche A</text>
+  </svg>
+  </div>
+  <div class="grid2" style="align-items:start">
+    <div class="box"><h3>Senkrechte Wände</h3><p>Quader, Zylinder, Prisma: Die Grundfläche wird bis oben „gestapelt“. <strong>Volumen = Grundfläche · Höhe.</strong> Die Grundfläche berechnest du wie in Modul 6.</p></div>
+    <div class="box"><h3>Mit Spitze</h3><p>Kegel und Pyramide: Sie laufen oben zu einer Spitze zusammen. Ihr Volumen ist genau <strong>ein Drittel</strong> des passenden Zylinders oder Prismas.</p></div>
+  </div>
+</section>
+
+<section id="koerper">
+  <h2>Die wichtigsten Körper</h2>
+  <div class="tscroll"><table>
+    <thead><tr><th>Körper</th><th>Formel</th><th>In Schwierbach</th></tr></thead>
+    <tbody>
+      <tr><td>Quader</td><td class="op"><span class="f"><i>V</i> = <i>l</i> · <i>b</i> · <i>h</i></span></td><td>Belebungsbecken, Container, Pumpensumpf</td></tr>
+      <tr><td>Zylinder</td><td class="op"><span class="f"><i>V</i> = <span class="fr"><span>π · <i>d</i>²</span><span>4</span></span> · <i>h</i></span></td><td>Nachklärbecken, Tank, Rohrinhalt (<i class="v">h</i> = Länge)</td></tr>
+      <tr><td>Prisma (z. B. Trapez)</td><td class="op"><span class="f"><i>V</i> = <span class="fr"><span><i>a</i> + <i>c</i></span><span>2</span></span> · <i>h</i> · <i>l</i></span></td><td>Rohrgraben, Erdbecken</td></tr>
+      <tr><td>Kegel</td><td class="op"><span class="f"><i>V</i> = <span class="fr"><span>1</span><span>3</span></span> · <span class="fr"><span>π · <i>d</i>²</span><span>4</span></span> · <i>h</i></span></td><td>Schüttkegel, Silotrichter</td></tr>
+      <tr><td>Pyramidenstumpf</td><td class="op"><span class="f"><i>V</i> = <span class="fr"><span><i>h</i></span><span>3</span></span> · (<i>A</i><sub>1</sub> + <i>A</i><sub>2</sub> + √<span style="text-decoration:overline"><i>A</i><sub>1</sub> · <i>A</i><sub>2</sub></span>)</span></td><td>Schlackehalde, Deponieabschnitt</td></tr>
+      <tr><td>Kegelstumpf</td><td class="op"><span class="f"><i>V</i> = <span class="fr"><span>π · <i>h</i></span><span>12</span></span> · (<i>D</i>² + <i>D</i> · <i>d</i> + <i>d</i>²)</span></td><td>Schlammtrichter im Vorklärbecken</td></tr>
+      <tr><td>Hohlzylinder</td><td class="op"><span class="f"><i>V</i> = <span class="fr"><span>π</span><span>4</span></span> · (<i>D</i>² − <i>d</i>²) · <i>l</i></span></td><td>Rohrwand (Materialvolumen)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box merke"><p><strong>Vorher umrechnen:</strong> Alle Maße müssen in derselben Einheit stehen – meistens Meter. Ein Rohr DN 300 hat <span class="f"><i>d</i> = 300&#8202;mm = 0,3&#8202;m</span>. Wer Millimeter und Meter mischt, liegt um den Faktor 1000 oder eine Million daneben.</p></div>
+  <div class="box merke"><p><strong>Zusammengesetzte Körper:</strong> Zerlege den Körper in Teile, die du kennst, und addiere die Volumen – etwa ein Silo aus Zylinder und Kegel. Fehlt ein Teil (Aussparung), ziehst du es ab.</p></div>
+</section>
+
+<section id="masse">
+  <h2>Vom Volumen zur Masse</h2>
+  <p>Die Masse hängt vom Material ab. Das sagt dir die Dichte <i class="v">ρ</i> (rho). Bei losem Material wie Kies, Kompost oder Abfall nimmst du die <strong>Schüttdichte</strong> – sie berücksichtigt die Luft zwischen den Stücken.</p>
+  <div class="box" style="justify-items:start"><span class="f" style="font-size:1.4rem"><i>m</i> = <i>ρ</i> · <i>V</i></span></div>
+  <div class="tscroll"><table>
+    <thead><tr><th>Material</th><th>Dichte / Schüttdichte (Richtwert)</th></tr></thead>
+    <tbody>
+      <tr><td>Wasser, Abwasser, Dünnschlamm</td><td class="num">≈ 1,0 t/m³</td></tr>
+      <tr><td>Beton</td><td class="num">≈ 2,4 t/m³</td></tr>
+      <tr><td>Stahl</td><td class="num">≈ 7,85 t/m³</td></tr>
+      <tr><td>Kies, Sand (lose)</td><td class="num">1,5 – 1,8 t/m³</td></tr>
+      <tr><td>Rostasche / Schlacke (lose)</td><td class="num">1,3 – 1,7 t/m³</td></tr>
+      <tr><td>Kompost</td><td class="num">0,5 – 0,7 t/m³</td></tr>
+      <tr><td>Restabfall lose / verpresst</td><td class="num">0,1 – 0,2 / 0,4 – 0,6 t/m³</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Richtwerte zur Orientierung. In Aufgaben und in der Prüfung gilt immer der angegebene Wert oder der Wert aus der Formelsammlung.</p>
+</section>
+
+<section id="beispiel">
+  <h2>Schritt für Schritt</h2>
+  <p>Klicke dich durch die Beispiele und schreibe jeden Schritt mit.</p>
+  <div data-k="stepper"></div>
+</section>
+
+<section id="trainer">
+  <h2>Volumen-Trainer</h2>
+  <p>Erst überlegen, dann wählen. Es zählt nur der erste Versuch.</p>
+  <div data-k="trainer"></div>
+</section>
+
+<section id="rechnen">
+  <h2>Rechnen im Betrieb</h2>
+  <p>Jede Aufgabe wird mit neuen Zahlen erzeugt. Du kannst bis zu drei Tipps aufdecken. Die Lösung zeigt dir den vollständigen Rechenweg.</p>
+  <div data-k="rechnen"></div>
+</section>
+
+<section id="stand">
+  <h2>Mein Lernstand</h2>
+  <p>Trage am Ende der Stunde den Kontrollcode in deinen Laufzettel ein.</p>
+  <div data-k="stand"></div>
+</section>
+
+<nav class="weiter" aria-label="Weiter"><a href="modul-04.html">← Modul 4 Formeln umstellen</a><a href="index.html">→ Zur Übersicht</a></nav>
+</main>
+<footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
+
+<script src="assets/kurs.js"></script>
+<script>
+(function(){
+const {I,fr,sq,F,M,MI,PL,EQ,u,q,nf,fmt,rnd,res,sqr}=K;
+const V=I('V'),A=I('A'),l=I('l'),b=I('b'),h=I('h'),d=I('d'),D=I('D'),r=I('r'),m=I('m'),rho=I('ρ'),a=I('a'),c=I('c'),Q=I('Q'),t=I('t'),s_=I('s');
+const A1=I('A','1'),A2=I('A','2'),pi='π';
+const z=(x,un)=>`${nf(x)}${u(un)}`;
+const PI=Math.PI;
+const zyl=F(V,EQ,fr(pi+M+sqr(d),'4'),M,h);
+
+const T=(L,n,prompt,ok,w,h_,ask)=>({L,n,prompt,ask:ask||'Welche Antwort ist richtig?',ok,w,h:h_});
+const trainer=[
+ T('B','Quader','Wie berechnest du das Volumen eines Quaders?',F(V,EQ,l,M,b,M,h),[F(V,EQ,l,PL,b,PL,h),F(V,EQ,'2',M,'(',l,PL,b,PL,h,')'),F(V,EQ,l,M,b)],'Grundfläche l · b mal Höhe h.'),
+ T('B','Zylinder','Wie berechnest du das Volumen eines Zylinders?',zyl,[F(V,EQ,pi,M,d,M,h),F(V,EQ,pi,M,sqr(d),M,h),F(V,EQ,fr(pi+M+sqr(d),'4'))],'Kreisfläche π · d² / 4 mal Höhe.'),
+ T('B','Grundidee','„Grundfläche mal Höhe“ gilt für …','Quader und Zylinder',['Kegel und Pyramide','nur für Quader','alle Körper'],'Bei Körpern mit Spitze kommt noch ⅓ dazu.'),
+ T('B','Becken','Ein Becken ist 10 m lang, 5 m breit und 2 m tief. Volumen?','100 m³',['17 m³','50 m³','1000 m³'],'10 · 5 · 2 = 100.'),
+ T('B','Dichte','Welche Dichte hat Wasser ungefähr?','1000 kg/m³',['1 kg/m³','100 kg/m³','10 000 kg/m³'],'1 L Wasser wiegt 1 kg, 1 m³ also 1000 kg = 1 t.'),
+ T('B','Würfel','Ein Würfel hat 2 m Kantenlänge. Volumen?','8 m³',['6 m³','4 m³','12 m³'],'2 · 2 · 2 = 8.'),
+ T('B','Masse','Ein Container fasst 20 m³ Sperrmüll mit 0,2 t/m³. Masse?','4 t',['100 t','20,2 t','0,01 t'],'m = ρ · V = 0,2 · 20.'),
+ T('S','Kegel','Wie berechnest du das Volumen eines Kegels?',F(V,EQ,fr('1','3'),M,fr(pi+M+sqr(d),'4'),M,h),[zyl,F(V,EQ,fr('1','2'),M,fr(pi+M+sqr(d),'4'),M,h),F(V,EQ,'3',M,fr(pi+M+sqr(d),'4'),M,h)],'Ein Drittel des Zylinders mit gleicher Grundfläche und Höhe.'),
+ T('S','Verdoppeln','Der Durchmesser eines Zylinders wird verdoppelt, die Höhe bleibt. Das Volumen wird …','viermal so groß',['doppelt so groß','gleich groß','achtmal so groß'],'d steht im Quadrat: 2² = 4.'),
+ T('S','Kegel und Zylinder','Kegel und Zylinder haben dieselbe Grundfläche und Höhe. Das Kegelvolumen ist …','ein Drittel',['die Hälfte','gleich groß','zwei Drittel'],'Das ist die ⅓-Regel für Körper mit Spitze.'),
+ T('S','Rohrinhalt','Wie viel Wasser passt in 1 m Rohr DN 200 (d = 0,2 m)?','etwa 31 L',['etwa 314 L','etwa 3,1 L','etwa 63 L'],'π · 0,2² / 4 · 1 = 0,0314 m³ = 31,4 L.'),
+ T('S','Schüttdichte','Wie schwer sind 5 m³ Kies mit 1,6 t/m³?','8 t',['3,1 t','6,6 t','0,32 t'],'m = ρ · V = 1,6 · 5.'),
+ T('S','Graben','Wie berechnest du das Volumen eines Grabens mit Trapezquerschnitt?',F(V,EQ,fr(a+PL+c,'2'),M,h,M,l),[F(V,EQ,'(',a,PL,c,')',M,h,M,l),F(V,EQ,a,M,c,M,h,M,l),F(V,EQ,fr(a+PL+c,'2'),M,l)],'Trapezfläche (Grundfläche) mal Länge.'),
+ T('S','Einheiten','Ein Rohr hat d = 400 mm. Was setzt du in die Formel ein, wenn das Volumen in m³ herauskommen soll?','d = 0,4 m',['d = 400 m','d = 4 m','d = 0,04 m'],'1 m = 1000 mm, also 400 : 1000 = 0,4.'),
+ T('V','Pyramidenstumpf','Wie berechnest du das Volumen eines Pyramidenstumpfs?',F(V,EQ,fr(h,'3'),M,'(',A1,PL,A2,PL,sq(A1+M+A2),')'),[F(V,EQ,fr(h,'3'),M,'(',A1,PL,A2,')'),F(V,EQ,h,M,sq(A1+M+A2)),F(V,EQ,fr(h,'3'),M,A1,M,A2)],'Beide Flächen plus die Wurzel aus ihrem Produkt, mal h/3.'),
+ T('V','Hohlzylinder','Wie berechnest du das Materialvolumen einer Rohrwand?',F(V,EQ,fr(pi,'4'),M,'(',sqr(D),MI,sqr(d),')',M,l),[F(V,EQ,fr(pi,'4'),M,'(',D,MI,d,')²',M,l),F(V,EQ,pi,M,'(',sqr(D),MI,sqr(d),')',M,l),F(V,EQ,fr(pi+M+sqr(D),'4'),M,l,MI,d)],'Großer Kreis minus kleiner Kreis, mal Länge. Nicht (D − d)²!'),
+ T('V','Grundfläche','Ein Zylinder hat V = 10 m³ und h = 2 m. Wie groß ist die Grundfläche?','5 m²',['20 m²','8 m²','12 m²'],'A = V : h.'),
+ T('V','Alles verdoppelt','Länge, Breite und Tiefe eines Beckens werden verdoppelt. Das Volumen wird …','achtmal so groß',['doppelt so groß','viermal so groß','sechsmal so groß'],'2 · 2 · 2 = 8.'),
+ T('V','Stahl','Wie schwer sind 0,002 m³ Stahl (7850 kg/m³)?','15,7 kg',['157 kg','1,57 kg','3925 kg'],'7850 · 0,002 = 15,7.'),
+ T('V','Silo','Ein Silo: Zylinder (h = 6 m) mit Kegel unten (h = 3 m), gleicher Durchmesser. Der Zylinder fasst 20 m³. Wie viel fasst der Kegel?','etwa 3,3 m³',['10 m³','6,7 m³','20 m³'],'A = 20 : 6 = 3,33 m². Kegel: ⅓ · 3,33 · 3 = 3,33 m³.'),
+ T('V','Restvolumen','Ein Tank (A = 4 m², h = 3 m) ist bis 1,8 m gefüllt. Wie viel passt noch hinein?','4,8 m³',['7,2 m³','12 m³','1,2 m³'],'Freie Höhe 3 − 1,8 = 1,2 m, mal 4 m².')
+];
+
+const tasks=[
+ /* ---------- Basis ---------- */
+ {L:'B',g(){const l0=rnd(30,60,1),b0=rnd(8,15,.5),h0=rnd(4,6,.1),x=l0*b0*h0;return{tag:'Abwasser',ti:'Belebungsbecken',tx:`Ein rechteckiges Belebungsbecken der Kläranlage Schwierbach ist ${z(l0,'m')} lang, ${z(b0,'m')} breit und hat eine Wassertiefe von ${z(h0,'m')}. Wie groß ist das Beckenvolumen?`,x:V,un:'m³',a:x,dc:1,
+   geg:`${F(l,EQ,z(l0,'m'))};&nbsp; ${F(b,EQ,z(b0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))}`,steps:[['Formel',F(V,EQ,l,M,b,M,h)],['Umstellung','entfällt']],ein:F(V,EQ,z(l0,'m'),M,z(b0,'m'),M,z(h0,'m')),
+   s:F(V,EQ,z(l0,'m'),M,z(b0,'m'),M,z(h0,'m'),EQ,res(x,1,'m³')),satz:`Das Belebungsbecken fasst ${fmt(x,1)} m³.`}}},
+ {L:'B',g(){const d0=rnd(2,5,.5),h0=rnd(3,8,.5),x=PI*d0*d0/4*h0;return{tag:'Abwasser',ti:'Fällmitteltank',tx:`Der stehende, zylindrische Fällmitteltank hat einen Innendurchmesser von ${z(d0,'m')} und ist ${z(h0,'m')} hoch. Welches Volumen hat er?`,x:V,un:'m³',a:x,dc:2,
+   geg:`${F(d,EQ,z(d0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))}`,steps:[['Formel',zyl],['Umstellung','entfällt']],ein:F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(h0,'m')),
+   s:F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(h0,'m'),EQ,res(x,2,'m³')),satz:`Der Tank fasst ${fmt(x,2)} m³.`}}},
+ {L:'B',g(){const V0=rnd(10,40,1),r0=rnd(.15,.45,.05),x=V0*r0;return{tag:'Kreislauf & Abfall',ti:'Containerladung',tx:`Ein Abrollcontainer im Abfallzentrum Schwierbach ist mit ${z(V0,'m³')} Sperrmüll gefüllt. Die Schüttdichte beträgt ${z(r0,'t/m³')}. Wie schwer ist die Ladung?`,x:m,un:'t',a:x,dc:2,
+   geg:`${F(V,EQ,z(V0,'m³'))};&nbsp; ${F(rho,EQ,z(r0,'t/m³'))}`,steps:[['Formel',F(m,EQ,rho,M,V)],['Umstellung','entfällt']],ein:F(m,EQ,z(r0,'t/m³'),M,z(V0,'m³')),
+   s:F(m,EQ,z(r0,'t/m³'),M,z(V0,'m³'),EQ,res(x,2,'t')),satz:`Die Ladung wiegt ${fmt(x,2)} t.`}}},
+ {L:'B',g(){const l0=rnd(2,5,.5),b0=rnd(1.5,4,.5),h0=rnd(.4,2,.1),x=l0*b0*h0;return{tag:'Abwasser',ti:'Pumpensumpf Talstraße',tx:`Der Pumpensumpf im Pumpwerk Talstraße ist ${z(l0,'m')} lang und ${z(b0,'m')} breit. Das Wasser steht ${z(h0,'m')} hoch. Wie viel Wasser ist im Sumpf?`,x:V,un:'m³',a:x,dc:2,
+   geg:`${F(l,EQ,z(l0,'m'))};&nbsp; ${F(b,EQ,z(b0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))} (Füllhöhe)`,steps:[['Formel',F(V,EQ,l,M,b,M,h)],['Hinweis','Für die Höhe setzt du die Füllhöhe ein, nicht die Beckentiefe.']],ein:F(V,EQ,z(l0,'m'),M,z(b0,'m'),M,z(h0,'m')),
+   s:F(V,EQ,z(l0,'m'),M,z(b0,'m'),M,z(h0,'m'),EQ,res(x,2,'m³')),satz:`Im Pumpensumpf stehen ${fmt(x,2)} m³ Wasser.`}}},
+ {L:'B',g(){const V0=rnd(80,600,10),r0=rnd(.95,1.05,.01),x=V0*r0;return{tag:'Abwasser',ti:'Masse im Faulbehälter',tx:`Im Vorlagebehälter der Faulung stehen ${z(V0,'m³')} Rohschlamm. Die Dichte des Schlamms beträgt ${z(r0,'t/m³')}. Welche Masse hat der Schlamm?`,x:m,un:'t',a:x,dc:1,
+   geg:`${F(V,EQ,z(V0,'m³'))};&nbsp; ${F(rho,EQ,z(r0,'t/m³'))}`,steps:[['Formel',F(m,EQ,rho,M,V)],['Umstellung','entfällt']],ein:F(m,EQ,z(r0,'t/m³'),M,z(V0,'m³')),
+   s:F(m,EQ,z(r0,'t/m³'),M,z(V0,'m³'),EQ,res(x,1,'t')),satz:`Der Schlamm hat eine Masse von ${fmt(x,1)} t.`}}},
+
+ /* ---------- Standard ---------- */
+ {L:'S',g(){const dm=rnd(150,600,50),l0=rnd(50,400,10),d0=dm/1000,x=PI*d0*d0/4*l0;return{tag:'Rohrleitungsnetze',ti:'Rohrinhalt beim Spülen',tx:`Eine Leitung DN ${dm} (Innendurchmesser ${z(dm,'mm')}) zwischen zwei Schächten in Schwierbach ist ${z(l0,'m')} lang. Wie viel Wasser braucht man, um sie komplett zu füllen?`,x:V,un:'m³',a:x,dc:2,
+   geg:`${F(d,EQ,z(dm,'mm'),EQ,z(d0,'m'))};&nbsp; ${F(l,EQ,z(l0,'m'))}`,steps:[['Formel',F(V,EQ,fr(pi+M+sqr(d),'4'),M,l)],['Einheit','Durchmesser zuerst in Meter umrechnen.']],ein:F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(l0,'m')),
+   s:F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(l0,'m'),EQ,res(x,2,'m³')),satz:`Zum Füllen braucht man ${fmt(x,2)} m³ Wasser.`}}},
+ {L:'S',g(){const d0=rnd(25,45,1),h0=rnd(3,5,.1),x=PI*d0*d0/4*h0;return{tag:'Abwasser',ti:'Nachklärbecken',tx:`Das runde Nachklärbecken der Kläranlage Schwierbach hat einen Durchmesser von ${z(d0,'m')} und eine mittlere Wassertiefe von ${z(h0,'m')}. Berechne das Beckenvolumen.`,x:V,un:'m³',a:x,dc:0,
+   geg:`${F(d,EQ,z(d0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))}`,steps:[['Formel',zyl],['Umstellung','entfällt']],ein:F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(h0,'m')),
+   s:F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(h0,'m'),EQ,res(x,0,'m³')),satz:`Das Nachklärbecken fasst ${fmt(x,0)} m³.`}}},
+ {L:'S',g(){const d0=rnd(6,16,.5),h0=rnd(2,5,.5),x=PI*d0*d0/4*h0/3;return{tag:'Kreislauf & Abfall',ti:'Schüttkegel Kompost',tx:`Auf dem Kompostplatz in Schwierbach liegt fertiger Kompost als Kegel mit einem Durchmesser von ${z(d0,'m')} und einer Höhe von ${z(h0,'m')}. Wie viel Kompost ist das?`,x:V,un:'m³',a:x,dc:1,
+   geg:`${F(d,EQ,z(d0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))}`,steps:[['Formel',F(V,EQ,fr('1','3'),M,fr(pi+M+sqr(d),'4'),M,h)],['Hinweis','Körper mit Spitze: ⅓ nicht vergessen.']],ein:F(V,EQ,fr('1','3'),M,fr('π · ('+z(d0,'m')+')²','4'),M,z(h0,'m')),
+   s:F(V,EQ,fr('1','3'),M,fr('π · ('+z(d0,'m')+')²','4'),M,z(h0,'m'),EQ,res(x,1,'m³')),satz:`Der Haufen enthält ${fmt(x,1)} m³ Kompost.`}}},
+ {L:'S',g(){const a0=rnd(.8,1.4,.1),c0=+(a0+rnd(.8,2,.1)).toFixed(2),h0=rnd(1.2,2.5,.1),l0=rnd(20,120,5),Aq=(a0+c0)/2*h0,x=Aq*l0;return{tag:'Rohrleitungsnetze',ti:'Grabenaushub Druckrohrleitung',tx:`Für die Erneuerung einer Druckrohrleitung wird ein Graben mit Trapezquerschnitt ausgehoben: Sohlbreite ${a} = ${z(a0,'m')}, obere Breite ${c} = ${z(c0,'m')}, Tiefe ${h} = ${z(h0,'m')}, Länge ${l} = ${z(l0,'m')}. Wie viel Boden muss ausgehoben werden?`,x:V,un:'m³',a:x,dc:1,
+   geg:`${F(a,EQ,z(a0,'m'))};&nbsp; ${F(c,EQ,z(c0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))};&nbsp; ${F(l,EQ,z(l0,'m'))}`,steps:[['Formel',F(V,EQ,fr(a+PL+c,'2'),M,h,M,l)],['Grundfläche',F(A,EQ,fr(z(a0,'m')+PL+z(c0,'m'),'2'),M,z(h0,'m'),EQ,fmt(Aq,3)+u('m²'))]],ein:F(V,EQ,fmt(Aq,3)+u('m²'),M,z(l0,'m')),
+   s:F(V,EQ,fmt(Aq,3)+u('m²'),M,z(l0,'m'),EQ,res(x,1,'m³')),satz:`Es müssen ${fmt(x,1)} m³ Boden ausgehoben werden.`}}},
+ {L:'S',g(){const d0=rnd(1.5,3.5,.5),hf=rnd(.8,3,.1),Vm=PI*d0*d0/4*hf,x=Vm*1000;return{tag:'Wasserversorgung',ti:'Füllstand im Chemikalientank',tx:`Im Wasserwerk Schwierbach steht ein zylindrischer Tank für Natronlauge mit ${z(d0,'m')} Innendurchmesser. Die Füllstandsanzeige zeigt ${z(hf,'m')}. Wie viele Liter sind im Tank?`,x:V,un:'L',a:x,dc:0,
+   geg:`${F(d,EQ,z(d0,'m'))};&nbsp; ${F(h,EQ,z(hf,'m'))} (Füllhöhe)`,steps:[['Formel',zyl],['Einheit','Das Ergebnis kommt in m³ heraus. 1 m³ = 1000 L.']],ein:F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(hf,'m')),
+   s:F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(hf,'m'),EQ,fmt(Vm,3)+u('m³'),EQ,res(x,0,'L')),satz:`Im Tank sind ${fmt(x,0)} Liter Natronlauge.`}}},
+
+ /* ---------- Vertiefung ---------- */
+ {L:'V',g(){const d0=rnd(2.5,4,.5),hz=rnd(4,9,.5),hk=rnd(1.5,3,.5),Ag=PI*d0*d0/4,Vz=Ag*hz,Vk=Ag*hk/3,x=Vz+Vk;return{tag:'Kreislauf & Abfall',ti:'Kalkhydrat-Silo der Rauchgasreinigung',tx:`Das Kalkhydrat-Silo der Rauchgasreinigung im Abfall- &amp; Energiezentrum Schwierbach besteht aus einem Zylinder (${F(d,EQ,z(d0,'m'))}, Höhe ${z(hz,'m')}) und einem Auslaufkegel darunter (Höhe ${z(hk,'m')}). Wie groß ist das gesamte Silovolumen?`,x:V,un:'m³',a:x,dc:2,
+   geg:`${F(d,EQ,z(d0,'m'))};&nbsp; ${F(I('h','Z'),EQ,z(hz,'m'))};&nbsp; ${F(I('h','K'),EQ,z(hk,'m'))}`,steps:[['Zerlegen',`${F(V,EQ,I('V','Z'),PL,I('V','K'))} – Zylinder plus Kegel`],['Grundfläche',F(A,EQ,fr('π · ('+z(d0,'m')+')²','4'),EQ,fmt(Ag,3)+u('m²'))]],ein:`${F(I('V','Z'),EQ,fmt(Ag,3),M,nf(hz))};&nbsp; ${F(I('V','K'),EQ,fr('1','3'),M,fmt(Ag,3),M,nf(hk))}`,
+   s:`${F(I('V','Z'),EQ,fmt(Ag,3)+u('m²'),M,z(hz,'m'),EQ,fmt(Vz,2)+u('m³'))}<br>${F(I('V','K'),EQ,fr('1','3'),M,fmt(Ag,3)+u('m²'),M,z(hk,'m'),EQ,fmt(Vk,2)+u('m³'))}<br>${F(V,EQ,fmt(Vz,2),PL,fmt(Vk,2),EQ,res(x,2,'m³'))}`,satz:`Das Silo fasst insgesamt ${fmt(x,2)} m³.`}}},
+ {L:'V',g(){const l1=rnd(40,80,5),b1=rnd(25,40,5),h0=rnd(4,8,.5),ab=rnd(1.5,2,.5),l2=l1-2*ab*h0,b2=b1-2*ab*h0;
+   const L2=l2>4?l2:l1*.5,B2=b2>4?b2:b1*.5,a1=l1*b1,a2=+(L2*B2).toFixed(2),Vh=h0/3*(a1+a2+Math.sqrt(a1*a2)),r0=rnd(1.3,1.7,.1),x=Vh*r0;
+   return{tag:'Kreislauf & Abfall',ti:'Schlackehalde',tx:`Auf dem Lagerplatz des Abfallzentrums Schwierbach liegt eine Schlackehalde in Form eines Pyramidenstumpfs: unten ${z(l1,'m')} × ${z(b1,'m')}, oben ${nf(+L2.toFixed(2))}${u('m')} × ${nf(+B2.toFixed(2))}${u('m')}, Höhe ${z(h0,'m')}. Die Schüttdichte der Schlacke beträgt ${z(r0,'t/m³')}. Wie viele Tonnen Schlacke lagern dort?`,x:m,un:'t',a:x,dc:0,
+   geg:`${F(A1,EQ,z(l1,'m'),M,z(b1,'m'),EQ,z(a1,'m²'))};&nbsp; ${F(A2,EQ,z(a2,'m²'))};&nbsp; ${F(h,EQ,z(h0,'m'))};&nbsp; ${F(rho,EQ,z(r0,'t/m³'))}`,steps:[['Formeln',`${F(V,EQ,fr(h,'3'),M,'(',A1,PL,A2,PL,sq(A1+M+A2),')')} und ${F(m,EQ,rho,M,V)}`],['Volumen',F(V,EQ,fr(z(h0,'m'),'3'),M,'(',nf(a1),PL,nf(a2),PL,sq(nf(a1)+M+nf(a2)),')',EQ,fmt(Vh,1)+u('m³'))]],ein:F(m,EQ,z(r0,'t/m³'),M,fmt(Vh,1)+u('m³')),
+   s:`${F(V,EQ,fr(z(h0,'m'),'3'),M,'(',nf(a1),PL,nf(a2),PL,sq(nf(a1)+M+nf(a2)),')',EQ,fmt(Vh,1)+u('m³'))}<br>${F(m,EQ,z(r0,'t/m³'),M,fmt(Vh,1)+u('m³'),EQ,res(x,0,'t'))}`,satz:`Auf der Halde lagern ${fmt(x,0)} t Schlacke.`}}},
+ {L:'V',g(){const Dm=rnd(200,600,25),sm=rnd(5,12,1),dm=Dm-2*sm,l0=rnd(6,12,1),D0=Dm/1000,d0=dm/1000,Vw=PI/4*(D0*D0-d0*d0)*l0,x=Vw*7850;return{tag:'Rohrleitungsnetze',ti:'Gewicht eines Stahlrohrs',tx:`Für die neue Druckrohrleitung wird ein Stahlrohr mit Außendurchmesser ${z(Dm,'mm')} und Wanddicke ${z(sm,'mm')} geliefert. Ein Rohrstück ist ${z(l0,'m')} lang. Wie schwer ist es (Stahl: 7850 kg/m³)?`,x:m,un:'kg',a:x,dc:1,
+   geg:`${F(D,EQ,z(Dm,'mm'),EQ,z(D0,'m'))};&nbsp; ${F(s_,EQ,z(sm,'mm'))} → ${F(d,EQ,D,MI,'2',M,s_,EQ,z(d0,'m'))};&nbsp; ${F(l,EQ,z(l0,'m'))};&nbsp; ${F(rho,EQ,'7850'+u('kg/m³'))}`,steps:[['Formeln',`${F(V,EQ,fr(pi,'4'),M,'(',sqr(D),MI,sqr(d),')',M,l)} und ${F(m,EQ,rho,M,V)}`],['Innendurchmesser','Die Wanddicke zieht man zweimal ab – links und rechts.']],ein:F(V,EQ,fr(pi,'4'),M,'(',nf(D0)+'²',MI,nf(d0)+'²',')',M,z(l0,'m'),EQ,fmt(Vw,5)+u('m³')),
+   s:`${F(V,EQ,fr(pi,'4'),M,'(',nf(D0)+'²',MI,nf(d0)+'²',')',M,z(l0,'m'),EQ,fmt(Vw,5)+u('m³'))}<br>${F(m,EQ,'7850'+u('kg/m³'),M,fmt(Vw,5)+u('m³'),EQ,res(x,1,'kg'))}`,satz:`Das Rohrstück wiegt ${fmt(x,1)} kg.`}}},
+ {L:'V',g(){const d0=rnd(20,40,1),h0=rnd(3,4.5,.1),Q0=rnd(250,900,50),Vb=PI*d0*d0/4*h0,x=Vb/Q0;return{tag:'Abwasser',ti:'Befüllen nach der Revision',tx:`Nach einer Revision wird das runde Nachklärbecken der Kläranlage Schwierbach (${F(d,EQ,z(d0,'m'))}, Wassertiefe ${z(h0,'m')}) wieder befüllt. Es fließen ${z(Q0,'m³/h')} zu. Wie lange dauert das Befüllen?`,x:t,un:'h',a:x,dc:1,
+   geg:`${F(d,EQ,z(d0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))};&nbsp; ${F(Q,EQ,z(Q0,'m³/h'))}`,steps:[['Formeln',`${zyl} und ${F(Q,EQ,fr(V,t))}, umgestellt ${F(t,EQ,fr(V,Q))}`],['Volumen',F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(h0,'m'),EQ,fmt(Vb,1)+u('m³'))]],ein:F(t,EQ,fr(fmt(Vb,1)+u('m³'),z(Q0,'m³/h'))),
+   s:`${F(V,EQ,fr('π · ('+z(d0,'m')+')²','4'),M,z(h0,'m'),EQ,fmt(Vb,1)+u('m³'))}<br>${F(t,EQ,fr(fmt(Vb,1)+u('m³'),z(Q0,'m³/h')),EQ,res(x,1,'h'))}`,satz:`Das Befüllen dauert ${fmt(x,1)} Stunden.`}}},
+ {L:'V',g(){const D0=rnd(3,6,.5),d0=rnd(.4,1,.1),h0=rnd(1.5,3.5,.5),x=PI*h0/12*(D0*D0+D0*d0+d0*d0);return{tag:'Abwasser',ti:'Schlammtrichter im Vorklärbecken',tx:`Der Schlammtrichter des Vorklärbeckens hat die Form eines Kegelstumpfs: oben ${F(D,EQ,z(D0,'m'))}, unten ${F(d,EQ,z(d0,'m'))}, Höhe ${z(h0,'m')}. Wie viel Schlamm passt hinein?`,x:V,un:'m³',a:x,dc:2,
+   geg:`${F(D,EQ,z(D0,'m'))};&nbsp; ${F(d,EQ,z(d0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))}`,steps:[['Formel',F(V,EQ,fr(pi+M+h,'12'),M,'(',sqr(D),PL,D,M,d,PL,sqr(d),')')],['Klammer',`${nf(D0)}² + ${nf(D0)} · ${nf(d0)} + ${nf(d0)}² = ${fmt(D0*D0+D0*d0+d0*d0,2)}`]],ein:F(V,EQ,fr('π · '+z(h0,'m'),'12'),M,fmt(D0*D0+D0*d0+d0*d0,2)+u('m²')),
+   s:F(V,EQ,fr('π · '+z(h0,'m'),'12'),M,fmt(D0*D0+D0*d0+d0*d0,2)+u('m²'),EQ,res(x,2,'m³')),satz:`Der Trichter fasst ${fmt(x,2)} m³ Schlamm.`}}}
+];
+
+const examples={
+ B:{tab:'Belebungsbecken',intro:'Ein Belebungsbecken der Kläranlage Schwierbach ist 40 m lang, 12 m breit und 5 m tief. Wie viel Wasser fasst es – und wie schwer ist das Wasser?',s:[
+   {e:F(V,EQ,l,M,b,M,h),o:'Formel',w:'Ein Becken mit senkrechten Wänden ist ein Quader: Grundfläche l · b mal Höhe.'},
+   {e:F(A,EQ,'40 m · 12 m',EQ,'480'+u('m²')),o:'Grundfläche',w:'Erst die Grundfläche, dann wird es übersichtlicher.'},
+   {e:F(V,EQ,'480 m²',M,'5 m',EQ,res(2400,0,'m³')),o:'Volumen',w:'Einheiten mitrechnen: m² mal m ergibt m³.'},
+   {e:F(m,EQ,rho,M,V,EQ,'1 t/m³',M,'2400 m³',EQ,res(2400,0,'t')),o:'Masse',w:'Wasser hat etwa 1 t/m³. Im Becken stehen also 2400 t Wasser.'}]},
+ S:{tab:'Rohrinhalt',intro:'Eine Leitung DN 400 (Innendurchmesser 400 mm) ist 250 m lang. Wie viel Wasser ist darin?',s:[
+   {e:F(d,EQ,'400 mm',EQ,'0,4'+u('m')),o:'Einheit',w:'Zuerst umrechnen: Die Länge ist in Metern, also muss auch der Durchmesser in Metern stehen.'},
+   {e:F(V,EQ,fr(pi+M+sqr(d),'4'),M,l),o:'Formel',w:'Ein Rohr ist ein liegender Zylinder. Die „Höhe“ ist die Rohrlänge.'},
+   {e:F(A,EQ,fr('π · (0,4 m)²','4'),EQ,'0,1257'+u('m²')),o:'Fläche',w:'Querschnittsfläche des Rohrs.'},
+   {e:F(V,EQ,'0,1257 m²',M,'250 m',EQ,res(31.4,1,'m³')),o:'Volumen',w:'31,4 m³ – das sind gut zwei Tanklastzüge voll Wasser.'}]},
+ V:{tab:'Silo',intro:'Ein Silo besteht aus einem Zylinder (d = 3 m, h = 6 m) und einem Kegel darunter (h = 2 m). Wie groß ist das Volumen?',s:[
+   {e:F(V,EQ,I('V','Z'),PL,I('V','K')),o:'Zerlegen',w:'Das Silo besteht aus zwei Körpern, die du kennst. Beide haben dieselbe Grundfläche.'},
+   {e:F(A,EQ,fr('π · (3 m)²','4'),EQ,'7,069'+u('m²')),o:'Grundfläche',w:'Die Kreisfläche brauchst du für beide Teile – einmal ausrechnen reicht.'},
+   {e:F(I('V','Z'),EQ,'7,069 m²',M,'6 m',EQ,'42,41'+u('m³')),o:'Zylinder',w:'Grundfläche mal Höhe.'},
+   {e:F(I('V','K'),EQ,fr('1','3'),M,'7,069 m²',M,'2 m',EQ,'4,71'+u('m³')),o:'Kegel',w:'Ein Drittel von Grundfläche mal Höhe.'},
+   {e:F(V,EQ,'42,41 + 4,71',EQ,res(47.12,2,'m³')),o:'Summe',w:'Beide Teile addieren.'}]}
+};
+
+K.module({id:'m7',nr:7,examples,trainer,tasks});
+})();
+</script>
+</body>
+</html>

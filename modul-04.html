@@ -11,7 +11,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html">M2 Einheiten</a><a href="modul-04.html" aria-current="page">M4 Umstellen</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent">M3</a><a href="modul-04.html" aria-current="page" title="Modul 4 Formeln umstellen">M4</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -19,7 +19,7 @@
   <div class="modnum" aria-hidden="true">4</div>
   <div class="eyebrow">Mathe-Aufbaukurs · Modul 4</div>
   <h1>Formeln umstellen</h1>
-  <p class="ctx">Im Entsorgungs- und Wasserbetrieb Emscherstadt stehen überall Formeln in der Formelsammlung – aber fast nie nach der Größe aufgelöst, die du gerade brauchst. Dieses Modul ist Schritt 4 des Rechenwegs: die Umstellung.</p>
+  <p class="ctx">In der Kläranlage Schwierbach, im Abfall- &amp; Energiezentrum und im Wasserwerk stehen überall Formeln in der Formelsammlung – aber fast nie nach der Größe aufgelöst, die du gerade brauchst. Dieses Modul ist Schritt 4 des Rechenwegs: die Umstellung.</p>
 </header>
 
 <div class="bar">
@@ -44,14 +44,14 @@
       <p>Eine Formel ist wie eine Waage im Gleichgewicht. Du darfst alles tun, solange du es <strong>auf beiden Seiten gleich</strong> tust.</p>
       <p>Um die gesuchte Größe allein zu bekommen, räumst du alles weg, was an ihr „hängt“. Dafür nimmst du jeweils die <strong>Gegenoperation</strong>.</p>
     </div>
-    <svg viewBox="0 0 320 150" role="img" aria-label="Waage: links t mal Q, rechts V, im Gleichgewicht" style="max-width:100%">
+    <svg viewBox="0 0 320 150" role="img" aria-label="Waage: links Q mal t, rechts V, im Gleichgewicht" style="max-width:100%">
       <polygon points="160,62 140,130 180,130" fill="var(--navy)"/>
       <rect x="40" y="56" width="240" height="6" rx="3" fill="var(--blue)"/>
       <line x1="70" y1="62" x2="70" y2="86" stroke="var(--muted)" stroke-width="1.5"/>
       <line x1="250" y1="62" x2="250" y2="86" stroke="var(--muted)" stroke-width="1.5"/>
       <path d="M30 86 H110 Q70 112 30 86Z" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
       <path d="M210 86 H290 Q250 112 210 86Z" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
-      <text x="70" y="44" text-anchor="middle" font-size="22" fill="var(--ink)" font-style="italic">t · Q</text>
+      <text x="70" y="44" text-anchor="middle" font-size="22" fill="var(--ink)" font-style="italic">Q · t</text>
       <text x="250" y="44" text-anchor="middle" font-size="22" fill="var(--ink)" font-style="italic">V</text>
       <text x="160" y="146" text-anchor="middle" font-size="14" fill="var(--muted)">links = rechts</text>
     </svg>
@@ -62,8 +62,8 @@
     <tbody>
       <tr><td>+ eine Zahl / Größe</td><td class="op">− auf beiden Seiten</td><td><span class="f"><i>V</i> = <i>V</i><sub>1</sub> + <i>V</i><sub>2</sub>&nbsp;&nbsp;| − <i>V</i><sub>1</sub></span></td></tr>
       <tr><td>− eine Zahl / Größe</td><td class="op">+ auf beiden Seiten</td><td><span class="f"><i>x</i> − 4 = 10&nbsp;&nbsp;| + 4</span></td></tr>
-      <tr><td>· (mal) eine Größe</td><td class="op">: (geteilt) auf beiden Seiten</td><td><span class="f"><i>Q</i> = <i>A</i> · <i>v</i>&nbsp;&nbsp;| : <i>A</i></span></td></tr>
-      <tr><td>: (geteilt) – Größe steht im Nenner oder Zähler</td><td class="op">· (mal) auf beiden Seiten</td><td><span class="f"><i>t</i> = <span class="fr"><span><i>V</i></span><span><i>Q</i></span></span>&nbsp;&nbsp;| · <i>Q</i></span></td></tr>
+      <tr><td>· (mal) eine Größe</td><td class="op">: (geteilt) auf beiden Seiten</td><td><span class="f"><i>Q</i> = <i>v</i> · <i>A</i>&nbsp;&nbsp;| : <i>A</i></span></td></tr>
+      <tr><td>: (geteilt) – Größe steht im Nenner oder Zähler</td><td class="op">· (mal) auf beiden Seiten</td><td><span class="f"><i>Q</i> = <span class="fr"><span><i>V</i></span><span><i>t</i></span></span>&nbsp;&nbsp;| · <i>t</i></span></td></tr>
       <tr><td>² (hoch zwei)</td><td class="op">√ auf beiden Seiten</td><td><span class="f"><i>d</i>² = 0,25&nbsp;&nbsp;| √</span></td></tr>
     </tbody>
   </table>
@@ -95,7 +95,7 @@
   <div data-k="stand"></div>
 </section>
 
-<nav class="weiter" aria-label="Weiter"><a href="modul-02.html">← Modul 2 Einheiten umrechnen</a><a href="index.html">→ Zur Übersicht</a></nav>
+<nav class="weiter" aria-label="Weiter"><a href="modul-03.html">← Modul 3 Dreisatz, Prozent, Verhältnisse</a><a href="modul-07.html">→ Weiter zu: Modul 7 Volumen &amp; Masse</a></nav>
 </main>
 <footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
 
@@ -103,15 +103,15 @@
 <script>
 (function(){
 const {I,fr,sq,F,M,MI,PL,EQ,u,q,nf,fmt,rnd,res,sqr,umstell}=K;
-const Q=I('Q'),A=I('A'),v=I('v'),t=I('t'),V=I('V'),rho=I('ρ'),m=I('m'),B=I('B'),c=I('c'),Ig=I('I'),dh='Δ'+I('h'),l=I('l'),b=I('b'),h=I('h'),a=I('a'),eta=I('η'),pi='π',d=I('d'),D=I('D'),P=I('P'),g=I('g'),H=I('H'),r=I('r');
-const czu=I('c','zu'),cab=I('c','ab'),V1=I('V','1'),V2=I('V','2'),c1=I('c','1'),c2=I('c','2'),cm=I('c','m');
+const Q=I('Q'),A=I('A'),v=I('v'),t=I('t'),V=I('V'),rho=I('ρ'),m=I('m'),B=I('B'),c=I('c'),Ig=I('J'),dh='Δ'+I('h'),l=I('l'),b=I('b'),h=I('h'),a=I('a'),eta=I('η'),pi='π',d=I('d'),D=I('D'),P=I('P'),g=I('g'),H=I('H'),r=I('r');
+const A1=I('A','1'),A2=I('A','2'),v1=I('v','1'),v2=I('v','2'),czu=I('c','zu'),cab=I('c','ab'),V1=I('V','1'),V2=I('V','2'),c1=I('c','1'),c2=I('c','2'),cm=I('c','m');
 
 /* ---------- Trainer ---------- */
 const trainer=[
- umstell('B','Durchfluss',Q,A+M+v,v,fr(Q,A),[Q+M+A,fr(A,Q),Q+MI+A],`${A} ist mit ${v} malgenommen. Gegenoperation: beide Seiten durch ${A} teilen.`),
- umstell('B','Durchfluss',Q,A+M+v,A,fr(Q,v),[fr(v,Q),Q+M+v,Q+MI+v],`${v} ist mit ${A} malgenommen. Beide Seiten durch ${v} teilen.`),
- umstell('B','Verweilzeit',t,fr(V,Q),V,t+M+Q,[fr(t,Q),fr(Q,t),t+PL+Q],`${V} wird durch ${Q} geteilt. Gegenoperation: beide Seiten mal ${Q}.`),
- umstell('B','Verweilzeit',t,fr(V,Q),Q,fr(V,t),[fr(t,V),V+M+t,V+MI+t],`Zwei Schritte: erst mal ${Q}, dann durch ${t}.`),
+ umstell('B','Durchfluss',Q,v+M+A,v,fr(Q,A),[Q+M+A,fr(A,Q),Q+MI+A],`${A} ist mit ${v} malgenommen. Gegenoperation: beide Seiten durch ${A} teilen.`),
+ umstell('B','Durchfluss',Q,v+M+A,A,fr(Q,v),[fr(v,Q),Q+M+v,Q+MI+v],`${v} ist mit ${A} malgenommen. Beide Seiten durch ${v} teilen.`),
+ umstell('B','Durchfluss und Zeit',Q,fr(V,t),V,Q+M+t,[fr(Q,t),fr(t,Q),Q+PL+t],`${V} wird durch ${t} geteilt. Gegenoperation: beide Seiten mal ${t}.`),
+ umstell('B','Verweilzeit',Q,fr(V,t),t,fr(V,Q),[fr(Q,V),V+M+Q,V+MI+Q],`${t} steht im Nenner. Zwei Schritte: erst mal ${t}, dann durch ${Q}.`),
  umstell('B','Dichte',rho,fr(m,V),m,rho+M+V,[fr(rho,V),fr(V,rho),rho+PL+V],`${m} wird durch ${V} geteilt. Beide Seiten mal ${V}.`),
  umstell('B','Dichte',rho,fr(m,V),V,fr(m,rho),[fr(rho,m),rho+M+m,m+MI+rho],`Erst mal ${V}, dann durch ${rho}.`),
  umstell('B','Fracht',B,c+M+Q,c,fr(B,Q),[B+M+Q,fr(Q,B),B+MI+Q],`${c} ist mit ${Q} malgenommen. Beide Seiten durch ${Q}.`),
@@ -122,6 +122,7 @@ const trainer=[
  umstell('S','Trapezfläche',A,fr(a+PL+c,'2')+M+h,a,fr('2'+M+A,h)+MI+c,[fr('2'+M+A,h)+PL+c,'2'+M+A+MI+fr(c,h),fr(A,'2'+M+h)+MI+c],`Erst mal 2, dann durch ${h}. Danach steht da ${a} + ${c} – also noch − ${c}.`),
  umstell('S','Eliminationsgrad',cab,czu+M+'(1'+MI+eta+')',eta,'1'+MI+fr(cab,czu),[fr(cab,czu),'1'+MI+fr(czu,cab),fr(czu+MI+cab,cab)],`Erst durch ${czu} teilen: ${fr(cab,czu)} = 1 − ${eta}. Dann ${eta} auf die andere Seite bringen.`),
  umstell('S','Haufwerk',m,rho+M+A+M+h,h,fr(m,rho+M+A),[fr(rho+M+A,m),m+MI+rho+MI+A,fr(m+M+rho,A)],`${h} ist mit ${rho} und ${A} malgenommen. Durch beide teilen.`),
+ umstell('S','Kontinuitätsgleichung',A1+M+v1,A2+M+v2,v2,fr(A1+M+v1,A2),[fr(A2+M+v1,A1),A1+M+v1+MI+A2,fr(A2,A1+M+v1)],`${v2} ist mit ${A2} malgenommen. Beide Seiten durch ${A2} teilen.`),
  umstell('S','Kanalgefälle',Ig,fr(dh,l),l,fr(dh,Ig),[dh+M+Ig,fr(Ig,dh),dh+MI+Ig],`Erst mal ${l}, dann durch ${Ig}.`),
  umstell('V','Kreisfläche',A,fr(pi+M+sqr(d),'4'),d,sq(fr('4'+M+A,pi)),[fr('4'+M+A,pi),sq(fr(A,'4'+M+pi)),sq(fr(pi+M+A,'4'))],'Mal 4, durch π, dann Wurzel ziehen.'),
  umstell('V','Zylindervolumen',V,fr(pi+M+sqr(d),'4')+M+h,d,sq(fr('4'+M+V,pi+M+h)),[sq(fr('4'+M+V+M+h,pi)),fr('4'+M+V,pi+M+h),sq(fr(V,'4'+M+pi+M+h))],`Mal 4, durch π und durch ${h}, zum Schluss Wurzel.`),
@@ -135,11 +136,11 @@ const trainer=[
    Jede Aufgabe liefert: geg (Gegeben), steps [[Formel],[Umstellung]], ein (eingesetzt), s (Rechnung), satz (Antwort) */
 const task=o=>Object.assign({steps:[['Formel',o.f],['Umstellung',o.um]]},o);
 const tasks=[
- {L:'B',g(){const A0=rnd(.25,.8,.05),Q0=rnd(.15,.9,.05),x=Q0/A0;return task({tag:'Abwasser',ti:'Zulaufkanal der Kläranlage',tx:`Im Zulaufkanal fließen ${Q} = ${q(Q0,'m³/s')}. Der durchflossene Querschnitt beträgt ${A} = ${q(A0,'m²')}. Berechne die Fließgeschwindigkeit ${v}.`,x:v,un:'m/s',a:x,dc:2,
-   geg:`${F(Q,EQ,q(Q0,'m³/s'))};&nbsp; ${F(A,EQ,q(A0,'m²'))}`,f:F(Q,EQ,A,M,v),um:F(v,EQ,fr(Q,A)),ein:F(v,EQ,fr(q(Q0,'m³/s'),q(A0,'m²'))),s:F(v,EQ,fr(q(Q0,'m³/s'),q(A0,'m²')),EQ,res(x,2,'m/s')),satz:`Das Abwasser fließt mit ${fmt(x,2)} m/s.`})}},
- {L:'B',g(){const V0=rnd(600,1800,50),t0=rnd(1,2.5,.25),x=V0/t0;return task({tag:'Abwasser',ti:'Vorklärbecken',tx:`Das Vorklärbecken hat ein Volumen von ${V} = ${q(V0,'m³')}. Das Abwasser soll mindestens ${t} = ${q(t0,'h')} im Becken bleiben. Welcher Zufluss ${Q} ist höchstens erlaubt?`,x:Q,un:'m³/h',a:x,dc:0,
-   geg:`${F(V,EQ,q(V0,'m³'))};&nbsp; ${F(t,EQ,q(t0,'h'))}`,f:F(t,EQ,fr(V,Q)),um:F(Q,EQ,fr(V,t)),ein:F(Q,EQ,fr(q(V0,'m³'),q(t0,'h'))),s:F(Q,EQ,fr(q(V0,'m³'),q(t0,'h')),EQ,res(x,0,'m³/h')),satz:`Der Zufluss darf höchstens ${fmt(x,0)} m³/h betragen.`})}},
- {L:'B',g(){const m0=rnd(6,14,.5),r0=rnd(.35,.65,.05),x=m0/r0;return task({tag:'Kreislauf & Abfall',ti:'Presscontainer am Wertstoffhof',tx:`Ein Presscontainer ist mit ${m} = ${q(m0,'t')} Restabfall gefüllt. Die Dichte des verpressten Abfalls beträgt ${rho} = ${q(r0,'t/m³')}. Welches Volumen ${V} nimmt der Abfall ein?`,x:V,un:'m³',a:x,dc:1,
+ {L:'B',g(){const A0=rnd(.25,.8,.05),Q0=rnd(.15,.9,.05),x=Q0/A0;return task({tag:'Abwasser',ti:'Zulaufkanal der Kläranlage Schwierbach',tx:`Im Zulaufkanal fließen ${Q} = ${q(Q0,'m³/s')}. Der durchflossene Querschnitt beträgt ${A} = ${q(A0,'m²')}. Berechne die Fließgeschwindigkeit ${v}.`,x:v,un:'m/s',a:x,dc:2,
+   geg:`${F(Q,EQ,q(Q0,'m³/s'))};&nbsp; ${F(A,EQ,q(A0,'m²'))}`,f:F(Q,EQ,v,M,A),um:F(v,EQ,fr(Q,A)),ein:F(v,EQ,fr(q(Q0,'m³/s'),q(A0,'m²'))),s:F(v,EQ,fr(q(Q0,'m³/s'),q(A0,'m²')),EQ,res(x,2,'m/s')),satz:`Das Abwasser fließt mit ${fmt(x,2)} m/s.`})}},
+ {L:'B',g(){const V0=rnd(600,1800,50),Q0=rnd(300,900,25),x=V0/Q0;return task({tag:'Abwasser',ti:'Verweilzeit im Vorklärbecken',tx:`Das Vorklärbecken der Kläranlage Schwierbach hat ein Volumen von ${V} = ${q(V0,'m³')}. Es fließen ${Q} = ${q(Q0,'m³/h')} Abwasser hindurch. Wie lange bleibt das Abwasser im Becken (Verweilzeit ${t})?`,x:t,un:'h',a:x,dc:2,
+   geg:`${F(V,EQ,q(V0,'m³'))};&nbsp; ${F(Q,EQ,q(Q0,'m³/h'))}`,f:F(Q,EQ,fr(V,t)),um:F(t,EQ,fr(V,Q)),ein:F(t,EQ,fr(q(V0,'m³'),q(Q0,'m³/h'))),s:F(t,EQ,fr(q(V0,'m³'),q(Q0,'m³/h')),EQ,res(x,2,'h')),satz:`Das Abwasser bleibt ${fmt(x,2)} Stunden im Vorklärbecken.`})}},
+ {L:'B',g(){const m0=rnd(6,14,.5),r0=rnd(.35,.65,.05),x=m0/r0;return task({tag:'Kreislauf & Abfall',ti:'Presscontainer im Abfallzentrum',tx:`Ein Presscontainer ist mit ${m} = ${q(m0,'t')} Restabfall gefüllt. Die Dichte des verpressten Abfalls beträgt ${rho} = ${q(r0,'t/m³')}. Welches Volumen ${V} nimmt der Abfall ein?`,x:V,un:'m³',a:x,dc:1,
    geg:`${F(m,EQ,q(m0,'t'))};&nbsp; ${F(rho,EQ,q(r0,'t/m³'))}`,f:F(rho,EQ,fr(m,V)),um:F(V,EQ,fr(m,rho)),ein:F(V,EQ,fr(q(m0,'t'),q(r0,'t/m³'))),s:F(V,EQ,fr(q(m0,'t'),q(r0,'t/m³')),EQ,res(x,1,'m³')),satz:`Der Abfall nimmt ${fmt(x,1)} m³ ein.`})}},
  {L:'B',g(){const B0=rnd(1800,6000,100),c0=rnd(.45,.8,.05),x=B0/c0;return task({tag:'Abwasser',ti:'CSB-Fracht im Zulauf',tx:`Im Zulauf der Kläranlage beträgt die CSB-Fracht ${B} = ${q(B0,'kg/d')}. Das Labor misst eine Konzentration von ${c} = ${q(c0,'kg/m³')} (das sind ${nf(c0*1000)} mg/L). Wie viel Abwasser ${Q} fließt pro Tag zu?`,x:Q,un:'m³/d',a:x,dc:0,
    geg:`${F(B,EQ,q(B0,'kg/d'))};&nbsp; ${F(c,EQ,q(c0,'kg/m³'))}`,f:F(B,EQ,c,M,Q),um:F(Q,EQ,fr(B,c)),ein:F(Q,EQ,fr(q(B0,'kg/d'),q(c0,'kg/m³'))),s:F(Q,EQ,fr(q(B0,'kg/d'),q(c0,'kg/m³')),EQ,res(x,0,'m³/d')),satz:`Es fließen ${fmt(x,0)} m³ Abwasser pro Tag zu.`})}},
@@ -152,41 +153,43 @@ const tasks=[
    geg:`${F(l,EQ,q(l0,'m'))};&nbsp; ${F(b,EQ,q(b0,'m'))};&nbsp; ${F(V,EQ,q(V0,'m³'))}`,f:F(V,EQ,l,M,b,M,h),um:F(h,EQ,fr(V,l+M+b)),ein:F(h,EQ,fr(q(V0,'m³'),q(l0,'m')+M+q(b0,'m'))),s:F(h,EQ,fr(q(V0,'m³'),q(l0*b0,'m²')),EQ,res(x,2,'m')),satz:`Das Wasser steht ${fmt(x,2)} m hoch.`})}},
  {L:'S',g(){const z=rnd(400,800,10),e0=rnd(.9,.97,.01),ab=Math.round(z*(1-e0)),x=(1-ab/z)*100;return task({tag:'Abwasser',ti:'Reinigungsleistung',tx:`Im Zulauf misst das Labor ${czu} = ${q(z,'mg/L')} CSB, im Ablauf ${cab} = ${q(ab,'mg/L')}. Berechne den Eliminationsgrad ${eta} in Prozent.`,x:eta,un:'%',a:x,dc:1,
    geg:`${F(czu,EQ,q(z,'mg/L'))};&nbsp; ${F(cab,EQ,q(ab,'mg/L'))}`,f:F(cab,EQ,czu,M,'(1',MI,eta,')'),um:F(eta,EQ,'1',MI,fr(cab,czu))+' – danach mal 100 % für die Prozentangabe',ein:F(eta,EQ,'(1',MI,fr(q(ab,'mg/L'),q(z,'mg/L')),')',M,'100 %'),s:F(eta,EQ,'(1',MI,fr(q(ab,'mg/L'),q(z,'mg/L')),')',M,'100 %',EQ,res(x,1,'%')),satz:`Die Kläranlage entfernt ${fmt(x,1)} % des CSB.`})}},
- {L:'S',g(){const A0=rnd(40,120,5),r0=rnd(.5,.8,.05),h0=rnd(1.5,3,.1),m0=+(r0*A0*h0).toFixed(1),x=m0/(r0*A0);return task({tag:'Kreislauf & Abfall',ti:'Rottebox der Kompostierung',tx:`In einer Rottebox mit der Grundfläche ${A} = ${q(A0,'m²')} liegen ${m} = ${q(m0,'t')} Bioabfall. Die Dichte beträgt ${rho} = ${q(r0,'t/m³')}. Wie hoch ist das Material aufgeschüttet (${h})?`,x:h,un:'m',a:x,dc:2,
+ {L:'S',g(){const A0=rnd(40,120,5),r0=rnd(.5,.8,.05),h0=rnd(1.5,3,.1),m0=+(r0*A0*h0).toFixed(1),x=m0/(r0*A0);return task({tag:'Kreislauf & Abfall',ti:'Rottebox der Kompostierung Schwierbach',tx:`In einer Rottebox mit der Grundfläche ${A} = ${q(A0,'m²')} liegen ${m} = ${q(m0,'t')} Bioabfall. Die Dichte beträgt ${rho} = ${q(r0,'t/m³')}. Wie hoch ist das Material aufgeschüttet (${h})?`,x:h,un:'m',a:x,dc:2,
    geg:`${F(A,EQ,q(A0,'m²'))};&nbsp; ${F(m,EQ,q(m0,'t'))};&nbsp; ${F(rho,EQ,q(r0,'t/m³'))}`,f:F(m,EQ,rho,M,A,M,h),um:F(h,EQ,fr(m,rho+M+A)),ein:F(h,EQ,fr(q(m0,'t'),q(r0,'t/m³')+M+q(A0,'m²'))),s:F(h,EQ,fr(q(m0,'t'),q(r0*A0,'t/m')),EQ,res(x,2,'m')),satz:`Das Material liegt ${fmt(x,2)} m hoch.`})}},
+{L:'S',g(){const A10=rnd(.08,.3,.01),A20=+(A10*rnd(.35,.7,.05)).toFixed(3),v10=rnd(.6,1.5,.1),x=A10*v10/A20;return task({tag:'Wasserversorgung',ti:'Querschnittsverengung',tx:`In der Rohwasserleitung zum Wasserwerk Schwierbach verengt sich der Querschnitt von ${A1} = ${q(A10,'m²')} auf ${A2} = ${q(A20,'m²')}. Vor der Verengung fließt das Wasser mit ${v1} = ${q(v10,'m/s')}. Wie schnell fließt es danach?`,x:v2,un:'m/s',a:x,dc:2,
+   geg:`${F(A1,EQ,q(A10,'m²'))};&nbsp; ${F(A2,EQ,q(A20,'m²'))};&nbsp; ${F(v1,EQ,q(v10,'m/s'))}`,f:F(A1,M,v1,EQ,A2,M,v2),um:F(v2,EQ,fr(A1+M+v1,A2)),ein:F(v2,EQ,fr(q(A10,'m²')+M+q(v10,'m/s'),q(A20,'m²'))),s:F(v2,EQ,fr(q(A10,'m²')+M+q(v10,'m/s'),q(A20,'m²')),EQ,res(x,2,'m/s')),satz:`Nach der Verengung fließt das Wasser mit ${fmt(x,2)} m/s – schneller, weil durch den kleineren Querschnitt dieselbe Menge muss.`})}},
  {L:'S',g(){const d0=rnd(.2,1.2,.05),I0=rnd(.003,.008,.0005),x=d0/I0;return task({tag:'Rohrleitungsnetze',ti:'Länge einer Kanalhaltung',tx:`Zwischen zwei Schächten beträgt der Höhenunterschied der Sohle ${dh} = ${q(d0,'m')}. Das Gefälle soll ${Ig} = ${nf(I0)} (${nf(I0*1000)} ‰) betragen. Wie lang darf die Haltung (${l}) sein?`,x:l,un:'m',a:x,dc:1,
    geg:`${F(dh,EQ,q(d0,'m'))};&nbsp; ${F(Ig,EQ,nf(I0))}`,f:F(Ig,EQ,fr(dh,l)),um:F(l,EQ,fr(dh,Ig)),ein:F(l,EQ,fr(q(d0,'m'),nf(I0))),s:F(l,EQ,fr(q(d0,'m'),nf(I0)),EQ,res(x,1,'m')),satz:`Die Haltung darf ${fmt(x,1)} m lang sein.`})}},
 
  {L:'V',g(){const Q0=rnd(.02,.2,.01),v0=rnd(.8,1.8,.1),A0=Q0/v0,x=Math.sqrt(4*A0/Math.PI);return{tag:'Wasserversorgung',ti:'Zubringerleitung zum Hochbehälter',tx:`Eine Zubringerleitung soll ${Q} = ${q(Q0,'m³/s')} Trinkwasser transportieren. Die Fließgeschwindigkeit soll ${v} = ${q(v0,'m/s')} betragen. Welchen Innendurchmesser ${d} braucht das Rohr?`,x:d,un:'m',a:x,dc:3,
    geg:`${F(Q,EQ,q(Q0,'m³/s'))};&nbsp; ${F(v,EQ,q(v0,'m/s'))}`,
-   steps:[['Formeln',`${F(Q,EQ,A,M,v)} und ${F(A,EQ,fr(pi+M+sqr(d),'4'))}`],['Umstellung',`Erst ${F(A,EQ,fr(Q,v))}, dann ${F(d,EQ,sq(fr('4'+M+A,pi)))}`]],
+   steps:[['Formeln',`${F(Q,EQ,v,M,A)} und ${F(A,EQ,fr(pi+M+sqr(d),'4'))}`],['Umstellung',`Erst ${F(A,EQ,fr(Q,v))}, dann ${F(d,EQ,sq(fr('4'+M+A,pi)))}`]],
    ein:F(A,EQ,fr(q(Q0,'m³/s'),q(v0,'m/s')),EQ,fmt(A0,4)+u('m²')),
    s:`${F(A,EQ,fr(q(Q0,'m³/s'),q(v0,'m/s')),EQ,fmt(A0,4)+u('m²'))}<br>${F(d,EQ,sq(fr('4 · '+fmt(A0,4)+u('m²'),pi)),EQ,res(x,3,'m'))}`,satz:`Das Rohr braucht einen Innendurchmesser von ${fmt(x,3)} m (${fmt(x*1000,0)} mm).`}}},
  {L:'V',g(){const V0=rnd(1500,5000,100),h0=rnd(2.5,4.5,.1),x=Math.sqrt(4*V0/(Math.PI*h0));return task({tag:'Abwasser',ti:'Rundes Nachklärbecken',tx:`Ein rundes Nachklärbecken soll ${V} = ${q(V0,'m³')} fassen. Die Wassertiefe beträgt ${h} = ${q(h0,'m')}. Welchen Durchmesser ${d} hat das Becken?`,x:d,un:'m',a:x,dc:1,
    geg:`${F(V,EQ,q(V0,'m³'))};&nbsp; ${F(h,EQ,q(h0,'m'))}`,f:F(V,EQ,fr(pi+M+sqr(d),'4'),M,h),um:F(d,EQ,sq(fr('4'+M+V,pi+M+h))),ein:F(d,EQ,sq(fr('4 · '+q(V0,'m³'),'π · '+q(h0,'m')))),s:F(d,EQ,sq(fr('4 · '+q(V0,'m³'),'π · '+q(h0,'m'))),EQ,res(x,1,'m')),satz:`Das Becken hat einen Durchmesser von ${fmt(x,1)} m.`})}},
- {L:'V',g(){const H0=rnd(8,40,1),Q0=rnd(.03,.2,.01),e0=rnd(.65,.85,.01),P0=Math.round(1000*9.81*Q0*H0/e0/1000*2)/2,x=P0*1000*e0/(1000*9.81*Q0);return task({tag:'Rohrleitungsnetze',ti:'Pumpstation',tx:`Eine Pumpe hat die Antriebsleistung ${P} = ${q(P0,'kW')} und den Wirkungsgrad ${eta} = ${nf(e0)}. Sie fördert ${Q} = ${q(Q0,'m³/s')} Wasser (${rho} = 1000 kg/m³, ${g} = 9,81 m/s²). Welche Förderhöhe ${H} erreicht sie? Achtung: 1 kW = 1000 W = 1000 kg·m²/s³.`,x:H,un:'m',a:x,dc:1,
+ {L:'V',g(){const H0=rnd(8,40,1),Q0=rnd(.03,.2,.01),e0=rnd(.65,.85,.01),P0=Math.round(1000*9.81*Q0*H0/e0/1000*2)/2,x=P0*1000*e0/(1000*9.81*Q0);return task({tag:'Rohrleitungsnetze',ti:'Pumpwerk Talstraße',tx:`Eine Pumpe hat die Antriebsleistung ${P} = ${q(P0,'kW')} und den Wirkungsgrad ${eta} = ${nf(e0)}. Sie fördert ${Q} = ${q(Q0,'m³/s')} Wasser (${rho} = 1000 kg/m³, ${g} = 9,81 m/s²). Welche Förderhöhe ${H} erreicht sie? Achtung: 1 kW = 1000 W = 1000 kg·m²/s³.`,x:H,un:'m',a:x,dc:1,
    geg:`${F(P,EQ,q(P0,'kW'),EQ,q(P0*1000,'W'))};&nbsp; ${F(eta,EQ,nf(e0))};&nbsp; ${F(Q,EQ,q(Q0,'m³/s'))};&nbsp; ${F(rho,EQ,'1000'+u('kg/m³'))};&nbsp; ${F(g,EQ,'9,81'+u('m/s²'))}`,f:F(P,EQ,fr(rho+M+g+M+Q+M+H,eta)),um:F(H,EQ,fr(P+M+eta,rho+M+g+M+Q)),ein:F(H,EQ,fr(q(P0*1000,'W')+M+nf(e0),'1000'+u('kg/m³')+M+'9,81'+u('m/s²')+M+q(Q0,'m³/s'))),s:F(H,EQ,fr(q(P0*1000,'W')+M+nf(e0),'1000 · 9,81 · '+nf(Q0)),EQ,res(x,1,'m')),satz:`Die Pumpe erreicht eine Förderhöhe von ${fmt(x,1)} m.`})}},
  {L:'V',g(){const k1=rnd(300,600,10),W1=rnd(200,800,10),W2=rnd(100,400,10),k2=rnd(20,80,5),km=+((k1*W1+k2*W2)/(W1+W2)).toFixed(1),x=(km*(W1+W2)-k1*W1)/W2;return task({tag:'Abwasser',ti:'Mischwasser im Regenüberlaufbecken',tx:`Im Becken mischen sich ${V1} = ${q(W1,'m³')} Schmutzwasser mit ${c1} = ${q(k1,'mg/L')} CSB und ${V2} = ${q(W2,'m³')} Regenwasser. Im Mischwasser misst das Labor ${cm} = ${q(km,'mg/L')}. Wie hoch ist die CSB-Konzentration ${c2} im Regenwasser?`,x:c2,un:'mg/L',a:x,dc:0,
    geg:`${F(V1,EQ,q(W1,'m³'))};&nbsp; ${F(c1,EQ,q(k1,'mg/L'))};&nbsp; ${F(V2,EQ,q(W2,'m³'))};&nbsp; ${F(cm,EQ,q(km,'mg/L'))}`,f:F(cm,EQ,fr(c1+M+V1+PL+c2+M+V2,V1+PL+V2)),um:F(c2,EQ,fr(cm+M+'('+V1+PL+V2+')'+MI+c1+M+V1,V2)),ein:F(c2,EQ,fr(nf(km)+M+nf(W1+W2)+MI+nf(k1)+M+nf(W1),nf(W2)))+' (Einheiten: mg/L)',s:F(c2,EQ,fr(nf(+(km*(W1+W2)).toFixed(1))+MI+nf(k1*W1),nf(W2)),EQ,res(x,0,'mg/L')),satz:`Das Regenwasser enthält ${fmt(x,0)} mg/L CSB.`})}},
- {L:'V',g(){const V0=rnd(20,120,5),h0=rnd(2,5,.5),x=Math.sqrt(3*V0/(Math.PI*h0));return task({tag:'Kreislauf & Abfall',ti:'Schüttkegel am Wertstoffhof',tx:`Grünschnitt wird zu einem kegelförmigen Haufen aufgeschüttet. Er soll ${V} = ${q(V0,'m³')} fassen und ${h} = ${q(h0,'m')} hoch sein. Welchen Radius ${r} hat die Grundfläche?`,x:r,un:'m',a:x,dc:2,
+ {L:'V',g(){const V0=rnd(20,120,5),h0=rnd(2,5,.5),x=Math.sqrt(3*V0/(Math.PI*h0));return task({tag:'Kreislauf & Abfall',ti:'Schüttkegel auf dem Kompostplatz',tx:`Grünschnitt wird zu einem kegelförmigen Haufen aufgeschüttet. Er soll ${V} = ${q(V0,'m³')} fassen und ${h} = ${q(h0,'m')} hoch sein. Welchen Radius ${r} hat die Grundfläche?`,x:r,un:'m',a:x,dc:2,
    geg:`${F(V,EQ,q(V0,'m³'))};&nbsp; ${F(h,EQ,q(h0,'m'))}`,f:F(V,EQ,fr('1','3'),M,pi,M,sqr(r),M,h),um:F(r,EQ,sq(fr('3'+M+V,pi+M+h))),ein:F(r,EQ,sq(fr('3 · '+q(V0,'m³'),'π · '+q(h0,'m')))),s:F(r,EQ,sq(fr('3 · '+q(V0,'m³'),'π · '+q(h0,'m'))),EQ,res(x,2,'m')),satz:`Der Haufen hat unten einen Radius von ${fmt(x,2)} m.`})}}
 ];
 
 /* ---------- Schritt für Schritt ---------- */
 const examples={
- B:{tab:'Verweilzeit',intro:`Ein Vorklärbecken fasst ${V} = 1200 m³. Das Abwasser soll ${t} = 2 h darin bleiben (Verweilzeit). Welcher Zufluss ${Q} ist höchstens erlaubt? Formel: ${F(t,EQ,fr(V,Q))}`,
-   s:[{e:F(t,EQ,fr(V,Q)),o:'',w:`Gesucht ist ${Q}. ${Q} steht im Nenner – durch ${Q} wird geteilt.`},
-      {e:F(t,M,Q,EQ,V),o:`| · ${Q}`,w:`Gegenoperation zu „geteilt durch ${Q}“: beide Seiten mal ${Q}. Rechts kürzt sich ${Q} weg.`},
-      {e:F(Q,EQ,fr(V,t)),o:`| : ${t}`,w:`Jetzt ist ${Q} mit ${t} malgenommen. Beide Seiten durch ${t} – und die Seiten tauschen.`},
-      {e:F(Q,EQ,fr('1200 m³','2 h'),EQ,res(600,0,'m³/h')),o:'Rechnen',w:'Werte mit Einheiten einsetzen. Die Einheiten rechnest du mit: m³ geteilt durch h ergibt m³/h.'},
-      {e:F(t,EQ,fr('1200 m³','600 m³/h'),EQ,'2'+u('h')),o:'Probe',w:'Ergebnis in die Ausgangsformel einsetzen. Es kommt wieder 2 h heraus – die Umstellung stimmt.'}]},
+ B:{tab:'Verweilzeit',intro:`Ein Vorklärbecken fasst ${V} = 1200 m³. Es fließen ${Q} = 600 m³/h zu. Wie lange bleibt das Abwasser im Becken (Verweilzeit ${t})? Formel aus der Formelsammlung: ${F(Q,EQ,fr(V,t))}`,
+   s:[{e:F(Q,EQ,fr(V,t)),o:'',w:`Gesucht ist ${t}. ${t} steht im Nenner – durch ${t} wird geteilt.`},
+      {e:F(Q,M,t,EQ,V),o:`| · ${t}`,w:`Gegenoperation zu „geteilt durch ${t}“: beide Seiten mal ${t}. Rechts kürzt sich ${t} weg.`},
+      {e:F(t,EQ,fr(V,Q)),o:`| : ${Q}`,w:`Jetzt ist ${t} mit ${Q} malgenommen. Beide Seiten durch ${Q} – und die Seiten tauschen.`},
+      {e:F(t,EQ,fr('1200 m³','600 m³/h'),EQ,res(2,0,'h')),o:'Rechnen',w:'Werte mit Einheiten einsetzen. m³ kürzt sich weg: m³ geteilt durch m³/h ergibt h.'},
+      {e:F(Q,EQ,fr('1200 m³','2 h'),EQ,'600'+u('m³/h')),o:'Probe',w:'Ergebnis in die Ausgangsformel einsetzen. Es kommt wieder 600 m³/h heraus – die Umstellung stimmt.'}]},
  S:{tab:'Rohrgraben',intro:`Ein Rohrgraben hat einen trapezförmigen Querschnitt: Sohlbreite ${a} = 1,0 m, obere Breite ${c} = 2,6 m, Fläche ${A} = 3,6 m². Wie tief ist der Graben? Formel: ${F(A,EQ,fr(a+PL+c,'2'),M,h)}`,
    s:[{e:F(A,EQ,fr(a+PL+c,'2'),M,h),o:'',w:`Gesucht ist ${h}. An ${h} hängt ein Bruch: (${a} + ${c}) geteilt durch 2.`},
       {e:F('2',M,A,EQ,'(',a,PL,c,')',M,h),o:'| · 2',w:'Zuerst den Nenner 2 wegräumen: beide Seiten mal 2.'},
       {e:F(h,EQ,fr('2'+M+A,a+PL+c)),o:`| : (${a} + ${c})`,w:`Die Klammer ist ein Faktor. Durch die ganze Klammer teilen – nicht einzeln durch ${a} und ${c}!`},
       {e:F(h,EQ,fr('2 · 3,6 m²','1,0 m + 2,6 m'),EQ,fr('7,2 m²','3,6 m'),EQ,res(2,1,'m')),o:'Rechnen',w:'Erst Zähler und Nenner ausrechnen, dann teilen. m² geteilt durch m ergibt m.'}]},
- V:{tab:'Rohrdurchmesser',intro:`Eine Trinkwasserleitung soll ${Q} = 0,05 m³/s bei ${v} = 1,0 m/s transportieren. Welchen Innendurchmesser ${d} braucht das Rohr? Zwei Formeln: ${F(Q,EQ,A,M,v)} und ${F(A,EQ,fr(pi+M+sqr(d),'4'))}`,
-   s:[{e:F(A,EQ,fr(Q,v),EQ,fr('0,05 m³/s','1,0 m/s'),EQ,'0,05'+u('m²')),o:'Schritt 1',w:`Zuerst die Fläche: ${F(Q,EQ,A,M,v)} durch ${v} teilen.`},
+ V:{tab:'Rohrdurchmesser',intro:`Eine Trinkwasserleitung soll ${Q} = 0,05 m³/s bei ${v} = 1,0 m/s transportieren. Welchen Innendurchmesser ${d} braucht das Rohr? Zwei Formeln: ${F(Q,EQ,v,M,A)} und ${F(A,EQ,fr(pi+M+sqr(d),'4'))}`,
+   s:[{e:F(A,EQ,fr(Q,v),EQ,fr('0,05 m³/s','1,0 m/s'),EQ,'0,05'+u('m²')),o:'Schritt 1',w:`Zuerst die Fläche: ${F(Q,EQ,v,M,A)} durch ${v} teilen.`},
       {e:F(A,EQ,fr(pi+M+sqr(d),'4')),o:'Schritt 2',w:`Jetzt die Kreisfläche nach ${d} umstellen. Von außen nach innen: erst die 4, dann π, dann das Quadrat.`},
       {e:F('4',M,A,EQ,pi,M,sqr(d)),o:'| · 4',w:'Beide Seiten mal 4.'},
       {e:F(fr('4'+M+A,pi),EQ,sqr(d)),o:'| : π',w:'Beide Seiten durch π.'},

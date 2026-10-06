@@ -11,7 +11,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html" aria-current="page">M2 Einheiten</a><a href="modul-04.html">M4 Umstellen</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html" aria-current="page" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -120,7 +120,7 @@
   <div data-k="stand"></div>
 </section>
 
-<nav class="weiter" aria-label="Weiter"><a href="rechenweg.html">← Der Rechenweg</a><a href="modul-04.html">→ Weiter zu: Modul 4 Formeln umstellen</a></nav>
+<nav class="weiter" aria-label="Weiter"><a href="rechenweg.html">← Der Rechenweg</a><a href="modul-03.html">→ Weiter zu: Modul 3 Dreisatz, Prozent, Verhältnisse</a></nav>
 </main>
 <footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
 
@@ -174,7 +174,7 @@ const tasks=[
    ()=>{const a=rnd(150,3500,50);return conv({tag:'Rohrleitungsnetze',ti:'Querschnitt in m²',tx:`Ein Kanalprofil hat eine Querschnittsfläche von ${z(a,'cm²')}. Gib die Fläche in Quadratmetern an.`,sym:A,val:a,ua:'cm²',ub:'m²',f:1e-4,rule:'1 m² = 10&#8202;000 cm²',satz:x=>`Der Querschnitt beträgt ${x} m².`})}
  ])()}},
  {L:'S',g(){
-   if(Math.random()<.5){const a=rnd(5,180,5),x=a*3.6;return{tag:'Abwasser',ti:'Pumpwerk: L/s in m³/h',tx:`Das Pumpwerk fördert ${Q} = ${z(a,'L/s')}. Für die Betriebsstatistik brauchst du den Wert in m³/h.`,x:Q,un:'m³/h',a:x,dc:K.dcOf(x),exact:true,
+   if(Math.random()<.5){const a=rnd(5,180,5),x=a*3.6;return{tag:'Abwasser',ti:'Pumpwerk Talstraße: L/s in m³/h',tx:`Das Pumpwerk Talstraße fördert ${Q} = ${z(a,'L/s')}. Für die Betriebsstatistik brauchst du den Wert in m³/h.`,x:Q,un:'m³/h',a:x,dc:K.dcOf(x),exact:true,
      geg:F(Q,EQ,z(a,'L/s')),steps:[['Umrechnung','Zähler: 1 L = 0,001 m³. Nenner: In 1 h = 3600 s fließt 3600-mal so viel.'],['Merke','1 L/s = 3,6 m³/h – also mal 3,6']],
      ein:F(Q,EQ,nf(a),M,'3,6'+u('m³/h')),s:F(Q,EQ,nf(a),M,'3,6'+u('m³/h'),EQ,`<span class="result">${nf(x)}${u('m³/h')}</span>`),satz:`Das Pumpwerk fördert ${nf(x)} m³/h.`}}
    const a=rnd(18,720,18),x=a/3.6;return{tag:'Wasserversorgung',ti:'Förderleistung: m³/h in L/s',tx:`Eine Brunnenpumpe ist mit ${Q} = ${z(a,'m³/h')} angegeben. Rechne in Liter pro Sekunde um.`,x:Q,un:'L/s',a:x,dc:K.dcOf(x),exact:true,
@@ -204,11 +204,11 @@ const tasks=[
    geg:`${F(m,EQ,z(mm,'mg'))};&nbsp; ${F(V,EQ,z(vv,'mL'),EQ,z(vv/1000,'L'))}`,
    steps:[['Formel',F(c,EQ,fr(m,V))],['Einheiten','Das Volumen muss in Litern stehen: mL geteilt durch 1000']],
    ein:F(c,EQ,fr(z(mm,'mg'),z(vv/1000,'L'))),s:F(c,EQ,fr(z(mm,'mg'),z(vv/1000,'L')),EQ,res(x,1,'mg/L')),satz:`Die Phosphorkonzentration beträgt ${fmt(x,1)} mg/L.`}}},
- {L:'V',g(){const vv=rnd(1,5,.5),qq=rnd(8,40,2),x=vv*1000/qq/60;return{tag:'Kreislauf & Abfall',ti:'Sickerwasserbehälter',tx:`Ein Sickerwasserbehälter der Deponie fasst ${V} = ${z(vv,'m³')}. Er wird mit ${Q} = ${z(qq,'L/min')} leergepumpt. Wie viele Stunden dauert das?`,x:t,un:'h',a:x,dc:2,
+ {L:'V',g(){const vv=rnd(1,5,.5),qq=rnd(8,40,2),x=vv*1000/qq/60;return{tag:'Kreislauf & Abfall',ti:'Sickerwasserbehälter',tx:`Ein Sickerwasserbehälter der Deponie im Abfallzentrum Schwierbach fasst ${V} = ${z(vv,'m³')}. Er wird mit ${Q} = ${z(qq,'L/min')} leergepumpt. Wie viele Stunden dauert das?`,x:t,un:'h',a:x,dc:2,
    geg:`${F(V,EQ,z(vv,'m³'),EQ,z(vv*1000,'L'))};&nbsp; ${F(Q,EQ,z(qq,'L/min'))}`,
-   steps:[['Formel',F(t,EQ,fr(V,Q))],['Einheiten','Volumen in Liter umrechnen, dann kommt die Zeit in Minuten heraus. Am Ende durch 60 für Stunden.']],
+   steps:[['Formel',`${F(Q,EQ,fr(V,t))}, umgestellt ${F(t,EQ,fr(V,Q))}`],['Einheiten','Volumen in Liter umrechnen, dann kommt die Zeit in Minuten heraus. Am Ende durch 60 für Stunden.']],
    ein:F(t,EQ,fr(z(vv*1000,'L'),z(qq,'L/min'))),s:F(t,EQ,fr(z(vv*1000,'L'),z(qq,'L/min')),EQ,z(+(vv*1000/qq).toFixed(2),'min'),' : 60',EQ,res(x,2,'h')),satz:`Das Leerpumpen dauert ${fmt(x,2)} Stunden.`}}},
- {L:'V',g(){const cc=rnd(.1,4.5,.05),qq=rnd(5000,40000,1000),x=cc*qq/1000;return{tag:'Abwasser',ti:'Spurenstoffe im Ablauf',tx:`Im Ablauf der Kläranlage werden ${c} = ${z(cc,'µg/L')} Diclofenac gemessen. Täglich fließen ${Q} = ${z(qq,'m³/d')} ab. Wie viel Gramm Diclofenac gelangen pro Tag in den Fluss?`,x:B,un:'g/d',a:x,dc:1,
+ {L:'V',g(){const cc=rnd(.1,4.5,.05),qq=rnd(5000,40000,1000),x=cc*qq/1000;return{tag:'Abwasser',ti:'Spurenstoffe im Ablauf',tx:`Im Ablauf der Kläranlage Schwierbach werden ${c} = ${z(cc,'µg/L')} Diclofenac gemessen. Täglich fließen ${Q} = ${z(qq,'m³/d')} ab. Wie viel Gramm Diclofenac gelangen pro Tag in den Fluss?`,x:B,un:'g/d',a:x,dc:1,
    geg:`${F(c,EQ,z(cc,'µg/L'),EQ,z(cc,'mg/m³'))};&nbsp; ${F(Q,EQ,z(qq,'m³/d'))}`,
    steps:[['Formel',F(B,EQ,c,M,Q)],['Einheiten','µg/L = mg/m³. Das Ergebnis ist dann in mg/d – am Ende geteilt durch 1000 für g/d.']],
    ein:F(B,EQ,z(cc,'mg/m³'),M,z(qq,'m³/d')),s:F(B,EQ,z(cc,'mg/m³'),M,z(qq,'m³/d'),EQ,z(+(cc*qq).toFixed(2),'mg/d'),EQ,res(x,1,'g/d')),satz:`Pro Tag gelangen ${fmt(x,1)} g Diclofenac in den Fluss.`}}}

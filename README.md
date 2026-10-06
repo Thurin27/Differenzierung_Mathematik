@@ -3,6 +3,8 @@
 Selbstlernkurs (Differenzierungsfach, ca. 20 UStd.) für die Unterstufen der Umwelttechnolog(inn)en aller Fachrichtungen.
 Hans-Schwier-Berufskolleg Gelsenkirchen, Fachbereich Umweltschutztechnik.
 
+Alle Aufgaben spielen im fiktiven Schwierbach (Kläranlage Schwierbach mit Pumpwerk Talstraße, Abfall- & Energiezentrum Schwierbach, Wasserwerk, Kanalnetz) – konsistent mit den PLS-Simulationen.
+
 Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google Fonts.
 
 ## Inhalt
@@ -12,7 +14,9 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 | `index.html` | Startseite: Ablauf, Niveaus, Modulübersicht mit Lernstand, Gesamtcode für den Laufzettel |
 | `rechenweg.html` | Modul 0: Die sechs Schritte des Rechenwegs, Musterlösung, typische Fehler, Rechenweg-Detektiv, Checkliste |
 | `modul-02.html` | Modul 2: Einheiten umrechnen |
+| `modul-03.html` | Modul 3: Dreisatz, Prozent, Verhältnisse |
 | `modul-04.html` | Modul 4: Formeln umstellen |
+| `modul-07.html` | Modul 7: Volumen & Masse |
 | `assets/kurs.css` | Gemeinsames Layout (hell/dunkel) |
 | `assets/kurs.js` | Gemeinsame Bausteine: Niveau-Wahl, Schritt-für-Schritt, Trainer, Aufgabengenerator, Lernstand |
 
