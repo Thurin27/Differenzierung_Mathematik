@@ -11,7 +11,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent">M3</a><a href="modul-04.html" aria-current="page" title="Modul 4 Formeln umstellen">M4</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" aria-current="page" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -95,7 +95,7 @@
   <div data-k="stand"></div>
 </section>
 
-<nav class="weiter" aria-label="Weiter"><a href="modul-03.html">← Modul 3 Dreisatz, Prozent, Verhältnisse</a><a href="modul-07.html">→ Weiter zu: Modul 7 Volumen &amp; Masse</a></nav>
+<nav class="weiter" aria-label="Weiter"><a href="modul-03.html">← Modul 3 Dreisatz, Prozent, Verhältnisse</a><a href="modul-05.html">→ Weiter zu: Modul 5 Mit Formeln rechnen</a></nav>
 </main>
 <footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
 
@@ -194,7 +194,7 @@ const examples={
       {e:F('4',M,A,EQ,pi,M,sqr(d)),o:'| · 4',w:'Beide Seiten mal 4.'},
       {e:F(fr('4'+M+A,pi),EQ,sqr(d)),o:'| : π',w:'Beide Seiten durch π.'},
       {e:F(d,EQ,sq(fr('4'+M+A,pi))),o:'| √',w:'Aus beiden Seiten die Wurzel ziehen. Die Wurzel steht über dem ganzen Bruch.'},
-      {e:F(d,EQ,sq(fr('4 · 0,05 m²','π')),EQ,res(0.252,3,'m')),o:'Rechnen',w:'Das sind rund 252 mm. Im Betrieb wählst du dann die nächste passende Nennweite.'}]}
+      {e:F(d,EQ,sq(fr('4 · 0,05 m²','π')),EQ,res(Math.sqrt(0.2/Math.PI),4,'m')),o:'Rechnen',w:'Das sind rund 252 mm. Im Betrieb wählst du dann die nächste passende Nennweite.'}]}
 };
 
 K.module({id:'m4',nr:4,examples,trainer,tasks,trainerNext:'Nächste Formel'});

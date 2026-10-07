@@ -13,9 +13,12 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 |---|---|
 | `index.html` | Startseite: Ablauf, Niveaus, Modulübersicht mit Lernstand, Gesamtcode für den Laufzettel |
 | `rechenweg.html` | Modul 0: Die sechs Schritte des Rechenwegs, Musterlösung, typische Fehler, Rechenweg-Detektiv, Checkliste |
+| `modul-01.html` | Modul 1: Zahlen & Rechenregeln (inkl. ×10-Anzeige lesen, Rundungsregel, Taschenrechner-Führerschein) |
 | `modul-02.html` | Modul 2: Einheiten umrechnen |
 | `modul-03.html` | Modul 3: Dreisatz, Prozent, Verhältnisse |
 | `modul-04.html` | Modul 4: Formeln umstellen |
+| `modul-05.html` | Modul 5: Mit Formeln rechnen (Einheiten angleichen, Einheitenkontrolle, Plausibilität) |
+| `modul-06.html` | Modul 6: Flächen |
 | `modul-07.html` | Modul 7: Volumen & Masse |
 | `assets/kurs.css` | Gemeinsames Layout (hell/dunkel) |
 | `assets/kurs.js` | Gemeinsame Bausteine: Niveau-Wahl, Schritt-für-Schritt, Trainer, Aufgabengenerator, Lernstand |
@@ -42,6 +45,19 @@ Eine Stufe gilt als geschafft bei 5 Trainer-Aufgaben (erster Versuch richtig) un
 3. In `index.html` die Modulkarte von `<div class="mod later">` auf `<a class="mod" href="modul-07.html" data-mod="m7">` umstellen und `{id:'m7',nr:7}` in `K.overview([...])` ergänzen.
 4. Die Navigation im Seitenkopf aller Seiten und die Weiter-Links am Seitenende ergänzen.
 
+Zahleneingaben akzeptieren Komma oder Punkt, Tausenderpunkte und Zehnerpotenzen (`2,4·10^5`, `2,4e5`).
+
+### Rundung
+
+Kursweit gilt: Ergebnisse mit **4 signifikanten Stellen** (`K.r4`, Anzeige mit `K.fmt` / `K.res`). Geht ein Wert genau auf, werden keine Nullen angehängt (2,5 statt 2,500); ab 1000 wird die ganze Zahl angezeigt (123 576).
+Die Prüfung akzeptiert genauere Angaben und Abweichungen bis 3 Einheiten in der 4. Stelle (gerundete Zwischenergebnisse, anderer Rechenweg). Zu grob gerundete Werte werden zurückgemeldet.
+Optional kann eine Aufgabe `diag:x=>'Hinweis'` mitbringen, um typische Fehleingaben gezielt zu erkennen (z. B. übersehene ×10ⁿ-Anzeige in Modul 1).
+
+Ausnahmen pro Aufgabe:
+- `exact:true` – Ergebnis geht genau auf (Umrechnungen); genauer Wert oder 4-Stellen-Wert werden akzeptiert.
+- `fix:true, dc:2` – feste Nachkommastellen (Geldbeträge), Anzeige mit `K.fix` / `K.resFix`.
+- `sig:true, raw:…` – Rundungsübung selbst (Modul 1); verlangt exakt den auf 4 Stellen gerundeten Wert.
+
 ### Trainer-Aufgabe (Multiple Choice)
 
 ```js
@@ -57,7 +73,7 @@ Jede Aufgabe ist eine Funktion `g()`, die bei jedem Aufruf neue Zahlen erzeugt u
 
 ```js
 {tag:'Abwasser', ti:'Titel', tx:'Aufgabentext', x:K.I('v'), un:'m/s',
- a:ergebnis, dc:2,            // Nachkommastellen; alternativ exact:true für exakte Umrechnungen
+ a:ergebnis,                  // ungerundet; geprüft wird auf 4 signifikante Stellen
  geg:'Gegeben-Zeile', steps:[['Formel',…],['Umstellung',…]],
  ein:'eingesetzte Werte', s:'Rechnung mit Ergebnis', satz:'Antwortsatz'}
 ```

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modul 5 Mit Formeln rechnen – Mathe-Aufbaukurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="assets/kurs.css">
+</head>
+<body>
+<header class="site"><div class="wrap sitebar">
+  <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" aria-current="page" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
+</div></header>
+
+<main class="wrap">
+<header class="top">
+  <div class="modnum" aria-hidden="true">5</div>
+  <div class="eyebrow">Mathe-Aufbaukurs · Modul 5</div>
+  <h1>Mit Formeln rechnen</h1>
+  <p class="ctx">Die Formel ist umgestellt – jetzt kommen die Zahlen. Hier entscheidet sich, ob das Ergebnis stimmt: Passen die Einheiten zusammen? Kommt die richtige Einheit heraus? Ist das Ergebnis realistisch? Dieses Modul ist Schritt 5 des Rechenwegs.</p>
+</header>
+
+<div class="bar">
+  <nav aria-label="Abschnitte"><a href="#ziele">Ziele</a><a href="#groessen">Größen</a><a href="#angleichen">Einheiten angleichen</a><a href="#kontrolle">Einheitenkontrolle</a><a href="#plausibel">Plausibilität</a><a href="#beispiel">Schritt für Schritt</a><a href="#trainer">Trainer</a><a href="#rechnen">Rechnen</a><a href="#stand">Lernstand</a></nav>
+  <div data-k="niveau"></div>
+</div>
+
+<section id="ziele">
+  <h2>Das kannst du nach diesem Modul</h2>
+  <div class="raster">
+    <div><span class="lvl B">Basis</span><ul><li>Ich setze Werte mit Einheiten in eine Formel ein.</li><li>Ich kann einfache Einheiten mitrechnen, z. B. m³ : m² = m.</li></ul></div>
+    <div><span class="lvl S">Standard</span><ul><li>Ich gleiche Einheiten vor dem Einsetzen an, z. B. L/s in m³/s.</li><li>Ich erkenne unrealistische Ergebnisse.</li></ul></div>
+    <div><span class="lvl V">Vertiefung</span><ul><li>Ich verbinde mehrere Formeln und Umrechnungen in einer Rechnung.</li><li>Ich kann zusammengesetzte Einheiten wie W, Pa und kWh herleiten.</li></ul></div>
+  </div>
+</section>
+
+<section id="groessen">
+  <h2>Eine Größe ist Zahl mal Einheit</h2>
+  <p><span class="f"><i>Q</i> = 45&#8202;L/s</span> bedeutet: 45 mal die Einheit „Liter pro Sekunde“. Die Einheit gehört zur Zahl wie das Vorzeichen. Wer sie weglässt, weiß am Ende nicht mehr, was herauskommt.</p>
+  <div class="box merke"><p><strong>Einheiten sind wie Buchstaben:</strong> Du kannst sie malnehmen, teilen und kürzen. <span class="f">m³ : (m³/h) = m³ · <span class="fr"><span>h</span><span>m³</span></span> = h</span>. Kommt am Ende die erwartete Einheit heraus, war die Rechnung mit großer Wahrscheinlichkeit richtig aufgebaut.</p></div>
+</section>
+
+<section id="angleichen">
+  <h2>Einheiten vor dem Einsetzen angleichen</h2>
+  <p>Eine Formel funktioniert nur, wenn die Einheiten zueinander passen. Typische Stolperstellen in Schwierbach:</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Gegeben</th><th>Problem</th><th>Lösung</th></tr></thead>
+    <tbody>
+      <tr><td><i class="v">Q</i> in L/s, <i class="v">A</i> in m²</td><td>Liter und Meter passen nicht</td><td class="op">Q in m³/s: L/s · 0,001</td></tr>
+      <tr><td><i class="v">V</i> in m³, <i class="v">Q</i> in L/s</td><td>Zeit soll in h herauskommen</td><td class="op">Q in m³/h: L/s · 3,6</td></tr>
+      <tr><td><i class="v">d</i> in mm, Länge in m</td><td>Millimeter und Meter gemischt</td><td class="op">d in m: mm : 1000</td></tr>
+      <tr><td><i class="v">c</i> in mg/L, <i class="v">Q</i> in m³/d</td><td>Liter und Kubikmeter</td><td class="op">mg/L = g/m³ – dann passt es</td></tr>
+      <tr><td><i class="v">t</i> in min, <i class="v">P</i> in kW</td><td>Energie soll in kWh herauskommen</td><td class="op">t in h: min : 60</td></tr>
+      <tr><td><i class="v">P</i> in kW in <span class="f"><i>P</i> = <i>ρ</i> · <i>g</i> · <i>Q</i> · <i>H</i></span></td><td>Formel liefert Watt</td><td class="op">Ergebnis in W : 1000 = kW</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="kontrolle">
+  <h2>Einheitenkontrolle</h2>
+  <p>Schreibe die Einheiten in die Rechnung und kürze sie wie Zahlen. Drei Beispiele aus der Formelsammlung:</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Formel</th><th>Einheiten einsetzen</th><th>Ergebnis</th></tr></thead>
+    <tbody>
+      <tr><td class="op"><span class="f"><i>v</i> = <span class="fr"><span><i>Q</i></span><span><i>A</i></span></span></span></td><td class="op"><span class="f"><span class="fr"><span>m³/s</span><span>m²</span></span> = <span class="fr"><span>m³</span><span>s · m²</span></span></span></td><td class="op">m/s</td></tr>
+      <tr><td class="op"><span class="f"><i>m</i> = <i>ρ</i> · <i>V</i></span></td><td class="op"><span class="f"><span class="fr"><span>kg</span><span>m³</span></span> · m³</span></td><td class="op">kg</td></tr>
+      <tr><td class="op"><span class="f"><i>p</i> = <i>ρ</i> · <i>g</i> · <i>h</i></span></td><td class="op"><span class="f"><span class="fr"><span>kg</span><span>m³</span></span> · <span class="fr"><span>m</span><span>s²</span></span> · m = <span class="fr"><span>kg</span><span>m · s²</span></span></span></td><td class="op">N/m² = Pa</td></tr>
+      <tr><td class="op"><span class="f"><i>P</i> = <i>ρ</i> · <i>g</i> · <i>Q</i> · <i>H</i></span></td><td class="op"><span class="f"><span class="fr"><span>kg</span><span>m³</span></span> · <span class="fr"><span>m</span><span>s²</span></span> · <span class="fr"><span>m³</span><span>s</span></span> · m</span></td><td class="op">kg · m²/s³ = W</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Aus der Formelsammlung: 1 Pa = 1 N/m² = 1 kg/(m · s²); 1 bar = 10⁵ Pa; 1 W = 1 J/s = 1 kg · m²/s³; 1 kWh = 3,6 MJ.</p>
+</section>
+
+<section id="plausibel">
+  <h2>Ist das realistisch?</h2>
+  <p>Vergleiche dein Ergebnis mit typischen Werten. Liegt es um den Faktor 10, 1000 oder mehr daneben, hast du fast immer eine Einheit falsch umgerechnet.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Größe</th><th>Typischer Bereich (Richtwert)</th></tr></thead>
+    <tbody>
+      <tr><td>Fließgeschwindigkeit im Kanal</td><td class="num">0,5 – 3 m/s</td></tr>
+      <tr><td>Fließgeschwindigkeit in einer Trinkwasserleitung</td><td class="num">0,5 – 2 m/s</td></tr>
+      <tr><td>Verweilzeit im Vorklärbecken</td><td class="num">0,5 – 3 h</td></tr>
+      <tr><td>Oberflächenbeschickung Nachklärbecken</td><td class="num">0,5 – 1,6 m/h</td></tr>
+      <tr><td>Druck am Fuß eines 40-m-Hochbehälters</td><td class="num">≈ 4 bar</td></tr>
+      <tr><td>Leistung einer Abwasserpumpe</td><td class="num">einige kW bis einige 100 kW</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="beispiel">
+  <h2>Schritt für Schritt</h2>
+  <p>Klicke dich durch die Beispiele und schreibe jeden Schritt mit.</p>
+  <div data-k="stepper"></div>
+</section>
+
+<section id="trainer">
+  <h2>Einheiten-Trainer</h2>
+  <p>Welche Einheit kommt heraus? Welcher Wert passt? Es zählt nur der erste Versuch.</p>
+  <div data-k="trainer"></div>
+</section>
+
+<section id="rechnen">
+  <h2>Rechnen im Betrieb</h2>
+  <p>Jede Aufgabe wird mit neuen Zahlen erzeugt. Achte besonders auf die Einheiten. Die Lösung zeigt dir den vollständigen Rechenweg.</p>
+  <div data-k="rechnen"></div>
+</section>
+
+<section id="stand">
+  <h2>Mein Lernstand</h2>
+  <p>Trage am Ende der Stunde den Kontrollcode in deinen Laufzettel ein.</p>
+  <div data-k="stand"></div>
+</section>
+
+<nav class="weiter" aria-label="Weiter"><a href="modul-04.html">← Modul 4 Formeln umstellen</a><a href="modul-06.html">→ Weiter zu: Modul 6 Flächen</a></nav>
+</main>
+<footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
+
+<script src="assets/kurs.js"></script>
+<script>
+(function(){
+const {I,fr,sq,F,M,MI,PL,EQ,u,q,nf,fmt,rnd,pick,res,sqr}=K;
+const z=(x,un)=>`${nf(x)}${u(un)}`;
+const Q=I('Q'),A=I('A'),v=I('v'),V=I('V'),t=I('t'),m=I('m'),rho=I('ρ'),E=I('E'),P=I('P'),c=I('c'),B=I('B'),p=I('p'),g=I('g'),h=I('h'),H=I('H'),d=I('d'),l=I('l'),b=I('b'),eta=I('η'),qA=I('q','A'),pi='π',K_=I('K');
+
+const T=(L,n,prompt,ok,w,h_,ask)=>({L,n,prompt,ask:ask||'Welche Antwort ist richtig?',ok,w,h:h_});
+const trainer=[
+ T('B','Einheit','m³/h · h = ?','m³',['m³/h²','h/m³','m³ · h²'],'Die Stunde kürzt sich weg.'),
+ T('B','Einheit','m³ : m² = ?','m',['m²','m⁵','m³/m'],'m · m · m geteilt durch m · m: übrig bleibt m.'),
+ T('B','Einheit','m² · m = ?','m³',['m²','m⁴','2 m'],'Fläche mal Höhe ergibt Volumen.'),
+ T('B','Einheit','kg/m³ · m³ = ?','kg',['kg/m⁶','m³/kg','kg · m⁶'],'m³ kürzt sich weg.'),
+ T('B','Einheit','m³ : (m³/h) = ?','h',['m⁶/h','1/h','m³ · h'],'Durch einen Bruch teilen heißt mit dem Kehrwert malnehmen: m³ · h/m³.'),
+ T('B','Angleichen','Q = 2 m³/h, t = 30 min. Was setzt du für t ein, damit V in m³ herauskommt?','t = 0,5 h',['t = 30 h','t = 3 h','t = 1800 h'],'Q ist pro Stunde, also t in Stunden: 30 min = 0,5 h.'),
+ T('B','Plausibilität','Ergebnis: Das Abwasser fließt im Kanal mit 45 m/s. Was sagst du?','Viel zu schnell – Fehler suchen',['Passt, Kanäle sind schnell','Zu langsam – Fehler suchen','Kann man nicht beurteilen'],'Im Kanal sind 0,5–3 m/s üblich. 45 m/s wären 162 km/h.'),
+ T('S','Einheit','m³/s : m² = ?','m/s',['m/s²','m⁵/s','s/m'],'m³ : m² = m, das „pro s“ bleibt.'),
+ T('S','Angleichen','Q = 120 L/s soll in v = Q/A mit A in m² eingesetzt werden. Was setzt du ein?','0,12 m³/s',['120 m³/s','432 m³/s','1,2 m³/s'],'1 L = 0,001 m³, also 120 · 0,001.'),
+ T('S','Angleichen','A = 706,9 cm². Was setzt du in m² ein?','0,07069 m²',['7,069 m²','0,7069 m²','70,69 m²'],'1 m² = 10 000 cm², also geteilt durch 10 000.'),
+ T('S','Einheit','mg/L · m³/d = ?','g/d',['mg/d','kg/d','g/m³'],'mg/L = g/m³. Dann kürzt sich m³ weg.'),
+ T('S','Plausibilität','Ergebnis: Verweilzeit im Vorklärbecken 150 h. Was sagst du?','Unrealistisch lang – Einheiten prüfen',['Passt','Etwas kurz','Typisch für Vorklärbecken'],'Üblich sind 0,5–3 h. Vermutlich wurde Q in L/s nicht umgerechnet.'),
+ T('S','Einheit','N/m² ist die Einheit für …','Druck (Pascal)',['Energie (Joule)','Leistung (Watt)','Kraft (Newton)'],'1 Pa = 1 N/m².'),
+ T('S','Energie','Eine Pumpe mit 2 kW läuft 3 h. Energie?','6 kWh',['6 kW','1,5 kWh','0,67 kWh'],'E = P · t = 2 kW · 3 h.'),
+ T('V','Einheit','kg/m³ · m/s² · m = ?','kg/(m · s²) = Pa',['kg · m/s² = N','kg · m²/s² = J','kg/s'],'Das ist ρ · g · h – der Druck einer Wassersäule.'),
+ T('V','Einheit','kg/m³ · m/s² · m³/s · m = ?','kg · m²/s³ = W',['J','N','Pa'],'Das ist ρ · g · Q · H – die hydraulische Leistung.'),
+ T('V','Formelsammlung','1 bar = ?','10⁵ Pa',['10³ Pa','10⁶ Pa','100 Pa'],'Steht in der Formelsammlung: 1 bar = 10⁵ Pa = 10⁵ N/m².'),
+ T('V','Formelsammlung','1 kWh = ?','3,6 MJ',['1000 J','3600 J','36 MJ'],'1000 W · 3600 s = 3 600 000 J.'),
+ T('V','Einheit','q_A = Q/A mit Q in m³/h und A in m². Einheit?','m/h',['m²/h','h/m','m³/(h·m)'],'m³ : m² = m, dazu „pro h“.'),
+ T('V','Druck','Welcher Druck herrscht ungefähr am Fuß einer 10 m hohen Wassersäule?','1 bar',['10 bar','0,1 bar','100 bar'],'p = 1000 · 9,81 · 10 ≈ 98 100 Pa ≈ 1 bar. Faustregel: 10 m Wassersäule ≈ 1 bar.'),
+ T('V','Angleichen','P = ρ · g · Q · H soll in kW herauskommen. Q ist in m³/h gegeben. Was tust du?','Q durch 3600 teilen, Ergebnis durch 1000',['Q mal 3600, Ergebnis mal 1000','nichts, das passt','Q durch 60 teilen'],'Die Formel braucht m³/s und liefert Watt.')
+];
+
+const tasks=[
+ /* ---------- Basis ---------- */
+ {L:'B',g(){const Q0=rnd(80,400,10),A0=rnd(150,600,10),x=Q0/A0;return{tag:'Abwasser',ti:'Oberflächenbeschickung',tx:`In ein Nachklärbecken der Kläranlage Schwierbach fließen ${Q} = ${z(Q0,'m³/h')}. Die Wasseroberfläche beträgt ${A} = ${z(A0,'m²')}. Berechne die Oberflächenbeschickung ${F(qA,EQ,fr(Q,A))}.`,x:qA,un:'m/h',a:x,dc:2,
+   geg:`${F(Q,EQ,z(Q0,'m³/h'))};&nbsp; ${F(A,EQ,z(A0,'m²'))}`,steps:[['Formel',F(qA,EQ,fr(Q,A))],['Einheitenkontrolle','m³/h : m² = m/h – die Einheiten passen.']],ein:F(qA,EQ,fr(z(Q0,'m³/h'),z(A0,'m²'))),
+   s:F(qA,EQ,fr(z(Q0,'m³/h'),z(A0,'m²')),EQ,res(x,2,'m/h')),satz:`Die Oberflächenbeschickung beträgt ${fmt(x,2)} m/h.`}}},
+ {L:'B',g(){const V0=rnd(200,1500,50),r0=rnd(1.2,1.5,.01),x=V0*r0;return{tag:'Abwasser',ti:'Fällmittel-Lieferung',tx:`Ein Tankwagen liefert ${z(V0,'L')} Eisen(III)-chlorid-Lösung an die Kläranlage Schwierbach. Die Lösung hat eine Dichte von ${z(r0,'kg/L')}. Wie viele Kilogramm wurden geliefert?`,x:m,un:'kg',a:x,dc:1,
+   geg:`${F(V,EQ,z(V0,'L'))};&nbsp; ${F(rho,EQ,z(r0,'kg/L'))}`,steps:[['Formel',F(m,EQ,rho,M,V)],['Einheitenkontrolle','kg/L · L = kg – die Einheiten passen.']],ein:F(m,EQ,z(r0,'kg/L'),M,z(V0,'L')),
+   s:F(m,EQ,z(r0,'kg/L'),M,z(V0,'L'),EQ,res(x,1,'kg')),satz:`Es wurden ${fmt(x,1)} kg Fällmittellösung geliefert.`}}},
+ {L:'B',g(){const P0=rnd(2,45,.5),t0=rnd(4,24,.5),x=P0*t0;return{tag:'Wasserversorgung',ti:'Energie der Brunnenpumpe',tx:`Die Brunnenpumpe des Wasserwerks Schwierbach nimmt ${F(P,EQ,z(P0,'kW'))} auf und läuft ${F(t,EQ,z(t0,'h'))} am Tag. Wie viel elektrische Energie braucht sie täglich?`,x:E,un:'kWh',a:x,dc:1,
+   geg:`${F(P,EQ,z(P0,'kW'))};&nbsp; ${F(t,EQ,z(t0,'h'))}`,steps:[['Formel',F(E,EQ,P,M,t)],['Einheitenkontrolle','kW · h = kWh']],ein:F(E,EQ,z(P0,'kW'),M,z(t0,'h')),
+   s:F(E,EQ,z(P0,'kW'),M,z(t0,'h'),EQ,res(x,1,'kWh')),satz:`Die Pumpe braucht ${fmt(x,1)} kWh am Tag.`}}},
+ {L:'B',g(){const c0=rnd(.04,.12,.005),Q0=rnd(3000,12000,100),x=c0*Q0;return{tag:'Abwasser',ti:'Stickstofffracht',tx:`Im Zulauf der Kläranlage Schwierbach beträgt die Stickstoffkonzentration ${F(c,EQ,z(c0,'kg/m³'))} bei einem Tageszufluss von ${F(Q,EQ,z(Q0,'m³/d'))}. Wie groß ist die Stickstofffracht?`,x:B,un:'kg/d',a:x,dc:0,
+   geg:`${F(c,EQ,z(c0,'kg/m³'))};&nbsp; ${F(Q,EQ,z(Q0,'m³/d'))}`,steps:[['Formel',F(B,EQ,c,M,Q)],['Einheitenkontrolle','kg/m³ · m³/d = kg/d']],ein:F(B,EQ,z(c0,'kg/m³'),M,z(Q0,'m³/d')),
+   s:F(B,EQ,z(c0,'kg/m³'),M,z(Q0,'m³/d'),EQ,res(x,0,'kg/d')),satz:`Die Stickstofffracht beträgt ${fmt(x,0)} kg/d.`}}},
+ {L:'B',g(){const V0=rnd(600,2000,50),Q0=rnd(400,1200,50),x=V0/Q0;return{tag:'Abwasser',ti:'Verweilzeit im Belebungsbecken',tx:`Ein Belebungsbecken der Kläranlage Schwierbach hat ${F(V,EQ,z(V0,'m³'))}. Es fließen ${F(Q,EQ,z(Q0,'m³/h'))} hindurch. Berechne die Verweilzeit mit ${F(t,EQ,fr(V,Q))}.`,x:t,un:'h',a:x,dc:2,
+   geg:`${F(V,EQ,z(V0,'m³'))};&nbsp; ${F(Q,EQ,z(Q0,'m³/h'))}`,steps:[['Formel',F(t,EQ,fr(V,Q))],['Einheitenkontrolle','m³ : m³/h = m³ · h/m³ = h']],ein:F(t,EQ,fr(z(V0,'m³'),z(Q0,'m³/h'))),
+   s:F(t,EQ,fr(z(V0,'m³'),z(Q0,'m³/h')),EQ,res(x,2,'h')),satz:`Die Verweilzeit beträgt ${fmt(x,2)} Stunden.`}}},
+
+ /* ---------- Standard ---------- */
+ {L:'S',g(){const A0=rnd(.08,.6,.01),Ql=Math.max(10,Math.round(rnd(.5,2,.05)*A0*1000/5)*5),Qm=Ql/1000,x=Qm/A0;return{tag:'Abwasser',ti:'Geschwindigkeit im Zulaufgerinne',tx:`Im Zulaufgerinne der Kläranlage Schwierbach fließen ${F(Q,EQ,z(Ql,'L/s'))}. Der durchflossene Querschnitt beträgt ${F(A,EQ,z(A0,'m²'))}. Wie schnell fließt das Abwasser (${F(v,EQ,fr(Q,A))})?`,x:v,un:'m/s',a:x,dc:2,
+   geg:`${F(Q,EQ,z(Ql,'L/s'),EQ,z(Qm,'m³/s'))};&nbsp; ${F(A,EQ,z(A0,'m²'))}`,steps:[['Formel',F(v,EQ,fr(Q,A))],['Angleichen','L/s und m² passen nicht zusammen. Q in m³/s: geteilt durch 1000.']],ein:F(v,EQ,fr(z(Qm,'m³/s'),z(A0,'m²'))),
+   s:F(v,EQ,fr(z(Qm,'m³/s'),z(A0,'m²')),EQ,res(x,2,'m/s')),satz:`Das Abwasser fließt mit ${fmt(x,2)} m/s.`}}},
+ {L:'S',g(){const P0=rnd(1.5,15,.5),tm=rnd(20,240,5),th=tm/60,x=P0*th;return{tag:'Kreislauf & Abfall',ti:'Energie der Ballenpresse',tx:`Die Ballenpresse der Sortieranlage im Abfallzentrum Schwierbach nimmt ${F(P,EQ,z(P0,'kW'))} auf und läuft ${F(t,EQ,z(tm,'min'))}. Wie viel Energie in kWh verbraucht sie?`,x:E,un:'kWh',a:x,dc:2,
+   geg:`${F(P,EQ,z(P0,'kW'))};&nbsp; ${F(t,EQ,z(tm,'min'),EQ,fmt(th,4)+u('h'))}`,steps:[['Formel',F(E,EQ,P,M,t)],['Angleichen','Für kWh muss die Zeit in Stunden stehen: min geteilt durch 60.']],ein:F(E,EQ,z(P0,'kW'),M,fmt(th,4)+u('h')),
+   s:F(E,EQ,z(P0,'kW'),M,fmt(th,4)+u('h'),EQ,res(x,2,'kWh')),satz:`Die Ballenpresse verbraucht ${fmt(x,2)} kWh.`}}},
+ {L:'S',g(){const V0=rnd(400,2400,50),Ql=rnd(50,300,10),Qh=Ql*3.6,x=V0/Qh;return{tag:'Abwasser',ti:'Speicherbecken leerpumpen',tx:`Das Speicherbecken der Kläranlage Schwierbach enthält ${F(V,EQ,z(V0,'m³'))}. Die Pumpe fördert ${F(Q,EQ,z(Ql,'L/s'))}. Wie viele Stunden dauert das Leerpumpen (${F(t,EQ,fr(V,Q))})?`,x:t,un:'h',a:x,dc:2,
+   geg:`${F(V,EQ,z(V0,'m³'))};&nbsp; ${F(Q,EQ,z(Ql,'L/s'),EQ,z(Qh,'m³/h'))}`,steps:[['Formel',F(t,EQ,fr(V,Q))],['Angleichen','Die Zeit soll in h herauskommen: Q in m³/h umrechnen (L/s · 3,6).']],ein:F(t,EQ,fr(z(V0,'m³'),z(Qh,'m³/h'))),
+   s:F(t,EQ,fr(z(V0,'m³'),z(Qh,'m³/h')),EQ,res(x,2,'h')),satz:`Das Leerpumpen dauert ${fmt(x,2)} Stunden.`}}},
+ {L:'S',g(){const VL=rnd(500,8000,100),r0=rnd(1.2,1.55,.01),Vm=VL/1000,x=r0*Vm*1000;return{tag:'Wasserversorgung',ti:'Natronlauge im Tank',tx:`Im Wasserwerk Schwierbach sind ${F(V,EQ,z(VL,'L'))} Natronlauge im Tank. Die Dichte beträgt ${F(rho,EQ,z(r0,'t/m³'))}. Wie viele Kilogramm sind das?`,x:m,un:'kg',a:x,dc:0,
+   geg:`${F(V,EQ,z(VL,'L'),EQ,z(Vm,'m³'))};&nbsp; ${F(rho,EQ,z(r0,'t/m³'))}`,steps:[['Formel',F(m,EQ,rho,M,V)],['Angleichen','L in m³ umrechnen, dann kommt t heraus. Am Ende t in kg: mal 1000.']],ein:F(m,EQ,z(r0,'t/m³'),M,z(Vm,'m³')),
+   s:F(m,EQ,z(r0,'t/m³'),M,z(Vm,'m³'),EQ,fmt(r0*Vm,3)+u('t'),EQ,res(x,0,'kg')),satz:`Im Tank sind ${fmt(x,0)} kg Natronlauge.`}}},
+ {L:'S',g(){const h0=rnd(15,55,1),x=1000*9.81*h0/1e5;return{tag:'Wasserversorgung',ti:'Druck am Fuß des Hochbehälters',tx:`Der Wasserspiegel im Hochbehälter Schwierbach liegt ${F(h,EQ,z(h0,'m'))} über der Talstraße. Welcher Druck herrscht dort in der Leitung, wenn kein Wasser fließt? Rechne mit ${F(p,EQ,rho,M,g,M,h)} und gib das Ergebnis in bar an.`,x:p,un:'bar',a:x,dc:2,
+   geg:`${F(rho,EQ,'1000'+u('kg/m³'))};&nbsp; ${F(g,EQ,'9,81'+u('m/s²'))};&nbsp; ${F(h,EQ,z(h0,'m'))}`,steps:[['Formel',F(p,EQ,rho,M,g,M,h)],['Einheiten','kg/m³ · m/s² · m = Pa. 1 bar = 10⁵ Pa = 100 000 Pa.']],ein:F(p,EQ,'1000',M,'9,81',M,nf(h0),EQ,z(1000*9.81*h0,'Pa')),
+   s:F(p,EQ,'1000'+u('kg/m³'),M,'9,81'+u('m/s²'),M,z(h0,'m'),EQ,z(+(9810*h0).toFixed(0),'Pa'),EQ,res(x,2,'bar')),satz:`In der Talstraße herrscht ein Ruhedruck von ${fmt(x,2)} bar.`}}},
+
+ /* ---------- Vertiefung ---------- */
+ {L:'V',g(){const cc=rnd(250,700,10),Ql=rnd(30,200,5),Qd=Ql*86.4,x=cc*Qd/1000;return{tag:'Abwasser',ti:'CSB-Fracht aus Stundenwerten',tx:`Die Messstelle im Zulauf der Kläranlage Schwierbach zeigt ${F(c,EQ,z(cc,'mg/L'))} CSB und einen Durchfluss von ${F(Q,EQ,z(Ql,'L/s'))}. Wie groß ist die CSB-Fracht in kg pro Tag, wenn diese Werte den ganzen Tag gelten?`,x:B,un:'kg/d',a:x,dc:1,
+   geg:`${F(c,EQ,z(cc,'mg/L'),EQ,z(cc,'g/m³'))};&nbsp; ${F(Q,EQ,z(Ql,'L/s'),EQ,z(Qd,'m³/d'))}`,steps:[['Formel',F(B,EQ,c,M,Q)],['Angleichen','mg/L = g/m³. L/s in m³/d: · 3,6 · 24 = · 86,4. Ergebnis in g/d, dann : 1000.']],ein:F(B,EQ,z(cc,'g/m³'),M,z(Qd,'m³/d')),
+   s:F(B,EQ,z(cc,'g/m³'),M,z(Qd,'m³/d'),EQ,z(+(cc*Qd).toFixed(1),'g/d'),EQ,res(x,1,'kg/d')),satz:`Die CSB-Fracht beträgt ${fmt(x,1)} kg/d.`}}},
+ {L:'V',g(){const Ql=rnd(40,250,5),H0=rnd(8,30,1),Qs=Ql/1000,x=1000*9.81*Qs*H0/1000;return{tag:'Abwasser',ti:'Hydraulische Leistung',tx:`Eine Pumpe im Pumpwerk Talstraße fördert ${F(Q,EQ,z(Ql,'L/s'))} auf eine Förderhöhe von ${F(H,EQ,z(H0,'m'))}. Wie groß ist die hydraulische Leistung ${F(P,EQ,rho,M,g,M,Q,M,H)} in kW?`,x:P,un:'kW',a:x,dc:2,
+   geg:`${F(Q,EQ,z(Ql,'L/s'),EQ,z(Qs,'m³/s'))};&nbsp; ${F(H,EQ,z(H0,'m'))};&nbsp; ${F(rho,EQ,'1000'+u('kg/m³'))};&nbsp; ${F(g,EQ,'9,81'+u('m/s²'))}`,steps:[['Formel',F(P,EQ,rho,M,g,M,Q,M,H)],['Angleichen','Q in m³/s, dann kommt Watt heraus (kg · m²/s³). Am Ende W : 1000 = kW.']],ein:F(P,EQ,'1000',M,'9,81',M,nf(Qs),M,nf(H0)),
+   s:F(P,EQ,'1000'+u('kg/m³'),M,'9,81'+u('m/s²'),M,z(Qs,'m³/s'),M,z(H0,'m'),EQ,z(+(9810*Qs*H0).toFixed(1),'W'),EQ,res(x,2,'kW')),satz:`Die hydraulische Leistung beträgt ${fmt(x,2)} kW.`}}},
+ {L:'V',g(){const Qh=rnd(100,600,10),H0=rnd(15,30,1),e0=rnd(.55,.75,.01),th=rnd(8,20,1),pr=rnd(.22,.35,.01),Pel=1000*9.81*(Qh/3600)*H0/e0/1000,Ed=Pel*th,x=Ed*pr;return{tag:'Abwasser',ti:'Stromkosten pro Tag',tx:`Im Pumpwerk Talstraße fördert eine Pumpe ${F(Q,EQ,z(Qh,'m³/h'))} auf ${F(H,EQ,z(H0,'m'))}. Der Gesamtwirkungsgrad beträgt ${F(eta,EQ,nf(e0))}. Sie läuft ${z(th,'h')} am Tag, 1 kWh kostet ${nf(pr)} €. Wie hoch sind die Stromkosten pro Tag?`,x:K_,un:'€',a:x,dc:2,fix:true,
+   geg:`${F(Q,EQ,z(Qh,'m³/h'),EQ,fmt(Qh/3600,5)+u('m³/s'))};&nbsp; ${F(H,EQ,z(H0,'m'))};&nbsp; ${F(eta,EQ,nf(e0))};&nbsp; ${F(t,EQ,z(th,'h'))};&nbsp; ${nf(pr)} €/kWh`,steps:[['Formeln',`${F(I('P','el'),EQ,fr(rho+M+g+M+Q+M+H,eta))};&nbsp; ${F(E,EQ,I('P','el'),M,t)};&nbsp; Kosten = ${E} · Preis`],['Leistung',F(I('P','el'),EQ,fr('1000 · 9,81 · '+fmt(Qh/3600,5)+' · '+nf(H0),nf(e0)),EQ,fmt(Pel,2)+u('kW'))]],ein:`${F(E,EQ,fmt(Pel,2)+u('kW'),M,z(th,'h'),EQ,fmt(Ed,1)+u('kWh'))}`,
+   s:`${F(I('P','el'),EQ,fmt(Pel,2)+u('kW'))}<br>${F(E,EQ,fmt(Pel,2)+u('kW'),M,z(th,'h'),EQ,fmt(Ed,1)+u('kWh'))}<br>${F(K_,EQ,fmt(Ed,1)+u('kWh'),M,z(pr,'€/kWh'),EQ,K.resFix(x,2,'€'))}`,satz:`Die Stromkosten betragen ${K.fix(x,2)} € pro Tag.`}}},
+ {L:'V',g(){const d0=rnd(24,44,1),Qd=rnd(6000,24000,500),Ag=Math.PI*d0*d0/4,Qh=Qd/24,x=Qh/Ag;return{tag:'Abwasser',ti:'Nachklärbecken prüfen',tx:`Das runde Nachklärbecken der Kläranlage Schwierbach hat ${F(d,EQ,z(d0,'m'))}. Bei Trockenwetter fließen ${F(Q,EQ,z(Qd,'m³/d'))} zu. Berechne die Oberflächenbeschickung ${F(qA,EQ,fr(Q,A))} in m/h. Liegt sie im üblichen Bereich?`,x:qA,un:'m/h',a:x,dc:2,
+   geg:`${F(d,EQ,z(d0,'m'))};&nbsp; ${F(Q,EQ,z(Qd,'m³/d'),EQ,fmt(Qh,1)+u('m³/h'))}`,steps:[['Formeln',`${F(A,EQ,fr(pi+M+sqr(d),'4'))} und ${F(qA,EQ,fr(Q,A))}`],['Fläche und Angleichen',`${F(A,EQ,fr('π · ('+z(d0,'m')+')²','4'),EQ,fmt(Ag,1)+u('m²'))}; Q in m³/h: geteilt durch 24`]],ein:F(qA,EQ,fr(fmt(Qh,1)+u('m³/h'),fmt(Ag,1)+u('m²'))),
+   s:`${F(A,EQ,fmt(Ag,1)+u('m²'))}<br>${F(qA,EQ,fr(fmt(Qh,1)+u('m³/h'),fmt(Ag,1)+u('m²')),EQ,res(x,2,'m/h'))}`,satz:`Die Oberflächenbeschickung beträgt ${fmt(x,2)} m/h – ${x<0.5?'eher niedrig, das Becken ist bei Trockenwetter wenig belastet':x<=1.6?'das liegt im üblichen Bereich':'das ist zu hoch, Schlamm könnte abtreiben'}.`}}},
+ {L:'V',g(){const l0=rnd(15,30,1),b0=rnd(1.5,3,.5),h0=rnd(1.5,3,.1),Ql=rnd(150,600,10),V0=l0*b0*h0,Qs=Ql/1000,ts=V0/Qs,x=ts/60;return{tag:'Abwasser',ti:'Verweilzeit im Sandfang',tx:`Der belüftete Sandfang der Kläranlage Schwierbach ist ${z(l0,'m')} lang, ${z(b0,'m')} breit und ${z(h0,'m')} tief. Es fließen ${F(Q,EQ,z(Ql,'L/s'))} hindurch. Wie viele Minuten bleibt das Abwasser im Sandfang?`,x:t,un:'min',a:x,dc:1,
+   geg:`${F(l,EQ,z(l0,'m'))};&nbsp; ${F(b,EQ,z(b0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))};&nbsp; ${F(Q,EQ,z(Ql,'L/s'),EQ,z(Qs,'m³/s'))}`,steps:[['Formeln',`${F(V,EQ,l,M,b,M,h)} und ${F(t,EQ,fr(V,Q))}`],['Volumen und Angleichen',`${F(V,EQ,fmt(V0,2)+u('m³'))}; Q in m³/s, dann kommt t in s heraus – am Ende : 60`]],ein:F(t,EQ,fr(fmt(V0,2)+u('m³'),z(Qs,'m³/s'))),
+   s:`${F(V,EQ,z(l0,'m'),M,z(b0,'m'),M,z(h0,'m'),EQ,fmt(V0,2)+u('m³'))}<br>${F(t,EQ,fr(fmt(V0,2)+u('m³'),z(Qs,'m³/s')),EQ,fmt(ts,1)+u('s'),EQ,res(x,1,'min'))}`,satz:`Das Abwasser bleibt ${fmt(x,1)} Minuten im Sandfang.`}}}
+];
+
+const examples={
+ B:{tab:'Einheiten mitrechnen',intro:`Ein Belebungsbecken hat ${F(V,EQ,'1500 m³')}, es fließen ${F(Q,EQ,'500 m³/h')} hindurch. Verweilzeit?`,s:[
+   {e:F(t,EQ,fr(V,Q)),o:'Formel',w:'Die Formel ist schon nach t umgestellt.'},
+   {e:F(t,EQ,fr('1500 m³','500 m³/h')),o:'Einsetzen',w:'Zahlen mit Einheiten einsetzen.'},
+   {e:'m³ : (m³/h) = m³ · h/m³ = h',o:'Kontrolle',w:'Einheiten kürzen. Es bleibt h – genau die Einheit, die wir für eine Zeit erwarten.'},
+   {e:F(t,EQ,res(3,0,'h')),o:'Ergebnis',w:'Drei Stunden – passt für ein Belebungsbecken.'}]},
+ S:{tab:'L/s angleichen',intro:`Im Zulaufgerinne fließen ${F(Q,EQ,'180 L/s')} durch ${F(A,EQ,'0,15 m²')}. Fließgeschwindigkeit?`,s:[
+   {e:F(v,EQ,fr(Q,A)),o:'Formel',w:'Nach v umgestellte Durchflussformel.'},
+   {e:'L/s und m² passen nicht',o:'Prüfen',w:'Liter und Quadratmeter lassen sich nicht kürzen. Erst angleichen.'},
+   {e:F('180 L/s',EQ,'0,18'+u('m³/s')),o:'Angleichen',w:'1 L = 0,001 m³.'},
+   {e:F(v,EQ,fr('0,18 m³/s','0,15 m²'),EQ,res(1.2,1,'m/s')),o:'Rechnen',w:'1,2 m/s ist ein typischer Wert im Gerinne. Ohne Umrechnung wären 1200 m/s herausgekommen.'}]},
+ V:{tab:'Leistung in kW',intro:`Eine Pumpe fördert ${F(Q,EQ,'90 L/s')} auf ${F(H,EQ,'20 m')}. Hydraulische Leistung in kW?`,s:[
+   {e:F(P,EQ,rho,M,g,M,Q,M,H),o:'Formel',w:'Hydraulische Leistung.'},
+   {e:F(Q,EQ,'90 L/s',EQ,'0,09'+u('m³/s')),o:'Angleichen',w:'Die Formel braucht SI-Einheiten: m³/s.'},
+   {e:F(P,EQ,'1000 kg/m³ · 9,81 m/s² · 0,09 m³/s · 20 m',EQ,'17&#8202;658'+u('W')),o:'Rechnen',w:'Einheiten: kg · m²/s³ = W.'},
+   {e:F(P,EQ,res(17.66,2,'kW')),o:': 1000',w:'Watt in Kilowatt umrechnen. 17,7 kW ist realistisch für eine Abwasserpumpe.'}]}
+};
+
+K.module({id:'m5',nr:5,examples,trainer,tasks});
+})();
+</script>
+</body>
+</html>

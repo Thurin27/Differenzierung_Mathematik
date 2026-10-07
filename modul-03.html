@@ -11,7 +11,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" aria-current="page" title="Modul 3 Dreisatz, Prozent">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" aria-current="page" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -170,9 +170,9 @@ const tasks=[
  {L:'B',g(){const r=rnd(25,90,5),d1=rnd(3,7,1),x1=r*d1,d2=rnd(10,31,1),x=r*d2;return{tag:'Abwasser',ti:'Fällmittelverbrauch',tx:`Die Phosphatfällung der Kläranlage Schwierbach hat in ${d1} Tagen ${z(x1,'L')} Fällmittel verbraucht. Wie viel Fällmittel wird bei gleichem Verbrauch in ${d2} Tagen benötigt?`,x:V,un:'L',a:x,dc:0,
    geg:`${d1} Tage → ${z(x1,'L')}`,steps:[['Zusammenhang','proportional: mehr Tage, mehr Fällmittel'],['Schluss auf 1',`1 Tag → ${nf(x1)} : ${d1} = ${z(r,'L')}`]],ein:`${d2} Tage → ${nf(r)} · ${d2}`,
    s:ds([[`${d1} Tage`,z(x1,'L'),`| : ${d1}`],['1 Tag',z(r,'L'),`| · ${d2}`],[`${d2} Tage`,res(x,0,'L')]]),satz:`In ${d2} Tagen werden ${fmt(x,0)} Liter Fällmittel benötigt.`}}},
- {L:'B',g(){const P0=rnd(4,30,.5),h0=rnd(6,24,1),pr=rnd(.22,.38,.01),E=P0*h0,x=E*pr;return{tag:'Abwasser',ti:'Stromkosten im Pumpwerk Talstraße',tx:`Eine Pumpe im Pumpwerk Talstraße nimmt ${z(P0,'kW')} auf und läuft ${z(h0,'h')} am Tag. Eine Kilowattstunde kostet ${nf(pr)} €. Wie hoch sind die Stromkosten pro Tag?`,x:K_,un:'€',a:x,dc:2,
+ {L:'B',g(){const P0=rnd(4,30,.5),h0=rnd(6,24,1),pr=rnd(.22,.38,.01),E=P0*h0,x=E*pr;return{tag:'Abwasser',ti:'Stromkosten im Pumpwerk Talstraße',tx:`Eine Pumpe im Pumpwerk Talstraße nimmt ${z(P0,'kW')} auf und läuft ${z(h0,'h')} am Tag. Eine Kilowattstunde kostet ${nf(pr)} €. Wie hoch sind die Stromkosten pro Tag?`,x:K_,un:'€',a:x,dc:2,fix:true,
    geg:`${F(P,EQ,z(P0,'kW'))};&nbsp; ${F(t,EQ,z(h0,'h'))};&nbsp; 1 kWh → ${nf(pr)} €`,steps:[['Energie',`${F(I('E'),EQ,P,M,t,EQ,z(P0,'kW'),M,z(h0,'h'),EQ,z(E,'kWh'))}`],['Dreisatz','1 kWh kostet '+nf(pr)+' € – also mal Anzahl kWh']],ein:F(K_,EQ,z(E,'kWh'),M,z(pr,'€/kWh')),
-   s:F(K_,EQ,z(E,'kWh'),M,z(pr,'€/kWh'),EQ,res(x,2,'€')),satz:`Die Pumpe verursacht ${fmt(x,2)} € Stromkosten pro Tag.`}}},
+   s:F(K_,EQ,z(E,'kWh'),M,z(pr,'€/kWh'),EQ,K.resFix(x,2,'€')),satz:`Die Pumpe verursacht ${K.fix(x,2)} € Stromkosten pro Tag.`}}},
  {L:'B',g(){const G0=rnd(20,80,1),p0=rnd(20,32,1),x=G0*p0/100;return{tag:'Abwasser',ti:'Trockenmasse im Klärschlamm',tx:`Aus der Schlammentwässerung kommen ${z(G0,'t')} Klärschlamm mit einem Trockenrückstand von ${p0} %. Wie viel Tonnen Trockenmasse sind das?`,x:W,un:'t',a:x,dc:2,
    geg:`${F(G,EQ,z(G0,'t'))};&nbsp; ${F(p,EQ,p0+u('%'))}`,steps:[['Formel',F(W,EQ,fr(G+M+p,'100'))],['Umstellung','entfällt']],ein:F(W,EQ,fr(z(G0,'t')+M+p0,'100')),
    s:F(W,EQ,fr(z(G0,'t')+M+p0,'100'),EQ,res(x,2,'t')),satz:`Der Schlamm enthält ${fmt(x,2)} t Trockenmasse.`}}},

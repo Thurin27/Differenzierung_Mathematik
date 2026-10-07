@@ -9,18 +9,19 @@
   --f-display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
   --f-body:"Source Sans 3","Segoe UI",Arial,sans-serif;
   --f-math:"STIX Two Text","Cambria Math","Times New Roman",serif;
+  --lcd-bg:#c9d4bf; --lcd-fg:#1e2a1a;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#0f1622; --surface:#172131; --ink:#e3e9f2; --muted:#9aa8bb; --line:#2a384b;
   --navy:#a9c7ef; --blue:#6ea6e8; --blue-soft:#1c2d45; --grid:#1f2c3e;
   --lb:#6cc893; --lb-soft:#173126; --ls:#6ea6e8; --ls-soft:#1c2d45; --lv:#ec8b72; --lv-soft:#3a2019;
-  --ok:#6cc893; --ok-soft:#173126; --bad:#ec8b72; --bad-soft:#3a2019; color-scheme:dark}}
+  --ok:#6cc893; --ok-soft:#173126; --bad:#ec8b72; --bad-soft:#3a2019; --lcd-bg:#2c3527; --lcd-fg:#d8e4cc; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#0f1622; --surface:#172131; --ink:#e3e9f2; --muted:#9aa8bb; --line:#2a384b;
   --navy:#a9c7ef; --blue:#6ea6e8; --blue-soft:#1c2d45; --grid:#1f2c3e;
   --lb:#6cc893; --lb-soft:#173126; --ls:#6ea6e8; --ls-soft:#1c2d45; --lv:#ec8b72; --lv-soft:#3a2019;
-  --ok:#6cc893; --ok-soft:#173126; --bad:#ec8b72; --bad-soft:#3a2019; color-scheme:dark}
+  --ok:#6cc893; --ok-soft:#173126; --bad:#ec8b72; --bad-soft:#3a2019; --lcd-bg:#2c3527; --lcd-fg:#d8e4cc; color-scheme:dark}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -241,3 +242,11 @@ a.mod:hover{border-color:var(--blue)}
 .weiter a{font:600 1.05rem var(--f-display);text-decoration:none}
 footer.site-foot{border-top:1px solid var(--line);padding-block:18px 28px;font-size:.88rem;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Taschenrechner-Anzeige */
+.lcds{display:flex;flex-wrap:wrap;gap:12px}
+.lcd{display:inline-flex;align-items:flex-start;gap:6px;background:var(--lcd-bg);color:var(--lcd-fg);border:2px solid var(--line);border-radius:6px;padding:10px 16px;font:500 1.6rem/1 ui-monospace,"Cascadia Mono",Consolas,monospace;font-variant-numeric:tabular-nums;min-width:12rem;justify-content:flex-end}
+.lcd .lcd-x{font-size:1.1rem}
+.lcd sup{font-size:.75em}
+.lcd-inline{min-width:0;font-size:1.15rem;padding:3px 10px;vertical-align:middle;border-width:1px}
+.lcd-inline .lcd-x{font-size:.85rem}

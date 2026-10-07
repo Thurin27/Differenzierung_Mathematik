@@ -11,7 +11,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-07.html" aria-current="page" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" aria-current="page" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -128,7 +128,7 @@
   <div data-k="stand"></div>
 </section>
 
-<nav class="weiter" aria-label="Weiter"><a href="modul-04.html">← Modul 4 Formeln umstellen</a><a href="index.html">→ Zur Übersicht</a></nav>
+<nav class="weiter" aria-label="Weiter"><a href="modul-06.html">← Modul 6 Flächen</a><a href="index.html">→ Zur Übersicht</a></nav>
 </main>
 <footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
 
@@ -232,13 +232,13 @@ const examples={
    {e:F(d,EQ,'400 mm',EQ,'0,4'+u('m')),o:'Einheit',w:'Zuerst umrechnen: Die Länge ist in Metern, also muss auch der Durchmesser in Metern stehen.'},
    {e:F(V,EQ,fr(pi+M+sqr(d),'4'),M,l),o:'Formel',w:'Ein Rohr ist ein liegender Zylinder. Die „Höhe“ ist die Rohrlänge.'},
    {e:F(A,EQ,fr('π · (0,4 m)²','4'),EQ,'0,1257'+u('m²')),o:'Fläche',w:'Querschnittsfläche des Rohrs.'},
-   {e:F(V,EQ,'0,1257 m²',M,'250 m',EQ,res(31.4,1,'m³')),o:'Volumen',w:'31,4 m³ – das sind gut zwei Tanklastzüge voll Wasser.'}]},
+   {e:F(V,EQ,'0,1257 m²',M,'250 m',EQ,res(Math.PI*0.16/4*250,4,'m³')),o:'Volumen',w:'31,42 m³ – das sind gut zwei Tanklastzüge voll Wasser.'}]},
  V:{tab:'Silo',intro:'Ein Silo besteht aus einem Zylinder (d = 3 m, h = 6 m) und einem Kegel darunter (h = 2 m). Wie groß ist das Volumen?',s:[
    {e:F(V,EQ,I('V','Z'),PL,I('V','K')),o:'Zerlegen',w:'Das Silo besteht aus zwei Körpern, die du kennst. Beide haben dieselbe Grundfläche.'},
    {e:F(A,EQ,fr('π · (3 m)²','4'),EQ,'7,069'+u('m²')),o:'Grundfläche',w:'Die Kreisfläche brauchst du für beide Teile – einmal ausrechnen reicht.'},
    {e:F(I('V','Z'),EQ,'7,069 m²',M,'6 m',EQ,'42,41'+u('m³')),o:'Zylinder',w:'Grundfläche mal Höhe.'},
-   {e:F(I('V','K'),EQ,fr('1','3'),M,'7,069 m²',M,'2 m',EQ,'4,71'+u('m³')),o:'Kegel',w:'Ein Drittel von Grundfläche mal Höhe.'},
-   {e:F(V,EQ,'42,41 + 4,71',EQ,res(47.12,2,'m³')),o:'Summe',w:'Beide Teile addieren.'}]}
+   {e:F(I('V','K'),EQ,fr('1','3'),M,'7,069 m²',M,'2 m',EQ,'4,712'+u('m³')),o:'Kegel',w:'Ein Drittel von Grundfläche mal Höhe.'},
+   {e:F(V,EQ,'42,41 + 4,712',EQ,res(47.12,2,'m³')),o:'Summe',w:'Beide Teile addieren.'}]}
 };
 
 K.module({id:'m7',nr:7,examples,trainer,tasks});

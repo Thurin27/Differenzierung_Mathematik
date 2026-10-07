@@ -19,17 +19,43 @@ K.save=(id,o)=>{try{localStorage.setItem('mak-'+id,JSON.stringify(o))}catch(e){}
 const NNBSP=' ';
 const grp=i=>i.length>4?i.replace(/\B(?=(\d{3})+(?!\d))/g,NNBSP):i;
 function split(s){const p=s.split('.');return grp(p[0])+(p[1]?','+p[1]:'')}
-K.fmt=(x,dc)=>{const s=Math.abs(x).toFixed(dc);return(x<0&&+s!==0?'−':'')+split(s)};
+/* Rundungsregel des Kurses: 4 signifikante Stellen.
+   K.r4(x)  rundet auf n signifikante Stellen (Zahl)
+   K.fmt(x) formatiert mit 4 signifikanten Stellen; geht der Wert genau auf (z. B. 2,5), ohne angehängte Nullen;
+            ab 1000 als ganze Zahl (123 576 statt 123 600)
+   K.fix(x,dc) formatiert mit fester Zahl Nachkommastellen (nur für Geldbeträge) */
+K.r4=(x,n)=>{n=n||4;if(!x)return 0;const sg=x<0?-1:1,a=Math.abs(x),e=Math.floor(Math.log10(a)),f=Math.pow(10,n-1-e);
+  const r=Math.round(a*f)/f;return sg*+r.toPrecision(n)};
+K.fix=(x,dc)=>{const s=Math.abs(x).toFixed(dc);return(x<0&&+s!==0?'−':'')+split(s)};
+K.fmt=x=>{
+  if(!x)return '0';
+  if(Math.abs(x)>=999.95)return(x<0?'−':'')+split(String(Math.round(Math.abs(x))));
+  const r=K.r4(x),a=Math.abs(r),e=Math.floor(Math.log10(a)+1e-12);
+  let s=a.toFixed(Math.max(0,3-e));
+  if(Math.abs(r-x)<=Math.abs(x)*1e-9&&s.includes('.'))s=s.replace(/0+$/,'').replace(/\.$/,'');
+  return(r<0?'−':'')+split(s);
+};
+/* Anzahl signifikanter Stellen einer Eingabe; Endnullen ganzer Zahlen zählen nicht (mehrdeutig) */
+K.sigCount=s=>{
+  s=String(s).trim().replace(/[\s\u202F\u00A0]/g,'').replace(/[−-]/g,'');
+  s=s.replace(/[·*x×]10\^?-?\d+$/i,'').replace(/e[+-]?\d+$/i,'');
+  if(s.includes(','))s=s.replace(/\./g,'').replace(',','.');
+  else if(/^[1-9]\d{0,2}(\.\d{3})+$/.test(s))s=s.replace(/\./g,'');
+  const d=s.includes('.')?s.replace('.','').replace(/^0+/,''):s.replace(/^0+/,'').replace(/0+$/,'');
+  return d.length;
+};
 K.nf=x=>{x=+(+x).toFixed(8);let s=Math.abs(x).toString();if(s.includes('e'))s=Math.abs(x).toFixed(10).replace(/0+$/,'');return(x<0?'−':'')+split(s)};
 K.dcOf=x=>{for(let d=0;d<=6;d++){if(Math.abs(+x.toFixed(d)-x)<1e-9)return d}return 6};
 K.rnd=(lo,hi,st)=>{const n=Math.round((hi-lo)/st);return +(lo+st*Math.floor(Math.random()*(n+1))).toFixed(6)};
 K.pick=a=>a[Math.floor(Math.random()*a.length)];
 K.shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 K.parse=s=>{
-  s=String(s).trim().replace(/[\s  ]/g,'').replace('−','-');
+  s=String(s).trim().replace(/[\s  ]/g,'').replace(/−/g,'-');
+  /* wissenschaftliche Schreibweise: 2,4·10^5 · 2,4*10^-3 · 2,4x10^5 · 2,4E5 */
+  s=s.replace(/[·*x×]10\^?(-?\d+)$/i,'e$1').replace(/E/g,'e');
   if(s.includes(','))s=s.replace(/\./g,'').replace(',','.');
   else if(/^-?[1-9]\d{0,2}(\.\d{3})+$/.test(s))s=s.replace(/\./g,'');
-  if(!/^-?\d*\.?\d+$/.test(s))return NaN;
+  if(!/^-?\d*\.?\d+(e[+-]?\d+)?$/.test(s))return NaN;
   return parseFloat(s);
 };
 
@@ -42,7 +68,8 @@ K.M=' · ';K.MI=' − ';K.PL=' + ';K.EQ=' = ';
 K.u=s=>`<span class="uu">&#8202;${s}</span>`;
 K.q=(x,unit)=>K.nf(x)+K.u(unit);
 K.sqr=x=>x+'²';
-K.res=(x,dc,unit)=>`<span class="result">${K.fmt(x,dc)}${unit?K.u(unit):''}</span>`;
+K.res=(x,dc,unit)=>`<span class="result">${K.fmt(x)}${unit?K.u(unit):''}</span>`;
+K.resFix=(x,dc,unit)=>`<span class="result">${K.fix(x,dc)}${unit?K.u(unit):''}</span>`;
 
 /* Hilfsfunktion für Umstell-Aufgaben im Trainer */
 K.umstell=(L,n,lhs,rhs,x,ok,w,h)=>({L,n,prompt:K.F(lhs,K.EQ,rhs),ask:`Stelle nach ${x} um.`,ok:K.F(x,K.EQ,ok),w:w.map(o=>K.F(x,K.EQ,o)),h});
@@ -151,7 +178,10 @@ K.module=function(cfg){
       const lv=$('.lvl',rHost);lv.className='lvl '+L;lv.textContent=LV[L];
       $('.tag',rHost).textContent=cur.tag;$('.r-title',rHost).textContent=cur.ti;$('.r-text',rHost).innerHTML=cur.tx;
       $('.r-want',rHost).innerHTML=`<span class="f">${cur.x}</span>`;$('.unit',rHost).innerHTML=cur.un;
-      $('.r-round',rHost).textContent=cur.exact?'Gib das Ergebnis genau an (ohne Runden). Dezimalzeichen: Komma.':`Runde auf ${cur.dc===0?'eine ganze Zahl':cur.dc+' Nachkommastelle'+(cur.dc>1?'n':'')}. Dezimalzeichen: Komma.`;
+      $('.r-round',rHost).innerHTML=cur.sig?'Gib die gerundete Zahl ein. Dezimalzeichen: Komma.'
+        :cur.exact?'Das Ergebnis geht genau auf – gib es vollständig an. Dezimalzeichen: Komma.'
+        :cur.fix?`Geldbeträge rundest du auf ${cur.dc} Nachkommastellen (Cent). Dezimalzeichen: Komma.`
+        :'Gib das Ergebnis mit <strong>4 signifikanten Stellen</strong> an (<a href="modul-01.html#runden">Regel in Modul 1</a>) – genauer ist auch in Ordnung. Dezimalzeichen: Komma.';
       inp.value='';inp.disabled=false;$('.hints',rHost).innerHTML='';$('.r-fb',rHost).hidden=true;
       const hb=$('.r-hint',rHost);hb.disabled=false;hb.textContent='Tipp 1 zeigen';$('.r-sol',rHost).disabled=false;cnt();
     };
@@ -163,19 +193,48 @@ K.module=function(cfg){
     $('form',rHost).addEventListener('submit',e=>{
       e.preventDefault();if(state!=='open')return;
       const x=K.parse(inp.value),fb=$('.r-fb',rHost);
-      if(isNaN(x)){fb.hidden=false;fb.className='r-fb fb info';fb.innerHTML='<div>Gib eine Zahl ein, zum Beispiel 1,25.</div>';return}
-      const dc=cur.exact?K.dcOf(cur.a):cur.dc;
-      const tol=cur.exact?Math.max(Math.abs(cur.a)*1e-6,1e-9):Math.max(Math.abs(cur.a)*0.01,0.501*Math.pow(10,-dc));
-      if(Math.abs(x-cur.a)<=tol){
+      if(isNaN(x)){fb.hidden=false;fb.className='r-fb fb info';fb.innerHTML='<div>Gib eine Zahl ein, zum Beispiel 1,25 oder 2,4·10^5.</div>';return}
+      const same=(p,q)=>Math.abs(p-q)<=Math.max(Math.abs(q)*1e-10,1e-12);
+      const nd=K.sigCount(inp.value),t4=K.r4(cur.a),ulp=Math.pow(10,Math.floor(Math.log10(Math.abs(t4))+1e-12)-3);
+      let ok=false,hint='';
+      if(cur.sig){
+        const big=Math.abs(cur.raw)>=999.95,maxd=big?String(Math.round(Math.abs(cur.raw))).replace(/0+$/,'').length:4;
+        ok=(same(x,cur.a)||(big&&same(x,K.r4(cur.raw))))&&nd<=Math.max(4,maxd);
+        if(!ok){
+          const ar=Math.abs(cur.raw),e=Math.floor(Math.log10(ar)),f=big?1:Math.pow(10,3-e),tr=Math.sign(cur.raw)*Math.floor(ar*f)/f;
+          if(same(x,cur.a))hint=big?'Der Wert stimmt, aber die Nachkommastellen kannst du bei so großen Zahlen weglassen.':'Der Wert stimmt, aber du hast zu viele Stellen angegeben. Vier signifikante Stellen reichen.';
+          else if(same(x,tr))hint='Du hast nach der vierten Stelle abgeschnitten. Schau dir die fünfte signifikante Stelle an: Ist sie 5 oder größer, wird aufgerundet.';
+          else if(nd<4&&Math.abs(x-cur.raw)<=Math.abs(cur.raw)*0.01)hint='Zu stark gerundet – es sollen vier signifikante Stellen sein.';
+          else hint='Zähle ab der ersten Ziffer, die keine Null ist. Führende Nullen zählen nicht mit.';
+        }
+      }else if(cur.exact){
+        /* geht genau auf: genauer Wert oder nach der Rundungsregel */
+        ok=same(x,cur.a)||Math.abs(x-cur.a)<=ulp*3.001;
+      }else if(cur.fix){
+        ok=Math.abs(x-cur.a)<=Math.max(Math.abs(cur.a)*0.001,0.501*Math.pow(10,-cur.dc));
+      }else{
+        /* akzeptiert: 4 signifikante Stellen oder genauer; Abweichung bis 3 Einheiten der 4. Stelle
+           (gerundete Zwischenergebnisse, anderer Rechenweg) */
+        ok=Math.abs(x-cur.a)<=Math.max(ulp*3.001,Math.abs(cur.a)*1e-9);
+        if(!ok&&Math.abs(x-cur.a)<=Math.abs(cur.a)*0.01){
+          hint=nd<4?'Der Wert liegt nah dran, ist aber zu stark gerundet. Gib mindestens 4 signifikante Stellen an.'
+                   :'Knapp daneben. Prüfe die Rechnung – vielleicht ist ein Wert falsch abgeschrieben oder ein Zwischenergebnis sehr grob gerundet.';
+        }
+      }
+      if(ok){
         state='solved';st.R[st.lvl]++;save();renderProg();cnt();
         solution(`<strong>Richtig${hints?` (mit ${hints} Tipp${hints>1?'s':''})`:''}.</strong> Vergleiche mit deinem Rechenweg im Heft:`,'ok');
       }else{
-        let msg='Prüfe deinen Rechenweg Schritt für Schritt.';
+        let msg=hint||'Prüfe deinen Rechenweg Schritt für Schritt.';
         const r=x/cur.a;
-        for(const f of [10,100,1000,3600,60,24,1e6]){
-          if(Math.abs(r/f-1)<0.02||Math.abs(r*f-1)<0.02){msg=`Dein Ergebnis ist um den Faktor ${K.nf(f)} verschoben. Prüfe die Einheiten und die Umrechnungszahl.`;break}
+        if(!hint&&cur.diag)msg=cur.diag(x)||msg;
+        if(!hint&&!cur.sig&&!(cur.diag&&cur.diag(x))){
+          for(const f of [10,100,1000,3600,60,24,1e4,1e5,1e6,1e7,1e8,1e9]){
+            if(Math.abs(r/f-1)<0.02||Math.abs(r*f-1)<0.02){
+              msg=`Dein Ergebnis ist um den Faktor ${K.nf(f)} verschoben. Prüfe die Einheiten und die Umrechnungszahl`+(f>=1000&&[1000,1e4,1e5,1e6,1e7,1e8,1e9].includes(f)?' – oder hast du in der Taschenrechner-Anzeige die Zehnerpotenz (×10⁻³, E−3) übersehen?':'.');break}
+          }
+          if(Math.abs(r-1)<0.05&&Math.abs(r-1)>0.01)msg='Knapp daneben. Prüfe die Rechnung – und runde erst ganz am Ende.';
         }
-        if(Math.abs(r-1)<0.05&&!cur.exact)msg='Sehr knapp daneben. Prüfe das Runden – runde erst am Ende.';
         fb.hidden=false;fb.className='r-fb fb no';fb.innerHTML=`<div><strong>Noch nicht.</strong> ${msg}</div>`;
       }
     });

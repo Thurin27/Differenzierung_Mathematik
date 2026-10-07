@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modul 6 Flächen – Mathe-Aufbaukurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="assets/kurs.css">
+</head>
+<body>
+<header class="site"><div class="wrap sitebar">
+  <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" aria-current="page" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
+</div></header>
+
+<main class="wrap">
+<header class="top">
+  <div class="modnum" aria-hidden="true">6</div>
+  <div class="eyebrow">Mathe-Aufbaukurs · Modul 6</div>
+  <h1>Flächen</h1>
+  <p class="ctx">Beckenoberflächen, Rohrquerschnitte, Grabenprofile, Deponieabschnitte: Flächen brauchst du in Schwierbach überall – und sie sind die Grundlage für jedes Volumen in Modul 7 und jeden Durchfluss <span class="f"><i>Q</i> = <i>v</i> · <i>A</i></span>.</p>
+</header>
+
+<div class="bar">
+  <nav aria-label="Abschnitte"><a href="#ziele">Ziele</a><a href="#formen">Grundformen</a><a href="#kreis">Kreis &amp; Ring</a><a href="#zusammen">Zusammengesetzt</a><a href="#pythagoras">Pythagoras</a><a href="#beispiel">Schritt für Schritt</a><a href="#trainer">Trainer</a><a href="#rechnen">Rechnen</a><a href="#stand">Lernstand</a></nav>
+  <div data-k="niveau"></div>
+</div>
+
+<section id="ziele">
+  <h2>Das kannst du nach diesem Modul</h2>
+  <div class="raster">
+    <div><span class="lvl B">Basis</span><ul><li>Ich kann Fläche und Umfang von Rechteck und Kreis berechnen.</li><li>Ich kann die Fläche eines Dreiecks berechnen.</li></ul></div>
+    <div><span class="lvl S">Standard</span><ul><li>Ich kann Trapez- und Kreisringflächen berechnen.</li><li>Ich kann zusammengesetzte Flächen zerlegen und Flächen in ha umrechnen.</li></ul></div>
+    <div><span class="lvl V">Vertiefung</span><ul><li>Ich kann mit dem Satz des Pythagoras Böschungslängen berechnen.</li><li>Ich kann aus einem Umfang die Fläche bestimmen.</li></ul></div>
+  </div>
+</section>
+
+<section id="formen">
+  <h2>Die Grundformen</h2>
+  <div class="figure">
+  <svg viewBox="0 0 640 170" role="img" aria-label="Rechteck mit l und b, Dreieck mit Grundseite g und Höhe h, Trapez mit a, c und h" style="max-width:100%;min-width:440px">
+    <rect x="20" y="40" width="150" height="80" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <text x="95" y="138" text-anchor="middle" font-size="16" fill="var(--ink)" font-style="italic">l</text>
+    <text x="180" y="86" font-size="16" fill="var(--ink)" font-style="italic">b</text>
+    <text x="95" y="160" text-anchor="middle" font-size="14" fill="var(--muted)">Rechteck</text>
+    <polygon points="230,120 380,120 300,40" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <line x1="300" y1="40" x2="300" y2="120" stroke="var(--navy)" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="306" y="88" font-size="16" fill="var(--navy)" font-style="italic">h</text>
+    <text x="305" y="138" text-anchor="middle" font-size="16" fill="var(--ink)" font-style="italic">g</text>
+    <text x="305" y="160" text-anchor="middle" font-size="14" fill="var(--muted)">Dreieck</text>
+    <polygon points="430,120 620,120 575,40 475,40" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <line x1="525" y1="40" x2="525" y2="120" stroke="var(--navy)" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="531" y="88" font-size="16" fill="var(--navy)" font-style="italic">h</text>
+    <text x="525" y="138" text-anchor="middle" font-size="16" fill="var(--ink)" font-style="italic">a</text>
+    <text x="525" y="32" text-anchor="middle" font-size="16" fill="var(--ink)" font-style="italic">c</text>
+    <text x="525" y="160" text-anchor="middle" font-size="14" fill="var(--muted)">Trapez</text>
+  </svg>
+  </div>
+  <div class="tscroll"><table>
+    <thead><tr><th>Form</th><th>Fläche</th><th>Umfang</th><th>In Schwierbach</th></tr></thead>
+    <tbody>
+      <tr><td>Rechteck</td><td class="op"><span class="f"><i>A</i> = <i>l</i> · <i>b</i></span></td><td class="op"><span class="f"><i>U</i> = 2 · (<i>l</i> + <i>b</i>)</span></td><td>Beckenoberfläche, Lagerplatz</td></tr>
+      <tr><td>Dreieck</td><td class="op"><span class="f"><i>A</i> = <span class="fr"><span><i>g</i> · <i>h</i></span><span>2</span></span></span></td><td class="op">alle Seiten addieren</td><td>Restflächen, Böschungsenden</td></tr>
+      <tr><td>Trapez</td><td class="op"><span class="f"><i>A</i> = <span class="fr"><span><i>a</i> + <i>c</i></span><span>2</span></span> · <i>h</i></span></td><td class="op">alle Seiten addieren</td><td>Grabenquerschnitt, Gerinne</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box merke"><p><strong>Die Höhe steht immer senkrecht</strong> auf der Grundseite – nicht die schräge Seite nehmen. Beim Trapez sind <i class="v">a</i> und <i class="v">c</i> die beiden parallelen Seiten, z. B. Sohlbreite und obere Breite eines Grabens.</p></div>
+</section>
+
+<section id="kreis">
+  <h2>Kreis und Kreisring</h2>
+  <div class="grid2">
+    <div class="tscroll"><table>
+      <thead><tr><th>Form</th><th>Formel</th></tr></thead>
+      <tbody>
+        <tr><td>Kreisfläche</td><td class="op"><span class="f"><i>A</i> = <span class="fr"><span>π · <i>d</i>²</span><span>4</span></span> = π · <i>r</i>²</span></td></tr>
+        <tr><td>Kreisumfang</td><td class="op"><span class="f"><i>U</i> = π · <i>d</i></span></td></tr>
+        <tr><td>Kreisring</td><td class="op"><span class="f"><i>A</i> = <span class="fr"><span>π</span><span>4</span></span> · (<i>D</i>² − <i>d</i>²)</span></td></tr>
+      </tbody>
+    </table></div>
+    <svg viewBox="0 0 220 180" role="img" aria-label="Kreisring mit Außendurchmesser D und Innendurchmesser d" style="max-width:100%">
+      <circle cx="110" cy="90" r="80" fill="var(--blue)" opacity=".85"/>
+      <circle cx="110" cy="90" r="48" fill="var(--paper)" stroke="var(--blue)" stroke-width="1.5"/>
+      <line x1="30" y1="90" x2="190" y2="90" stroke="var(--surface)" stroke-width="1.5"/>
+      <line x1="62" y1="104" x2="158" y2="104" stroke="var(--navy)" stroke-width="1.5"/>
+      <text x="110" y="82" text-anchor="middle" font-size="16" fill="var(--surface)" font-style="italic" stroke="var(--blue)" stroke-width=".3">D</text>
+      <text x="110" y="122" text-anchor="middle" font-size="16" fill="var(--navy)" font-style="italic">d</text>
+    </svg>
+  </div>
+  <div class="box merke"><p><strong>Durchmesser oder Radius?</strong> Die Formelsammlung arbeitet meist mit dem Durchmesser <i class="v">d</i>, weil Rohre und Becken mit dem Durchmesser angegeben werden (DN 300). <span class="f">π · <i>r</i>²</span> und <span class="f"><span class="fr"><span>π · <i>d</i>²</span><span>4</span></span></span> ergeben dasselbe – verwechsle nur nicht <i class="v">r</i> und <i class="v">d</i>.</p></div>
+  <div class="box merke"><p><strong>Kreisring ≠ (D − d)²:</strong> Erst beide Durchmesser quadrieren, dann subtrahieren.</p></div>
+</section>
+
+<section id="zusammen">
+  <h2>Zusammengesetzte Flächen</h2>
+  <p>Zerlege die Fläche in Grundformen. Teile, die dazugehören, addierst du. Aussparungen ziehst du ab. Ein Umlaufbecken der Belebung besteht zum Beispiel aus einem Rechteck und zwei Halbkreisen – zusammen ein ganzer Kreis.</p>
+  <div class="figure">
+  <svg viewBox="0 0 420 140" role="img" aria-label="Umlaufbecken: Rechteck mit Länge l und Breite b, an beiden Enden ein Halbkreis mit Durchmesser b" style="max-width:100%;min-width:320px">
+    <path d="M110 20 H310 A50 50 0 0 1 310 120 H110 A50 50 0 0 1 110 20Z" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+    <line x1="110" y1="20" x2="110" y2="120" stroke="var(--navy)" stroke-width="1" stroke-dasharray="4 3"/>
+    <line x1="310" y1="20" x2="310" y2="120" stroke="var(--navy)" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="210" y="76" text-anchor="middle" font-size="15" fill="var(--ink)"><tspan font-style="italic">l</tspan> · <tspan font-style="italic">b</tspan></text>
+    <text x="78" y="76" text-anchor="middle" font-size="13" fill="var(--muted)">½ Kreis</text>
+    <text x="342" y="76" text-anchor="middle" font-size="13" fill="var(--muted)">½ Kreis</text>
+    <text x="210" y="138" text-anchor="middle" font-size="14" fill="var(--navy)">A = l · b + π · b² / 4</text>
+  </svg>
+  </div>
+  <p class="small">Große Flächen gibt man oft in Hektar an: 1 ha = 10&#8202;000 m² (ein Quadrat von 100 m × 100 m).</p>
+</section>
+
+<section id="pythagoras">
+  <h2>Satz des Pythagoras (Vertiefung)</h2>
+  <div class="grid2">
+    <div style="display:grid;gap:10px">
+      <p>Im rechtwinkligen Dreieck gilt: <span class="f"><i>c</i>² = <i>a</i>² + <i>b</i>²</span>. Die längste Seite <i class="v">c</i> liegt gegenüber dem rechten Winkel.</p>
+      <p>Damit berechnest du die schräge Länge einer Böschung. Eine Böschung „1 : 2“ ist bei 1 m Höhe 2 m breit.</p>
+      <p><span class="f"><i>s</i> = <span class="sq"><span class="rad">√</span><span class="sqc"><i>h</i>² + <i>w</i>²</span></span></span></p>
+    </div>
+    <svg viewBox="0 0 260 150" role="img" aria-label="Böschung als rechtwinkliges Dreieck: Höhe h, Breite w, schräge Länge s" style="max-width:100%">
+      <polygon points="30,120 230,120 230,30" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.5"/>
+      <rect x="218" y="108" width="12" height="12" fill="none" stroke="var(--navy)" stroke-width="1"/>
+      <text x="130" y="140" text-anchor="middle" font-size="16" fill="var(--ink)" font-style="italic">w</text>
+      <text x="240" y="80" font-size="16" fill="var(--ink)" font-style="italic">h</text>
+      <text x="118" y="64" font-size="16" fill="var(--navy)" font-style="italic">s</text>
+    </svg>
+  </div>
+</section>
+
+<section id="beispiel">
+  <h2>Schritt für Schritt</h2>
+  <p>Klicke dich durch die Beispiele und schreibe jeden Schritt mit.</p>
+  <div data-k="stepper"></div>
+</section>
+
+<section id="trainer">
+  <h2>Flächen-Trainer</h2>
+  <p>Erst überlegen, dann wählen. Es zählt nur der erste Versuch.</p>
+  <div data-k="trainer"></div>
+</section>
+
+<section id="rechnen">
+  <h2>Rechnen im Betrieb</h2>
+  <p>Jede Aufgabe wird mit neuen Zahlen erzeugt. Du kannst bis zu drei Tipps aufdecken. Die Lösung zeigt dir den vollständigen Rechenweg.</p>
+  <div data-k="rechnen"></div>
+</section>
+
+<section id="stand">
+  <h2>Mein Lernstand</h2>
+  <p>Trage am Ende der Stunde den Kontrollcode in deinen Laufzettel ein.</p>
+  <div data-k="stand"></div>
+</section>
+
+<nav class="weiter" aria-label="Weiter"><a href="modul-05.html">← Modul 5 Mit Formeln rechnen</a><a href="modul-07.html">→ Weiter zu: Modul 7 Volumen &amp; Masse</a></nav>
+</main>
+<footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
+
+<script src="assets/kurs.js"></script>
+<script>
+(function(){
+const {I,fr,sq,F,M,MI,PL,EQ,u,q,nf,fmt,rnd,pick,res,sqr}=K;
+const z=(x,un)=>`${nf(x)}${u(un)}`;
+const A=I('A'),U=I('U'),l=I('l'),b=I('b'),g=I('g'),h=I('h'),a=I('a'),c=I('c'),d=I('d'),D=I('D'),r=I('r'),s=I('s'),w=I('w'),pi='π';
+const PI=Math.PI;
+const kreis=F(A,EQ,fr(pi+M+sqr(d),'4'));
+
+const T=(L,n,prompt,ok,wr,h_,ask)=>({L,n,prompt,ask:ask||'Welche Antwort ist richtig?',ok,w:wr,h:h_});
+const trainer=[
+ T('B','Rechteck','Fläche eines Rechtecks?',F(A,EQ,l,M,b),[F(A,EQ,'2 · (',l,PL,b,')'),F(A,EQ,l,PL,b),F(A,EQ,sqr(l),M,b)],'Länge mal Breite. 2 · (l + b) ist der Umfang.'),
+ T('B','Kreis','Fläche eines Kreises mit Durchmesser d?',kreis,[F(A,EQ,pi,M,d),F(A,EQ,pi,M,sqr(d)),F(A,EQ,fr(pi+M+d,'4'))],'π · d² / 4. π · d ist der Umfang.'),
+ T('B','Rechteck','Ein Becken ist 8 m lang und 5 m breit. Wasseroberfläche?','40 m²',['26 m²','13 m²','80 m²'],'8 · 5 = 40. 26 m wäre der Umfang.'),
+ T('B','Dreieck','Fläche eines Dreiecks?',F(A,EQ,fr(g+M+h,'2')),[F(A,EQ,g,M,h),F(A,EQ,'2',M,g,M,h),F(A,EQ,fr(g+PL+h,'2'))],'Ein Dreieck ist ein halbes Rechteck.'),
+ T('B','Umfang','Umfang eines Kreises?',F(U,EQ,pi,M,d),[F(U,EQ,fr(pi+M+sqr(d),'4')),F(U,EQ,'2',M,pi,M,sqr(d)),F(U,EQ,pi,M,sqr(r))],'π mal Durchmesser.'),
+ T('B','Einheit','In welcher Einheit gibst du eine Fläche an?','m²',['m','m³','m/s'],'Länge mal Länge ergibt m².'),
+ T('B','Umfang','Ein Lagerplatz ist 30 m lang und 20 m breit. Wie lang muss der Zaun sein?','100 m',['600 m','50 m','1200 m'],'2 · (30 + 20) = 100.'),
+ T('S','Trapez','Fläche eines Trapezes?',F(A,EQ,fr(a+PL+c,'2'),M,h),[F(A,EQ,'(',a,PL,c,')',M,h),F(A,EQ,a,M,c,M,h),F(A,EQ,fr(a+M+c,'2'),M,h)],'Mittelwert der parallelen Seiten mal Höhe.'),
+ T('S','Kreisring','Fläche eines Kreisrings?',F(A,EQ,fr(pi,'4'),M,'(',sqr(D),MI,sqr(d),')'),[F(A,EQ,fr(pi,'4'),M,'(',D,MI,d,')²'),F(A,EQ,pi,M,'(',D,MI,d,')'),F(A,EQ,fr(pi+M+sqr(D),'4'),MI,d)],'Große Kreisfläche minus kleine Kreisfläche.'),
+ T('S','Kreis','Ein Rohr hat d = 2 m. Querschnitt ungefähr?','3,14 m²',['6,28 m²','12,57 m²','1,57 m²'],'π · 2² / 4 = π · 1 = 3,14.'),
+ T('S','Radius','Welche Formel ist gleichwertig zu π · r²?',fr(pi+M+sqr(d),'4'),[pi+M+sqr(d),fr(pi+M+d,'2'),'2'+M+pi+M+r],'r = d/2, also r² = d²/4.'),
+ T('S','Durchmesser halbiert','Der Durchmesser eines Rohres wird halbiert. Die Querschnittsfläche wird …','ein Viertel',['die Hälfte','gleich groß','ein Achtel'],'d steht im Quadrat: (½)² = ¼.'),
+ T('S','Hektar','Ein Deponieabschnitt ist 250 m lang und 120 m breit. Wie viel Hektar sind das?','3 ha',['30 ha','0,3 ha','300 ha'],'30 000 m² : 10 000 = 3 ha.'),
+ T('S','Zusammengesetzt','Ein Rechteck 20 m × 10 m hat eine Aussparung 5 m × 4 m. Fläche?','180 m²',['220 m²','200 m²','170 m²'],'200 − 20 = 180.'),
+ T('V','Pythagoras','Satz des Pythagoras im rechtwinkligen Dreieck (c gegenüber dem rechten Winkel):',F(sqr(c),EQ,sqr(a),PL,sqr(b)),[F(c,EQ,a,PL,b),F(sqr(c),EQ,sqr(a),MI,sqr(b)),F(c,EQ,sqr(a),PL,sqr(b))],'Die Quadrate der kurzen Seiten ergeben zusammen das Quadrat der langen Seite.'),
+ T('V','Böschung','Böschung 1 : 2 bei 3 m Höhe. Wie breit ist sie waagerecht?','6 m',['1,5 m','3 m','9 m'],'Pro Meter Höhe 2 m Breite.'),
+ T('V','Pythagoras','Ein rechtwinkliges Dreieck hat die kurzen Seiten 3 m und 4 m. Lange Seite?','5 m',['7 m','25 m','12 m'],'√(9 + 16) = √25 = 5.'),
+ T('V','Umfang → Fläche','Ein Rundbecken hat U = 31,4 m. Durchmesser?','10 m',['5 m','3,14 m','98,6 m'],'d = U : π.'),
+ T('V','Teilfüllung','Ein Rohr ist halb gefüllt. Durchflossene Fläche?',F(A,EQ,fr(pi+M+sqr(d),'8')),[kreis,F(A,EQ,fr(pi+M+d,'2')),F(A,EQ,fr(pi+M+sqr(d),'2'))],'Die Hälfte von π · d² / 4.'),
+ T('V','Umlaufbecken','Rechteck l · b mit je einem Halbkreis (Durchmesser b) an beiden Enden. Fläche?',F(A,EQ,l,M,b,PL,fr(pi+M+sqr(b),'4')),[F(A,EQ,l,M,b,PL,fr(pi+M+sqr(b),'8')),F(A,EQ,l,M,b,PL,'2',M,pi,M,sqr(b)),F(A,EQ,l,M,b)],'Zwei Halbkreise ergeben einen ganzen Kreis mit Durchmesser b.')
+];
+
+const tasks=[
+ /* ---------- Basis ---------- */
+ {L:'B',g(){const l0=rnd(20,60,1),b0=rnd(5,15,.5),x=l0*b0;return{tag:'Abwasser',ti:'Oberfläche des Vorklärbeckens',tx:`Ein rechteckiges Vorklärbecken der Kläranlage Schwierbach ist ${z(l0,'m')} lang und ${z(b0,'m')} breit. Wie groß ist die Wasseroberfläche?`,x:A,un:'m²',a:x,dc:1,
+   geg:`${F(l,EQ,z(l0,'m'))};&nbsp; ${F(b,EQ,z(b0,'m'))}`,steps:[['Formel',F(A,EQ,l,M,b)],['Einheitenkontrolle','m · m = m²']],ein:F(A,EQ,z(l0,'m'),M,z(b0,'m')),
+   s:F(A,EQ,z(l0,'m'),M,z(b0,'m'),EQ,res(x,1,'m²')),satz:`Die Wasseroberfläche beträgt ${fmt(x,1)} m².`}}},
+ {L:'B',g(){const d0=rnd(.2,1.2,.05),x=PI*d0*d0/4;return{tag:'Rohrleitungsnetze',ti:'Rohrquerschnitt',tx:`Eine Abwasserleitung in Schwierbach hat einen Innendurchmesser von ${F(d,EQ,z(d0,'m'))}. Wie groß ist die Querschnittsfläche?`,x:A,un:'m²',a:x,dc:3,
+   geg:F(d,EQ,z(d0,'m')),steps:[['Formel',kreis],['Taschenrechner',`π × ${nf(d0)} x² ÷ 4`]],ein:F(A,EQ,fr('π · ('+z(d0,'m')+')²','4')),
+   s:F(A,EQ,fr('π · ('+z(d0,'m')+')²','4'),EQ,res(x,3,'m²')),satz:`Die Querschnittsfläche beträgt ${fmt(x,3)} m².`}}},
+ {L:'B',g(){const d0=rnd(20,45,1),x=PI*d0;return{tag:'Abwasser',ti:'Ablaufrinne am Nachklärbecken',tx:`Am Rand des runden Nachklärbeckens (${F(d,EQ,z(d0,'m'))}) läuft eine Ablaufrinne einmal ganz herum. Wie lang ist die Rinne?`,x:U,un:'m',a:x,dc:1,
+   geg:F(d,EQ,z(d0,'m')),steps:[['Formel',F(U,EQ,pi,M,d)],['Umstellung','entfällt']],ein:F(U,EQ,pi,M,z(d0,'m')),
+   s:F(U,EQ,pi,M,z(d0,'m'),EQ,res(x,1,'m')),satz:`Die Ablaufrinne ist ${fmt(x,1)} m lang.`}}},
+ {L:'B',g(){const l0=rnd(40,150,5),b0=rnd(25,90,5),x=2*(l0+b0);return{tag:'Kreislauf & Abfall',ti:'Zaun um den Wertstoffhof',tx:`Der rechteckige Wertstoffhof des Abfallzentrums Schwierbach ist ${z(l0,'m')} lang und ${z(b0,'m')} breit. Er bekommt einen neuen Zaun. Wie viele Meter Zaun werden gebraucht (ohne Tor)?`,x:U,un:'m',a:x,dc:0,exact:true,
+   geg:`${F(l,EQ,z(l0,'m'))};&nbsp; ${F(b,EQ,z(b0,'m'))}`,steps:[['Formel',F(U,EQ,'2 · (',l,PL,b,')')],['Regel','Klammer zuerst']],ein:F(U,EQ,'2 · (',z(l0,'m'),PL,z(b0,'m'),')'),
+   s:F(U,EQ,'2 · (',nf(l0),PL,nf(b0),')'+u('m'),EQ,'2 · '+z(l0+b0,'m'),EQ,`<span class="result">${nf(x)}${u('m')}</span>`),satz:`Es werden ${nf(x)} m Zaun gebraucht.`}}},
+ {L:'B',g(){const g0=rnd(10,40,1),h0=rnd(6,25,1),x=g0*h0/2;return{tag:'Kreislauf & Abfall',ti:'Dreieckige Restfläche',tx:`Neben dem Kompostplatz in Schwierbach bleibt eine dreieckige Restfläche mit der Grundseite ${F(g,EQ,z(g0,'m'))} und der Höhe ${F(h,EQ,z(h0,'m'))}. Sie soll gepflastert werden. Wie groß ist die Fläche?`,x:A,un:'m²',a:x,dc:1,
+   geg:`${F(g,EQ,z(g0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))}`,steps:[['Formel',F(A,EQ,fr(g+M+h,'2'))],['Umstellung','entfällt']],ein:F(A,EQ,fr(z(g0,'m')+M+z(h0,'m'),'2')),
+   s:F(A,EQ,fr(z(g0,'m')+M+z(h0,'m'),'2'),EQ,res(x,1,'m²')),satz:`Die Restfläche ist ${fmt(x,1)} m² groß.`}}},
+
+ /* ---------- Standard ---------- */
+ {L:'S',g(){const a0=rnd(.6,1.4,.1),c0=+(a0+rnd(.6,2,.1)).toFixed(2),h0=rnd(.8,2.5,.1),x=(a0+c0)/2*h0;return{tag:'Rohrleitungsnetze',ti:'Grabenquerschnitt',tx:`Für eine neue Leitung in Schwierbach wird ein Graben mit Trapezquerschnitt ausgehoben: Sohlbreite ${F(a,EQ,z(a0,'m'))}, obere Breite ${F(c,EQ,z(c0,'m'))}, Tiefe ${F(h,EQ,z(h0,'m'))}. Wie groß ist die Querschnittsfläche?`,x:A,un:'m²',a:x,dc:2,
+   geg:`${F(a,EQ,z(a0,'m'))};&nbsp; ${F(c,EQ,z(c0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))}`,steps:[['Formel',F(A,EQ,fr(a+PL+c,'2'),M,h)],['Regel','Zähler (a + c) zuerst ausrechnen']],ein:F(A,EQ,fr(z(a0,'m')+PL+z(c0,'m'),'2'),M,z(h0,'m')),
+   s:F(A,EQ,fr(z(a0+c0,'m'),'2'),M,z(h0,'m'),EQ,res(x,2,'m²')),satz:`Der Graben hat eine Querschnittsfläche von ${fmt(x,2)} m².`}}},
+ {L:'S',g(){const Dm=rnd(100,400,10),sm=rnd(4,12,1),dm=Dm-2*sm,Dc=Dm/10,dc_=dm/10,x=PI/4*(Dc*Dc-dc_*dc_);return{tag:'Rohrleitungsnetze',ti:'Wandfläche eines Rohres',tx:`Ein Kunststoffrohr hat den Außendurchmesser ${F(D,EQ,z(Dm,'mm'))} und die Wanddicke ${F(s,EQ,z(sm,'mm'))}. Wie groß ist die Querschnittsfläche der Rohrwand in cm²?`,x:A,un:'cm²',a:x,dc:1,
+   geg:`${F(D,EQ,z(Dm,'mm'),EQ,z(Dc,'cm'))};&nbsp; ${F(d,EQ,D,MI,'2',M,s,EQ,z(dm,'mm'),EQ,z(dc_,'cm'))}`,steps:[['Formel',F(A,EQ,fr(pi,'4'),M,'(',sqr(D),MI,sqr(d),')')],['Vorbereiten','Innendurchmesser: Wanddicke zweimal abziehen. Für cm² beide Durchmesser in cm.']],ein:F(A,EQ,fr(pi,'4'),M,'(',nf(Dc)+'²',MI,nf(dc_)+'²',')'),
+   s:F(A,EQ,fr(pi,'4'),M,'(',nf(Dc)+'²',MI,nf(dc_)+'²',')'+u('cm²'),EQ,res(x,1,'cm²')),satz:`Die Rohrwand hat eine Querschnittsfläche von ${fmt(x,1)} cm².`}}},
+ {L:'S',g(){const L1=rnd(40,90,5),B1=rnd(30,60,5),L2=rnd(10,L1/2,5),B2=rnd(8,B1/2,2),x=L1*B1-L2*B2;return{tag:'Kreislauf & Abfall',ti:'Lagerfläche mit Aussparung',tx:`Der Lagerplatz für Schlacke im Abfallzentrum Schwierbach ist ein Rechteck von ${z(L1,'m')} × ${z(B1,'m')}. In einer Ecke steht eine Waagenhalle von ${z(L2,'m')} × ${z(B2,'m')}. Wie viel Fläche bleibt zum Lagern?`,x:A,un:'m²',a:x,dc:0,exact:true,
+   geg:`Platz ${z(L1,'m')} × ${z(B1,'m')};&nbsp; Halle ${z(L2,'m')} × ${z(B2,'m')}`,steps:[['Zerlegen',`${F(A,EQ,I('A','Platz'),MI,I('A','Halle'))}`],['Teilflächen',`${nf(L1)} · ${nf(B1)} = ${nf(L1*B1)} m²;&nbsp; ${nf(L2)} · ${nf(B2)} = ${nf(L2*B2)} m²`]],ein:`${nf(L1*B1)} − ${nf(L2*B2)}`,
+   s:F(A,EQ,z(L1*B1,'m²'),MI,z(L2*B2,'m²'),EQ,`<span class="result">${nf(x)}${u('m²')}</span>`),satz:`Zum Lagern bleiben ${nf(x)} m².`}}},
+ {L:'S',g(){const D0=rnd(25,45,1),d0=rnd(3,7,.5),x=PI/4*(D0*D0-d0*d0);return{tag:'Abwasser',ti:'Nachklärbecken mit Mittelbauwerk',tx:`Das runde Nachklärbecken der Kläranlage Schwierbach hat einen Durchmesser von ${F(D,EQ,z(D0,'m'))}. In der Mitte steht das runde Einlaufbauwerk mit ${F(d,EQ,z(d0,'m'))}. Wie groß ist die wirksame Wasseroberfläche?`,x:A,un:'m²',a:x,dc:1,
+   geg:`${F(D,EQ,z(D0,'m'))};&nbsp; ${F(d,EQ,z(d0,'m'))}`,steps:[['Formel',F(A,EQ,fr(pi,'4'),M,'(',sqr(D),MI,sqr(d),')')],['Klammer',`${nf(D0)}² − ${nf(d0)}² = ${nf(D0*D0)} − ${nf(d0*d0)} = ${nf(D0*D0-d0*d0)}`]],ein:F(A,EQ,fr(pi,'4'),M,z(D0*D0-d0*d0,'m²')),
+   s:F(A,EQ,fr(pi,'4'),M,'(',nf(D0)+'²',MI,nf(d0)+'²',')'+u('m²'),EQ,res(x,1,'m²')),satz:`Die wirksame Wasseroberfläche beträgt ${fmt(x,1)} m².`}}},
+ {L:'S',g(){const l0=rnd(120,400,10),b0=rnd(80,250,10),Am=l0*b0,x=Am/1e4;return{tag:'Kreislauf & Abfall',ti:'Deponieabschnitt in Hektar',tx:`Ein neuer Abschnitt der Deponie im Abfallzentrum Schwierbach ist ${z(l0,'m')} lang und ${z(b0,'m')} breit. Wie viel Hektar sind das?`,x:A,un:'ha',a:x,dc:2,
+   geg:`${F(l,EQ,z(l0,'m'))};&nbsp; ${F(b,EQ,z(b0,'m'))}`,steps:[['Formel',F(A,EQ,l,M,b)],['Umrechnen','1 ha = 10 000 m², also geteilt durch 10 000']],ein:F(A,EQ,z(l0,'m'),M,z(b0,'m'),EQ,z(Am,'m²')),
+   s:F(A,EQ,z(l0,'m'),M,z(b0,'m'),EQ,z(Am,'m²'),EQ,res(x,2,'ha')),satz:`Der Deponieabschnitt ist ${fmt(x,2)} ha groß.`}}},
+
+ /* ---------- Vertiefung ---------- */
+ {L:'V',g(){const h0=rnd(1.5,5,.5),n0=pick([1.5,2,2.5,3]),w0=h0*n0,x=Math.sqrt(h0*h0+w0*w0);return{tag:'Abwasser',ti:'Böschungslänge am Regenrückhaltebecken',tx:`Das Erdbecken zur Regenrückhaltung in Schwierbach ist ${z(h0,'m')} tief. Die Böschung hat die Neigung 1 : ${nf(n0)}. Wie lang ist die Böschung, schräg gemessen?`,x:s,un:'m',a:x,dc:2,
+   geg:`${F(h,EQ,z(h0,'m'))};&nbsp; Neigung 1 : ${nf(n0)} → ${F(w,EQ,nf(n0),M,z(h0,'m'),EQ,z(w0,'m'))}`,steps:[['Formel',F(s,EQ,sq(sqr(h)+PL+sqr(w)))],['Quadrate',`${nf(h0)}² + ${nf(w0)}² = ${nf(h0*h0)} + ${nf(w0*w0)} = ${nf(h0*h0+w0*w0)}`]],ein:F(s,EQ,sq(nf(+(h0*h0+w0*w0).toFixed(4))+u('m²'))),
+   s:F(s,EQ,sq(nf(h0)+'²'+PL+nf(w0)+'²'),EQ,res(x,2,'m')),satz:`Die Böschung ist ${fmt(x,2)} m lang.`}}},
+ {L:'V',g(){const L0=rnd(40,120,5),h0=rnd(1.5,4,.5),n0=pick([2,2.5,3]),sl=Math.sqrt(h0*h0+(n0*h0)**2),x=2*L0*sl;return{tag:'Kreislauf & Abfall',ti:'Folie für die Böschungen',tx:`Ein Sickerwasserbecken im Abfallzentrum Schwierbach ist ${z(L0,'m')} lang und ${z(h0,'m')} tief. Die beiden Längsböschungen (Neigung 1 : ${nf(n0)}) werden mit Dichtungsfolie belegt. Wie viel Quadratmeter Folie braucht man dafür (ohne Überlappung)?`,x:A,un:'m²',a:x,dc:0,
+   geg:`${F(l,EQ,z(L0,'m'))};&nbsp; ${F(h,EQ,z(h0,'m'))};&nbsp; ${F(w,EQ,z(n0*h0,'m'))}`,steps:[['Böschungslänge',F(s,EQ,sq(nf(h0)+'²'+PL+nf(n0*h0)+'²'),EQ,fmt(sl,3)+u('m'))],['Fläche','Jede Böschung ist ein Rechteck: Länge · schräge Böschungslänge. Zwei Böschungen.']],ein:F(A,EQ,'2',M,z(L0,'m'),M,fmt(sl,3)+u('m')),
+   s:`${F(s,EQ,fmt(sl,3)+u('m'))}<br>${F(A,EQ,'2',M,z(L0,'m'),M,fmt(sl,3)+u('m'),EQ,res(x,0,'m²'))}`,satz:`Für die beiden Längsböschungen braucht man ${fmt(x,0)} m² Folie.`}}},
+ {L:'V',g(){const dm=rnd(200,800,50),d0=dm/1000,x=PI*d0*d0/8;return{tag:'Rohrleitungsnetze',ti:'Halb gefüllter Kanal',tx:`Ein Kanal DN ${dm} (Innendurchmesser ${z(dm,'mm')}) ist bei Trockenwetter genau halb gefüllt. Wie groß ist die durchflossene Fläche in m²?`,x:A,un:'m²',a:x,dc:4,
+   geg:F(d,EQ,z(dm,'mm'),EQ,z(d0,'m')),steps:[['Formel',F(A,EQ,fr(1,2),M,fr(pi+M+sqr(d),'4'),EQ,fr(pi+M+sqr(d),'8'))],['Angleichen','Durchmesser in Meter, damit m² herauskommt']],ein:F(A,EQ,fr('π · ('+z(d0,'m')+')²','8')),
+   s:F(A,EQ,fr('π · ('+z(d0,'m')+')²','8'),EQ,res(x,4,'m²')),satz:`Die durchflossene Fläche beträgt ${fmt(x,4)} m².`}}},
+ {L:'V',g(){const l0=rnd(30,80,1),b0=rnd(8,16,.5),Ar=l0*b0,Ak=PI*b0*b0/4,x=Ar+Ak;return{tag:'Abwasser',ti:'Umlaufbecken der Belebung',tx:`Das Umlaufbecken der Kläranlage Schwierbach besteht aus einem geraden Mittelteil (${z(l0,'m')} lang, ${z(b0,'m')} breit) und an beiden Enden je einem Halbkreis mit dem Durchmesser ${z(b0,'m')}. Wie groß ist die Wasseroberfläche?`,x:A,un:'m²',a:x,dc:1,
+   geg:`${F(l,EQ,z(l0,'m'))};&nbsp; ${F(b,EQ,z(b0,'m'))}`,steps:[['Zerlegen','Rechteck plus zwei Halbkreise – zusammen ein ganzer Kreis mit d = b'],['Formel',F(A,EQ,l,M,b,PL,fr(pi+M+sqr(b),'4'))]],ein:`${F(I('A','R'),EQ,fmt(Ar,1)+u('m²'))};&nbsp; ${F(I('A','K'),EQ,fr('π · ('+z(b0,'m')+')²','4'),EQ,fmt(Ak,1)+u('m²'))}`,
+   s:F(A,EQ,fmt(Ar,1)+u('m²'),PL,fmt(Ak,1)+u('m²'),EQ,res(x,1,'m²')),satz:`Das Umlaufbecken hat eine Wasseroberfläche von ${fmt(x,1)} m².`}}},
+ {L:'V',g(){const d0=rnd(15,40,.5),U0=+(PI*d0).toFixed(1),dd=U0/PI,x=PI*dd*dd/4;return{tag:'Wasserversorgung',ti:'Fläche aus dem Umfang',tx:`Am Reinwasserbehälter des Wasserwerks Schwierbach (rund) kann man den Durchmesser nicht direkt messen. Ein Maßband um den Behälter ergibt einen Umfang von ${F(U,EQ,z(U0,'m'))}. Wie groß ist die Grundfläche?`,x:A,un:'m²',a:x,dc:1,
+   geg:F(U,EQ,z(U0,'m')),steps:[['Formeln',`${F(U,EQ,pi,M,d)} und ${kreis}`],['Durchmesser',`${F(d,EQ,fr(U,pi),EQ,fr(z(U0,'m'),pi),EQ,fmt(dd,3)+u('m'))}`]],ein:F(A,EQ,fr('π · ('+fmt(dd,3)+u('m')+')²','4')),
+   s:`${F(d,EQ,fr(z(U0,'m'),pi),EQ,fmt(dd,3)+u('m'))}<br>${F(A,EQ,fr('π · ('+fmt(dd,3)+u('m')+')²','4'),EQ,res(x,1,'m²'))}`,satz:`Der Behälter hat eine Grundfläche von ${fmt(x,1)} m².`}}}
+];
+
+const examples={
+ B:{tab:'Rohrquerschnitt',intro:'Ein Rohr hat einen Innendurchmesser von 0,5 m. Wie groß ist die Querschnittsfläche?',s:[
+   {e:kreis,o:'Formel',w:'Kreisfläche mit dem Durchmesser – so steht sie in der Formelsammlung.'},
+   {e:F(A,EQ,fr('π · (0,5 m)²','4')),o:'Einsetzen',w:'Der ganze Durchmesser mit Einheit wird quadriert.'},
+   {e:F(A,EQ,fr('π · 0,25 m²','4')),o:'Quadrat',w:'0,5 · 0,5 = 0,25 und m · m = m².'},
+   {e:F(A,EQ,res(Math.PI*0.25/4,4,'m²')),o:'Rechnen',w:'Taschenrechner: π × 0,25 ÷ 4 = 0,19634… → 4 signifikante Stellen.'}]},
+ S:{tab:'Zusammengesetzt',intro:'Der Lagerplatz ist 60 m × 40 m groß. In einer Ecke steht eine Halle mit 15 m × 10 m. Wie viel Fläche bleibt?',s:[
+   {e:F(A,EQ,I('A','Platz'),MI,I('A','Halle')),o:'Zerlegen',w:'Die Halle ist eine Aussparung – sie wird abgezogen.'},
+   {e:F(I('A','Platz'),EQ,'60 m · 40 m',EQ,'2400'+u('m²')),o:'Teil 1',w:'Ganzes Rechteck.'},
+   {e:F(I('A','Halle'),EQ,'15 m · 10 m',EQ,'150'+u('m²')),o:'Teil 2',w:'Aussparung.'},
+   {e:F(A,EQ,'2400 m² − 150 m²',EQ,res(2250,0,'m²')),o:'Ergebnis',w:'2250 m² sind 0,225 ha.'}]},
+ V:{tab:'Böschung',intro:'Ein Becken ist 3 m tief, die Böschung hat die Neigung 1 : 2. Wie lang ist die Böschung schräg gemessen?',s:[
+   {e:F(w,EQ,'2 · 3 m',EQ,'6'+u('m')),o:'Breite',w:'Neigung 1 : 2 heißt: pro Meter Höhe 2 Meter waagerecht.'},
+   {e:F(sqr(s),EQ,sqr(h),PL,sqr(w)),o:'Pythagoras',w:'Höhe und Breite bilden einen rechten Winkel. Die Böschung ist die lange Seite.'},
+   {e:F(s,EQ,sq('(3 m)² + (6 m)²'),EQ,sq('45 m²')),o:'Einsetzen',w:'9 + 36 = 45.'},
+   {e:F(s,EQ,res(Math.sqrt(45),4,'m')),o:'√',w:'Probe: Die Böschung muss länger sein als 6 m – passt.'}]}
+};
+
+K.module({id:'m6',nr:6,examples,trainer,tasks});
+})();
+</script>
+</body>
+</html>
