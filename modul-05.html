@@ -38,7 +38,7 @@
 
 <section id="groessen">
   <h2>Eine Größe ist Zahl mal Einheit</h2>
-  <p><span class="f"><i>Q</i> = 45&#8202;L/s</span> bedeutet: 45 mal die Einheit „Liter pro Sekunde“. Die Einheit gehört zur Zahl wie das Vorzeichen. Wer sie weglässt, weiß am Ende nicht mehr, was herauskommt.</p>
+  <p><span class="f"><i>Q</i> = 45&#8239;L/s</span> bedeutet: 45 mal die Einheit „Liter pro Sekunde“. Die Einheit gehört zur Zahl wie das Vorzeichen. Wer sie weglässt, weiß am Ende nicht mehr, was herauskommt.</p>
   <div class="box merke"><p><strong>Einheiten sind wie Buchstaben:</strong> Du kannst sie malnehmen, teilen und kürzen. <span class="f">m³ : (m³/h) = m³ · <span class="fr"><span>h</span><span>m³</span></span> = h</span>. Kommt am Ende die erwartete Einheit heraus, war die Rechnung mit großer Wahrscheinlichkeit richtig aufgebaut.</p></div>
 </section>
 
@@ -216,7 +216,7 @@ const examples={
  V:{tab:'Leistung in kW',intro:`Eine Pumpe fördert ${F(Q,EQ,'90 L/s')} auf ${F(H,EQ,'20 m')}. Hydraulische Leistung in kW?`,s:[
    {e:F(P,EQ,rho,M,g,M,Q,M,H),o:'Formel',w:'Hydraulische Leistung.'},
    {e:F(Q,EQ,'90 L/s',EQ,'0,09'+u('m³/s')),o:'Angleichen',w:'Die Formel braucht SI-Einheiten: m³/s.'},
-   {e:F(P,EQ,'1000 kg/m³ · 9,81 m/s² · 0,09 m³/s · 20 m',EQ,'17&#8202;658'+u('W')),o:'Rechnen',w:'Einheiten: kg · m²/s³ = W.'},
+   {e:F(P,EQ,'1000 kg/m³ · 9,81 m/s² · 0,09 m³/s · 20 m',EQ,'17&#8239;658'+u('W')),o:'Rechnen',w:'Einheiten: kg · m²/s³ = W.'},
    {e:F(P,EQ,res(17.66,2,'kW')),o:': 1000',w:'Watt in Kilowatt umrechnen. 17,7 kW ist realistisch für eine Abwasserpumpe.'}]}
 };
 

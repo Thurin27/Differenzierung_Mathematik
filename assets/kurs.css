@@ -82,13 +82,18 @@ section{padding-block:44px 8px;display:grid;gap:18px;scroll-margin-top:70px}
 @media (max-width:700px){.raster{grid-template-columns:1fr}}
 
 /* Formeln */
-.f{font-family:var(--f-math);font-size:1.18em;white-space:nowrap;display:inline-flex;align-items:center;flex-wrap:nowrap}
+.f{font-family:var(--f-math);font-size:1.18em;white-space:nowrap;display:inline;line-height:1.9}
+/* Hoch- und Tiefstellung ohne Einfluss auf die Zeilenhöhe */
+.f sup,.f sub{position:relative;font-size:.68em;line-height:0;vertical-align:baseline}
+.f sup{top:-.55em;margin-left:.04em}
+.f sub{top:.3em;margin-left:.02em}
+.num{white-space:nowrap}
 .f i,i.v{font-style:italic;font-family:var(--f-math)}
-.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;line-height:1.2}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;white-space:nowrap;text-align:center;margin:0 .12em;line-height:1.2}
 .fr>span{padding:0 .22em}
 .fr>span:first-child{border-bottom:1.4px solid currentColor;padding-bottom:.08em}
 .fr>span:last-child{padding-top:.08em}
-.sq{display:inline-flex;align-items:stretch}
+.sq{display:inline-flex;align-items:stretch;vertical-align:middle}
 .sq .rad{font-size:1.5em;line-height:1;align-self:center;margin-right:-.05em}
 .sq .sqc{border-top:1.4px solid currentColor;padding:.12em .15em 0;display:inline-flex;align-items:center}
 .uu{font-style:normal}

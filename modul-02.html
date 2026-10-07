@@ -75,7 +75,7 @@
     <thead><tr><th>Größe</th><th>Umrechnung</th><th>Typischer Einsatz</th></tr></thead>
     <tbody>
       <tr><td>Länge</td><td class="op">1 km = 1000 m;&nbsp; 1 m = 10 dm = 100 cm = 1000 mm</td><td>Kanalhaltung, Rohrdurchmesser in mm</td></tr>
-      <tr><td>Fläche</td><td class="op">1 m² = 100 dm² = 10&#8202;000 cm²;&nbsp; 1 ha = 10&#8202;000 m²</td><td>Rohrquerschnitt, Einzugsgebiet</td></tr>
+      <tr><td>Fläche</td><td class="op">1 m² = 100 dm² = 10&#8239;000 cm²;&nbsp; 1 ha = 10&#8239;000 m²</td><td>Rohrquerschnitt, Einzugsgebiet</td></tr>
       <tr><td>Volumen</td><td class="op">1 m³ = 1000 dm³ = 1000 L;&nbsp; 1 L = 1000 mL = 1000 cm³</td><td>Becken, Container, Laborprobe</td></tr>
       <tr><td>Masse</td><td class="op">1 t = 1000 kg;&nbsp; 1 kg = 1000 g;&nbsp; 1 g = 1000 mg;&nbsp; 1 mg = 1000 µg</td><td>Abfallmengen, Laborwerte</td></tr>
       <tr><td>Zeit</td><td class="op">1 d = 24 h;&nbsp; 1 h = 60 min = 3600 s</td><td>Durchfluss pro Tag oder Sekunde</td></tr>
@@ -170,8 +170,8 @@ const tasks=[
 
  /* ---------- Standard ---------- */
  {L:'S',g(){return pick([
-   ()=>{const a=rnd(.05,.8,.01);return conv({tag:'Rohrleitungsnetze',ti:'Querschnitt in cm²',tx:`Ein Rohr hat eine Querschnittsfläche von ${z(a,'m²')}. Gib die Fläche in Quadratzentimetern an.`,sym:A,val:a,ua:'m²',ub:'cm²',f:10000,rule:'1 m² = 100 dm² = 10&#8202;000 cm²',satz:x=>`Der Querschnitt beträgt ${x} cm².`})},
-   ()=>{const a=rnd(150,3500,50);return conv({tag:'Rohrleitungsnetze',ti:'Querschnitt in m²',tx:`Ein Kanalprofil hat eine Querschnittsfläche von ${z(a,'cm²')}. Gib die Fläche in Quadratmetern an.`,sym:A,val:a,ua:'cm²',ub:'m²',f:1e-4,rule:'1 m² = 10&#8202;000 cm²',satz:x=>`Der Querschnitt beträgt ${x} m².`})}
+   ()=>{const a=rnd(.05,.8,.01);return conv({tag:'Rohrleitungsnetze',ti:'Querschnitt in cm²',tx:`Ein Rohr hat eine Querschnittsfläche von ${z(a,'m²')}. Gib die Fläche in Quadratzentimetern an.`,sym:A,val:a,ua:'m²',ub:'cm²',f:10000,rule:'1 m² = 100 dm² = 10&#8239;000 cm²',satz:x=>`Der Querschnitt beträgt ${x} cm².`})},
+   ()=>{const a=rnd(150,3500,50);return conv({tag:'Rohrleitungsnetze',ti:'Querschnitt in m²',tx:`Ein Kanalprofil hat eine Querschnittsfläche von ${z(a,'cm²')}. Gib die Fläche in Quadratmetern an.`,sym:A,val:a,ua:'cm²',ub:'m²',f:1e-4,rule:'1 m² = 10&#8239;000 cm²',satz:x=>`Der Querschnitt beträgt ${x} m².`})}
  ])()}},
  {L:'S',g(){
    if(Math.random()<.5){const a=rnd(5,180,5),x=a*3.6;return{tag:'Abwasser',ti:'Pumpwerk Talstraße: L/s in m³/h',tx:`Das Pumpwerk Talstraße fördert ${Q} = ${z(a,'L/s')}. Für die Betriebsstatistik brauchst du den Wert in m³/h.`,x:Q,un:'m³/h',a:x,dc:K.dcOf(x),exact:true,
@@ -216,46 +216,46 @@ const tasks=[
 
 const T=(L,n,prompt,ok,w,h)=>({L,n,prompt,ask:'Welche Angabe ist richtig?',ok,w,h});
 const trainer=[
- T('B','Volumen','1&#8202;m³ = ?','1000 L',['100 L','10 L','10&#8202;000 L'],'1 m³ = 1000 dm³ und 1 dm³ = 1 L.'),
- T('B','Länge','1&#8202;km = ?','1000 m',['100 m','10 m','10&#8202;000 m'],'k steht für kilo = tausend.'),
- T('B','Länge','1&#8202;m = ?','1000 mm',['100 mm','10 mm','10&#8202;000 mm'],'m steht für milli = ein Tausendstel. 1 m hat 1000 mm.'),
- T('B','Zeit','1&#8202;h = ?','60 min',['100 min','3600 min','24 min'],'Eine Stunde hat 60 Minuten. 3600 sind die Sekunden.'),
- T('B','Masse','1&#8202;t = ?','1000 kg',['100 kg','10&#8202;000 kg','1&#8202;000&#8202;000 kg'],'Eine Tonne sind 1000 Kilogramm.'),
- T('B','Volumen','1&#8202;L = ?','1000 mL',['100 mL','10 mL','1&#8202;000&#8202;000 mL'],'milli = ein Tausendstel: 1 L hat 1000 mL.'),
- T('B','Länge','2,5&#8202;m = ?','250 cm',['25 cm','2500 cm','0,25 cm'],'1 m = 100 cm, also 2,5 · 100 = 250.'),
- T('B','Volumen','750&#8202;L = ?','0,75 m³',['7,5 m³','75 m³','0,075 m³'],'Von L nach m³: geteilt durch 1000.'),
- T('S','Fläche','1&#8202;m² = ?','10&#8202;000 cm²',['100 cm²','1000 cm²','1&#8202;000&#8202;000 cm²'],'Bei Flächen ist jeder Schritt 100: m² → dm² → cm², also 100 · 100.'),
- T('S','Volumen','1&#8202;m³ = ?','1&#8202;000&#8202;000 cm³',['1000 cm³','10&#8202;000 cm³','100&#8202;000 cm³'],'Bei Volumen ist jeder Schritt 1000: m³ → dm³ → cm³, also 1000 · 1000.'),
- T('S','Zeit','1&#8202;h = ?','3600 s',['60 s','360 s','6000 s'],'60 Minuten mit je 60 Sekunden: 60 · 60 = 3600.'),
- T('S','Konzentration','1&#8202;mg/L = ?','1 g/m³',['1 kg/m³','1000 g/m³','0,001 g/m³'],'Zähler: mg → g geteilt durch 1000. Nenner: L → m³ geteilt durch 1000. Beides hebt sich auf.'),
- T('S','Durchfluss','36&#8202;m³/h = ?','10 L/s',['36&#8202;000 L/s','0,1 L/s','100 L/s'],'36 m³ = 36 000 L in 3600 s. 36 000 : 3600 = 10.'),
- T('S','Zeit','1&#8202;d = ?','86&#8202;400 s',['3600 s','1440 s','24&#8202;000 s'],'24 · 3600 = 86 400. Die 1440 sind die Minuten eines Tages.'),
- T('S','Konzentration','0,5&#8202;kg/m³ = ?','500 mg/L',['0,5 mg/L','5 mg/L','50&#8202;000 mg/L'],'1 kg/m³ = 1000 mg/L, also 0,5 · 1000 = 500.'),
- T('V','Durchfluss','1&#8202;L/s = ?','3,6 m³/h',['0,36 m³/h','36 m³/h','60 m³/h'],'0,001 m³ pro Sekunde, mal 3600 Sekunden: 3,6 m³ pro Stunde.'),
- T('V','Konzentration','1&#8202;µg/L = ?','0,001 mg/L',['1000 mg/L','0,01 mg/L','0,000001 mg/L'],'µ (mikro) ist ein Tausendstel von milli.'),
- T('V','Fläche','1&#8202;ha = ?','10&#8202;000 m²',['1000 m²','100&#8202;000 m²','100 m²'],'Ein Hektar ist ein Quadrat von 100 m mal 100 m.'),
- T('V','Dichte','1&#8202;kg/L = ?','1 t/m³',['1000 t/m³','0,001 t/m³','1 kg/m³'],'Zähler mal 1000 (kg → t ist geteilt), Nenner L → m³ ebenfalls: hebt sich auf.'),
- T('V','Fläche','1&#8202;mm² = ?','0,000001 m²',['0,001 m²','0,0001 m²','0,01 m²'],'1 m² = 1 000 000 mm², also umgekehrt geteilt durch eine Million.'),
- T('V','Dichte','1&#8202;g/cm³ = ?','1000 kg/m³',['1 kg/m³','100 kg/m³','0,001 kg/m³'],'g → kg: geteilt durch 1000. cm³ → m³: 1 m³ hat eine Million cm³. Zusammen: mal 1000.'),
- T('V','Durchfluss','100&#8202;m³/d = ?','1,16 L/s',['11,6 L/s','0,116 L/s','4,17 L/s'],'100 000 L in 86 400 s: 100 000 : 86 400 ≈ 1,16. Die 4,17 sind m³/h.')
+ T('B','Volumen','1&#8239;m³ = ?','1000 L',['100 L','10 L','10&#8239;000 L'],'1 m³ = 1000 dm³ und 1 dm³ = 1 L.'),
+ T('B','Länge','1&#8239;km = ?','1000 m',['100 m','10 m','10&#8239;000 m'],'k steht für kilo = tausend.'),
+ T('B','Länge','1&#8239;m = ?','1000 mm',['100 mm','10 mm','10&#8239;000 mm'],'m steht für milli = ein Tausendstel. 1 m hat 1000 mm.'),
+ T('B','Zeit','1&#8239;h = ?','60 min',['100 min','3600 min','24 min'],'Eine Stunde hat 60 Minuten. 3600 sind die Sekunden.'),
+ T('B','Masse','1&#8239;t = ?','1000 kg',['100 kg','10&#8239;000 kg','1&#8239;000&#8239;000 kg'],'Eine Tonne sind 1000 Kilogramm.'),
+ T('B','Volumen','1&#8239;L = ?','1000 mL',['100 mL','10 mL','1&#8239;000&#8239;000 mL'],'milli = ein Tausendstel: 1 L hat 1000 mL.'),
+ T('B','Länge','2,5&#8239;m = ?','250 cm',['25 cm','2500 cm','0,25 cm'],'1 m = 100 cm, also 2,5 · 100 = 250.'),
+ T('B','Volumen','750&#8239;L = ?','0,75 m³',['7,5 m³','75 m³','0,075 m³'],'Von L nach m³: geteilt durch 1000.'),
+ T('S','Fläche','1&#8239;m² = ?','10&#8239;000 cm²',['100 cm²','1000 cm²','1&#8239;000&#8239;000 cm²'],'Bei Flächen ist jeder Schritt 100: m² → dm² → cm², also 100 · 100.'),
+ T('S','Volumen','1&#8239;m³ = ?','1&#8239;000&#8239;000 cm³',['1000 cm³','10&#8239;000 cm³','100&#8239;000 cm³'],'Bei Volumen ist jeder Schritt 1000: m³ → dm³ → cm³, also 1000 · 1000.'),
+ T('S','Zeit','1&#8239;h = ?','3600 s',['60 s','360 s','6000 s'],'60 Minuten mit je 60 Sekunden: 60 · 60 = 3600.'),
+ T('S','Konzentration','1&#8239;mg/L = ?','1 g/m³',['1 kg/m³','1000 g/m³','0,001 g/m³'],'Zähler: mg → g geteilt durch 1000. Nenner: L → m³ geteilt durch 1000. Beides hebt sich auf.'),
+ T('S','Durchfluss','36&#8239;m³/h = ?','10 L/s',['36&#8239;000 L/s','0,1 L/s','100 L/s'],'36 m³ = 36 000 L in 3600 s. 36 000 : 3600 = 10.'),
+ T('S','Zeit','1&#8239;d = ?','86&#8239;400 s',['3600 s','1440 s','24&#8239;000 s'],'24 · 3600 = 86 400. Die 1440 sind die Minuten eines Tages.'),
+ T('S','Konzentration','0,5&#8239;kg/m³ = ?','500 mg/L',['0,5 mg/L','5 mg/L','50&#8239;000 mg/L'],'1 kg/m³ = 1000 mg/L, also 0,5 · 1000 = 500.'),
+ T('V','Durchfluss','1&#8239;L/s = ?','3,6 m³/h',['0,36 m³/h','36 m³/h','60 m³/h'],'0,001 m³ pro Sekunde, mal 3600 Sekunden: 3,6 m³ pro Stunde.'),
+ T('V','Konzentration','1&#8239;µg/L = ?','0,001 mg/L',['1000 mg/L','0,01 mg/L','0,000001 mg/L'],'µ (mikro) ist ein Tausendstel von milli.'),
+ T('V','Fläche','1&#8239;ha = ?','10&#8239;000 m²',['1000 m²','100&#8239;000 m²','100 m²'],'Ein Hektar ist ein Quadrat von 100 m mal 100 m.'),
+ T('V','Dichte','1&#8239;kg/L = ?','1 t/m³',['1000 t/m³','0,001 t/m³','1 kg/m³'],'Zähler mal 1000 (kg → t ist geteilt), Nenner L → m³ ebenfalls: hebt sich auf.'),
+ T('V','Fläche','1&#8239;mm² = ?','0,000001 m²',['0,001 m²','0,0001 m²','0,01 m²'],'1 m² = 1 000 000 mm², also umgekehrt geteilt durch eine Million.'),
+ T('V','Dichte','1&#8239;g/cm³ = ?','1000 kg/m³',['1 kg/m³','100 kg/m³','0,001 kg/m³'],'g → kg: geteilt durch 1000. cm³ → m³: 1 m³ hat eine Million cm³. Zusammen: mal 1000.'),
+ T('V','Durchfluss','100&#8239;m³/d = ?','1,16 L/s',['11,6 L/s','0,116 L/s','4,17 L/s'],'100 000 L in 86 400 s: 100 000 : 86 400 ≈ 1,16. Die 4,17 sind m³/h.')
 ];
 
 const examples={
  B:{tab:'Fällmittel in Liter',intro:`Im Vorratstank sind 2,4 m³ Fällmittel. Wie viele Liter sind das?`,s:[
-   {e:'1&#8202;m³ = 1000&#8202;L',o:'Zahl',w:'Suche die passende Umrechnungszahl aus der Tabelle.'},
+   {e:'1&#8239;m³ = 1000&#8239;L',o:'Zahl',w:'Suche die passende Umrechnungszahl aus der Tabelle.'},
    {e:'m³ → L',o:'Richtung',w:'m³ ist die größere Einheit. Die Zahl wird größer – also mal 1000.'},
    {e:F('2,4'+u('m³'),EQ,'2,4',M,'1000'+u('L'),EQ,'<span class="result">2400'+u('L')+'</span>'),o:'Rechnen',w:'Mal 1000 heißt: Komma um drei Stellen nach rechts.'},
-   {e:'2400&#8202;L ≈ 2,4 IBC-Container',o:'Probe',w:'Ein IBC-Container fasst 1000 L. 2,4 Container passen – das Ergebnis ist plausibel.'}]},
+   {e:'2400&#8239;L ≈ 2,4 IBC-Container',o:'Probe',w:'Ein IBC-Container fasst 1000 L. 2,4 Container passen – das Ergebnis ist plausibel.'}]},
  S:{tab:'L/s in m³/h',intro:`Ein Pumpwerk fördert 45 L/s. Wie viele m³/h sind das?`,s:[
    {e:F('45'+u('L'),EQ,'0,045'+u('m³')),o:'Zähler',w:'Zuerst den Zähler umrechnen: Liter in Kubikmeter, also geteilt durch 1000.'},
-   {e:'0,045&#8202;m³ pro Sekunde',o:'',w:'Jetzt fließen jede Sekunde 0,045 m³.'},
+   {e:'0,045&#8239;m³ pro Sekunde',o:'',w:'Jetzt fließen jede Sekunde 0,045 m³.'},
    {e:F('0,045',M,'3600',EQ,'162'),o:'Nenner',w:'Eine Stunde hat 3600 Sekunden. In einer Stunde fließt also 3600-mal so viel.'},
    {e:F('45'+u('L/s'),EQ,'<span class="result">162'+u('m³/h')+'</span>'),o:'Ergebnis',w:'Abkürzung für später: L/s mal 3,6 ergibt m³/h. Prüfe: 45 · 3,6 = 162.'}]},
  V:{tab:'Fracht in kg/d',intro:`Im Zulauf misst das Labor ${c} = 480 mg/L CSB, der Zufluss beträgt ${Q} = 1200 m³/d. Wie groß ist die Fracht ${B} in kg/d?`,s:[
    {e:F(B,EQ,c,M,Q),o:'Formel',w:'Die Fracht ist Konzentration mal Durchfluss.'},
    {e:F('480'+u('mg/L'),EQ,'480'+u('g/m³')),o:'Einheit',w:'mg/L und g/m³ sind gleich. Jetzt passen die Einheiten zu m³/d.'},
-   {e:F(B,EQ,'480'+u('g/m³'),M,'1200'+u('m³/d'),EQ,'576&#8202;000'+u('g/d')),o:'Rechnen',w:'m³ kürzt sich weg, übrig bleibt g/d.'},
-   {e:F('576&#8202;000'+u('g/d'),EQ,'<span class="result">576'+u('kg/d')+'</span>'),o:': 1000',w:'Von g nach kg: geteilt durch 1000.'}]}
+   {e:F(B,EQ,'480'+u('g/m³'),M,'1200'+u('m³/d'),EQ,'576&#8239;000'+u('g/d')),o:'Rechnen',w:'m³ kürzt sich weg, übrig bleibt g/d.'},
+   {e:F('576&#8239;000'+u('g/d'),EQ,'<span class="result">576'+u('kg/d')+'</span>'),o:': 1000',w:'Von g nach kg: geteilt durch 1000.'}]}
 };
 
 K.module({id:'m2',nr:2,examples,trainer,tasks});

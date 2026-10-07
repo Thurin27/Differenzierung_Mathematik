@@ -65,7 +65,7 @@ K.fr=(n,d)=>`<span class="fr"><span>${n}</span><span>${d}</span></span>`;
 K.sq=x=>`<span class="sq"><span class="rad">√</span><span class="sqc">${x}</span></span>`;
 K.F=(...p)=>`<span class="f">${p.join('')}</span>`;
 K.M=' · ';K.MI=' − ';K.PL=' + ';K.EQ=' = ';
-K.u=s=>`<span class="uu">&#8202;${s}</span>`;
+K.u=s=>`<span class="uu">&#8239;${s}</span>`;
 K.q=(x,unit)=>K.nf(x)+K.u(unit);
 K.sqr=x=>x+'²';
 K.res=(x,dc,unit)=>`<span class="result">${K.fmt(x)}${unit?K.u(unit):''}</span>`;
