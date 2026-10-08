@@ -330,3 +330,15 @@ body.einfach header.top h1{hyphens:auto;overflow-wrap:break-word}
 @media (max-width:480px){body.einfach header.top h1{font-size:1.75rem}body.einfach .modnum{font-size:4.2rem}}
 header.top .say{grid-column:1/-1;margin:10px 0 -6px}
 .gw li *{text-indent:0}
+
+/* Heft-Hinweis über der Ergebnis-Eingabe */
+.heft{display:flex;gap:12px;align-items:flex-start;background:var(--blue-soft);border-left:4px solid var(--navy);border-radius:4px;padding:12px 14px;color:var(--ink)}
+.heft>svg{flex:none;color:var(--navy);margin-top:2px}
+.heft>div{display:grid;gap:6px;min-width:0;flex:1}
+.heft.kompakt{padding:8px 12px;align-items:center}
+.heftok{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--navy);cursor:pointer;justify-self:start;max-width:100%;border-radius:6px;padding:2px 6px 2px 0}
+.heftok input{width:20px;height:20px;accent-color:var(--navy);margin:0}
+.heftok.pulse{outline:2px solid var(--bad);outline-offset:3px}
+@media (prefers-reduced-motion:no-preference){.heftok.pulse{animation:hp .3s 3}}
+@keyframes hp{50%{outline-color:transparent}}
+.heftok input{flex:none}

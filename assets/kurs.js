@@ -228,21 +228,30 @@ K.module=function(cfg){
   /* Rechenaufgaben */
   const rHost=$('[data-k="rechnen"]');
   if(rHost&&cfg.tasks){
+    /* Heft-Hinweis: in den Grundlagenmodulen (Rechenweg, M1–M7) mit Haken „Rechenweg steht im Heft“ vor dem Prüfen */
+    const heft=cfg.heft||(['rwe','m1','m2','m3','m4','m5','m6','m7'].includes(cfg.id)?'check':'hint');
+    const PEN='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M13.5 6.5l4 4" stroke="currentColor" stroke-width="2"/></svg>';
+    const heftBox=heft==='check'
+      ?`<div class="heft">${PEN}<div><p>${S('<strong>Zuerst ins Heft:</strong> Gegeben – Gesucht – Formel – Umstellung – Rechnung – Antwortsatz.','<strong>Zuerst ins Heft.</strong> Schreibe alle 6 Schritte auf: Gegeben, Gesucht, Formel, Umstellen, Rechnung, Antwortsatz.')}</p>
+          <p class="small">${S('Das Eingabefeld ist nur die Kontrolle für dein Ergebnis. Bewertet wird dein Rechenweg im Heft.','Hier gibst du nur das Ergebnis ein. So kontrollierst du dich.')}</p>
+          <label class="heftok"><input type="checkbox"> ${S('Mein Rechenweg steht im Heft','Mein Rechenweg steht im Heft')}</label></div></div>`
+      :`<div class="heft kompakt">${PEN}<p><strong>Rechenweg ins Heft</strong> – hier trägst du nur das Ergebnis zur Kontrolle ein.</p></div>`;
     rHost.innerHTML=`<div class="card"><div class="head"><div class="row"><span class="lvl"></span><span class="tag"></span></div><span class="counter"></span></div>
       <div style="display:grid;gap:8px"><h3 class="r-title"></h3><div class="r-text"></div>${simple?'<button class="say" type="button" data-say-r></button>':''}</div>
+      ${heftBox}
       <form class="ans" autocomplete="off"><label class="r-want" for="${cfg.id}-in"></label><span class="f">=</span>
         <input id="${cfg.id}-in" inputmode="decimal" placeholder="Ergebnis"><span class="unit"></span><button class="btn" type="submit">Prüfen</button></form>
       <p class="small r-round"></p><div class="hints"></div><div class="r-fb" hidden></div>
       <div class="row"><button class="btn ghost r-hint">Tipp 1 zeigen</button><button class="btn ghost r-sol">Lösung zeigen</button><button class="btn r-new">Neue Aufgabe</button></div></div>`;
     let bag=[],cur=null,hints=0,state='open';
-    const inp=$('input',rHost);
+    const inp=$('form input',rHost);
     const cnt=()=>{$('.counter',rHost).textContent=`${Math.min(st.R[st.lvl],need.R)} / ${need.R} gelöst`};
     const hintList=()=>cur.steps.concat([['Eingesetzt',cur.ein]]).slice(0,3);
     const next=()=>{
       const L=st.lvl,pool=cfg.tasks.filter(x=>x.L===L);
       if(!bag.length||bag[0].L!==L)bag=K.shuffle(pool);
       const g=bag.shift();if(!bag.length)bag=K.shuffle(pool);
-      cur=g.g();hints=0;state='open';
+      cur=g.g();hints=0;state='open';{const hb=$('.heftok input',rHost);if(hb)hb.checked=false}
       const lv=$('.lvl',rHost);lv.className='lvl '+L;lv.textContent=LV[L];
       $('.tag',rHost).textContent=cur.tag;$('.r-title',rHost).textContent=cur.ti;$('.r-text',rHost).innerHTML=cur.tx;
       $('.r-want',rHost).innerHTML=`<span class="f">${cur.x}</span>`;$('.unit',rHost).innerHTML=cur.un;
@@ -265,6 +274,10 @@ K.module=function(cfg){
     };
     $('form',rHost).addEventListener('submit',e=>{
       e.preventDefault();if(state!=='open')return;
+      const hk=$('.heftok input',rHost);
+      if(hk&&!hk.checked){const f0=$('.r-fb',rHost);f0.hidden=false;f0.className='r-fb fb info';
+        f0.innerHTML=S('<div><strong>Erst ins Heft.</strong> Schreibe den Rechenweg auf, setze dann den Haken bei „Mein Rechenweg steht im Heft“ und prüfe dein Ergebnis.</div>','<div><strong>Erst ins Heft.</strong> Schreibe den Rechenweg auf. Setze dann den Haken. Dann klicke auf Prüfen.</div>');
+        $('.heftok',rHost).classList.add('pulse');setTimeout(()=>$('.heftok',rHost).classList.remove('pulse'),900);return}
       const x=K.parse(inp.value),fb=$('.r-fb',rHost);
       if(isNaN(x)){fb.hidden=false;fb.className='r-fb fb info';fb.innerHTML=S('<div>Gib eine Zahl ein, zum Beispiel 1,25 oder 2,4·10^5.</div>','<div>Gib eine Zahl ein. Zum Beispiel: 1,25</div>');return}
       const same=(p,q)=>Math.abs(p-q)<=Math.max(Math.abs(q)*1e-10,1e-12);
