@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mein Fortschritt – Mathe-Aufbaukurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="assets/kurs.css">
+</head>
+<body>
+<header class="site"><div class="wrap sitebar">
+  <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="fortschritt.html" aria-current="page">Fortschritt</a></nav>
+</div></header>
+
+<main class="wrap">
+<header class="top plain">
+  <div class="eyebrow">Mathe-Aufbaukurs · Übersicht</div>
+  <h1>Mein Fortschritt</h1>
+  <p class="ctx">Hier siehst du, welche Niveaustufen du in welchem Modul begonnen und geschafft hast. Eine Stufe ist geschafft, wenn du im Trainer 5 Aufgaben beim ersten Versuch richtig hast und 3 Rechenaufgaben ohne Lösungsanzeige gelöst hast.</p>
+</header>
+
+<section>
+  <div class="box merke"><p><strong>Nur in diesem Browser gespeichert.</strong> Der Fortschritt liegt auf diesem Gerät in diesem Browser. Wechselst du das Gerät, nutzt du ein privates Fenster oder werden die Browserdaten gelöscht, ist die Übersicht leer. Deshalb hakst du geschaffte Stufen am Ende jeder Stunde in deinem <strong>Lerntagebuch</strong> ab – das ist dein gesicherter Nachweis.</p></div>
+  <div id="fortschritt"></div>
+  <p class="small">Legende: <span class="stat">offen</span> noch nicht bearbeitet · <span class="stat angefangen">angefangen</span> mindestens eine Aufgabe gelöst · <span class="stat geschafft">geschafft</span> Stufe abgeschlossen. Die Daten „begonnen“ und „geschafft“ kannst du direkt ins Lerntagebuch übernehmen.</p>
+</section>
+
+<nav class="weiter" aria-label="Weiter"><a href="index.html">← Zur Übersicht</a><span></span></nav>
+</main>
+<footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
+
+<script src="assets/kurs.js"></script>
+<script>K.progressPage(document.getElementById('fortschritt'));</script>
+</body>
+</html>

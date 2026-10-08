@@ -2,7 +2,7 @@
    Stellt window.K bereit:
    - Formelbausteine (K.I, K.fr, K.sq, K.F, …) und Zahlformat (K.nf, K.fmt, K.rnd)
    - K.module(cfg): Niveau-Wahl, Schritt-für-Schritt-Beispiele, Trainer, Rechenaufgaben, Lernstand
-   - K.overview(): Lernstand aller Module auf der Startseite
+   - K.overview(): Status-Chips auf der Startseite, K.progressPage(): Seite „Mein Fortschritt“
    Fortschritt liegt nur im localStorage des Browsers (Schlüssel "mak-…"). */
 (function(){
 "use strict";
@@ -10,6 +10,23 @@ const K=window.K={};
 const $=(s,root)=>(root||document).querySelector(s);
 const LV={B:'Basis',S:'Standard',V:'Vertiefung'};
 K.LV=LV;
+
+/* ---------- Module (für Startseite und Fortschrittsseite) ---------- */
+K.MODS=[
+  {id:'rw',nr:0,href:'rechenweg.html',t:'Der Rechenweg',p:true,rw:true},
+  {id:'m1',nr:1,href:'modul-01.html',t:'Zahlen & Rechenregeln'},
+  {id:'m2',nr:2,href:'modul-02.html',t:'Einheiten umrechnen',p:true},
+  {id:'m3',nr:3,href:'modul-03.html',t:'Dreisatz, Prozent, Verhältnisse'},
+  {id:'m4',nr:4,href:'modul-04.html',t:'Formeln umstellen',p:true},
+  {id:'m5',nr:5,href:'modul-05.html',t:'Mit Formeln rechnen',p:true},
+  {id:'m6',nr:6,href:'modul-06.html',t:'Flächen'},
+  {id:'m7',nr:7,href:'modul-07.html',t:'Volumen & Masse',p:true}
+];
+K.NEED={T:5,R:3};K.RW_NEED=4;
+/* Status einer Niveaustufe: offen · angefangen · geschafft */
+K.status=(st,L)=>{const t=(st.T||{})[L]||0,r=(st.R||{})[L]||0;return t>=K.NEED.T&&r>=K.NEED.R?'geschafft':(t||r)?'angefangen':'offen'};
+K.today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+K.dDE=iso=>iso?iso.slice(8,10)+'.'+iso.slice(5,7)+'.':'';
 
 /* ---------- Speicher ---------- */
 K.load=id=>{try{return JSON.parse(localStorage.getItem('mak-'+id)||'{}')||{}}catch(e){return{}}};
@@ -81,8 +98,11 @@ K.schema=rows=>`<dl class="schema">${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</d
 K.module=function(cfg){
   const need=Object.assign({T:5,R:3},cfg.need);
   const raw=K.load(cfg.id);
-  const st={lvl:raw.lvl||K.load('global').lvl||'B',T:Object.assign({B:0,S:0,V:0},raw.T),R:Object.assign({B:0,S:0,V:0},raw.R)};
-  const save=()=>K.save(cfg.id,st);
+  const st={lvl:raw.lvl||K.load('global').lvl||'B',T:Object.assign({B:0,S:0,V:0},raw.T),R:Object.assign({B:0,S:0,V:0},raw.R),D:Object.assign({B:{},S:{},V:{}},raw.D)};
+  /* Datum merken: begonnen (erster Erfolg) und geschafft */
+  const save=()=>{['B','S','V'].forEach(L=>{const s=K.status(st,L);st.D[L]=st.D[L]||{};
+      if(s!=='offen'&&!st.D[L].b)st.D[L].b=K.today();if(s==='geschafft'&&!st.D[L].g)st.D[L].g=K.today()});
+    K.save(cfg.id,st)};
   const hooks=[];
 
   /* Niveau-Wahl */
@@ -251,7 +271,6 @@ K.module=function(cfg){
 
   /* Lernstand */
   const pHost=$('[data-k="stand"]');
-  function code(){return K.moduleCode(cfg.id,cfg.nr,st,need)}
   function renderProg(){
     if(!pHost)return;
     $('.prog',pHost).innerHTML=['B','S','V'].map(L=>{
@@ -259,22 +278,19 @@ K.module=function(cfg){
       return `<div class="prow" data-l="${L}"><div class="lvlc"><span class="lvl ${L}">${LV[L]}</span></div>
         <div class="meter">Trainer ${tp}/${need.T}<div class="trk"><div class="fill" style="width:${tp/need.T*100}%"></div></div></div>
         <div class="meter">Rechnen ${rp}/${need.R}<div class="trk"><div class="fill" style="width:${rp/need.R*100}%"></div></div></div>
-        <div class="done ${ok?'yes':''}">${ok?'geschafft':'offen'}</div></div>`}).join('');
-    $('.code',pHost).textContent=code();
+        <div class="done ${ok?'yes':''}">${K.status(st,L)}</div></div>`}).join('');
   }
   if(pHost){
     pHost.innerHTML=`<div class="prog"></div>
-      <div style="display:grid;gap:8px"><div class="eyebrow">Kontrollcode für den Laufzettel</div>
-      <div class="row"><div class="code"></div><button class="btn ghost p-copy">Kopieren</button></div></div>
+      <p class="small">Gespeichert nur in diesem Browser. Alle Module auf einen Blick: <a href="fortschritt.html">Mein Fortschritt</a>. Geschaffte Stufen hakst du in deinem Lerntagebuch ab.</p>
       <div class="confirm p-reset"></div>`;
-    K.copyBtn($('.p-copy',pHost),$('.code',pHost));
     const resetUI=()=>{
       const box=$('.p-reset',pHost);
       box.innerHTML='<button class="btn ghost">Lernstand dieses Moduls zurücksetzen</button>';
       box.firstChild.onclick=()=>{
         box.innerHTML='<span>Wirklich alles auf null setzen?</span><button class="btn">Ja, zurücksetzen</button><button class="btn ghost">Abbrechen</button>';
         const bs=box.querySelectorAll('button');
-        bs[0].onclick=()=>{st.T={B:0,S:0,V:0};st.R={B:0,S:0,V:0};save();renderProg();setLvl(st.lvl);resetUI()};
+        bs[0].onclick=()=>{st.T={B:0,S:0,V:0};st.R={B:0,S:0,V:0};st.D={B:{},S:{},V:{}};save();renderProg();setLvl(st.lvl);resetUI()};
         bs[1].onclick=resetUI;
       };
     };
@@ -282,8 +298,6 @@ K.module=function(cfg){
   }
   setLvl(st.lvl);
 };
-
-K.moduleCode=(id,nr,st,need)=>`M${nr} · `+['B','S','V'].map(L=>`${L} ${Math.min(st.T[L]||0,9)}${Math.min(st.R[L]||0,9)}${((st.T[L]||0)>=need.T&&(st.R[L]||0)>=need.R)?'+':'-'}`).join(' · ');
 
 K.copyBtn=(btn,el)=>{
   btn.onclick=()=>{
@@ -294,25 +308,42 @@ K.copyBtn=(btn,el)=>{
   };
 };
 
-/* ---------- Übersicht (Startseite) ---------- */
-K.overview=function(mods){
-  const parts=[];
-  mods.forEach(m=>{
-    const host=document.querySelector(`[data-mod="${m.id}"] .st`);
-    if(!host)return;
-    if(m.id==='rw'){
-      const s=K.load('rw'),n=(s.solved||[]).length;
-      host.insertAdjacentHTML('beforeend',`<span class="pill ${n>=m.need?'ok':''}">Detektiv ${Math.min(n,m.need)}/${m.need}</span>`);
-      parts.push(`RW ${n}/${m.need}`);return;
-    }
-    const st=Object.assign({T:{},R:{}},K.load(m.id)),need={T:5,R:3};
-    ['B','S','V'].forEach(L=>{
-      const ok=(st.T[L]||0)>=need.T&&(st.R[L]||0)>=need.R;
-      host.insertAdjacentHTML('beforeend',`<span class="pill ${ok?'ok':''}">${LV[L]}${ok?' ✓':''}</span>`);
-    });
-    parts.push(K.moduleCode(m.id,m.nr,{T:st.T,R:st.R},need));
+/* ---------- Startseite: Status-Chips auf den Modulkarten ---------- */
+const MARK={offen:'',angefangen:'',geschafft:' ✓'};
+K.overview=function(){
+  K.MODS.forEach(m=>{
+    const host=document.querySelector(`[data-mod="${m.id}"] .st`);if(!host)return;
+    if(m.rw){const n=(K.load('rw').solved||[]).length;
+      host.insertAdjacentHTML('beforeend',`<span class="pill ${n>=K.RW_NEED?'ok':n?'half':''}">Detektiv ${Math.min(n,K.RW_NEED)}/${K.RW_NEED}</span>`);return}
+    const st=K.load(m.id);
+    ['B','S','V'].forEach(L=>{const s=K.status(st,L);
+      host.insertAdjacentHTML('beforeend',`<span class="pill ${s==='geschafft'?'ok':s==='angefangen'?'half':''}" title="${LV[L]}: ${s}">${LV[L]}${MARK[s]}</span>`)});
   });
-  const c=document.getElementById('gesamtcode');
-  if(c){c.textContent=parts.join('  |  ');K.copyBtn(document.getElementById('gesamtcopy'),c)}
+};
+
+/* ---------- Seite „Mein Fortschritt“ ---------- */
+K.progressPage=function(host){
+  const esc=t=>t.replace(/&/g,'&amp;');
+  const chip=(s,d)=>`<span class="stat ${s}">${s}</span>${d&&(d.b||d.g)?`<span class="dates">${d.b?'begonnen '+K.dDE(d.b):''}${d.g?'<br>geschafft '+K.dDE(d.g):''}</span>`:''}`;
+  let pfl=0,pflN=0,lv={B:0,S:0,V:0};
+  const rows=K.MODS.map(m=>{
+    if(m.rw){const n=(K.load('rw').solved||[]).length,s=n>=K.RW_NEED?'geschafft':n?'angefangen':'offen';
+      pflN++;if(s==='geschafft')pfl++;
+      return `<tr><th scope="row"><a href="${m.href}">${m.nr} · ${esc(m.t)}</a>${m.p?' <span class="pill pflicht">Pflicht</span>':''}</th>
+        <td colspan="3" class="pcell">${chip(s)}<span class="dates">Rechenweg-Detektiv ${Math.min(n,K.RW_NEED)}/${K.RW_NEED}</span></td></tr>`}
+    const st=Object.assign({T:{},R:{},D:{}},K.load(m.id));
+    if(m.p){pflN++;if(K.status(st,'S')==='geschafft'||K.status(st,'V')==='geschafft')pfl++}
+    return `<tr><th scope="row"><a href="${m.href}">${m.nr} · ${esc(m.t)}</a>${m.p?' <span class="pill pflicht">Pflicht</span>':''}</th>`+
+      ['B','S','V'].map(L=>{const s=K.status(st,L);if(s==='geschafft')lv[L]++;
+        const meta=s==='angefangen'?`<span class="meta">Trainer ${Math.min(st.T[L]||0,K.NEED.T)}/${K.NEED.T}<br>Rechnen ${Math.min(st.R[L]||0,K.NEED.R)}/${K.NEED.R}</span>`:'';
+        return `<td class="pcell">${chip(s,(st.D||{})[L])}${meta}</td>`}).join('')+'</tr>';
+  }).join('');
+  host.innerHTML=`<div class="kpis">
+      <div class="kpi"><span class="kv">${pfl}<small> / ${pflN}</small></span><span class="kl">Pflichtkern-Module geschafft<br>(Rechenweg + Standard oder Vertiefung)</span></div>
+      <div class="kpi"><span class="kv">${lv.B+lv.S+lv.V}</span><span class="kl">Niveaustufen geschafft<br>Basis ${lv.B} · Standard ${lv.S} · Vertiefung ${lv.V}</span></div>
+    </div>
+    <div class="tscroll"><table class="ptable">
+      <thead><tr><th>Modul</th><th>Basis</th><th>Standard</th><th>Vertiefung</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
 };
 })();

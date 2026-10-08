@@ -11,7 +11,8 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 
 | Datei | Inhalt |
 |---|---|
-| `index.html` | Startseite: Ablauf, Niveaus, Modulübersicht mit Lernstand, Gesamtcode für den Laufzettel |
+| `index.html` | Startseite: Ablauf, Niveaus, Modulübersicht mit Status (angefangen/geschafft) |
+| `fortschritt.html` | Mein Fortschritt: alle Module × Niveaus mit Status und Datum (begonnen/geschafft) aus dem Browser-Speicher |
 | `rechenweg.html` | Modul 0: Die sechs Schritte des Rechenwegs, Musterlösung, typische Fehler, Rechenweg-Detektiv, Checkliste |
 | `modul-01.html` | Modul 1: Zahlen & Rechenregeln (inkl. ×10-Anzeige lesen, Rundungsregel, Taschenrechner-Führerschein) |
 | `modul-02.html` | Modul 2: Einheiten umrechnen |
@@ -20,6 +21,7 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 | `modul-05.html` | Modul 5: Mit Formeln rechnen (Einheiten angleichen, Einheitenkontrolle, Plausibilität) |
 | `modul-06.html` | Modul 6: Flächen |
 | `modul-07.html` | Modul 7: Volumen & Masse |
+| `material/lerntagebuch-mathe-aufbaukurs.docx` | Lerntagebuch zum Ausdrucken: Übersicht zum Abhaken, 10 Terminseiten mit Reflexion |
 | `assets/kurs.css` | Gemeinsames Layout (hell/dunkel) |
 | `assets/kurs.js` | Gemeinsame Bausteine: Niveau-Wahl, Schritt-für-Schritt, Trainer, Aufgabengenerator, Lernstand |
 
@@ -42,7 +44,7 @@ Eine Stufe gilt als geschafft bei 5 Trainer-Aufgaben (erster Versuch richtig) un
 
 1. `modul-04.html` kopieren, z. B. als `modul-07.html`. Kopf, Ziele und Erklärteil anpassen.
 2. Im Skript am Ende drei Listen füllen und `K.module({id:'m7', nr:7, examples, trainer, tasks})` aufrufen.
-3. In `index.html` die Modulkarte von `<div class="mod later">` auf `<a class="mod" href="modul-07.html" data-mod="m7">` umstellen und `{id:'m7',nr:7}` in `K.overview([...])` ergänzen.
+3. In `index.html` die Modulkarte von `<div class="mod later">` auf `<a class="mod" href="modul-08.html" data-mod="m8">` umstellen und das Modul in `K.MODS` (assets/kurs.js) ergänzen – dann erscheint es auch auf „Mein Fortschritt“.
 4. Die Navigation im Seitenkopf aller Seiten und die Weiter-Links am Seitenende ergänzen.
 
 Zahleneingaben akzeptieren Komma oder Punkt, Tausenderpunkte und Zehnerpotenzen (`2,4·10^5`, `2,4e5`).

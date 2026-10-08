@@ -11,7 +11,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html" aria-current="page">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html" aria-current="page">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="fortschritt.html">Fortschritt</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -28,7 +28,7 @@
     <li><span class="n">1</span><h3>Rechenweg lernen</h3><p>Starte mit der Seite „Rechenweg“. So schreibst du jede Aufgabe im Heft auf.</p></li>
     <li><span class="n">2</span><h3>Niveau wählen</h3><p>In jedem Modul wählst du Basis, Standard oder Vertiefung. Fang dort an, wo du sicher bist.</p></li>
     <li><span class="n">3</span><h3>Üben</h3><p>Erst das Beispiel durchklicken, dann Trainer und Rechenaufgaben. Tipps sind erlaubt.</p></li>
-    <li><span class="n">4</span><h3>Laufzettel</h3><p>Am Ende der Stunde trägst du den Kontrollcode in deinen Laufzettel ein.</p></li>
+    <li><span class="n">4</span><h3>Lerntagebuch</h3><p>Am Ende der Stunde hakst du ab, was du geschafft hast, und schreibst eine kurze Reflexion.</p></li>
   </ol>
   <div class="raster">
     <div><span class="lvl B">Basis</span><p class="small">Du frischst die Grundlagen auf. Die Aufgaben haben einen Rechenschritt.</p></div>
@@ -57,20 +57,18 @@
   </div>
 </section>
 
-<section id="laufzettel">
+<section id="lernstand">
   <h2>Mein Lernstand</h2>
-  <p>Dein Fortschritt wird nur in diesem Browser gespeichert. Wenn du das Gerät wechselst, fängst du dort neu an – deshalb gibt es den Laufzettel.</p>
-  <div style="display:grid;gap:8px"><div class="eyebrow">Gesamtcode für den Laufzettel</div>
-    <div class="row"><div class="code" id="gesamtcode"></div><button class="btn ghost" id="gesamtcopy">Kopieren</button></div>
-    <p class="small">Lesart: „M4 · B 53+“ heißt Modul 4, Basis: 5 Trainer-Aufgaben richtig, 3 Rechenaufgaben gelöst, Stufe geschafft (+).</p>
-  </div>
+  <p>Auf den Modulkarten oben siehst du deinen Stand: <span class="pill half">Standard</span> angefangen, <span class="pill ok">Standard ✓</span> geschafft. Alle Module mit Datum zeigt dir die Seite <a href="fortschritt.html">Mein Fortschritt</a>.</p>
+  <div class="box merke"><p><strong>Nur in diesem Browser gespeichert.</strong> Wechselst du das Gerät oder werden die Browserdaten gelöscht, ist die Anzeige leer. Dein gesicherter Nachweis ist das <strong>Lerntagebuch</strong>: Dort hakst du am Ende jeder Stunde ab und hältst fest, was du gelernt hast.</p></div>
+  <p><a class="btn ghost" href="fortschritt.html">Mein Fortschritt öffnen</a></p>
   <details>
     <summary>Hinweise für die Lernbegleitung</summary>
     <ul>
       <li>Umfang: ca. 20 UStd. (2 Wochenstunden). Nicht alle bearbeiten alles – Ziel ist der sichere Pflichtkern auf Standard-Niveau.</li>
       <li>Empfohlener Start: Rechenweg (1 UStd.) gemeinsam, danach individuelle Lernpfade. Wer sicher ist, startet direkt auf Standard oder Vertiefung.</li>
       <li>Aufgaben werden mit Zufallswerten erzeugt; Lösungen lassen sich nicht abschreiben. Der Rechenweg gehört ins Heft und ist Grundlage für Rückmeldungen.</li>
-      <li>Der Lernstand liegt im localStorage des jeweiligen Browsers. Für die Dokumentation dient der Kontrollcode auf dem Laufzettel.</li>
+      <li>Der Lernstand liegt im localStorage des jeweiligen Browsers und wird auf „Mein Fortschritt“ mit Datum angezeigt. Dokumentiert wird auf Papier im Lerntagebuch: Übersicht zum Abhaken plus eine kurze Reflexion je Termin. <a href="material/lerntagebuch-mathe-aufbaukurs.docx">Lerntagebuch als Word-Vorlage</a></li>
       <li>Expertensystem: Wer eine Stufe geschafft hat, ist in der Stammgruppe Ansprechpartner:in dafür.</li>
       <li>Formelzeichen orientieren sich an der „Formelsammlung für Berufe der Umwelttechnik“.</li>
       <li>Rundung: mindestens 4 signifikante Stellen, genauere Angaben zählen auch; ab 1000 als ganze Zahl; Geld in Cent. Abweichungen bis 3 Einheiten in der 4. Stelle (gerundete Zwischenergebnisse, anderer Rechenweg) werden akzeptiert. Zu grob gerundete Werte und übersehene Zehnerpotenzen in der Taschenrechner-Anzeige werden gezielt zurückgemeldet.</li>
@@ -84,7 +82,7 @@
 
 <script src="assets/kurs.js"></script>
 <script>
-K.overview([{id:'rw',need:4},{id:'m1',nr:1},{id:'m2',nr:2},{id:'m3',nr:3},{id:'m4',nr:4},{id:'m5',nr:5},{id:'m6',nr:6},{id:'m7',nr:7}]);
+K.overview();
 </script>
 </body>
 </html>
