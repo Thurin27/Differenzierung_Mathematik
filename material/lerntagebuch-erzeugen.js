@@ -91,7 +91,7 @@ const cover = [
   h2('Gut zu wissen'),
   bul([run('Eine Stufe ist '), run('geschafft', { bold: true }), run(', wenn du im Trainer 5 Aufgaben beim ersten Versuch richtig hast und 3 Rechenaufgaben ohne Lösungsanzeige gelöst hast.')]),
   bul([run('Der Fortschritt auf der Website wird nur im Browser gespeichert. '), run('Dein Nachweis ist dieses Lerntagebuch.', { bold: true })]),
-  bul([run('Ziel für alle: die '), run(STAR + ' Pflichtkern-Module', { bold: true }), run(' mindestens auf Standard-Niveau.')]),
+  bul([run('Ziel für alle: '), run(STAR + ' Pflicht', { bold: true }), run(' = mindestens Standard geschafft, '), run(STAR + ' Pflicht (Basis)', { bold: true }), run(' = Basis reicht. Wer schneller ist, macht mit 8 – 10 weiter.')]),
   bul([run('Rundungsregel: Ergebnisse mit 4 signifikanten Stellen, z. B. 4034,56 → 4035 oder 0,000785467 → 0,0007855.')]),
   bul([run('Den Rechenweg schreibst du immer ins Heft: Gegeben – Gesucht – Formel – Umstellung – Rechnung – Antwortsatz.')]),
   p([run('Kurs im Browser:  ', { bold: true, color: NAVY }), run('_______________________________________________', { color: LINE })], { spacing: { before: 320 } }),
@@ -99,14 +99,14 @@ const cover = [
 
 /* ---------- Seite 2: Übersicht zum Abhaken ---------- */
 const MODS = [
-  [0, 'Der Rechenweg', true, true],
-  [1, 'Zahlen & Rechenregeln'],
-  [2, 'Einheiten umrechnen', true],
-  [3, 'Dreisatz, Prozent, Verhältnisse'],
-  [4, 'Formeln umstellen', true],
-  [5, 'Mit Formeln rechnen', true],
-  [6, 'Flächen'],
-  [7, 'Volumen & Masse', true],
+  [0, 'Der Rechenweg', 'Pflicht', true],
+  [1, 'Zahlen & Rechenregeln', 'Pflicht (Basis)'],
+  [2, 'Einheiten umrechnen', 'Pflicht'],
+  [3, 'Dreisatz, Prozent, Verhältnisse', 'Pflicht'],
+  [4, 'Formeln umstellen', 'Pflicht'],
+  [5, 'Mit Formeln rechnen', 'Pflicht'],
+  [6, 'Flächen', 'Pflicht (Basis)'],
+  [7, 'Volumen & Masse', 'Pflicht'],
   [8, 'Diagramme lesen'],
   [9, 'Die Berufsformeln'],
   [10, 'Funktionen (Vertiefung)'],
@@ -122,10 +122,10 @@ const overviewRows = [
     const fill = i % 2 ? SOFT : 'FFFFFF';
     const name = cell([
       p([run(`${nr}  `, { bold: true, color: BLUE, size: 26 }), run(t, { bold: true, size: 21 })], { spacing: { after: 20 } }),
-      ...(pf ? [p([run(STAR + ' Pflichtkern', { size: 16, color: NAVY, bold: true })])] : [])
+      ...(pf ? [p([run(STAR + ' ' + pf, { size: 16, color: NAVY, bold: true })])] : [])
     ], MW, { fill });
     if (rw) {
-      return new TableRow({ cantSplit: true, children: [name, cell([p([box({ size: 22 }), run(' begonnen  ', { size: 18 }), run('____.____.', { size: 20, color: LINE }), run('          '), box({ size: 22 }), run(' geschafft  ', { size: 18 }), run('____.____.', { size: 20, color: LINE })]), p([run('geschafft = alle 4 Fälle im Rechenweg-Detektiv gelöst', { size: 16, color: GREY })], { spacing: { before: 40 } })], 3 * LW, { fill, span: 3 })] });
+      return new TableRow({ cantSplit: true, children: [name, cell([p([box({ size: 22 }), run(' begonnen  ', { size: 18 }), run('____.____.', { size: 20, color: LINE }), run('          '), box({ size: 22 }), run(' geschafft  ', { size: 18 }), run('____.____.', { size: 20, color: LINE })]), p([run('geschafft = alle 4 Fälle im Rechenweg-Detektiv gelöst (Mathe einfach: Schritt 0 geschafft)', { size: 16, color: GREY })], { spacing: { before: 40 } })], 3 * LW, { fill, span: 3 })] });
     }
     return new TableRow({ cantSplit: true, height: { value: Math.round(1.35 * CM), rule: HeightRule.ATLEAST }, children: [name, levelCell(fill), levelCell(fill), levelCell(fill)] });
   })

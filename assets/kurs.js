@@ -13,19 +13,26 @@ K.LV=LV;
 
 /* ---------- Module (für Startseite und Fortschrittsseite) ---------- */
 K.MODS=[
-  {id:'rw',nr:0,href:'rechenweg.html',t:'Der Rechenweg',p:true,rw:true},
-  {id:'m1',nr:1,href:'modul-01.html',t:'Zahlen & Rechenregeln'},
-  {id:'m2',nr:2,href:'modul-02.html',t:'Einheiten umrechnen',p:true},
-  {id:'m3',nr:3,href:'modul-03.html',t:'Dreisatz, Prozent, Verhältnisse'},
-  {id:'m4',nr:4,href:'modul-04.html',t:'Formeln umstellen',p:true},
-  {id:'m5',nr:5,href:'modul-05.html',t:'Mit Formeln rechnen',p:true},
-  {id:'m6',nr:6,href:'modul-06.html',t:'Flächen'},
-  {id:'m7',nr:7,href:'modul-07.html',t:'Volumen & Masse',p:true},
+  /* p:'S' = Pflicht bis Standard, p:'B' = Pflicht nur Basis */
+  {id:'rw',nr:0,href:'rechenweg.html',t:'Der Rechenweg',p:'S',rw:true},
+  {id:'m1',nr:1,href:'modul-01.html',t:'Zahlen & Rechenregeln',p:'B'},
+  {id:'m2',nr:2,href:'modul-02.html',t:'Einheiten umrechnen',p:'S'},
+  {id:'m3',nr:3,href:'modul-03.html',t:'Dreisatz, Prozent, Verhältnisse',p:'S'},
+  {id:'m4',nr:4,href:'modul-04.html',t:'Formeln umstellen',p:'S'},
+  {id:'m5',nr:5,href:'modul-05.html',t:'Mit Formeln rechnen',p:'S'},
+  {id:'m6',nr:6,href:'modul-06.html',t:'Flächen',p:'B'},
+  {id:'m7',nr:7,href:'modul-07.html',t:'Volumen & Masse',p:'S'},
   {id:'m8',nr:8,href:'modul-08.html',t:'Diagramme lesen'},
   {id:'m9',nr:9,href:'modul-09.html',t:'Die Berufsformeln'},
   {id:'m10',nr:10,href:'modul-10.html',t:'Funktionen (Vertiefung)'}
 ];
 K.NEED={T:5,R:3};K.RW_NEED=4;
+/* Rechenweg: geschafft über den Detektiv (normaler Kurs) oder die Basis-Stufe der einfachen Version */
+K.rwState=()=>{const n=(K.load('rw').solved||[]).length,e=K.status(K.load('rwe'),'B');
+  return{n,s:(n>=K.RW_NEED||e==='geschafft')?'geschafft':(n||e!=='offen')?'angefangen':'offen'}};
+/* Pflicht erfüllt? p:'S' → Standard oder Vertiefung geschafft, p:'B' → irgendeine Stufe geschafft */
+K.pflichtOk=(m,st)=>m.rw?K.rwState().s==='geschafft':m.p==='B'?['B','S','V'].some(L=>K.status(st,L)==='geschafft'):['S','V'].some(L=>K.status(st,L)==='geschafft');
+K.pflichtPill=m=>m.p==='S'?' <span class="pill pflicht">Pflicht</span>':m.p==='B'?' <span class="pill pflicht-b">Pflicht (Basis)</span>':'';
 /* Status einer Niveaustufe: offen · angefangen · geschafft */
 K.status=(st,L)=>{const t=(st.T||{})[L]||0,r=(st.R||{})[L]||0;return t>=K.NEED.T&&r>=K.NEED.R?'geschafft':(t||r)?'angefangen':'offen'};
 K.today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
@@ -135,22 +142,25 @@ K.schema=rows=>`<dl class="schema">${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</d
 /* ---------- Modul ---------- */
 K.module=function(cfg){
   const need=Object.assign({T:5,R:3},cfg.need);
+  /* einfache Version: lock = feste Stufe (ohne Wahl), simple = kurze, einfache Rückmeldungen, root = Pfad zur Hauptseite */
+  const lock=cfg.lock||null,simple=!!cfg.simple,root=cfg.root||'',S=(a,b)=>simple?b:a;
   const raw=K.load(cfg.id);
-  const st={lvl:raw.lvl||K.load('global').lvl||'B',T:Object.assign({B:0,S:0,V:0},raw.T),R:Object.assign({B:0,S:0,V:0},raw.R),D:Object.assign({B:{},S:{},V:{}},raw.D)};
+  const st={lvl:lock||raw.lvl||K.load('global').lvl||'B',T:Object.assign({B:0,S:0,V:0},raw.T),R:Object.assign({B:0,S:0,V:0},raw.R),D:Object.assign({B:{},S:{},V:{}},raw.D)};
   /* Datum merken: begonnen (erster Erfolg) und geschafft */
   const save=()=>{['B','S','V'].forEach(L=>{const s=K.status(st,L);st.D[L]=st.D[L]||{};
       if(s!=='offen'&&!st.D[L].b)st.D[L].b=K.today();if(s==='geschafft'&&!st.D[L].g)st.D[L].g=K.today()});
-    K.save(cfg.id,st)};
+    K.save(cfg.id,lock?Object.assign({},st,{lvl:raw.lvl}):st)};
   const hooks=[];
 
   /* Niveau-Wahl */
   const segHost=$('[data-k="niveau"]');
-  if(segHost){
+  if(segHost&&!lock){
     segHost.innerHTML=`<div class="seg" role="group" aria-label="Niveau wählen">${['B','S','V'].map(L=>`<button id="lv${L}" data-l="${L}" aria-pressed="false">${LV[L]}</button>`).join('')}</div>`;
     segHost.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>setLvl(b.dataset.l)));
   }
   function setLvl(L){
-    st.lvl=L;save();K.save('global',{lvl:L});
+    if(lock)L=lock;
+    st.lvl=L;save();if(!lock)K.save('global',{lvl:L});
     if(segHost)segHost.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===L));
     hooks.forEach(f=>f(L));
   }
@@ -159,8 +169,8 @@ K.module=function(cfg){
   const stHost=$('[data-k="stepper"]');
   if(stHost&&cfg.examples){
     const keys=Object.keys(cfg.examples);
-    stHost.innerHTML=`<div class="stepper"><div class="tabs" role="tablist" aria-label="Beispiel wählen">${keys.map(k=>`<button role="tab" data-ex="${k}" aria-selected="false">${LV[k]}: ${cfg.examples[k].tab}</button>`).join('')}</div>
-      <p class="intro"></p><ol class="steps"></ol>
+    stHost.innerHTML=`<div class="stepper"><div class="tabs" role="tablist" aria-label="Beispiel wählen"${keys.length<2?' hidden':''}>${keys.map(k=>`<button role="tab" data-ex="${k}" aria-selected="false">${lock?'':LV[k]+': '}${cfg.examples[k].tab}</button>`).join('')}</div>
+      <p class="intro${simple?' sayable':''}"></p><ol class="steps"></ol>
       <div class="ctl"><button class="btn" data-a="next">Nächster Schritt</button><button class="btn ghost" data-a="all">Alle zeigen</button><button class="btn ghost" data-a="reset">Von vorn</button></div></div>`;
     let key=keys[0],shown=1;
     const render=()=>{
@@ -182,7 +192,7 @@ K.module=function(cfg){
   const tHost=$('[data-k="trainer"]');
   if(tHost&&cfg.trainer){
     tHost.innerHTML=`<div class="card"><div class="head"><span class="lvl"></span><span class="counter"></span></div>
-      <div><div class="eyebrow t-name"></div><div class="task-f t-prompt"></div><p class="t-ask"></p></div>
+      <div><div class="eyebrow t-name"></div><div class="task-f t-prompt"></div><p class="t-ask"></p>${simple?'<button class="say" type="button" data-say-t></button>':''}</div>
       <div class="opts"></div><div class="t-fb" hidden></div>
       <div class="row"><button class="btn t-next">${cfg.trainerNext||'Nächste Aufgabe'}</button></div></div>`;
     let bag=[],cur=null,done=false,miss=false;
@@ -205,7 +215,7 @@ K.module=function(cfg){
       if(ok){
         done=true;b.classList.add('right');tHost.querySelectorAll('.opt').forEach(o=>o.disabled=true);
         if(!miss){st.T[st.lvl]++;save();renderProg()}
-        fb.className='t-fb fb ok';fb.innerHTML=`<div><strong>Richtig.</strong> ${cur.h}${miss?' <span class="small">(Zählt nur, wenn der erste Versuch sitzt.)</span>':''}</div>`;cnt();
+        fb.className='t-fb fb ok';fb.innerHTML=`<div><strong>Richtig.</strong> ${cur.h}${miss?` <span class="small">${S('(Zählt nur, wenn der erste Versuch sitzt.)','(Das zählt nur beim ersten Versuch.)')}</span>`:''}</div>`;cnt();
       }else{
         miss=true;b.classList.add('wrong');b.disabled=true;
         fb.className='t-fb fb no';fb.innerHTML=`<div><strong>Noch nicht.</strong> Tipp: ${cur.h}</div>`;
@@ -219,7 +229,7 @@ K.module=function(cfg){
   const rHost=$('[data-k="rechnen"]');
   if(rHost&&cfg.tasks){
     rHost.innerHTML=`<div class="card"><div class="head"><div class="row"><span class="lvl"></span><span class="tag"></span></div><span class="counter"></span></div>
-      <div style="display:grid;gap:8px"><h3 class="r-title"></h3><p class="r-text"></p></div>
+      <div style="display:grid;gap:8px"><h3 class="r-title"></h3><div class="r-text"></div>${simple?'<button class="say" type="button" data-say-r></button>':''}</div>
       <form class="ans" autocomplete="off"><label class="r-want" for="${cfg.id}-in"></label><span class="f">=</span>
         <input id="${cfg.id}-in" inputmode="decimal" placeholder="Ergebnis"><span class="unit"></span><button class="btn" type="submit">Prüfen</button></form>
       <p class="small r-round"></p><div class="hints"></div><div class="r-fb" hidden></div>
@@ -236,7 +246,11 @@ K.module=function(cfg){
       const lv=$('.lvl',rHost);lv.className='lvl '+L;lv.textContent=LV[L];
       $('.tag',rHost).textContent=cur.tag;$('.r-title',rHost).textContent=cur.ti;$('.r-text',rHost).innerHTML=cur.tx;
       $('.r-want',rHost).innerHTML=`<span class="f">${cur.x}</span>`;$('.unit',rHost).innerHTML=cur.un;
-      $('.r-round',rHost).innerHTML=cur.tol!=null?(cur.tolText||`Lies so genau ab, wie es geht. Erlaubte Abweichung: ±${K.nf(cur.tol)} ${cur.un}.`)
+      $('.r-round',rHost).innerHTML=simple?(cur.sig?'Gib die gerundete Zahl ein. Schreibe ein Komma, keinen Punkt.'
+          :cur.exact?'Das Ergebnis geht genau auf. Schreibe ein Komma, keinen Punkt.'
+          :cur.fix?'Geld: Runde auf 2 Stellen nach dem Komma (Cent).'
+          :'<strong>Runde auf 4 Stellen.</strong> Zähle ab der ersten Ziffer, die nicht 0 ist. Genauer ist auch richtig. Schreibe ein Komma, keinen Punkt.')
+        :cur.tol!=null?(cur.tolText||`Lies so genau ab, wie es geht. Erlaubte Abweichung: ±${K.nf(cur.tol)} ${cur.un}.`)
         :cur.sig?'Gib die gerundete Zahl ein. Dezimalzeichen: Komma.'
         :cur.exact?'Das Ergebnis geht genau auf – gib es vollständig an. Dezimalzeichen: Komma.'
         :cur.fix?`Geldbeträge rundest du auf ${cur.dc} Nachkommastellen (Cent). Dezimalzeichen: Komma.`
@@ -252,7 +266,7 @@ K.module=function(cfg){
     $('form',rHost).addEventListener('submit',e=>{
       e.preventDefault();if(state!=='open')return;
       const x=K.parse(inp.value),fb=$('.r-fb',rHost);
-      if(isNaN(x)){fb.hidden=false;fb.className='r-fb fb info';fb.innerHTML='<div>Gib eine Zahl ein, zum Beispiel 1,25 oder 2,4·10^5.</div>';return}
+      if(isNaN(x)){fb.hidden=false;fb.className='r-fb fb info';fb.innerHTML=S('<div>Gib eine Zahl ein, zum Beispiel 1,25 oder 2,4·10^5.</div>','<div>Gib eine Zahl ein. Zum Beispiel: 1,25</div>');return}
       const same=(p,q)=>Math.abs(p-q)<=Math.max(Math.abs(q)*1e-10,1e-12);
       const nd=K.sigCount(inp.value),t4=K.r4(cur.a),ulp=Math.pow(10,Math.floor(Math.log10(Math.abs(t4))+1e-12)-3);
       let ok=false,hint='';
@@ -261,10 +275,10 @@ K.module=function(cfg){
         ok=(same(x,cur.a)||(big&&same(x,K.r4(cur.raw))))&&nd<=Math.max(4,maxd);
         if(!ok){
           const ar=Math.abs(cur.raw),e=Math.floor(Math.log10(ar)),f=big?1:Math.pow(10,3-e),tr=Math.sign(cur.raw)*Math.floor(ar*f)/f;
-          if(same(x,cur.a))hint=big?'Der Wert stimmt, aber die Nachkommastellen kannst du bei so großen Zahlen weglassen.':'Der Wert stimmt, aber du hast zu viele Stellen angegeben. Vier signifikante Stellen reichen.';
-          else if(same(x,tr))hint='Du hast nach der vierten Stelle abgeschnitten. Schau dir die fünfte signifikante Stelle an: Ist sie 5 oder größer, wird aufgerundet.';
-          else if(nd<4&&Math.abs(x-cur.raw)<=Math.abs(cur.raw)*0.01)hint='Zu stark gerundet – es sollen vier signifikante Stellen sein.';
-          else hint='Zähle ab der ersten Ziffer, die keine Null ist. Führende Nullen zählen nicht mit.';
+          if(same(x,cur.a))hint=big?S('Der Wert stimmt, aber die Nachkommastellen kannst du bei so großen Zahlen weglassen.','Die Zahl stimmt. Bei so großen Zahlen lässt du die Stellen nach dem Komma weg.'):S('Der Wert stimmt, aber du hast zu viele Stellen angegeben. Vier signifikante Stellen reichen.','Die Zahl stimmt. Aber es sind zu viele Stellen. 4 Stellen reichen.');
+          else if(same(x,tr))hint=S('Du hast nach der vierten Stelle abgeschnitten. Schau dir die fünfte signifikante Stelle an: Ist sie 5 oder größer, wird aufgerundet.','Schau auf die 5. Stelle. Ist sie 5 oder mehr? Dann rundest du auf.');
+          else if(nd<4&&Math.abs(x-cur.raw)<=Math.abs(cur.raw)*0.01)hint=S('Zu stark gerundet – es sollen vier signifikante Stellen sein.','Zu stark gerundet. Es sollen 4 Stellen sein.');
+          else hint=S('Zähle ab der ersten Ziffer, die keine Null ist. Führende Nullen zählen nicht mit.','Zähle ab der ersten Ziffer, die nicht 0 ist. Nullen am Anfang zählen nicht.');
         }
       }else if(cur.tol!=null){
         /* Ablesen aus Diagrammen: feste Toleranz */
@@ -280,23 +294,25 @@ K.module=function(cfg){
            (gerundete Zwischenergebnisse, anderer Rechenweg) */
         ok=Math.abs(x-cur.a)<=Math.max(ulp*3.001,Math.abs(cur.a)*1e-9);
         if(!ok&&Math.abs(x-cur.a)<=Math.abs(cur.a)*0.01){
-          hint=nd<4?'Der Wert liegt nah dran, ist aber zu stark gerundet. Gib mindestens 4 signifikante Stellen an.'
-                   :'Knapp daneben. Prüfe die Rechnung – vielleicht ist ein Wert falsch abgeschrieben oder ein Zwischenergebnis sehr grob gerundet.';
+          hint=nd<4?S('Der Wert liegt nah dran, ist aber zu stark gerundet. Gib mindestens 4 signifikante Stellen an.','Fast richtig. Du hast zu stark gerundet. Schreibe 4 Stellen.')
+                   :S('Knapp daneben. Prüfe die Rechnung – vielleicht ist ein Wert falsch abgeschrieben oder ein Zwischenergebnis sehr grob gerundet.','Fast richtig. Prüfe die Zahlen noch einmal.');
         }
       }
       if(ok){
         state='solved';st.R[st.lvl]++;save();renderProg();cnt();
-        solution(`<strong>Richtig${hints?` (mit ${hints} Tipp${hints>1?'s':''})`:''}.</strong> Vergleiche mit deinem Rechenweg im Heft:`,'ok');
+        solution(`<strong>Richtig${hints?` (mit ${hints} Tipp${hints>1?'s':''})`:''}.</strong> ${S('Vergleiche mit deinem Rechenweg im Heft:','Vergleiche mit deinem Heft:')}`,'ok');
       }else{
-        let msg=hint||'Prüfe deinen Rechenweg Schritt für Schritt.';
+        let msg=hint||S('Prüfe deinen Rechenweg Schritt für Schritt.','Rechne noch einmal. Hol dir einen Tipp, wenn du nicht weiterkommst.');
         const r=x/cur.a;
         if(!hint&&cur.diag)msg=cur.diag(x)||msg;
         if(!hint&&!cur.sig&&!(cur.diag&&cur.diag(x))){
           for(const f of [10,100,1000,3600,60,24,1e4,1e5,1e6,1e7,1e8,1e9]){
             if(Math.abs(r/f-1)<0.02||Math.abs(r*f-1)<0.02){
-              msg=`Dein Ergebnis ist um den Faktor ${K.nf(f)} verschoben. Prüfe die Einheiten und die Umrechnungszahl`+(f>=1000&&[1000,1e4,1e5,1e6,1e7,1e8,1e9].includes(f)?' – oder hast du in der Taschenrechner-Anzeige die Zehnerpotenz (×10⁻³, E−3) übersehen?':'.');break}
+              const tr=f>=1000&&[1000,1e4,1e5,1e6,1e7,1e8,1e9].includes(f);
+              msg=simple?`Dein Ergebnis ist ${K.nf(f)}-mal zu groß oder zu klein. Prüfe die Einheiten.`+(tr?' Oder: Hast du am Taschenrechner die Zahl hinter ×10 übersehen?':'')
+                :`Dein Ergebnis ist um den Faktor ${K.nf(f)} verschoben. Prüfe die Einheiten und die Umrechnungszahl`+(tr?' – oder hast du in der Taschenrechner-Anzeige die Zehnerpotenz (×10⁻³, E−3) übersehen?':'.');break}
           }
-          if(Math.abs(r-1)<0.05&&Math.abs(r-1)>0.01)msg='Knapp daneben. Prüfe die Rechnung – und runde erst ganz am Ende.';
+          if(Math.abs(r-1)<0.05&&Math.abs(r-1)>0.01)msg=S('Knapp daneben. Prüfe die Rechnung – und runde erst ganz am Ende.','Fast richtig. Runde erst ganz am Ende.');
         }
         fb.hidden=false;fb.className='r-fb fb no';fb.innerHTML=`<div><strong>Noch nicht.</strong> ${msg}</div>`;
       }
@@ -307,7 +323,7 @@ K.module=function(cfg){
       $('.hints',rHost).appendChild(d);hints++;
       const hb=$('.r-hint',rHost);if(hints>=hl.length){hb.disabled=true;hb.textContent='Alle Tipps gezeigt'}else hb.textContent=`Tipp ${hints+1} zeigen`;
     };
-    $('.r-sol',rHost).onclick=()=>{state='shown';solution('<strong>Lösung.</strong> Diese Aufgabe zählt nicht – probiere gleich eine neue.','info')};
+    $('.r-sol',rHost).onclick=()=>{state='shown';solution(S('<strong>Lösung.</strong> Diese Aufgabe zählt nicht – probiere gleich eine neue.','<strong>Lösung.</strong> Diese Aufgabe zählt nicht. Mach gleich eine neue.'),'info')};
     $('.r-new',rHost).onclick=next;
     hooks.push(()=>{bag=[];next()});
   }
@@ -316,7 +332,7 @@ K.module=function(cfg){
   const pHost=$('[data-k="stand"]');
   function renderProg(){
     if(!pHost)return;
-    $('.prog',pHost).innerHTML=['B','S','V'].map(L=>{
+    $('.prog',pHost).innerHTML=(lock?[lock]:['B','S','V']).map(L=>{
       const tp=Math.min(st.T[L],need.T),rp=Math.min(st.R[L],need.R),ok=tp>=need.T&&rp>=need.R;
       return `<div class="prow" data-l="${L}"><div class="lvlc"><span class="lvl ${L}">${LV[L]}</span></div>
         <div class="meter">Trainer ${tp}/${need.T}<div class="trk"><div class="fill" style="width:${tp/need.T*100}%"></div></div></div>
@@ -325,22 +341,68 @@ K.module=function(cfg){
   }
   if(pHost){
     pHost.innerHTML=`<div class="prog"></div>
-      <p class="small">Gespeichert nur in diesem Browser. Alle Module auf einen Blick: <a href="fortschritt.html">Mein Fortschritt</a>. Geschaffte Stufen hakst du in deinem Lerntagebuch ab.</p>
+      <p class="small">${simple?`Das speichert nur dieser Browser. Alle Schritte siehst du auf der <a href="${cfg.standLink||'index.html'}">Startseite</a>. Wenn du fertig bist: Hake im Lerntagebuch ab (Spalte Basis).`
+        :`Gespeichert nur in diesem Browser. Alle Module auf einen Blick: <a href="${root}fortschritt.html">Mein Fortschritt</a>. Geschaffte Stufen hakst du in deinem Lerntagebuch ab.`}</p>
       <div class="confirm p-reset"></div>`;
     const resetUI=()=>{
       const box=$('.p-reset',pHost);
-      box.innerHTML='<button class="btn ghost">Lernstand dieses Moduls zurücksetzen</button>';
+      box.innerHTML=`<button class="btn ghost">${S('Lernstand dieses Moduls zurücksetzen','Alles auf null setzen')}</button>`;
       box.firstChild.onclick=()=>{
         box.innerHTML='<span>Wirklich alles auf null setzen?</span><button class="btn">Ja, zurücksetzen</button><button class="btn ghost">Abbrechen</button>';
         const bs=box.querySelectorAll('button');
-        bs[0].onclick=()=>{st.T={B:0,S:0,V:0};st.R={B:0,S:0,V:0};st.D={B:{},S:{},V:{}};save();renderProg();setLvl(st.lvl);resetUI()};
+        bs[0].onclick=()=>{if(lock){st.T[lock]=0;st.R[lock]=0;st.D[lock]={}}else{st.T={B:0,S:0,V:0};st.R={B:0,S:0,V:0};st.D={B:{},S:{},V:{}}}save();renderProg();setLvl(st.lvl);resetUI()};
         bs[1].onclick=resetUI;
       };
     };
     resetUI();renderProg();
   }
   setLvl(st.lvl);
+  if(simple){
+    const tb=$('[data-say-t]'),rb=$('[data-say-r]');
+    if(tb)K.sayBtn(tb,()=>[$('.t-prompt',tHost).innerText,$('.t-ask',tHost).innerText,'Antworten: '+[...tHost.querySelectorAll('.opt')].map(o=>o.innerText).join('. Oder: ')].join('. '));
+    if(rb)K.sayBtn(rb,()=>$('.r-title',rHost).innerText+'. '+$('.r-text',rHost).innerText);
+    K.initSay();
+  }
 };
+
+/* ---------- Vorlesen (Web Speech API, nur wenn der Browser es kann) ---------- */
+const UNITS=[['m³/h','Kubikmeter pro Stunde'],['m³/s','Kubikmeter pro Sekunde'],['m³/d','Kubikmeter pro Tag'],['L/s','Liter pro Sekunde'],['kg/m³','Kilogramm pro Kubikmeter'],['g/cm³','Gramm pro Kubikzentimeter'],['mg/L','Milligramm pro Liter'],['m/s','Meter pro Sekunde'],['€/kWh','Euro pro Kilowattstunde'],
+  ['mm²','Quadratmillimeter'],['cm²','Quadratzentimeter'],['dm²','Quadratdezimeter'],['m²','Quadratmeter'],['cm³','Kubikzentimeter'],['dm³','Kubikdezimeter'],['m³','Kubikmeter'],['kWh','Kilowattstunden'],['kW','Kilowatt'],['mA','Milliampere'],['mm','Millimeter'],['cm','Zentimeter'],['dm','Dezimeter'],['km','Kilometer'],['kg','Kilogramm'],['mL','Milliliter'],['min','Minuten'],
+  ['Ω','Ohm'],['m','Meter'],['L','Liter'],['g','Gramm'],['t','Tonnen'],['h','Stunden'],['s','Sekunden'],['W','Watt'],['V','Volt'],['A','Ampere'],['%','Prozent'],['€','Euro']];
+K.spoken=t=>{
+  t=t.replace(/\u00AD/g,'');
+  UNITS.forEach(([a,b])=>{t=t.split('\u202F'+a).map((p,i)=>i&&/^[a-zA-Zäöü³²]/.test(p)?'\u202F'+a+p:p).join(' '+b)});
+  return t.replace(/(\d)\s*:\s*(\d)/g,'$1 geteilt durch $2').replace(/[·×]/g,' mal ').replace(/≈/g,' ungefähr ').replace(/=/g,' ist gleich ').replace(/−/g,' minus ').replace(/→/g,', ').replace(/\s+/g,' ');
+};
+K.canSay=()=>'speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined';
+let sayCur=null;
+const SPK='<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+K.sayBtn=(btn,getText)=>{
+  if(!K.canSay()){btn.hidden=true;return}
+  btn.classList.add('say');btn.type='button';btn.innerHTML=SPK+'<span>Vorlesen</span>';
+  btn.onclick=()=>{
+    const ss=window.speechSynthesis;
+    if(sayCur===btn&&ss.speaking){ss.cancel();return}
+    ss.cancel();
+    const u=new SpeechSynthesisUtterance(K.spoken(getText()));u.lang='de-DE';u.rate=.9;
+    const v=ss.getVoices().find(v=>/^de/i.test(v.lang));if(v)u.voice=v;
+    const end=()=>{btn.querySelector('span').textContent='Vorlesen';btn.classList.remove('on');if(sayCur===btn)sayCur=null};
+    u.onend=end;u.onerror=end;
+    document.querySelectorAll('button.say.on').forEach(b=>{b.classList.remove('on');b.querySelector('span').textContent='Vorlesen'});
+    sayCur=btn;btn.classList.add('on');btn.querySelector('span').textContent='Stopp';ss.speak(u);
+  };
+};
+/* Vorlese-Knopf vor jedes Element mit class="sayable" (Text aus data-say oder dem sichtbaren Text) */
+K.initSay=()=>{
+  document.querySelectorAll('.sayable').forEach(el=>{
+    if(el.dataset.sayInit)return;el.dataset.sayInit=1;
+    const b=document.createElement('button');
+    /* Kästen (div): Knopf hinein, sonst (p, ul, ol) davor – so bleibt das Raster intakt */
+    if(el.tagName==='DIV')el.insertBefore(b,el.firstChild);else el.parentNode.insertBefore(b,el);
+    K.sayBtn(b,()=>el.dataset.say||el.innerText);
+  });
+};
+K.onlySay=()=>{if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',K.initSay);else K.initSay()};
 
 K.copyBtn=(btn,el)=>{
   btn.onclick=()=>{
@@ -356,8 +418,8 @@ const MARK={offen:'',angefangen:'',geschafft:' ✓'};
 K.overview=function(){
   K.MODS.forEach(m=>{
     const host=document.querySelector(`[data-mod="${m.id}"] .st`);if(!host)return;
-    if(m.rw){const n=(K.load('rw').solved||[]).length;
-      host.insertAdjacentHTML('beforeend',`<span class="pill ${n>=K.RW_NEED?'ok':n?'half':''}">Detektiv ${Math.min(n,K.RW_NEED)}/${K.RW_NEED}</span>`);return}
+    if(m.rw){const r=K.rwState();
+      host.insertAdjacentHTML('beforeend',`<span class="pill ${r.s==='geschafft'?'ok':r.s==='angefangen'?'half':''}">${r.s==='geschafft'?'geschafft ✓':'Detektiv '+Math.min(r.n,K.RW_NEED)+'/'+K.RW_NEED}</span>`);return}
     const st=K.load(m.id);
     ['B','S','V'].forEach(L=>{const s=K.status(st,L);
       host.insertAdjacentHTML('beforeend',`<span class="pill ${s==='geschafft'?'ok':s==='angefangen'?'half':''}" title="${LV[L]}: ${s}">${LV[L]}${MARK[s]}</span>`)});
@@ -370,19 +432,19 @@ K.progressPage=function(host){
   const chip=(s,d)=>`<span class="stat ${s}">${s}</span>${d&&(d.b||d.g)?`<span class="dates">${d.b?'begonnen '+K.dDE(d.b):''}${d.g?'<br>geschafft '+K.dDE(d.g):''}</span>`:''}`;
   let pfl=0,pflN=0,lv={B:0,S:0,V:0};
   const rows=K.MODS.map(m=>{
-    if(m.rw){const n=(K.load('rw').solved||[]).length,s=n>=K.RW_NEED?'geschafft':n?'angefangen':'offen';
-      pflN++;if(s==='geschafft')pfl++;
-      return `<tr><th scope="row"><a href="${m.href}">${m.nr} · ${esc(m.t)}</a>${m.p?' <span class="pill pflicht">Pflicht</span>':''}</th>
-        <td colspan="3" class="pcell">${chip(s)}<span class="dates">Rechenweg-Detektiv ${Math.min(n,K.RW_NEED)}/${K.RW_NEED}</span></td></tr>`}
+    if(m.rw){const r=K.rwState();
+      pflN++;if(r.s==='geschafft')pfl++;
+      return `<tr><th scope="row"><a href="${m.href}">${m.nr} · ${esc(m.t)}</a>${K.pflichtPill(m)}</th>
+        <td colspan="3" class="pcell">${chip(r.s)}<span class="dates">Rechenweg-Detektiv ${Math.min(r.n,K.RW_NEED)}/${K.RW_NEED}</span></td></tr>`}
     const st=Object.assign({T:{},R:{},D:{}},K.load(m.id));
-    if(m.p){pflN++;if(K.status(st,'S')==='geschafft'||K.status(st,'V')==='geschafft')pfl++}
-    return `<tr><th scope="row"><a href="${m.href}">${m.nr} · ${esc(m.t)}</a>${m.p?' <span class="pill pflicht">Pflicht</span>':''}</th>`+
+    if(m.p){pflN++;if(K.pflichtOk(m,st))pfl++}
+    return `<tr><th scope="row"><a href="${m.href}">${m.nr} · ${esc(m.t)}</a>${K.pflichtPill(m)}</th>`+
       ['B','S','V'].map(L=>{const s=K.status(st,L);if(s==='geschafft')lv[L]++;
         const meta=s==='angefangen'?`<span class="meta">Trainer ${Math.min(st.T[L]||0,K.NEED.T)}/${K.NEED.T}<br>Rechnen ${Math.min(st.R[L]||0,K.NEED.R)}/${K.NEED.R}</span>`:'';
         return `<td class="pcell">${chip(s,(st.D||{})[L])}${meta}</td>`}).join('')+'</tr>';
   }).join('');
   host.innerHTML=`<div class="kpis">
-      <div class="kpi"><span class="kv">${pfl}<small> / ${pflN}</small></span><span class="kl">Pflichtkern-Module geschafft<br>(Rechenweg + Standard oder Vertiefung)</span></div>
+      <div class="kpi"><span class="kv">${pfl}<small> / ${pflN}</small></span><span class="kl">Pflicht-Module geschafft<br>Pflicht: bis Standard · Pflicht (Basis): Basis reicht</span></div>
       <div class="kpi"><span class="kv">${lv.B+lv.S+lv.V}</span><span class="kl">Niveaustufen geschafft<br>Basis ${lv.B} · Standard ${lv.S} · Vertiefung ${lv.V}</span></div>
     </div>
     <div class="tscroll"><table class="ptable">

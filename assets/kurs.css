@@ -291,3 +291,42 @@ section>*,.grid2>*,.card>*{min-width:0}
 @media (min-width:700px){.labctl{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-auto-flow:column;grid-template-rows:auto auto}}
 #lab-out{font-size:1.05rem}
 .schema dt{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere}
+.pill.pflicht-b{border-color:var(--lb);color:var(--lb)}
+
+/* ---------- Einfache Version (Ordner einfach/) ---------- */
+body.einfach{font-size:19px;line-height:1.65}
+body.einfach p,body.einfach li{max-width:60ch}
+body.einfach header.top h1{font-size:2.2rem}
+body.einfach .btn{font-size:1.08rem;padding:11px 20px;min-height:46px}
+body.einfach .opt{font-size:1.1rem;min-height:52px}
+body.einfach input{font-size:1.2rem}
+body.einfach section{scroll-margin-top:70px}
+body.einfach .r-text{display:grid;gap:10px}
+.say{display:inline-flex;align-items:center;gap:6px;justify-self:start;width:max-content;border:1px solid var(--line);background:var(--surface);color:var(--navy);border-radius:999px;padding:4px 12px;font:600 .9rem var(--f-display);cursor:pointer;margin-bottom:6px}
+.say:hover{border-color:var(--blue)}
+.say.on{background:var(--blue-soft);border-color:var(--blue)}
+.einfach .kurz{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.einfach .kurz li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.einfach .kurz li b{color:var(--navy)}
+.woerter{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--lb);border-radius:4px;padding:14px 18px}
+.woerter h3{font-size:1.05rem;margin-bottom:8px}
+.woerter dl{display:grid;grid-template-columns:minmax(7rem,max-content) minmax(0,1fr);gap:6px 16px;margin:0}
+.woerter dt{font-weight:600;color:var(--navy)}
+.woerter dd{margin:0}
+@media (max-width:480px){.woerter dl{grid-template-columns:1fr;gap:0}.woerter dd{margin-bottom:8px}}
+.gw{display:grid;gap:4px;margin:0;padding:0;list-style:none}
+.gw li{padding-left:1.4em;text-indent:-1.4em}
+.gw li::before{content:"•";display:inline-block;width:1.4em;text-indent:0;color:var(--blue);font-weight:700}
+.satz{border:1px dashed var(--line);border-radius:6px;padding:8px 12px;color:var(--muted)}
+.satz b{color:var(--ink)}
+.pfad{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:pf}
+.pfad a{display:grid;grid-template-columns:3.2rem minmax(0,1fr) auto;gap:4px 14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink)}
+.pfad a:hover{border-color:var(--blue)}
+.pfad .nr{font:700 2.1rem/1 var(--f-display);color:var(--lb)}
+.pfad h3{font-size:1.2rem}
+.pfad .desc{font-size:.95rem;color:var(--muted)}
+@media (max-width:480px){.pfad a{grid-template-columns:2.6rem minmax(0,1fr)}.pfad .st{grid-column:2}}
+body.einfach header.top h1{hyphens:auto;overflow-wrap:break-word}
+@media (max-width:480px){body.einfach header.top h1{font-size:1.75rem}body.einfach .modnum{font-size:4.2rem}}
+header.top .say{grid-column:1/-1;margin:10px 0 -6px}
+.gw li *{text-indent:0}

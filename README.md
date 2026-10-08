@@ -26,6 +26,7 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 | `modul-08.html` | Modul 8: Diagramme lesen (Ganglinie, Kennlinien, Betriebspunkt, Steigung; Ablese-Aufgaben mit Toleranz) |
 | `modul-09.html` | Modul 9: Die Berufsformeln (Formelübersicht je Bereich, Formel finden, mehrstufige Aufgaben) |
 | `modul-10.html` | Modul 10: Funktionen – Vertiefung (linear/4–20 mA, Anlagenkennlinie mit Kennlinien-Labor, Halbwertszeit, pH) |
+| `einfach/` | **Mathe einfach**: reduzierte Version in einfacher Sprache (Start + Schritt 0–7), feste Stufe Basis, Vorlese-Funktion |
 | `material/lerntagebuch-mathe-aufbaukurs.docx` | Lerntagebuch zum Ausdrucken: Übersicht zum Abhaken, 10 Terminseiten mit Reflexion |
 | `assets/kurs.css` | Gemeinsames Layout (hell/dunkel) |
 | `assets/kurs.js` | Gemeinsame Bausteine: Niveau-Wahl, Schritt-für-Schritt, Trainer, Aufgabengenerator, Lernstand |
@@ -44,6 +45,16 @@ Lokal testen: `index.html` einfach im Browser öffnen.
 Der Fortschritt wird nur im `localStorage` des Browsers gespeichert (Schlüssel `mak-…`).
 Alle Repos eines GitHub-Kontos teilen sich dieselbe Domain – das Präfix `mak-` verhindert Überschneidungen mit anderen Kursseiten.
 Eine Stufe gilt als geschafft bei 5 Trainer-Aufgaben (erster Versuch richtig) und 3 gelösten Rechenaufgaben (ohne Lösungsanzeige).
+
+## Mathe einfach (Ordner `einfach/`)
+
+Für die schwächsten Lernenden, auch mit Sprachschwierigkeiten. Der Link wird gezielt ausgegeben (auf der Startseite nur in den Hinweisen für die Lernbegleitung).
+
+- Linearer Pfad: Schritt 0 Rechenweg, 1 Rechnen/Runden/Taschenrechner, 2 Einheiten, 3 Dreisatz und Prozent, 4 Umstellen (mit Formeldreieck), 5 Mit Formeln rechnen, 6 Flächen, 7 Volumen und Masse.
+- Kurze Sätze, Wörter-Box je Seite, Aufgaben als Liste („Das weißt du“, „Frage“, Satzanfang für den Antwortsatz), einfache Rückmeldungen.
+- Vorlesen über die Sprachausgabe des Browsers (Web Speech API, deutsche Stimme, Einheiten werden ausgesprochen). Fehlt die Funktion im Browser, werden die Knöpfe ausgeblendet.
+- Fortschritt zählt in dieselben Module des normalen Kurses, Stufe Basis (Schritt 0 unter `mak-rwe`; zählt als „Rechenweg geschafft“). Wer fertig ist, macht im normalen Kurs mit Standard weiter.
+- Technik: dieselbe Engine mit `K.module({lock:'B', simple:true, root:'../'})`, Helfer in `einfach/einfach.js` (`K.E.tx`, `K.E.T`, `K.E.run`). Elemente mit `class="sayable"` bekommen einen Vorlese-Knopf (Text aus `data-say` oder dem sichtbaren Text).
 
 ## Neues Modul anlegen
 

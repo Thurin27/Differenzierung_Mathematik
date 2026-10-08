@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Schritt 7: Volumen und Masse – Mathe einfach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="../assets/kurs.css">
+</head>
+<body class="einfach">
+<header class="site"><div class="wrap sitebar">
+  <a class="brand" href="index.html">Mathe einfach <span>Umwelttechnik</span></a>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="schritt-0.html" title="Schritt 0: Der Rechenweg">0</a><a href="schritt-1.html" title="Schritt 1: Rechnen, Runden, Taschenrechner">1</a><a href="schritt-2.html" title="Schritt 2: Einheiten umrechnen">2</a><a href="schritt-3.html" title="Schritt 3: Dreisatz und Prozent">3</a><a href="schritt-4.html" title="Schritt 4: Formeln umstellen">4</a><a href="schritt-5.html" title="Schritt 5: Mit Formeln rechnen">5</a><a href="schritt-6.html" title="Schritt 6: Flächen">6</a><a href="schritt-7.html" aria-current="page" title="Schritt 7: Volumen und Masse">7</a><a href="../index.html">Normaler Kurs</a></nav>
+</div></header>
+
+<main class="wrap">
+<header class="top">
+  <div class="modnum" aria-hidden="true">7</div>
+  <div class="eyebrow">Mathe einfach · Schritt 7</div>
+  <h1>Volumen und Masse</h1>
+  <p class="ctx sayable">Wie viel Wasser passt in ein Becken? Und wie schwer ist die Füllung? Das rechnest du hier.</p>
+</header>
+
+<div class="bar">
+  <nav aria-label="Abschnitte"><a href="#ziel">Ziel</a><a href="#woerter">Wörter</a><a href="#koerper">Körper</a><a href="#masse">Masse</a><a href="#beispiel">Beispiel</a><a href="#trainer">Üben</a><a href="#rechnen">Rechnen</a><a href="#stand">Stand</a></nav>
+</div>
+
+<section id="ziel">
+  <h2>Das lernst du hier</h2>
+  <ul class="kurz sayable"><li>Ich rechne das Volumen von einem Quader aus.</li><li>Ich rechne das Volumen von einem Zylinder aus.</li><li>Ich rechne aus dem Volumen die Masse aus.</li></ul>
+</section>
+
+<section id="woerter">
+  <div class="woerter sayable"><h3>Wichtige Wörter</h3><dl><dt>das Volumen <i>V</i></dt><dd>wie viel hineinpasst. In Kubikmeter (m³)</dd><dt>der Quader</dt><dd>ein Körper wie ein Schuhkarton oder ein eckiges Becken</dd><dt>der Zylinder</dt><dd>ein Körper wie eine Dose, ein Rohr oder ein rundes Becken</dd><dt>die Grundfläche</dt><dd>die Fläche unten, auf der der Körper steht</dd><dt>die Höhe <i>h</i></dt><dd>bei Becken oft: die Wassertiefe</dd><dt>die Masse <i>m</i></dt><dd>wie schwer etwas ist. In kg oder t</dd><dt>die Dichte <i>ρ</i></dt><dd>Wasser: 1000 kg/m³ – also wiegt 1 m³ Wasser 1 t</dd></dl></div>
+</section>
+
+<section id="koerper">
+  <h2>Volumen = Grundfläche · Höhe</h2>
+  <div class="grid2">
+    <div class="box sayable" data-say="Quader. V ist gleich l mal b mal h. Länge mal Breite mal Höhe."><h3>Quader</h3>
+      <svg viewBox="0 0 220 130" role="img" aria-label="Quader mit Länge l, Breite b und Höhe h" style="max-width:220px"><path d="M20 50 L150 50 L150 115 L20 115 Z" fill="var(--blue-soft)" stroke="var(--navy)" stroke-width="2"/><path d="M20 50 L60 20 L190 20 L150 50 M190 20 L190 85 L150 115" fill="none" stroke="var(--navy)" stroke-width="2"/><text x="85" y="128" text-anchor="middle" font-size="16" font-style="italic" fill="var(--navy)">l</text><text x="178" y="112" font-size="16" font-style="italic" fill="var(--navy)">b</text><text x="6" y="88" font-size="16" font-style="italic" fill="var(--navy)">h</text></svg>
+      <p class="f"><i>V</i> = <i>l</i> · <i>b</i> · <i>h</i></p></div>
+    <div class="box sayable" data-say="Zylinder. V ist gleich Pi mal d hoch 2 durch 4, mal h. Erst die Kreisfläche, dann mal die Höhe."><h3>Zylinder</h3>
+      <svg viewBox="0 0 220 130" role="img" aria-label="Zylinder mit Durchmesser d und Höhe h" style="max-width:220px"><path d="M50 25 L50 105 A60 14 0 0 0 170 105 L170 25" fill="var(--blue-soft)" stroke="var(--navy)" stroke-width="2"/><ellipse cx="110" cy="25" rx="60" ry="14" fill="var(--blue-soft)" stroke="var(--navy)" stroke-width="2"/><line x1="50" y1="25" x2="170" y2="25" stroke="var(--navy)" stroke-dasharray="4 3"/><text x="110" y="19" text-anchor="middle" font-size="16" font-style="italic" fill="var(--navy)">d</text><text x="178" y="70" font-size="16" font-style="italic" fill="var(--navy)">h</text></svg>
+      <p class="f"><i>V</i> = <span class="fr"><span>π · <i>d</i>²</span><span>4</span></span> · <i>h</i></p><p class="small">Erst die Kreisfläche, dann mal die Höhe.</p></div>
+  </div>
+  <p class="small">Volumen hat die Einheit <b>m³</b>. Denn: m · m · m = m³.</p>
+</section>
+
+<section id="masse">
+  <h2>Vom Volumen zur Masse</h2>
+  <div class="box merke sayable" data-say="Masse ist gleich Dichte mal Volumen. m ist gleich rho mal V. Wasser hat die Dichte 1000 Kilogramm pro Kubikmeter. 1 Kubikmeter Wasser wiegt 1000 Kilogramm, also 1 Tonne.">
+    <p class="f"><i>m</i> = <i>ρ</i> · <i>V</i></p>
+    <p>Wasser: <i>ρ</i> = 1000 kg/m³. Also: 1 m³ Wasser wiegt 1000 kg = 1 t.</p>
+  </div>
+</section>
+
+<section id="beispiel">
+  <h2>Beispiel</h2>
+  <p>Klicke auf <strong>Nächster Schritt</strong>. So siehst du die Lösung Stück für Stück.</p>
+  <div data-k="stepper"></div>
+</section>
+
+<section id="trainer">
+  <h2>Üben</h2>
+  <p class="sayable">Klicke auf die richtige Antwort. Du brauchst 5 richtige Antworten. Sie zählen nur, wenn du gleich beim ersten Mal richtig klickst.</p>
+  <div data-k="trainer"></div>
+</section>
+
+<section id="rechnen">
+  <h2>Rechnen</h2>
+  <p class="sayable">Löse 3 Aufgaben. Schreibe den Rechenweg ins Heft. Dann gib das Ergebnis ein. Du kannst Tipps ansehen.</p>
+  <div data-k="rechnen"></div>
+</section>
+
+<section id="stand">
+  <h2>Mein Stand</h2>
+  <p>Hast du 5 richtige Antworten beim Üben und 3 gelöste Aufgaben? Dann ist der Schritt geschafft.</p>
+  <div data-k="stand"></div>
+</section>
+
+<nav class="weiter" aria-label="Weiter"><a href="schritt-6.html">← Schritt 6: Flächen</a><a href="index.html">→ Zur Startseite: alles geschafft?</a></nav>
+</main>
+<footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Mathe-Aufbaukurs, einfache Version</div></footer>
+
+<script src="../assets/kurs.js"></script>
+<script src="einfach.js"></script>
+<script>
+(function(){
+const {I,fr,F,M,MI,PL,EQ,u,nf,fmt,rnd,res,pick}=K;
+const {tx,T}=K.E;
+const z=(x,un)=>`${nf(x)}${u(un)}`;
+
+const V=I('V'),l=I('l'),b=I('b'),h=I('h'),d=I('d'),m=I('m'),rho=I('ρ');
+const examples={B:{tab:'Becken',intro:'Ein Becken ist ein Quader: 20 m lang, 8 m breit, das Wasser ist 3 m tief. Wie viel Wasser ist im Becken?',s:[
+  {e:`${F(l,EQ,z(20,'m'))};&nbsp; ${F(b,EQ,z(8,'m'))};&nbsp; ${F(h,EQ,z(3,'m'))}`,o:'Gegeben',w:'Länge, Breite und Höhe. Die Höhe ist hier die Wassertiefe.'},
+  {e:F(V,EQ,l,M,b,M,h),o:'Formel',w:'Die Formel für den Quader.'},
+  {e:F(V,EQ,z(20,'m'),M,z(8,'m'),M,z(3,'m')),o:'Einsetzen',w:'Setze die Zahlen mit Einheit ein.'},
+  {e:F(V,EQ,res(480,0,'m³')),o:'Rechnung',w:'20 · 8 · 3 = 480. Meter mal Meter mal Meter gibt m³.'},
+  {e:'Im Becken sind 480 m³ Wasser.',o:'Antwort',w:'Ganzer Satz mit Zahl und Einheit.'}]}};
+const trainer=[
+ T('Formel','Welche Formel gilt für einen Quader?',F(V,EQ,l,M,b,M,h),[F(V,EQ,l,PL,b,PL,h),F(V,EQ,l,M,b),F(V,EQ,fr(l+M+b+M+h,'2'))],'Länge mal Breite mal Höhe.'),
+ T('Formel','Welche Formel gilt für einen Zylinder?',F(V,EQ,fr('π'+M+d+'²','4'),M,h),[F(V,EQ,'π',M,d,M,h),F(V,EQ,fr('π'+M+d+'²','4')),F(V,EQ,d,'²',M,h)],'Kreisfläche mal Höhe.'),
+ T('Einheit','Welche Einheit hat ein Volumen?','m³',['m²','m','kg'],'Meter mal Meter mal Meter.'),
+ T('Rechnen','Quader: 5 m · 4 m · 2 m = ?','40 m³',['11 m³','20 m³','40 m²'],'5 · 4 = 20. 20 · 2 = 40.'),
+ T('Masse','Wie schwer ist 1 m³ Wasser?','1 t (1000 kg)',['1 kg','100 kg','10 t'],'Dichte von Wasser: 1000 kg/m³.'),
+ T('Masse','Im Becken sind 50 m³ Wasser. Wie schwer ist das Wasser?','50 t',['50 kg','5 t','500 t'],'1 m³ wiegt 1 t. 50 m³ wiegen 50 t.'),
+ T('Formel','Welche Formel gibt die Masse?',F(m,EQ,rho,M,V),[F(m,EQ,rho,PL,V),F(m,EQ,fr(rho,V)),F(m,EQ,fr(V,rho))],'Dichte mal Volumen.'),
+ T('Körper','Ein rundes Becken ist ein …','Zylinder',['Quader','Kreis','Dreieck'],'Ein Kreis ist eine Fläche. Ein Zylinder ist ein Körper.'),
+ T('Körper','Ein Container ist ein …','Quader',['Zylinder','Rechteck','Kreis'],'Ein Rechteck ist eine Fläche. Ein Quader ist ein Körper.'),
+ T('Volumen','Volumen = Grundfläche · …','Höhe',['Breite','Durchmesser','Dichte'],'Die Grundfläche wird mit der Höhe malgenommen.')
+];
+const tasks=[
+ {L:'B',g(){const ll=rnd(15,40,1),bb=rnd(5,12,1),hh=rnd(2,4.5,.5),x=ll*bb*hh;return{tag:'Abwasser',ti:'Eckiges Becken',
+   tx:tx('Ein Becken in der Kläranlage Schwierbach ist ein Quader.',[['Länge',F(l,EQ,z(ll,'m'))],['Breite',F(b,EQ,z(bb,'m'))],['Wassertiefe',F(h,EQ,z(hh,'m'))]],'Wie viel Wasser ist im Becken?','Im Becken sind … m³ Wasser.'),
+   x:V,un:'m³',a:x,exact:true,geg:`${F(l,EQ,z(ll,'m'))};&nbsp; ${F(b,EQ,z(bb,'m'))};&nbsp; ${F(h,EQ,z(hh,'m'))}`,steps:[['Körper','Quader'],['Formel',F(V,EQ,l,M,b,M,h)]],ein:F(V,EQ,z(ll,'m'),M,z(bb,'m'),M,z(hh,'m')),
+   s:F(V,EQ,z(ll,'m'),M,z(bb,'m'),M,z(hh,'m'),EQ,res(x,0,'m³')),satz:`Im Becken sind ${fmt(x)} m³ Wasser.`}}},
+ {L:'B',g(){const dd=rnd(6,20,1),hh=rnd(2,5,.5),x=Math.PI*dd*dd/4*hh;return{tag:'Wasserversorgung',ti:'Runder Wasserbehälter',
+   tx:tx('Ein Wasserbehälter im Wasserwerk Schwierbach ist ein Zylinder.',[['Durchmesser',F(d,EQ,z(dd,'m'))],['Wasserhöhe',F(h,EQ,z(hh,'m'))]],'Wie viel Wasser ist im Behälter?','Im Behälter sind … m³ Wasser.'),
+   x:V,un:'m³',a:x,geg:`${F(d,EQ,z(dd,'m'))};&nbsp; ${F(h,EQ,z(hh,'m'))}`,steps:[['Körper','Zylinder'],['Formel',F(V,EQ,fr('π'+M+d+'²','4'),M,h)]],ein:F(V,EQ,fr('π'+M+'('+z(dd,'m')+')²','4'),M,z(hh,'m')),
+   s:F(V,EQ,fr('π'+M+z(dd*dd,'m²'),'4'),M,z(hh,'m'),EQ,res(x,0,'m³')),satz:`Im Behälter sind ${fmt(x)} m³ Wasser.`,
+   diag:x0=>Math.abs(x0-Math.PI*dd*dd/4)<0.01*x0?'Du hast nur die Kreisfläche. Rechne noch mal die Höhe.':Math.abs(x0-Math.PI*dd*dd*hh)<0.01*x0?'Hast du durch 4 geteilt?':''}}},
+ {L:'B',g(){const vv=rnd(20,300,5),x=vv;return{tag:'Abwasser',ti:'Masse vom Wasser',
+   tx:tx('In einem Becken der Kläranlage Schwierbach steht Wasser.',[['Volumen',F(V,EQ,z(vv,'m³'))],['Dichte',F(rho,EQ,z(1000,'kg/m³'),EQ,z(1,'t/m³'))]],'Wie viele Tonnen wiegt das Wasser?','Das Wasser wiegt … t.'),
+   x:m,un:'t',a:x,exact:true,geg:`${F(V,EQ,z(vv,'m³'))};&nbsp; ${F(rho,EQ,z(1,'t/m³'))}`,steps:[['Formel',F(m,EQ,rho,M,V)],['Tipp','1 m³ Wasser wiegt 1 t']],ein:F(m,EQ,z(1,'t/m³'),M,z(vv,'m³')),
+   s:F(m,EQ,z(1,'t/m³'),M,z(vv,'m³'),EQ,res(x,0,'t')),satz:`Das Wasser wiegt ${fmt(x)} t.`,
+   diag:x0=>Math.abs(x0-vv*1000)<1e-6?'Das ist die Masse in kg. Gefragt ist t: geteilt durch 1000.':''}}},
+ {L:'B',g(){const ll=rnd(4,7,.5),bb=rnd(2,2.5,.5),hh=rnd(1,2,.5),r=pick([0.6,0.8,1.5]),vv=ll*bb*hh,x=vv*r;return{tag:'Kreislauf & Abfall',ti:'Container mit Bauschutt',
+   tx:tx('Ein Container im Abfallzentrum Schwierbach ist ein Quader. Er ist voll.',[['Länge',F(l,EQ,z(ll,'m'))],['Breite',F(b,EQ,z(bb,'m'))],['Höhe',F(h,EQ,z(hh,'m'))],['Dichte der Füllung',F(rho,EQ,z(r,'t/m³'))]],'Wie schwer ist die Füllung? Rechne erst das Volumen aus.','Die Füllung wiegt … t.'),
+   x:m,un:'t',a:x,geg:`${F(l,EQ,z(ll,'m'))};&nbsp; ${F(b,EQ,z(bb,'m'))};&nbsp; ${F(h,EQ,z(hh,'m'))};&nbsp; ${F(rho,EQ,z(r,'t/m³'))}`,steps:[['Volumen',F(V,EQ,l,M,b,M,h,EQ,z(vv,'m³'))],['Masse',F(m,EQ,rho,M,V)]],ein:F(m,EQ,z(r,'t/m³'),M,z(vv,'m³')),
+   s:`${F(V,EQ,z(ll,'m'),M,z(bb,'m'),M,z(hh,'m'),EQ,z(vv,'m³'))}<br>${F(m,EQ,z(r,'t/m³'),M,z(vv,'m³'),EQ,res(x,0,'t'))}`,satz:`Die Füllung wiegt ${fmt(x)} t.`,
+   diag:x0=>Math.abs(x0-vv)<1e-6?'Das ist das Volumen. Rechne noch mal die Dichte.':''}}}
+];
+K.E.run({id:'m7',nr:7,examples,trainer,tasks});
+})();
+</script>
+</body>
+</html>
