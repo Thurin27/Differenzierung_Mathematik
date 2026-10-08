@@ -4,6 +4,8 @@ Selbstlernkurs (Differenzierungsfach, ca. 20 UStd.) für die Unterstufen der Umw
 Hans-Schwier-Berufskolleg Gelsenkirchen, Fachbereich Umweltschutztechnik.
 
 Alle Aufgaben spielen im fiktiven Schwierbach (Kläranlage Schwierbach mit Pumpwerk Talstraße, Abfall- & Energiezentrum Schwierbach, Wasserwerk, Kanalnetz) – konsistent mit den PLS-Simulationen.
+Anwendungsbereiche (Etikett an jeder Aufgabe): Abwasser, Wasserversorgung, Kreislauf & Abfall, Rohrleitungsnetze, Elektrotechnik.
+Formelzeichen Elektrotechnik: U, R, I (Stromstärke; im Code `Ic`, weil `I` der Formel-Helfer ist), P, ρ (Ω·mm²/m), cos φ. Gefälle hat das Zeichen J.
 
 Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google Fonts.
 

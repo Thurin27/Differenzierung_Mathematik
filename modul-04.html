@@ -103,11 +103,19 @@
 <script>
 (function(){
 const {I,fr,sq,F,M,MI,PL,EQ,u,q,nf,fmt,rnd,res,sqr,umstell}=K;
+const U=I('U'),R=I('R'),Ic=I('I'),cosphi='cos&#8239;'+I('φ'),W3='√3';const rhoE=I('ρ');
 const Q=I('Q'),A=I('A'),v=I('v'),t=I('t'),V=I('V'),rho=I('ρ'),m=I('m'),B=I('B'),c=I('c'),Ig=I('J'),dh='Δ'+I('h'),l=I('l'),b=I('b'),h=I('h'),a=I('a'),eta=I('η'),pi='π',d=I('d'),D=I('D'),P=I('P'),g=I('g'),H=I('H'),r=I('r');
 const A1=I('A','1'),A2=I('A','2'),v1=I('v','1'),v2=I('v','2'),czu=I('c','zu'),cab=I('c','ab'),V1=I('V','1'),V2=I('V','2'),c1=I('c','1'),c2=I('c','2'),cm=I('c','m');
 
 /* ---------- Trainer ---------- */
 const trainer=[
+ umstell('B','Ohmsches Gesetz',U,R+M+Ic,Ic,fr(U,R),[U+M+R,fr(R,U),U+MI+R],`${Ic} ist mit ${R} malgenommen. Beide Seiten durch ${R} teilen.`),
+ umstell('B','Ohmsches Gesetz',U,R+M+Ic,R,fr(U,Ic),[U+M+Ic,fr(Ic,U),U+MI+Ic],`${R} ist mit ${Ic} malgenommen. Beide Seiten durch ${Ic} teilen.`),
+ umstell('B','Elektrische Leistung',P,U+M+Ic,Ic,fr(P,U),[P+M+U,fr(U,P),P+MI+U],`${Ic} ist mit ${U} malgenommen. Beide Seiten durch ${U} teilen.`),
+ umstell('S','Leitungswiderstand',R,fr(rhoE+M+l,A),A,fr(rhoE+M+l,R),[fr(R+M+l,rhoE),R+M+rhoE+M+l,fr(R,rhoE+M+l)],`Erst mal ${A}, dann durch ${R}.`),
+ umstell('S','Leitungswiderstand',R,fr(rhoE+M+l,A),l,fr(R+M+A,rhoE),[fr(R+M+rhoE,A),fr(rhoE,R+M+A),R+M+A+M+rhoE],`Erst mal ${A}, dann durch ${rhoE}.`),
+ umstell('V','Verlustleistung',P,sqr(Ic)+M+R,Ic,sq(fr(P,R)),[fr(P,R),sq(P+M+R),fr(sq(P),R)],`Erst durch ${R}, dann Wurzel ziehen.`),
+ umstell('V','Drehstromleistung',P,W3+M+U+M+Ic+M+cosphi,Ic,fr(P,W3+M+U+M+cosphi),[fr(P+M+W3,U+M+cosphi),P+MI+W3+M+U+M+cosphi,fr(W3+M+U+M+cosphi,P)],`Durch alle Faktoren teilen, die an ${Ic} hängen: ${W3}, ${U} und ${cosphi}.`),
  umstell('B','Durchfluss',Q,v+M+A,v,fr(Q,A),[Q+M+A,fr(A,Q),Q+MI+A],`${A} ist mit ${v} malgenommen. Gegenoperation: beide Seiten durch ${A} teilen.`),
  umstell('B','Durchfluss',Q,v+M+A,A,fr(Q,v),[fr(v,Q),Q+M+v,Q+MI+v],`${v} ist mit ${A} malgenommen. Beide Seiten durch ${v} teilen.`),
  umstell('B','Durchfluss und Zeit',Q,fr(V,t),V,Q+M+t,[fr(Q,t),fr(t,Q),Q+PL+t],`${V} wird durch ${t} geteilt. Gegenoperation: beide Seiten mal ${t}.`),
@@ -136,6 +144,16 @@ const trainer=[
    Jede Aufgabe liefert: geg (Gegeben), steps [[Formel],[Umstellung]], ein (eingesetzt), s (Rechnung), satz (Antwort) */
 const task=o=>Object.assign({steps:[['Formel',o.f],['Umstellung',o.um]]},o);
 const tasks=[
+ {L:'B',g(){const R0=rnd(20,80,.5),U0=230,x=U0/R0;return task({tag:'Elektrotechnik',ti:'Frostschutzheizung im Pumpenschacht',tx:`Ein Heizwiderstand hält den Pumpenschacht im Pumpwerk Talstraße frostfrei. Er hat ${R} = ${q(R0,'Ω')} und liegt an ${U} = ${q(U0,'V')}. Welcher Strom ${Ic} fließt?`,x:Ic,un:'A',a:x,
+   geg:`${F(U,EQ,q(U0,'V'))};&nbsp; ${F(R,EQ,q(R0,'Ω'))}`,f:F(U,EQ,R,M,Ic),um:F(Ic,EQ,fr(U,R)),ein:F(Ic,EQ,fr(q(U0,'V'),q(R0,'Ω'))),s:F(Ic,EQ,fr(q(U0,'V'),q(R0,'Ω')),EQ,res(x,0,'A')),satz:`Es fließt ein Strom von ${fmt(x)} A.`})}},
+ {L:'B',g(){const P0=rnd(550,3000,50),U0=230,x=P0/U0;return task({tag:'Elektrotechnik',ti:'Tauchpumpe im Pumpensumpf',tx:`Eine Tauchpumpe für den Pumpensumpf hat laut Typenschild ${P} = ${q(P0,'W')} und wird an ${U} = ${q(U0,'V')} betrieben. Welchen Strom ${Ic} nimmt sie auf?`,x:Ic,un:'A',a:x,
+   geg:`${F(P,EQ,q(P0,'W'))};&nbsp; ${F(U,EQ,q(U0,'V'))}`,f:F(P,EQ,U,M,Ic),um:F(Ic,EQ,fr(P,U)),ein:F(Ic,EQ,fr(q(P0,'W'),q(U0,'V'))),s:F(Ic,EQ,fr(q(P0,'W'),q(U0,'V')),EQ,res(x,0,'A')),satz:`Die Pumpe nimmt ${fmt(x)} A auf.`})}},
+ {L:'S',g(){const A0=K.pick([1.5,2.5,4,6,10]),l0=rnd(20,180,5),rh=0.0178,R0=+(rh*l0/A0).toFixed(3),x=R0*A0/rh;return task({tag:'Elektrotechnik',ti:'Kabellänge aus dem Widerstand',tx:`Bei der Fehlersuche misst eine Elektrofachkraft im Abfallzentrum Schwierbach den Widerstand eines Kupferkabels (Hin- und Rückleiter zusammen): ${R} = ${q(R0,'Ω')}. Der Querschnitt beträgt ${A} = ${q(A0,'mm²')}, der spezifische Widerstand von Kupfer ${rhoE} = ${q(rh,'Ω·mm²/m')}. Wie lang ist die Leitung?`,x:l,un:'m',a:x,
+   geg:`${F(R,EQ,q(R0,'Ω'))};&nbsp; ${F(A,EQ,q(A0,'mm²'))};&nbsp; ${F(rhoE,EQ,q(rh,'Ω·mm²/m'))}`,f:F(R,EQ,fr(rhoE+M+l,A)),um:F(l,EQ,fr(R+M+A,rhoE)),ein:F(l,EQ,fr(q(R0,'Ω')+M+q(A0,'mm²'),q(rh,'Ω·mm²/m'))),s:F(l,EQ,fr(q(R0,'Ω')+M+q(A0,'mm²'),q(rh,'Ω·mm²/m')),EQ,res(x,0,'m')),satz:`Die Leitung ist ${fmt(x)} m lang (Hin- und Rückleiter).`})}},
+ {L:'V',g(){const PkW=rnd(5.5,55,.5),U0=400,cp=rnd(.8,.9,.01),x=PkW*1000/(Math.sqrt(3)*U0*cp);return task({tag:'Elektrotechnik',ti:'Strom eines Drehstrommotors',tx:`Der Drehstrommotor eines Gebläses in der Kläranlage Schwierbach nimmt ${P} = ${q(PkW,'kW')} elektrische Leistung auf. Die Spannung beträgt ${U} = ${q(U0,'V')}, der Leistungsfaktor ${cosphi} = ${nf(cp)}. Welcher Strom ${Ic} fließt in jedem Außenleiter?`,x:Ic,un:'A',a:x,
+   geg:`${F(P,EQ,q(PkW,'kW'),EQ,q(PkW*1000,'W'))};&nbsp; ${F(U,EQ,q(U0,'V'))};&nbsp; ${F(cosphi,EQ,nf(cp))}`,f:F(P,EQ,W3,M,U,M,Ic,M,cosphi),um:F(Ic,EQ,fr(P,W3+M+U+M+cosphi)),ein:F(Ic,EQ,fr(q(PkW*1000,'W'),'√3 · '+q(U0,'V')+M+nf(cp))),s:F(Ic,EQ,fr(q(PkW*1000,'W'),'√3 · '+q(U0,'V')+M+nf(cp)),EQ,res(x,0,'A')),satz:`In jedem Außenleiter fließen ${fmt(x)} A.`})}},
+ {L:'V',g(){const R0=rnd(.12,.6,.01),P0=rnd(40,250,5),x=Math.sqrt(P0/R0);return task({tag:'Elektrotechnik',ti:'Höchster Strom in der Zuleitung',tx:`In der Zuleitung zur Brunnenpumpe des Wasserwerks Schwierbach (${R} = ${q(R0,'Ω')}) sollen höchstens ${P} = ${q(P0,'W')} Verlustleistung entstehen. Welcher Strom ${Ic} ist höchstens zulässig?`,x:Ic,un:'A',a:x,
+   geg:`${F(R,EQ,q(R0,'Ω'))};&nbsp; ${F(P,EQ,q(P0,'W'))}`,f:F(P,EQ,sqr(Ic),M,R),um:F(Ic,EQ,sq(fr(P,R))),ein:F(Ic,EQ,sq(fr(q(P0,'W'),q(R0,'Ω')))),s:F(Ic,EQ,sq(fr(q(P0,'W'),q(R0,'Ω'))),EQ,res(x,0,'A')),satz:`Es dürfen höchstens ${fmt(x)} A fließen.`})}},
  {L:'B',g(){const A0=rnd(.25,.8,.05),Q0=rnd(.15,.9,.05),x=Q0/A0;return task({tag:'Abwasser',ti:'Zulaufkanal der Kläranlage Schwierbach',tx:`Im Zulaufkanal fließen ${Q} = ${q(Q0,'m³/s')}. Der durchflossene Querschnitt beträgt ${A} = ${q(A0,'m²')}. Berechne die Fließgeschwindigkeit ${v}.`,x:v,un:'m/s',a:x,dc:2,
    geg:`${F(Q,EQ,q(Q0,'m³/s'))};&nbsp; ${F(A,EQ,q(A0,'m²'))}`,f:F(Q,EQ,v,M,A),um:F(v,EQ,fr(Q,A)),ein:F(v,EQ,fr(q(Q0,'m³/s'),q(A0,'m²'))),s:F(v,EQ,fr(q(Q0,'m³/s'),q(A0,'m²')),EQ,res(x,2,'m/s')),satz:`Das Abwasser fließt mit ${fmt(x,2)} m/s.`})}},
  {L:'B',g(){const V0=rnd(600,1800,50),Q0=rnd(300,900,25),x=V0/Q0;return task({tag:'Abwasser',ti:'Verweilzeit im Vorklärbecken',tx:`Das Vorklärbecken der Kläranlage Schwierbach hat ein Volumen von ${V} = ${q(V0,'m³')}. Es fließen ${Q} = ${q(Q0,'m³/h')} Abwasser hindurch. Wie lange bleibt das Abwasser im Becken (Verweilzeit ${t})?`,x:t,un:'h',a:x,dc:2,

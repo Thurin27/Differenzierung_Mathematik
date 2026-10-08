@@ -141,6 +141,9 @@ const ds=(rows)=>`<span style="display:inline-grid;grid-template-columns:auto au
 
 const T=(L,n,prompt,ok,w,h,ask)=>({L,n,prompt,ask:ask||'Welche Antwort ist richtig?',ok,w,h});
 const trainer=[
+ T('B','Elektrotechnik','Ein Gerät verbraucht in 2 h 3 kWh. Wie viel in 5 h?','7,5 kWh',['6 kWh','15 kWh','1,2 kWh'],'1 h: 1,5 kWh. Mal 5.'),
+ T('S','Elektrotechnik','Ein Motor nimmt 10 kW auf und gibt 8,5 kW an der Welle ab. Wirkungsgrad?','85 %',['15 %','118 %','8,5 %'],'Nutzen durch Aufwand: 8,5 : 10 = 0,85.'),
+ T('V','Elektrotechnik','Gleiche Leistung, doppelte Spannung: Der Strom wird …','halb so groß',['doppelt so groß','gleich groß','viermal so groß'],'P = U · I bleibt gleich. U und I sind antiproportional.'),
  T('B','Dreisatz','Eine Pumpe fördert in 2 h 160 m³. Wie viel fördert sie in 5 h?','400 m³',['64 m³','320 m³','800 m³'],'Erst auf 1 h: 160 : 2 = 80 m³. Dann mal 5.'),
  T('B','Prozentwert','Was sind 25 % von 80 t?','20 t',['25 t','3,2 t','320 t'],'25 % ist ein Viertel: 80 : 4 = 20.'),
  T('B','Prozentsatz','Wie viel Prozent sind 15 t von 60 t?','25 %',['4 %','15 %','40 %'],'15 · 100 : 60 = 25.'),
@@ -166,6 +169,15 @@ const trainer=[
 
 const task=o=>o;
 const tasks=[
+ {L:'B',g(){const r=rnd(3.5,6.5,.1),k=rnd(30,99,1),d1=rnd(3,7,1),d2=rnd(10,31,1),x1=+(r*k*d1).toFixed(0),x=x1/d1*d2;return{tag:'Elektrotechnik',ti:'Ertrag der PV-Anlage',tx:`Die Photovoltaikanlage auf dem Betriebsgebäude der Kläranlage Schwierbach hat in ${d1} Tagen ${z(x1,'kWh')} erzeugt. Mit wie viel Energie kann man bei gleichem Wetter in ${d2} Tagen rechnen?`,x:I('E'),un:'kWh',a:x,
+   geg:`${d1} Tage → ${z(x1,'kWh')}`,steps:[['Zusammenhang','proportional: mehr Tage, mehr Energie'],['Schluss auf 1',`1 Tag → ${nf(x1)} : ${d1} = ${fmt(x1/d1)} kWh`]],ein:`${d2} Tage → ${fmt(x1/d1)} · ${d2}`,
+   s:ds([[`${d1} Tage`,z(x1,'kWh'),`| : ${d1}`],['1 Tag',fmt(x1/d1)+u('kWh'),`| · ${d2}`],[`${d2} Tage`,res(x,0,'kWh')]]),satz:`In ${d2} Tagen erzeugt die Anlage etwa ${fmt(x)} kWh.`}}},
+ {L:'S',g(){const Pz=rnd(5.5,45,.5),e=rnd(.84,.94,.01),Pab=+(Pz*e).toFixed(2),x=Pab/Pz*100;return{tag:'Elektrotechnik',ti:'Wirkungsgrad eines Motors',tx:`Der Motor einer Rücklaufschlammpumpe in der Kläranlage Schwierbach nimmt ${F(I('P','zu'),EQ,z(Pz,'kW'))} elektrische Leistung auf und gibt ${F(I('P','ab'),EQ,z(Pab,'kW'))} an der Welle ab. Wie groß ist der Wirkungsgrad in Prozent?`,x:eta,un:'%',a:x,
+   geg:`${F(I('P','zu'),EQ,z(Pz,'kW'))} (= 100 %);&nbsp; ${F(I('P','ab'),EQ,z(Pab,'kW'))}`,steps:[['Formel',F(eta,EQ,fr(I('P','ab'),I('P','zu')),M,'100 %')],['Idee','Nutzen (abgegeben) durch Aufwand (aufgenommen)']],ein:F(eta,EQ,fr(z(Pab,'kW'),z(Pz,'kW')),M,'100 %'),
+   s:F(eta,EQ,fr(z(Pab,'kW'),z(Pz,'kW')),M,'100 %',EQ,res(x,1,'%')),satz:`Der Motor hat einen Wirkungsgrad von ${fmt(x)} %.`}}},
+ {L:'V',g(){const P0=rnd(1.5,4.5,.1),U1=230,U2=400,I1=P0*1000/U1,x=P0*1000/U2;return{tag:'Elektrotechnik',ti:'Gleiche Leistung, andere Spannung',tx:`Ein Heizgerät für den Pumpenschacht nimmt an ${z(U1,'V')} einen Strom von ${z(+I1.toFixed(2),'A')} auf. Ein Gerät mit derselben Leistung wird für ${z(U2,'V')} gebaut. Welchen Strom nimmt es auf?`,x:I('I'),un:'A',a:+I1.toFixed(2)*U1/U2,
+   geg:`${z(U1,'V')} → ${z(+I1.toFixed(2),'A')}`,steps:[['Zusammenhang','Die Leistung P = U · I bleibt gleich. Höhere Spannung, kleinerer Strom: antiproportional.'],['Schluss auf 1',`1 V → ${nf(+I1.toFixed(2))} · ${U1} = ${fmt(+I1.toFixed(2)*U1)} (das ist die Leistung in W)`]],ein:`${U2} V → ${fmt(+I1.toFixed(2)*U1)} : ${U2}`,
+   s:ds([[`${U1} V`,z(+I1.toFixed(2),'A'),`| : ${U1} ↔ · ${U1}`],['1 V',fmt(+I1.toFixed(2)*U1)+u('A'),`| · ${U2} ↔ : ${U2}`],[`${U2} V`,res(+I1.toFixed(2)*U1/U2,0,'A')]]),satz:`An ${U2} V nimmt das Gerät ${fmt(+I1.toFixed(2)*U1/U2)} A auf.`}}},
  /* ---------- Basis ---------- */
  {L:'B',g(){const r=rnd(25,90,5),d1=rnd(3,7,1),x1=r*d1,d2=rnd(10,31,1),x=r*d2;return{tag:'Abwasser',ti:'Fällmittelverbrauch',tx:`Die Phosphatfällung der Kläranlage Schwierbach hat in ${d1} Tagen ${z(x1,'L')} Fällmittel verbraucht. Wie viel Fällmittel wird bei gleichem Verbrauch in ${d2} Tagen benötigt?`,x:V,un:'L',a:x,dc:0,
    geg:`${d1} Tage → ${z(x1,'L')}`,steps:[['Zusammenhang','proportional: mehr Tage, mehr Fällmittel'],['Schluss auf 1',`1 Tag → ${nf(x1)} : ${d1} = ${z(r,'L')}`]],ein:`${d2} Tage → ${nf(r)} · ${d2}`,

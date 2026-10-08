@@ -179,6 +179,7 @@
 (function(){
 const {I,fr,sq,F,M,MI,PL,EQ,u,q,nf,fmt,rnd,pick,res}=K;
 const z=(x,un)=>`${nf(x)}${u(un)}`;
+const U=I('U'),R=I('R'),Ic=I('I'),cosphi='cos&#8239;'+I('φ'),W3='√3';
 const K_=I('K'),V=I('V'),m=I('m'),t=I('t'),Q=I('Q'),c=I('c'),B=I('B'),N=I('N'),a=I('a'),P=I('P'),n=I('n'),dT='Δ'+I('T'),dh='Δ'+I('h');
 const sup=k=>String(k).replace(/-/g,'⁻').replace(/\d/g,x=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[x]);
 const pw=(mant,exp)=>`${nf(mant)}&#8239;·&#8239;10${sup(exp)}`;
@@ -186,6 +187,7 @@ const sci=x=>{const e=Math.floor(Math.log10(Math.abs(x))+1e-9);return pw(+(x/Mat
 
 const T=(L,n_,prompt,ok,w,h)=>({L,n:n_,prompt,ask:'Welches Ergebnis stimmt?',ok,w,h});
 const trainer=[
+ T('V','Parallelschaltung',`1/${'R'} = 1/6 Ω + 1/3 Ω. Wie groß ist R?`,'2 Ω',['9 Ω','0,5 Ω','4,5 Ω'],'1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2. Der Kehrwert von 1/2 ist 2.'),
  T('B','Punkt vor Strich','3 + 4 · 5 = ?','23',['35','60','27'],'Erst 4 · 5 = 20, dann + 3.'),
  T('B','Klammer','(3 + 4) · 5 = ?','35',['23','12','27'],'Klammer zuerst: 7 · 5.'),
  T('B','Punkt vor Strich','12 − 8 : 2 = ?','8',['2','10','6'],'Erst 8 : 2 = 4, dann 12 − 4.'),
@@ -275,6 +277,10 @@ function anzeigeTask(o){
     satz:o.satz(K.fmt(a))};
 }
 const tasks=[
+ {L:'V',g(){const R1=K.pick([10,12,15,20,22,27,33,47]),R2=K.pick([18,22,39,47,56,68,82,100]),x=1/(1/R1+1/R2);return{tag:'Elektrotechnik',ti:'Zwei Heizwiderstände parallel',tx:`Im Schaltschrank des Pumpwerks Talstraße sorgen zwei Heizwiderstände gegen Kondenswasser. Sie sind parallel geschaltet: ${F(I('R','1'),EQ,z(R1,'Ω'))} und ${F(I('R','2'),EQ,z(R2,'Ω'))}. Wie groß ist der Gesamtwiderstand? Es gilt ${F(fr('1',R),EQ,fr('1',I('R','1')),PL,fr('1',I('R','2')))}.`,x:R,un:'Ω',a:x,
+   geg:`${F(I('R','1'),EQ,z(R1,'Ω'))};&nbsp; ${F(I('R','2'),EQ,z(R2,'Ω'))}`,steps:[['Brüche addieren',`${F(fr('1',R),EQ,fr('1',R1),PL,fr('1',R2),EQ,fmt(1/R1+1/R2)+u('1/Ω'))}`],['Kehrwert',`Gesucht ist ${R}, nicht 1/${R}: zum Schluss den Kehrwert bilden (Taste x⁻¹ oder 1 ÷ Ans).`]],ein:F(R,EQ,fr('1',fmt(1/R1+1/R2)+u('1/Ω'))),
+   s:`${F(fr('1',R),EQ,fr('1',z(R1,'Ω')),PL,fr('1',z(R2,'Ω')),EQ,fmt(1/R1+1/R2)+u('1/Ω'))}<br>${F(R,EQ,fr('1',fmt(1/R1+1/R2)+u('1/Ω')),EQ,res(x,0,'Ω'))}`,satz:`Der Gesamtwiderstand beträgt ${fmt(x)} Ω – kleiner als der kleinste Einzelwiderstand.`,
+   diag:x=>Math.abs(x-(R1+R2))<0.01?'Das wäre die Reihenschaltung. Bei Parallelschaltung addierst du die Kehrwerte.':Math.abs(x-(1/R1+1/R2))<0.002?'Das ist 1/R. Bilde zum Schluss noch den Kehrwert.':''}}},
  /* ---------- Basis ---------- */
  {L:'B',g(){const n0=rnd(2,6,1),p0=rnd(180,420,10),a0=rnd(45,120,5),x=n0*p0+a0;return{tag:'Kreislauf & Abfall',ti:'Rechnung für den Containerdienst',tx:`Das Abfallzentrum Schwierbach stellt einer Baufirma ${n0} Container Bauschutt zu je ${z(p0,'€')} in Rechnung, dazu einmal eine Anfahrtspauschale von ${z(a0,'€')}. Wie hoch ist die Rechnung?`,x:K_,un:'€',a:x,dc:2,fix:true,
    geg:`${n0} Container à ${z(p0,'€')};&nbsp; Pauschale ${z(a0,'€')}`,steps:[['Ansatz',`${n0} · ${nf(p0)} + ${nf(a0)}`],['Regel','Punkt vor Strich: erst die Container, dann die Pauschale dazu']],ein:`${n0} · ${nf(p0)} = ${nf(n0*p0)}`,

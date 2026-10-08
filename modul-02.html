@@ -130,6 +130,7 @@
 const {F,fr,I,u,q,nf,fmt,rnd,pick,res,EQ,M}=K;
 const Q=I('Q'),V=I('V'),m=I('m'),t=I('t'),l=I('l'),d=I('d'),A=I('A'),c=I('c'),B=I('B'),bb=I('b'),hh=I('h');
 const z=(x,un)=>`${nf(x)}${u(un)}`;  // Zahl mit Einheit
+const U=I('U'),R=I('R'),Ic=I('I'),cosphi='cos&#8239;'+I('φ'),W3='√3';const E=I('E'),P=I('P');
 
 /* einfache Umrechnungsaufgabe: von a(ua) nach ub mit Faktor f (ua -> ub: mal f) */
 function conv(o){
@@ -145,6 +146,14 @@ function conv(o){
 }
 
 const tasks=[
+ {L:'B',g(){return pick([
+   ()=>{const a=rnd(4,20,.1);return conv({tag:'Elektrotechnik',ti:'Messsignal 4–20 mA',tx:`Der Füllstandssensor im Pumpwerk Talstraße liefert ein Stromsignal von ${Ic} = ${z(a,'mA')}. Für die Berechnung im Leitsystem brauchst du den Wert in Ampere.`,sym:Ic,val:a,ua:'mA',ub:'A',f:.001,rule:'1 A = 1000 mA',satz:x=>`Das Messsignal beträgt ${x} A.`})},
+   ()=>{const a=rnd(550,7500,50);return conv({tag:'Elektrotechnik',ti:'Typenschild Rührwerk',tx:`Auf dem Typenschild eines Rührwerks im Vorlagebehälter der Kläranlage Schwierbach steht ${P} = ${z(a,'W')}. Gib die Leistung in Kilowatt an.`,sym:P,val:a,ua:'W',ub:'kW',f:.001,rule:'1 kW = 1000 W',satz:x=>`Das Rührwerk hat eine Leistung von ${x} kW.`})}
+ ])()}},
+ {L:'S',g(){const a=rnd(12,480,2);return conv({tag:'Elektrotechnik',ti:'Energie in Megajoule',tx:`Die UV-Desinfektion im Wasserwerk Schwierbach hat an einem Tag ${E} = ${z(a,'kWh')} elektrische Energie verbraucht. Für eine Energiebilanz brauchst du den Wert in MJ.`,sym:E,val:a,ua:'kWh',ub:'MJ',f:3.6,rule:'1 kWh = 3,6 MJ (Formelsammlung)',satz:x=>`Die UV-Anlage hat ${x} MJ verbraucht.`})}},
+ {L:'V',g(){const P0=rnd(30,120,5),h0=rnd(5000,8760,10),Ek=P0*h0,x=Ek/1000;return{tag:'Elektrotechnik',ti:'Jahresenergie der Gebläse',tx:`Die Gebläse der Belebung in der Kläranlage Schwierbach nehmen zusammen ${P} = ${z(P0,'kW')} auf und laufen ${z(h0,'h')} im Jahr. Wie viele Megawattstunden verbrauchen sie?`,x:E,un:'MWh',a:x,exact:true,
+   geg:`${F(P,EQ,z(P0,'kW'))};&nbsp; ${F(t,EQ,z(h0,'h'))}`,steps:[['Formel',F(E,EQ,P,M,t)],['Einheit','kW · h = kWh. Danach in MWh: geteilt durch 1000.']],ein:F(E,EQ,z(P0,'kW'),M,z(h0,'h'),EQ,z(Ek,'kWh')),
+   s:F(E,EQ,z(P0,'kW'),M,z(h0,'h'),EQ,z(Ek,'kWh'),EQ,`<span class="result">${nf(x)}${u('MWh')}</span>`),satz:`Die Gebläse verbrauchen ${nf(x)} MWh im Jahr.`}}},
  /* ---------- Basis ---------- */
  {L:'B',g(){return pick([
    ()=>{const a=rnd(.5,12,.25);return conv({tag:'Abwasser',ti:'Fällmittel-Vorratstank',tx:`Im Vorratstank für Fällmittel sind noch ${z(a,'m³')}. Das Lieferprotokoll verlangt die Angabe in Litern.`,sym:V,val:a,ua:'m³',ub:'L',f:1000,rule:'1 m³ = 1000 L',satz:x=>`Im Tank sind noch ${x} Liter Fällmittel.`})},
@@ -216,6 +225,11 @@ const tasks=[
 
 const T=(L,n,prompt,ok,w,h)=>({L,n,prompt,ask:'Welche Angabe ist richtig?',ok,w,h});
 const trainer=[
+ T('B','Elektrotechnik','1 kW = ?','1000 W',['100 W','10 W','10 000 W'],'k steht für kilo = tausend.'),
+ T('B','Elektrotechnik','250 mA = ?','0,25 A',['2,5 A','25 A','0,025 A'],'1 A = 1000 mA, also 250 : 1000.'),
+ T('S','Elektrotechnik','1 kWh = ? (Formelsammlung)','3,6 MJ',['1000 J','3600 J','36 MJ'],'1000 W · 3600 s = 3 600 000 J = 3,6 MJ.'),
+ T('S','Elektrotechnik','1 MWh = ?','1000 kWh',['100 kWh','1 000 000 kWh','10 kWh'],'Mega ist tausendmal so viel wie kilo.'),
+ T('V','Elektrotechnik','0,75 MW = ?','750 000 W',['75 000 W','7500 W','750 W'],'1 MW = 1 000 000 W.'),
  T('B','Volumen','1&#8239;m³ = ?','1000 L',['100 L','10 L','10&#8239;000 L'],'1 m³ = 1000 dm³ und 1 dm³ = 1 L.'),
  T('B','Länge','1&#8239;km = ?','1000 m',['100 m','10 m','10&#8239;000 m'],'k steht für kilo = tausend.'),
  T('B','Länge','1&#8239;m = ?','1000 mm',['100 mm','10 mm','10&#8239;000 mm'],'m steht für milli = ein Tausendstel. 1 m hat 1000 mm.'),

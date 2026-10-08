@@ -52,6 +52,7 @@
       <tr><td><i class="v">V</i> in m³, <i class="v">Q</i> in L/s</td><td>Zeit soll in h herauskommen</td><td class="op">Q in m³/h: L/s · 3,6</td></tr>
       <tr><td><i class="v">d</i> in mm, Länge in m</td><td>Millimeter und Meter gemischt</td><td class="op">d in m: mm : 1000</td></tr>
       <tr><td><i class="v">c</i> in mg/L, <i class="v">Q</i> in m³/d</td><td>Liter und Kubikmeter</td><td class="op">mg/L = g/m³ – dann passt es</td></tr>
+      <tr><td><i class="v">P</i> in kW, <i class="v">U</i> in V</td><td>Strom soll in A herauskommen</td><td class="op">P in W: kW · 1000 (denn V · A = W)</td></tr>
       <tr><td><i class="v">t</i> in min, <i class="v">P</i> in kW</td><td>Energie soll in kWh herauskommen</td><td class="op">t in h: min : 60</td></tr>
       <tr><td><i class="v">P</i> in kW in <span class="f"><i>P</i> = <i>ρ</i> · <i>g</i> · <i>Q</i> · <i>H</i></span></td><td>Formel liefert Watt</td><td class="op">Ergebnis in W : 1000 = kW</td></tr>
     </tbody>
@@ -122,10 +123,16 @@
 (function(){
 const {I,fr,sq,F,M,MI,PL,EQ,u,q,nf,fmt,rnd,pick,res,sqr}=K;
 const z=(x,un)=>`${nf(x)}${u(un)}`;
+const U=I('U'),R=I('R'),Ic=I('I'),cosphi='cos&#8239;'+I('φ'),W3='√3';
 const Q=I('Q'),A=I('A'),v=I('v'),V=I('V'),t=I('t'),m=I('m'),rho=I('ρ'),E=I('E'),P=I('P'),c=I('c'),B=I('B'),p=I('p'),g=I('g'),h=I('h'),H=I('H'),d=I('d'),l=I('l'),b=I('b'),eta=I('η'),qA=I('q','A'),pi='π',K_=I('K');
 
 const T=(L,n,prompt,ok,w,h_,ask)=>({L,n,prompt,ask:ask||'Welche Antwort ist richtig?',ok,w,h:h_});
 const trainer=[
+ T('B','Einheit','V · A = ?','W',['Ω','J','V/A'],'Spannung mal Strom ergibt Leistung: 1 V · 1 A = 1 W.'),
+ T('B','Einheit','V : A = ?','Ω',['W','A/V','kWh'],'Spannung durch Strom ergibt den Widerstand: 1 Ω = 1 V/A (Formelsammlung).'),
+ T('S','Angleichen','P = 2,3 kW, U = 230 V. Was setzt du für P ein, damit I = P/U in A herauskommt?','P = 2300 W',['P = 2,3 W','P = 0,0023 W','P = 2,3 kW'],'V · A = W – also muss P in Watt stehen.'),
+ T('S','Einheit','Ω·mm²/m · m : mm² = ?','Ω',['Ω·mm²','m','Ω/m'],'mm² kürzt sich, m kürzt sich – es bleibt Ω.'),
+ T('V','Plausibilität','Ergebnis: Ein 37-kW-Drehstrommotor an 400 V zieht 0,063 A. Was sagst du?','Viel zu klein – kW nicht in W umgerechnet',['Passt','Etwas zu groß','Kann man nicht beurteilen'],'Richtig wären rund 63 A. Faktor 1000 – typischer Einheitenfehler.'),
  T('B','Einheit','m³/h · h = ?','m³',['m³/h²','h/m³','m³ · h²'],'Die Stunde kürzt sich weg.'),
  T('B','Einheit','m³ : m² = ?','m',['m²','m⁵','m³/m'],'m · m · m geteilt durch m · m: übrig bleibt m.'),
  T('B','Einheit','m² · m = ?','m³',['m²','m⁴','2 m'],'Fläche mal Höhe ergibt Volumen.'),
@@ -150,6 +157,21 @@ const trainer=[
 ];
 
 const tasks=[
+ {L:'B',g(){const U0=230,I0=rnd(.8,12,.05),x=U0*I0;return{tag:'Elektrotechnik',ti:'Leistung aus einer Messung',tx:`Eine Elektrofachkraft misst an einer Probenahmepumpe im Wasserwerk Schwierbach die Spannung ${U} = ${z(U0,'V')} und den Strom ${Ic} = ${z(I0,'A')}. Welche Leistung nimmt die Pumpe auf?`,x:P,un:'W',a:x,
+   geg:`${F(U,EQ,z(U0,'V'))};&nbsp; ${F(Ic,EQ,z(I0,'A'))}`,steps:[['Formel',F(P,EQ,U,M,Ic)],['Einheitenkontrolle','V · A = W']],ein:F(P,EQ,z(U0,'V'),M,z(I0,'A')),
+   s:F(P,EQ,z(U0,'V'),M,z(I0,'A'),EQ,res(x,0,'W')),satz:`Die Pumpe nimmt ${fmt(x)} W auf.`}}},
+ {L:'S',g(){const n0=rnd(4,16,2),Pw=rnd(150,400,10),th=24,Pk=n0*Pw/1000,x=Pk*th;return{tag:'Elektrotechnik',ti:'UV-Desinfektion im Wasserwerk',tx:`Die UV-Desinfektion im Wasserwerk Schwierbach hat ${n0} Strahler mit je ${z(Pw,'W')}. Sie laufen rund um die Uhr. Wie viel Energie in kWh verbrauchen sie pro Tag?`,x:E,un:'kWh',a:x,
+   geg:`${n0} Strahler à ${z(Pw,'W')} → ${F(P,EQ,z(n0*Pw,'W'),EQ,z(Pk,'kW'))};&nbsp; ${F(t,EQ,z(th,'h'))}`,steps:[['Formel',F(E,EQ,P,M,t)],['Angleichen','Gesamtleistung erst addieren, dann W in kW umrechnen (: 1000), damit kWh herauskommt.']],ein:F(E,EQ,z(Pk,'kW'),M,z(th,'h')),
+   s:F(E,EQ,z(Pk,'kW'),M,z(th,'h'),EQ,res(x,0,'kWh')),satz:`Die UV-Anlage verbraucht ${fmt(x)} kWh pro Tag.`}}},
+ {L:'S',g(){const A0=K.pick([1.5,2.5,4,6,10,16]),l0=rnd(30,250,5),rh=0.0178,x=rh*l0/A0;return{tag:'Elektrotechnik',ti:'Widerstand einer Zuleitung',tx:`Die Zuleitung zu einem Rührwerk im Abfallzentrum Schwierbach ist (Hin- und Rückleiter zusammen) ${l} = ${z(l0,'m')} lang und hat den Querschnitt ${A} = ${z(A0,'mm²')}. Kupfer hat ${rho} = ${z(rh,'Ω·mm²/m')}. Wie groß ist der Leitungswiderstand?`,x:R,un:'Ω',a:x,
+   geg:`${F(l,EQ,z(l0,'m'))};&nbsp; ${F(A,EQ,z(A0,'mm²'))};&nbsp; ${F(rho,EQ,z(rh,'Ω·mm²/m'))}`,steps:[['Formel',F(R,EQ,fr(rho+M+l,A))],['Einheitenkontrolle','Ω·mm²/m · m : mm² = Ω. Hier musst du nichts umrechnen – der spezifische Widerstand ist schon in mm² angegeben.']],ein:F(R,EQ,fr(z(rh,'Ω·mm²/m')+M+z(l0,'m'),z(A0,'mm²'))),
+   s:F(R,EQ,fr(z(rh,'Ω·mm²/m')+M+z(l0,'m'),z(A0,'mm²')),EQ,res(x,0,'Ω')),satz:`Die Leitung hat einen Widerstand von ${fmt(x)} Ω.`}}},
+ {L:'V',g(){const A0=K.pick([1.5,2.5,4]),l0=rnd(40,160,5),I0=rnd(6,16,.5),rh=0.0178,R0=rh*l0/A0,dU=R0*I0,x=dU/230*100;return{tag:'Elektrotechnik',ti:'Spannungsfall auf der Leitung',tx:`Eine Wechselstrom-Pumpe (230 V) im Pumpwerk Talstraße nimmt ${Ic} = ${z(I0,'A')} auf. Die Zuleitung aus Kupfer (${rho} = ${z(rh,'Ω·mm²/m')}) ist mit Hin- und Rückleiter ${z(l0,'m')} lang und hat ${z(A0,'mm²')} Querschnitt. Wie viel Prozent der Spannung gehen auf der Leitung verloren?`,x:I('p'),un:'%',a:x,
+   geg:`${F(Ic,EQ,z(I0,'A'))};&nbsp; ${F(l,EQ,z(l0,'m'))};&nbsp; ${F(A,EQ,z(A0,'mm²'))};&nbsp; ${F(U,EQ,'230'+u('V'))}`,steps:[['Formeln',`${F(R,EQ,fr(rho+M+l,A))};&nbsp; ${F('Δ'+U,EQ,R,M,Ic)};&nbsp; ${F(I('p'),EQ,fr('Δ'+U,U),M,'100 %')}`],['Widerstand',F(R,EQ,fr(z(rh,'Ω·mm²/m')+M+z(l0,'m'),z(A0,'mm²')),EQ,fmt(R0)+u('Ω'))]],ein:`${F('Δ'+U,EQ,fmt(R0)+u('Ω'),M,z(I0,'A'),EQ,fmt(dU)+u('V'))}`,
+   s:`${F(R,EQ,fmt(R0)+u('Ω'))}<br>${F('Δ'+U,EQ,fmt(R0)+u('Ω'),M,z(I0,'A'),EQ,fmt(dU)+u('V'))}<br>${F(I('p'),EQ,fr(fmt(dU)+u('V'),'230'+u('V')),M,'100 %',EQ,res(x,0,'%'))}`,satz:`Auf der Leitung gehen ${fmt(x)} % der Spannung verloren${x>3?' – mehr als die üblichen 3 %, ein größerer Querschnitt wäre besser':''}.`}}},
+ {L:'V',g(){const U0=400,I0=rnd(25,90,1),cp=rnd(.8,.9,.01),th=rnd(12,24,1),Pk=Math.sqrt(3)*U0*I0*cp/1000,x=Pk*th;return{tag:'Elektrotechnik',ti:'Tagesenergie eines Gebläses',tx:`Am Gebläse der Belebung in der Kläranlage Schwierbach werden gemessen: ${U} = ${z(U0,'V')}, ${Ic} = ${z(I0,'A')}, ${cosphi} = ${nf(cp)}. Das Gebläse läuft ${z(th,'h')} am Tag. Wie viel Energie in kWh verbraucht es täglich?`,x:E,un:'kWh',a:x,
+   geg:`${F(U,EQ,z(U0,'V'))};&nbsp; ${F(Ic,EQ,z(I0,'A'))};&nbsp; ${F(cosphi,EQ,nf(cp))};&nbsp; ${F(t,EQ,z(th,'h'))}`,steps:[['Formeln',`${F(P,EQ,W3,M,U,M,Ic,M,cosphi)} und ${F(E,EQ,P,M,t)}`],['Angleichen','V · A ergibt W. Für kWh die Leistung erst in kW umrechnen (: 1000).']],ein:`${F(P,EQ,'√3 · '+z(U0,'V')+M+z(I0,'A')+M+nf(cp),EQ,fmt(Pk*1000)+u('W'),EQ,fmt(Pk)+u('kW'))}`,
+   s:`${F(P,EQ,'√3 · '+z(U0,'V')+M+z(I0,'A')+M+nf(cp),EQ,fmt(Pk)+u('kW'))}<br>${F(E,EQ,fmt(Pk)+u('kW'),M,z(th,'h'),EQ,res(x,0,'kWh'))}`,satz:`Das Gebläse verbraucht ${fmt(x)} kWh am Tag.`}}},
  /* ---------- Basis ---------- */
  {L:'B',g(){const Q0=rnd(80,400,10),A0=rnd(150,600,10),x=Q0/A0;return{tag:'Abwasser',ti:'Oberflächenbeschickung',tx:`In ein Nachklärbecken der Kläranlage Schwierbach fließen ${Q} = ${z(Q0,'m³/h')}. Die Wasseroberfläche beträgt ${A} = ${z(A0,'m²')}. Berechne die Oberflächenbeschickung ${F(qA,EQ,fr(Q,A))}.`,x:qA,un:'m/h',a:x,dc:2,
    geg:`${F(Q,EQ,z(Q0,'m³/h'))};&nbsp; ${F(A,EQ,z(A0,'m²'))}`,steps:[['Formel',F(qA,EQ,fr(Q,A))],['Einheitenkontrolle','m³/h : m² = m/h – die Einheiten passen.']],ein:F(qA,EQ,fr(z(Q0,'m³/h'),z(A0,'m²'))),
