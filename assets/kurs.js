@@ -246,7 +246,8 @@ K.module=function(cfg){
     let bag=[],cur=null,hints=0,state='open';
     const inp=$('form input',rHost);
     const cnt=()=>{$('.counter',rHost).textContent=`${Math.min(st.R[st.lvl],need.R)} / ${need.R} gelöst`};
-    const hintList=()=>cur.steps.concat([['Eingesetzt',cur.ein]]).slice(0,3);
+    /* Tipps: eigene Tipp-Folge (tips: Denkanstoß – Zwischenschritt – Anleitung für die Rechnung), sonst aus den Lösungsschritten */
+    const hintList=()=>cur.tips?cur.tips.map(t=>['',t]):cur.steps.concat([['Eingesetzt',cur.ein]]).slice(0,3);
     const next=()=>{
       const L=st.lvl,pool=cfg.tasks.filter(x=>x.L===L);
       if(!bag.length||bag[0].L!==L)bag=K.shuffle(pool);
@@ -332,7 +333,7 @@ K.module=function(cfg){
     });
     $('.r-hint',rHost).onclick=()=>{
       const hl=hintList();if(hints>=hl.length)return;
-      const d=document.createElement('div');d.className='hint';d.innerHTML=`<b>Tipp ${hints+1} · ${hl[hints][0]}</b>${hl[hints][1]}`;
+      const d=document.createElement('div');d.className='hint';d.innerHTML=`<b>Tipp ${hints+1}${hl[hints][0]?' · '+hl[hints][0]:''}</b>${hl[hints][1]}`;
       $('.hints',rHost).appendChild(d);hints++;
       const hb=$('.r-hint',rHost);if(hints>=hl.length){hb.disabled=true;hb.textContent='Alle Tipps gezeigt'}else hb.textContent=`Tipp ${hints+1} zeigen`;
     };

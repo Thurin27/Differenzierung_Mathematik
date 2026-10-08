@@ -44,6 +44,8 @@ Lokal testen: `index.html` einfach im Browser öffnen.
 
 Der Fortschritt wird nur im `localStorage` des Browsers gespeichert (Schlüssel `mak-…`).
 Alle Repos eines GitHub-Kontos teilen sich dieselbe Domain – das Präfix `mak-` verhindert Überschneidungen mit anderen Kursseiten.
+Tipps: Jede Rechenaufgabe hat `tips:[t1,t2,t3]` – Tipp 1 Denkanstoß (Leitfrage), Tipp 2 erster Zwischenschritt mit Einheiten, Tipp 3 Anleitung für die letzte Rechnung (ohne Endergebnis). Fehlt `tips`, zeigt die Engine ersatzweise die Lösungsschritte.
+
 Heft-Hinweis: Über der Ergebnis-Eingabe steht „Zuerst ins Heft …“. In `rwe`, `m1`–`m7` muss vor dem Prüfen „Mein Rechenweg steht im Heft“ angehakt werden (Option `heft:'check'`), in M8–M10 nur ein kurzer Hinweis (`heft:'hint'`). Per `K.module({heft:…})` überschreibbar.
 
 Eine Stufe gilt als geschafft bei 5 Trainer-Aufgaben (erster Versuch richtig) und 3 gelösten Rechenaufgaben (ohne Lösungsanzeige).

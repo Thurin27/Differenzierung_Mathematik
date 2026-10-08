@@ -250,7 +250,19 @@ function rundeTask(o){
                  ['Fünfte Stelle',`Die fünfte signifikante Stelle ist ${t.d5} – also ${t.d5>=5?'aufrunden':'abrunden'}.`]],
     ein:`${t.mark}${u(o.un)} (fett: die Stellen, die bleiben, unterstrichen: die Entscheidungsstelle)`,
     s:F(t.mark+u(o.un),' ≈ ',`<span class="result">${K.fmt(t.raw)}${u(o.un)}</span>`),
-    satz:o.satz(K.fmt(t.raw))};
+    satz:o.satz(K.fmt(t.raw)),
+    tips:(()=>{const sg=t.txt.replace(/\D/g,'').replace(/^0+/,''),up=t.d5>=5,nz=t.raw<1?(t.txt.split(',')[1]||'').match(/^0*/)[0].length:0;
+      if(t.big)return[
+        'Die Zahl ist größer als tausend. Wie viele Stellen schreibst du dann auf – und welche Stelle entscheidet, ob du auf- oder abrundest?',
+        `Bei Werten ab tausend bleiben alle Ziffern vor dem Komma stehen, die Nachkommastellen fallen weg. Entscheidend ist die erste Nachkommastelle: Sie ist ${t.d5}.`,
+        up?`Die ${t.d5} ist 5 oder größer: Erhöhe die letzte Ziffer vor dem Komma (die Einerstelle) um 1${String(Math.floor(t.raw)).slice(-1)==='9'?' – Achtung, aus 9 wird 0 und die Stelle davor wird um 1 größer':''}. Lass das Komma und alle Nachkommastellen weg und schreib die Einheit ${o.un} dazu.`
+          :`Die ${t.d5} ist kleiner als 5: Die Ziffern vor dem Komma bleiben unverändert. Lass das Komma und alle Nachkommastellen weg und schreib die Einheit ${o.un} dazu.`];
+      return[
+        t.raw<1?'Wo steht die erste Ziffer, die keine Null ist? Ab ihr zählst du vier Stellen ab – die Nullen davor zählen nicht mit.'
+               :'Ab welcher Ziffer zählst du die vier signifikanten Stellen? Welche Stelle entscheidet, ob du auf- oder abrundest?',
+        `Die vier signifikanten Stellen sind ${sg[0]}, ${sg[1]}, ${sg[2]} und ${sg[3]}${nz?` (die ${nz===1?'Null':nz+' Nullen'} direkt hinter dem Komma ${nz===1?'zählt':'zählen'} nicht mit)`:''}. Die fünfte Stelle – die Entscheidungsstelle – ist ${t.d5}.`,
+        up?`Die ${t.d5} ist 5 oder größer: Erhöhe die vierte Stelle (${sg[3]}) um 1${sg[3]==='9'?' – Achtung Übertrag: aus 9 wird 0 und die Stelle davor wird um 1 größer. Entstehende Nullen am Ende schreibst du mit hin, sie gehören zu den 4 Stellen':''}. Alles hinter der vierten Stelle fällt weg${nz&&sg.slice(0,4)!=='9999'?', die Nullen vor der ersten Ziffer bleiben stehen':''}. Einheit ${o.un} nicht vergessen.`
+          :`Die ${t.d5} ist kleiner als 5: Die vier Stellen bleiben unverändert, alles dahinter fällt weg${nz?'. Die Nullen vor der ersten Ziffer bleiben stehen':''}. Einheit ${o.un} nicht vergessen.`];})()};
 }
 
 /* Aufgaben: ×10-Anzeige des Taschenrechners lesen */
@@ -274,29 +286,52 @@ function anzeigeTask(o){
            ['Komma verschieben',`${nf(m)} → ${nf(a)}`]],
     ein:`${nf(a)} auf 4 signifikante Stellen runden`,
     s:F(nf(m),'&#8239;·&#8239;10'+sup(e),EQ,nf(a),' ≈ ',`<span class="result">${K.fmt(a)}${u(o.un)}</span>`),
-    satz:o.satz(K.fmt(a))};
+    satz:o.satz(K.fmt(a)),
+    tips:(()=>{const md=m.toFixed(4).replace('.','').padEnd(5,'0'),k=Math.abs(e);return[
+      `Was bedeutet die Zahl hinter ${style==='E'?'dem E':'×10'}? Wird die Zahl dadurch größer oder kleiner – und in welche Richtung verschiebst du das Komma?`,
+      `Die Anzeige bedeutet ${F(nf(m)+'&#8239;·&#8239;10'+sup(e)+u(o.un))}. Die Hochzahl ${nf(e)} heißt: Komma um ${k} Stellen nach ${dir}${e<0?' – die Zahl wird kleiner als 1':' – die Zahl wird größer'}.`,
+      e<0?`Verschiebe das Komma in ${z(m,o.un)} um ${k} Stellen nach links: Hinter „0,“ kommen ${k-1===1?'eine Null':(k-1)+' Nullen'}, dann die Ziffern ${md[0]}, ${md[1]}, ${md[2]}, ${md[3]} … Runde auf 4 signifikante Stellen – die fünfte Ziffer ist ${md[4]}.`
+         :`Verschiebe das Komma in ${z(m,o.un)} um ${k} Stellen nach rechts; fehlende Stellen füllst du mit Nullen auf. Ab 1000 schreibst du die ganze Zahl mit der Einheit ${o.un}.`];})()};
 }
 const tasks=[
  {L:'V',g(){const R1=K.pick([10,12,15,20,22,27,33,47]),R2=K.pick([18,22,39,47,56,68,82,100]),x=1/(1/R1+1/R2);return{tag:'Elektrotechnik',ti:'Zwei Heizwiderstände parallel',tx:`Im Schaltschrank des Pumpwerks Talstraße sorgen zwei Heizwiderstände gegen Kondenswasser. Sie sind parallel geschaltet: ${F(I('R','1'),EQ,z(R1,'Ω'))} und ${F(I('R','2'),EQ,z(R2,'Ω'))}. Wie groß ist der Gesamtwiderstand? Es gilt ${F(fr('1',R),EQ,fr('1',I('R','1')),PL,fr('1',I('R','2')))}.`,x:R,un:'Ω',a:x,
    geg:`${F(I('R','1'),EQ,z(R1,'Ω'))};&nbsp; ${F(I('R','2'),EQ,z(R2,'Ω'))}`,steps:[['Brüche addieren',`${F(fr('1',R),EQ,fr('1',R1),PL,fr('1',R2),EQ,fmt(1/R1+1/R2)+u('1/Ω'))}`],['Kehrwert',`Gesucht ist ${R}, nicht 1/${R}: zum Schluss den Kehrwert bilden (Taste x⁻¹ oder 1 ÷ Ans).`]],ein:F(R,EQ,fr('1',fmt(1/R1+1/R2)+u('1/Ω'))),
    s:`${F(fr('1',R),EQ,fr('1',z(R1,'Ω')),PL,fr('1',z(R2,'Ω')),EQ,fmt(1/R1+1/R2)+u('1/Ω'))}<br>${F(R,EQ,fr('1',fmt(1/R1+1/R2)+u('1/Ω')),EQ,res(x,0,'Ω'))}`,satz:`Der Gesamtwiderstand beträgt ${fmt(x)} Ω – kleiner als der kleinste Einzelwiderstand.`,
-   diag:x=>Math.abs(x-(R1+R2))<0.01?'Das wäre die Reihenschaltung. Bei Parallelschaltung addierst du die Kehrwerte.':Math.abs(x-(1/R1+1/R2))<0.002?'Das ist 1/R. Bilde zum Schluss noch den Kehrwert.':''}}},
+   diag:x=>Math.abs(x-(R1+R2))<0.01?'Das wäre die Reihenschaltung. Bei Parallelschaltung addierst du die Kehrwerte.':Math.abs(x-(1/R1+1/R2))<0.002?'Das ist 1/R. Bilde zum Schluss noch den Kehrwert.':'',
+   tips:['Bei der Parallelschaltung addierst du nicht die Widerstände selbst, sondern ihre Kehrwerte. Was musst du am Ende noch tun, wenn du 1/R kennst?',
+     `Addiere die Kehrwerte der beiden Heizwiderstände: ${F(fr('1',R),EQ,fr('1',z(R1,'Ω')),PL,fr('1',z(R2,'Ω')),EQ,fmt(1/R1+1/R2)+u('1/Ω'))}.`,
+     `Gesucht ist ${R}, nicht 1/${R}: Bilde den Kehrwert, also teile 1 durch ${fmt(1/R1+1/R2)+u('1/Ω')} (Taste x⁻¹). Runde auf 4 signifikante Stellen – das Ergebnis hat die Einheit Ω.`]}}},
  /* ---------- Basis ---------- */
  {L:'B',g(){const n0=rnd(2,6,1),p0=rnd(180,420,10),a0=rnd(45,120,5),x=n0*p0+a0;return{tag:'Kreislauf & Abfall',ti:'Rechnung für den Containerdienst',tx:`Das Abfallzentrum Schwierbach stellt einer Baufirma ${n0} Container Bauschutt zu je ${z(p0,'€')} in Rechnung, dazu einmal eine Anfahrtspauschale von ${z(a0,'€')}. Wie hoch ist die Rechnung?`,x:K_,un:'€',a:x,dc:2,fix:true,
    geg:`${n0} Container à ${z(p0,'€')};&nbsp; Pauschale ${z(a0,'€')}`,steps:[['Ansatz',`${n0} · ${nf(p0)} + ${nf(a0)}`],['Regel','Punkt vor Strich: erst die Container, dann die Pauschale dazu']],ein:`${n0} · ${nf(p0)} = ${nf(n0*p0)}`,
-   s:F(K_,EQ,n0+M+nf(p0)+PL+nf(a0),EQ,nf(n0*p0)+PL+nf(a0),EQ,K.resFix(x,2,'€')),satz:`Die Rechnung beträgt ${K.fix(x,2)} €.`}}},
+   s:F(K_,EQ,n0+M+nf(p0)+PL+nf(a0),EQ,nf(n0*p0)+PL+nf(a0),EQ,K.resFix(x,2,'€')),satz:`Die Rechnung beträgt ${K.fix(x,2)} €.`,
+   tips:['Was kosten zuerst alle Container zusammen? Wie oft wird die Anfahrtspauschale berechnet?',
+     `Die Container kosten zusammen ${F(n0+' Container'+M+z(p0,'€'),EQ,z(n0*p0,'€'))}. Die Anfahrtspauschale von ${z(a0,'€')} kommt nur einmal dazu.`,
+     `Addiere die Anfahrtspauschale (${z(a0,'€')}) zu den Containerkosten (${z(n0*p0,'€')}). Gib den Betrag in Euro auf den Cent genau an (zwei Nachkommastellen).`]}}},
  {L:'B',g(){const k=rnd(4,6,1),vals=Array.from({length:k},()=>rnd(3800,6200,10)),sum=vals.reduce((p,c)=>p+c,0),x=sum/k;return{tag:'Abwasser',ti:'Mittlerer Tageszufluss',tx:`Die Kläranlage Schwierbach hat an ${k} Tagen diese Zuflüsse gemessen: ${vals.map(v=>z(v,'m³')).join('; ')}. Wie groß ist der mittlere Tageszufluss?`,x:Q,un:'m³/d',a:x,dc:1,
    geg:vals.map(v=>nf(v)).join(' · ')+' (m³/d)',steps:[['Ansatz','Mittelwert = Summe aller Werte : Anzahl'],['Summe',`${vals.map(nf).join(' + ')} = ${nf(sum)}`]],ein:`${nf(sum)} : ${k}`,
-   s:F(Q,EQ,fr(nf(sum)+u('m³/d'),k),EQ,res(x,1,'m³/d')),satz:`Der mittlere Tageszufluss beträgt ${fmt(x,1)} m³/d.`}}},
+   s:F(Q,EQ,fr(nf(sum)+u('m³/d'),k),EQ,res(x,1,'m³/d')),satz:`Der mittlere Tageszufluss beträgt ${fmt(x,1)} m³/d.`,
+   tips:['Wie berechnest du einen Mittelwert? Was brauchst du dafür aus den Messwerten der Kläranlage – und durch welche Zahl teilst du?',
+     `Zähle alle ${k} Tageszuflüsse zusammen: ${F(vals.map(v=>z(v,'m³')).join(PL),EQ,z(sum,'m³'))}.`,
+     `Teile die Summe (${z(sum,'m³')}) durch die Anzahl der Tage (${z(k,'d')}). So erhältst du den mittleren Tageszufluss in m³/d – runde auf 4 signifikante Stellen.`]}}},
  {L:'B',g(){const t1=-rnd(2,12,1),t2=rnd(3,18,1),x=t2-t1;return{tag:'Wasserversorgung',ti:'Temperaturunterschied am Hochbehälter',tx:`Am Hochbehälter Schwierbach zeigt das Außenthermometer morgens ${nf(t1)} °C und mittags +${nf(t2)} °C. Um wie viel Kelvin ist es wärmer geworden?`,x:dT,un:'K',a:x,dc:0,exact:true,
    geg:`morgens ${nf(t1)} °C;&nbsp; mittags +${nf(t2)} °C`,steps:[['Ansatz','Unterschied = späterer Wert − früherer Wert'],['Vorzeichen',`Minus und Minus ergibt Plus: ${nf(t2)} − (${nf(t1)}) = ${nf(t2)} + ${nf(-t1)}`]],ein:`${nf(t2)} − (${nf(t1)})`,
-   s:F(dT,EQ,nf(t2),MI,'(',nf(t1),')',EQ,nf(t2),PL,nf(-t1),EQ,`<span class="result">${nf(x)}${u('K')}</span>`),satz:`Es ist um ${nf(x)} K wärmer geworden.`}}},
+   s:F(dT,EQ,nf(t2),MI,'(',nf(t1),')',EQ,nf(t2),PL,nf(-t1),EQ,`<span class="result">${nf(x)}${u('K')}</span>`),satz:`Es ist um ${nf(x)} K wärmer geworden.`,
+   tips:['Wie berechnest du den Unterschied zwischen der Temperatur am Morgen und am Mittag? Was passiert, wenn du eine negative Zahl abziehst?',
+     `Ansatz: späterer Wert − früherer Wert, also ${F(dT,EQ,z(t2,'°C'),MI,'('+z(t1,'°C')+')')}.`,
+     `Minus und Minus ergibt Plus: Aus „− (${z(t1,'°C')})“ wird „+ ${z(-t1,'°C')}“. Addiere also ${z(t2,'°C')} und ${z(-t1,'°C')}. Eine Temperaturdifferenz gibst du in Kelvin (K) an.`]}}},
  {L:'B',g(){const [zz,nn]=pick([[1,4],[3,4],[1,8],[3,8],[5,8],[2,5],[3,5],[1,2]]),V0=rnd(400,1600,40),x=V0*zz/nn;return{tag:'Abwasser',ti:'Füllgrad des Speicherbeckens',tx:`Das Speicherbecken der Kläranlage Schwierbach fasst ${z(V0,'m³')}. Laut Prozessleitsystem ist es zu ${zz}/${nn} gefüllt. Wie viel Abwasser steht im Becken?`,x:V,un:'m³',a:x,dc:1,
    geg:`${F(I('V','ges'),EQ,z(V0,'m³'))};&nbsp; Füllgrad ${zz}/${nn}`,steps:[['Bruch als Dezimalzahl',`${zz}/${nn} = ${zz} : ${nn} = ${nf(zz/nn)}`],['Ansatz','Anteil vom Ganzen: mal nehmen']],ein:F(V,EQ,nf(zz/nn),M,z(V0,'m³')),
-   s:F(V,EQ,fr(zz,nn),M,z(V0,'m³'),EQ,res(x,1,'m³')),satz:`Im Becken stehen ${fmt(x,1)} m³ Abwasser.`}}},
+   s:F(V,EQ,fr(zz,nn),M,z(V0,'m³'),EQ,res(x,1,'m³')),satz:`Im Becken stehen ${fmt(x,1)} m³ Abwasser.`,
+   tips:['Welcher Anteil des Speicherbeckens ist gefüllt? Wie rechnest du einen Bruchteil von einem Volumen aus?',
+     `Schreib den Füllgrad als Dezimalzahl: ${F(fr(zz,nn),EQ,zz+' : '+nn,EQ,nf(zz/nn))}. Das ganze Becken fasst ${z(V0,'m³')}.`,
+     `Multipliziere das Beckenvolumen (${z(V0,'m³')}) mit dem Füllgrad ${nf(zz/nn)}. Das Ergebnis ist in m³ – runde auf 4 signifikante Stellen.`]}}},
  {L:'B',g(){const Vg=rnd(40,120,5),Vi=rnd(5,Vg-10,1),r0=rnd(.45,.65,.05),x=(Vg-Vi)*r0;return{tag:'Kreislauf & Abfall',ti:'Freier Platz im Kalksilo',tx:`Das Kalkhydrat-Silo der Rauchgasreinigung fasst ${z(Vg,'m³')}. Es sind noch ${z(Vi,'m³')} im Silo. Wie viele Tonnen Kalkhydrat (${nf(r0)} t/m³) kann der Tankwagen höchstens einblasen?`,x:m,un:'t',a:x,dc:2,
    geg:`${F(I('V','ges'),EQ,z(Vg,'m³'))};&nbsp; ${F(I('V','ist'),EQ,z(Vi,'m³'))};&nbsp; ${F(I('ρ'),EQ,z(r0,'t/m³'))}`,steps:[['Ansatz',`(${nf(Vg)} − ${nf(Vi)}) · ${nf(r0)}`],['Regel','Klammer zuerst: erst den freien Platz, dann mal Dichte']],ein:`(${nf(Vg)} − ${nf(Vi)}) = ${nf(Vg-Vi)} m³`,
-   s:F(m,EQ,'(',nf(Vg),MI,nf(Vi),')'+u('m³'),M,z(r0,'t/m³'),EQ,z(Vg-Vi,'m³'),M,nf(r0),EQ,res(x,2,'t')),satz:`Der Tankwagen kann höchstens ${fmt(x,2)} t einblasen.`}}},
+   s:F(m,EQ,'(',nf(Vg),MI,nf(Vi),')'+u('m³'),M,z(r0,'t/m³'),EQ,z(Vg-Vi,'m³'),M,nf(r0),EQ,res(x,2,'t')),satz:`Der Tankwagen kann höchstens ${fmt(x,2)} t einblasen.`,
+   tips:['Wie viele m³ passen noch ins Silo? Wie viele Tonnen Kalkhydrat entspricht das?',
+     `Es passen noch ${F(z(Vg,'m³'),MI,z(Vi,'m³'),EQ,z(Vg-Vi,'m³'))} ins Silo. Die Dichte des Kalkhydrats ist ${z(r0,'t/m³')}.`,
+     `Multipliziere das freie Volumen (${z(Vg-Vi,'m³')}) mit der Dichte (${z(r0,'t/m³')}).`]}}},
 
  {L:'B',g(){return K.pick([
    ()=>rundeTask({e:[2,4],tag:'Abwasser',ti:'Runden: Beckenvolumen',x:V,un:'m³',tx:t=>`Du hast das Volumen eines Beckens der Kläranlage Schwierbach berechnet. Der Taschenrechner zeigt <strong>${t}</strong>. Was notierst du nach der Rundungsregel (4 signifikante Stellen, ab 1000 die ganze Zahl)?`,satz:r=>`Das Becken fasst ${r} m³.`}),
@@ -309,19 +344,34 @@ const tasks=[
  /* ---------- Standard ---------- */
  {L:'S',g(){const mant=rnd(1.2,9.8,.1),e=rnd(2,4,1),x=mant*Math.pow(10,e)*100;return{tag:'Wasserversorgung',ti:'Keimzahl im Rohwasser',tx:`Das Labor des Wasserwerks Schwierbach findet im Rohwasser ${pw(mant,e)} KBE (koloniebildende Einheiten) pro Milliliter. Wie viele KBE sind das in 100 mL? Du darfst das Ergebnis auch in Zehnerpotenz-Schreibweise eingeben (z. B. 2,4·10^5).`,x:N,un:'KBE/100 mL',a:x,dc:0,exact:true,
    geg:`${pw(mant,e)} KBE/mL`,steps:[['Ansatz','100 mL sind 100-mal so viel wie 1 mL – mal 100 = mal 10²'],['Potenzgesetz',`10${sup(e)} · 10² = 10${sup(e+2)}`]],ein:`${pw(mant,e)} · 10²`,
-   s:F(N,EQ,pw(mant,e),M,'10²',EQ,pw(mant,e+2),EQ,`<span class="result">${nf(x)}</span>`),satz:`In 100 mL sind ${pw(mant,e+2)} = ${nf(x)} KBE.`}}},
+   s:F(N,EQ,pw(mant,e),M,'10²',EQ,pw(mant,e+2),EQ,`<span class="result">${nf(x)}</span>`),satz:`In 100 mL sind ${pw(mant,e+2)} = ${nf(x)} KBE.`,
+   tips:['Wie viel mehr Wasser sind 100 mL als 1 mL? Wie schreibst du diesen Faktor als Zehnerpotenz?',
+     `In 1 mL Rohwasser sind ${pw(mant,e)+u('KBE')}. 100 mL sind 100-mal so viel, und ${F('100',EQ,'10²')}.`,
+     `Multipliziere ${pw(mant,e)+u('KBE/mL')} mit ${z(100,'mL')}: Beim Malnehmen von Zehnerpotenzen addierst du die Hochzahlen (${e} + 2). Die Zahl ${nf(mant)} vorne bleibt gleich.`]}}},
  {L:'S',g(){const V0=rnd(800,2400,50),n0=rnd(2,4,1),Q0=rnd(80,200,10),x=V0/(n0*Q0);return{tag:'Abwasser',ti:'Mehrere Pumpen gleichzeitig',tx:`Das Speicherbecken der Kläranlage Schwierbach (${z(V0,'m³')}) wird mit ${n0} Pumpen leergepumpt, jede fördert ${z(Q0,'m³/h')}. Wie lange dauert das? Rechne mit ${F(t,EQ,fr(V,n+M+Q))}.`,x:t,un:'h',a:x,dc:2,
    geg:`${F(V,EQ,z(V0,'m³'))};&nbsp; ${F(n,EQ,n0)};&nbsp; ${F(Q,EQ,z(Q0,'m³/h'))}`,steps:[['Formel',F(t,EQ,fr(V,n+M+Q))],['Taschenrechner',`${nf(V0)} ÷ (${n0} × ${nf(Q0)}) – der Nenner gehört in Klammern!`]],ein:F(t,EQ,fr(z(V0,'m³'),n0+M+z(Q0,'m³/h'))),
-   s:F(t,EQ,fr(z(V0,'m³'),n0+M+z(Q0,'m³/h')),EQ,fr(z(V0,'m³'),z(n0*Q0,'m³/h')),EQ,res(x,2,'h')),satz:`Das Leerpumpen dauert ${fmt(x,2)} Stunden.`}}},
+   s:F(t,EQ,fr(z(V0,'m³'),n0+M+z(Q0,'m³/h')),EQ,fr(z(V0,'m³'),z(n0*Q0,'m³/h')),EQ,res(x,2,'h')),satz:`Das Leerpumpen dauert ${fmt(x,2)} Stunden.`,
+   tips:['Wie viele Kubikmeter fördern alle Pumpen zusammen in einer Stunde? Wie lange brauchen sie dann für das ganze Speicherbecken?',
+     `Alle ${n0} Pumpen zusammen fördern ${F(n0+M+z(Q0,'m³/h'),EQ,z(n0*Q0,'m³/h'))}.`,
+     `Teile das Beckenvolumen (${z(V0,'m³')}) durch die gesamte Förderleistung (${z(n0*Q0,'m³/h')}). Im Taschenrechner gehört der ganze Nenner in Klammern. Das Ergebnis ist in h – runde auf 4 signifikante Stellen.`]}}},
  {L:'S',g(){const Q1=rnd(80,300,10),c1=rnd(400,800,10),Q2=rnd(20,120,10),c2=rnd(1200,3000,100),x=(Q1*c1+Q2*c2)/(Q1+Q2);return{tag:'Abwasser',ti:'Zwei Zuläufe treffen sich',tx:`Im Zulaufbauwerk der Kläranlage Schwierbach treffen sich zwei Ströme: ${z(Q1,'m³/h')} kommunales Abwasser mit ${z(c1,'mg/L')} CSB und ${z(Q2,'m³/h')} Abwasser aus dem Gewerbegebiet mit ${z(c2,'mg/L')} CSB. Welche CSB-Konzentration hat das Gemisch? Rechne mit ${F(I('c','m'),EQ,fr(I('Q','1')+M+I('c','1')+PL+I('Q','2')+M+I('c','2'),I('Q','1')+PL+I('Q','2')))}.`,x:I('c','m'),un:'mg/L',a:x,dc:1,
    geg:`${F(I('Q','1'),EQ,z(Q1,'m³/h'))};&nbsp; ${F(I('c','1'),EQ,z(c1,'mg/L'))};&nbsp; ${F(I('Q','2'),EQ,z(Q2,'m³/h'))};&nbsp; ${F(I('c','2'),EQ,z(c2,'mg/L'))}`,steps:[['Zähler',`${nf(Q1)} · ${nf(c1)} + ${nf(Q2)} · ${nf(c2)} = ${nf(Q1*c1+Q2*c2)} (Punkt vor Strich)`],['Nenner',`${nf(Q1)} + ${nf(Q2)} = ${nf(Q1+Q2)}`]],ein:`${nf(Q1*c1+Q2*c2)} : ${nf(Q1+Q2)}`,
-   s:F(I('c','m'),EQ,fr(nf(Q1*c1+Q2*c2),nf(Q1+Q2)),EQ,res(x,1,'mg/L')),satz:`Das Gemisch hat eine CSB-Konzentration von ${fmt(x,1)} mg/L.`}}},
+   s:F(I('c','m'),EQ,fr(nf(Q1*c1+Q2*c2),nf(Q1+Q2)),EQ,res(x,1,'mg/L')),satz:`Das Gemisch hat eine CSB-Konzentration von ${fmt(x,1)} mg/L.`,
+   tips:['Wie viel CSB bringt jeder der beiden Zuläufe mit (Volumenstrom mal Konzentration)? Durch welchen Gesamtvolumenstrom musst du diese CSB-Menge teilen?',
+     `Zähler (Punkt vor Strich): ${F(z(Q1,'m³/h'),M,z(c1,'mg/L'),PL,z(Q2,'m³/h'),M,z(c2,'mg/L'),EQ,nf(Q1*c1+Q2*c2)+u('m³/h · mg/L'))}.`,
+     `Teile den Zähler (${nf(Q1*c1+Q2*c2)+u('m³/h · mg/L')}) durch die Summe der Volumenströme (${F(z(Q1,'m³/h'),PL,z(Q2,'m³/h'),EQ,z(Q1+Q2,'m³/h'))}). Die Einheit m³/h kürzt sich weg, es bleibt mg/L. Runde auf 4 signifikante Stellen.`]}}},
  {L:'S',g(){const ew=rnd(1.5,9.5,.5),x=ew*1e4*60/1000;return{tag:'Abwasser',ti:'Fracht aus Einwohnerwerten',tx:`Die Kläranlage Schwierbach ist für ${pw(ew,4)} Einwohnerwerte (EW) ausgelegt. Jeder Einwohnerwert bringt 60 g BSB₅ pro Tag. Wie viele Kilogramm BSB₅ kommen täglich an?`,x:B,un:'kg/d',a:x,dc:0,exact:true,
    geg:`${pw(ew,4)} EW = ${nf(ew*1e4)} EW;&nbsp; 60 g BSB₅ pro EW und Tag`,steps:[['Ansatz','Anzahl EW · 60 g, danach g in kg: geteilt durch 1000 = mal 10⁻³'],['In Zehnerpotenzen',`${pw(ew,4)} · 6 · 10¹ g = ${sci(ew*6e5)} g`]],ein:`${sci(ew*6e5)} g · 10⁻³`,
-   s:F(B,EQ,nf(ew*1e4),M,'60 g',EQ,z(ew*1e4*60,'g/d'),EQ,`<span class="result">${nf(x)}${u('kg/d')}</span>`),satz:`Täglich kommen ${nf(x)} kg BSB₅ an.`}}},
+   s:F(B,EQ,nf(ew*1e4),M,'60 g',EQ,z(ew*1e4*60,'g/d'),EQ,`<span class="result">${nf(x)}${u('kg/d')}</span>`),satz:`Täglich kommen ${nf(x)} kg BSB₅ an.`,
+   tips:['Wie viel BSB₅ bringen alle Einwohnerwerte zusammen an einem Tag? Wie rechnest du danach Gramm in Kilogramm um?',
+     `${pw(ew,4)} EW sind ${nf(ew*1e4)} EW. Zusammen bringen sie ${F(pw(ew,4)+' EW',M,z(60,'g/(EW · d)'),EQ,sci(ew*6e5)+u('g/d'))}.`,
+     `Rechne Gramm in Kilogramm um: Teile ${sci(ew*6e5)+u('g/d')} durch 1000 (1 kg = 1000 g, also mal 10⁻³). Ab 1000 schreibst du die ganze Zahl.`]}}},
  {L:'S',g(){const p1=rnd(.8,2.5,.05),p2=rnd(3,6.5,.05),x=p2-p1;return{tag:'Rohrleitungsnetze',ti:'Tiefe unter Gelände',tx:`An einer Baustelle in Schwierbach liegt der Grundwasserspiegel bei −${nf(p1)} m unter Geländeoberkante (GOK), die Rohrsohle der neuen Leitung bei −${nf(p2)} m. Wie hoch steht das Grundwasser über der Rohrsohle?`,x:dh,un:'m',a:x,dc:2,
    geg:`Grundwasser −${nf(p1)} m;&nbsp; Rohrsohle −${nf(p2)} m (bezogen auf GOK)`,steps:[['Ansatz','Höhendifferenz = oberer Wert − unterer Wert'],['Vorzeichen',`(−${nf(p1)}) − (−${nf(p2)}) = −${nf(p1)} + ${nf(p2)}`]],ein:`−${nf(p1)} + ${nf(p2)}`,
-   s:F(dh,EQ,'(−'+nf(p1)+')',MI,'(−'+nf(p2)+')',EQ,res(x,2,'m')),satz:`Das Grundwasser steht ${fmt(x,2)} m über der Rohrsohle – die Baugrube muss entwässert werden.`}}},
+   s:F(dh,EQ,'(−'+nf(p1)+')',MI,'(−'+nf(p2)+')',EQ,res(x,2,'m')),satz:`Das Grundwasser steht ${fmt(x,2)} m über der Rohrsohle – die Baugrube muss entwässert werden.`,
+   tips:['Was liegt höher – der Grundwasserspiegel oder die Rohrsohle? Wie berechnest du den Abstand zwischen zwei negativen Höhenangaben?',
+     `Ansatz: oberer Wert − unterer Wert, also ${F(dh,EQ,'(−'+z(p1,'m')+')',MI,'(−'+z(p2,'m')+')')}.`,
+     `Minus und Minus ergibt Plus: Rechne ${F('−'+z(p1,'m'),PL,z(p2,'m'))}. Das Ergebnis ist in m – runde auf 4 signifikante Stellen.`]}}},
 
  {L:'S',g(){return K.pick([
    ()=>rundeTask({e:[-5,-2],tag:'Abwasser',ti:'Runden: kleine Konzentration',x:c,un:'g/L',tx:t=>`Das Labor der Kläranlage Schwierbach berechnet eine Phosphatkonzentration. Der Taschenrechner zeigt <strong>${t}</strong>. Was notierst du nach der Rundungsregel (4 signifikante Stellen, ab 1000 die ganze Zahl)?`,satz:r=>`Die Konzentration beträgt ${r} g/L.`}),
@@ -334,19 +384,34 @@ const tasks=[
  /* ---------- Vertiefung ---------- */
  {L:'V',g(){const a0=rnd(1.5,4,.1),V0=+(a0**3).toFixed(2),x=Math.cbrt(V0);return{tag:'Wasserversorgung',ti:'Würfelförmiger Behälter',tx:`Im Wasserwerk Schwierbach soll ein würfelförmiger Vorlagebehälter mit ${F(V,EQ,z(V0,'m³'))} gebaut werden. Wie lang ist eine Kante?`,x:a,un:'m',a:x,dc:2,
    geg:F(V,EQ,z(V0,'m³')),steps:[['Formel',F(V,EQ,a+'³')],['Umstellung',`${F(a,EQ,'∛'+V)} – die Gegenoperation zu „hoch 3“ ist die dritte Wurzel`]],ein:`∛${nf(V0)} (Taschenrechner: ${nf(V0)} [ˣ√] 3 oder ${nf(V0)} ^ (1 ÷ 3))`,
-   s:F(a,EQ,'∛'+z(V0,'m³'),EQ,res(x,2,'m')),satz:`Eine Kante ist ${fmt(x,2)} m lang.`}}},
+   s:F(a,EQ,'∛'+z(V0,'m³'),EQ,res(x,2,'m')),satz:`Eine Kante ist ${fmt(x,2)} m lang.`,
+   tips:['Wie hängen beim Würfel Volumen und Kantenlänge zusammen? Welche Rechenart macht „hoch 3“ rückgängig?',
+     `Formel: ${F(V,EQ,a+'³')}, umgestellt: ${F(a,EQ,'∛'+V)}. Eingesetzt wird das Volumen des Vorlagebehälters, ${F(V,EQ,z(V0,'m³'))}.`,
+     `Ziehe die dritte Wurzel aus ${z(V0,'m³')} (Taschenrechner: ${nf(V0)} ^ (1 ÷ 3)). Aus m³ wird dabei m. Runde auf 4 signifikante Stellen.`]}}},
  {L:'V',g(){const gz=pick([15,30]),th=rnd(1,4,.5),k=th*60/gz,N0=pick([100,500,1000]),x=N0*Math.pow(2,k);return{tag:'Abwasser',ti:'Wachstum im Labor',tx:`Im Labor der Kläranlage Schwierbach wird eine Bakterienkultur angesetzt: ${nf(N0)} Bakterien, die sich alle ${gz} Minuten verdoppeln. Wie viele Bakterien sind es nach ${nf(th)} Stunden (ohne Absterben)?`,x:N,un:'Bakterien',a:x,dc:0,
    geg:`${F(I('N','0'),EQ,nf(N0))};&nbsp; Verdopplungszeit ${gz} min;&nbsp; ${F(t,EQ,z(th,'h'),EQ,z(th*60,'min'))}`,steps:[['Anzahl Verdopplungen',`${nf(th*60)} min : ${gz} min = ${nf(k)}`],['Formel',F(N,EQ,I('N','0'),M,'2'+'<sup>'+I('n')+'</sup>')]],ein:`${nf(N0)} · 2${sup(k)}`,
-   s:F(N,EQ,nf(N0),M,'2'+sup(k),EQ,nf(N0),M,nf(Math.pow(2,k)),EQ,res(x,0)),satz:`Nach ${nf(th)} Stunden sind es ${fmt(x,0)} Bakterien.`}}},
+   s:F(N,EQ,nf(N0),M,'2'+sup(k),EQ,nf(N0),M,nf(Math.pow(2,k)),EQ,res(x,0)),satz:`Nach ${nf(th)} Stunden sind es ${fmt(x,0)} Bakterien.`,
+   tips:['Wie oft verdoppeln sich die Bakterien in der gegebenen Zeit? Rechne dazu beide Zeiten in dieselbe Einheit um.',
+     `${F(z(th,'h'),EQ,z(th*60,'min'))}. Anzahl der Verdopplungen: ${F(fr(z(th*60,'min'),z(gz,'min')),EQ,nf(k))}.`,
+     `Multipliziere die Startzahl (${nf(N0)} Bakterien) ${nf(k)}-mal mit 2, also mit ${'2'+sup(k)}. Ab 1000 schreibst du die ganze Zahl.`]}}},
  {L:'V',g(){const cc=rnd(.02,.4,.01),ma=rnd(.8,1.6,.1),x=cc*ma*1e7/1000;return{tag:'Abwasser',ti:'Spurenstoffe pro Jahr',tx:`Im Ablauf der Kläranlage Schwierbach werden ${z(cc,'µg/L')} eines Arzneimittelwirkstoffs gemessen. Pro Jahr fließen ${pw(ma,7)} m³ ab. Wie viele Gramm gelangen jährlich in den Fluss?`,x:B,un:'g/a',a:x,dc:0,
    geg:`${F(c,EQ,z(cc,'µg/L'),EQ,z(cc,'mg/m³'))};&nbsp; ${F(Q,EQ,pw(ma,7)+u('m³/a'))}`,steps:[['Einheit','µg/L = mg/m³ (Modul 2)'],['Ansatz',`${nf(cc)} mg/m³ · ${pw(ma,7)} m³/a, danach mg in g: mal 10⁻³`]],ein:`${sci(cc*ma*1e7)} mg · 10⁻³`,
-   s:F(B,EQ,z(cc,'mg/m³'),M,pw(ma,7)+u('m³/a'),EQ,z(+(cc*ma*1e7).toFixed(0),'mg/a'),EQ,res(x,0,'g/a')),satz:`Jährlich gelangen ${fmt(x,0)} g des Wirkstoffs in den Fluss.`}}},
+   s:F(B,EQ,z(cc,'mg/m³'),M,pw(ma,7)+u('m³/a'),EQ,z(+(cc*ma*1e7).toFixed(0),'mg/a'),EQ,res(x,0,'g/a')),satz:`Jährlich gelangen ${fmt(x,0)} g des Wirkstoffs in den Fluss.`,
+   tips:['Wie rechnest du µg/L in eine Einheit um, die zu m³ passt? Wie viel Wirkstoff steckt dann in der gesamten Jahresabwassermenge?',
+     `${F(z(cc,'µg/L'),EQ,z(cc,'mg/m³'))} (1 mg = 10³ µg und 1 m³ = 10³ L). Jahresfracht: ${F(z(cc,'mg/m³'),M,pw(ma,7)+u('m³/a'),EQ,sci(cc*ma*1e7)+u('mg/a'))}.`,
+     `Rechne Milligramm in Gramm um: Teile ${sci(cc*ma*1e7)+u('mg/a')} durch 10³ (also mal 10⁻³). Ab Tausend schreibst du die ganze Zahl, sonst 4 signifikante Stellen.`]}}},
  {L:'V',g(){const vals=Array.from({length:5},()=>rnd(5.8,8.6,.1)),mean=vals.reduce((p,c)=>p+c,0)/5,mx=Math.max(...vals),x=(mx-mean)*100/mean;return{tag:'Abwasser',ti:'Ausreißer im Messprotokoll',tx:`Fünf Proben aus dem Zulauf ergeben diese Phosphorwerte: ${vals.map(v=>z(v,'mg/L')).join('; ')}. Um wie viel Prozent liegt der höchste Wert über dem Mittelwert?`,x:I('p'),un:'%',a:x,dc:1,
    geg:vals.map(nf).join(' · ')+' (mg/L)',steps:[['Mittelwert',`(${vals.map(nf).join(' + ')}) : 5 = ${fmt(mean,3)} mg/L`],['Abweichung',`${nf(mx)} − ${fmt(mean,3)} = ${fmt(mx-mean,3)} mg/L`]],ein:F(I('p'),EQ,fr(fmt(mx-mean,3)+M+'100',fmt(mean,3))),
-   s:F(I('p'),EQ,fr(fmt(mx-mean,3)+M+'100',fmt(mean,3)),EQ,res(x,1,'%')),satz:`Der höchste Wert liegt ${fmt(x,1)} % über dem Mittelwert.`}}},
+   s:F(I('p'),EQ,fr(fmt(mx-mean,3)+M+'100',fmt(mean,3)),EQ,res(x,1,'%')),satz:`Der höchste Wert liegt ${fmt(x,1)} % über dem Mittelwert.`,
+   tips:['Womit vergleichst du den höchsten Phosphorwert? Rechne zuerst diesen Vergleichswert aus – wie bestimmst du dann die Abweichung in Prozent?',
+     `Mittelwert: ${F('('+vals.map(v=>z(v,'mg/L')).join(PL)+') : 5',EQ,fmt(mean)+u('mg/L'))}. Der höchste Wert ist ${z(mx,'mg/L')}.`,
+     `Ziehe den Mittelwert (${fmt(mean)+u('mg/L')}) vom höchsten Wert (${z(mx,'mg/L')}) ab. Teile die Differenz durch den Mittelwert und multipliziere mit 100 %. Runde auf 4 signifikante Stellen.`]}}},
  {L:'V',g(){const P1=rnd(8,30,.5),n1=1450,f=rnd(.6,.9,.05),n2=Math.round(n1*f),x=P1*Math.pow(n2/n1,3);return{tag:'Abwasser',ti:'Drehzahl absenken im Pumpwerk Talstraße',tx:`Eine Pumpe im Pumpwerk Talstraße nimmt bei ${n1} min⁻¹ eine Leistung von ${z(P1,'kW')} auf. Mit einem Frequenzumrichter wird die Drehzahl auf ${nf(n2)} min⁻¹ gesenkt. Nach dem Affinitätsgesetz gilt ${F(I('P','2'),EQ,I('P','1'),M,'(',fr(I('n','2'),I('n','1')),')³')}. Welche Leistung nimmt die Pumpe jetzt auf?`,x:I('P','2'),un:'kW',a:x,dc:2,
    geg:`${F(I('P','1'),EQ,z(P1,'kW'))};&nbsp; ${F(I('n','1'),EQ,n1+u('min⁻¹'))};&nbsp; ${F(I('n','2'),EQ,nf(n2)+u('min⁻¹'))}`,steps:[['Verhältnis',`${nf(n2)} : ${n1} = ${fmt(n2/n1,4)}`],['Hoch drei',`${fmt(n2/n1,4)}³ = ${fmt(Math.pow(n2/n1,3),4)} – die Klammer kommt vor dem Malnehmen`]],ein:F(I('P','2'),EQ,z(P1,'kW'),M,fmt(Math.pow(n2/n1,3),4)),
-   s:F(I('P','2'),EQ,z(P1,'kW'),M,'(',fr(nf(n2),n1),')³',EQ,res(x,2,'kW')),satz:`Die Pumpe nimmt nur noch ${fmt(x,2)} kW auf – bei ${Math.round(f*100)} % Drehzahl sinkt die Leistung auf rund ${Math.round(f**3*100)} %.`}}}
+   s:F(I('P','2'),EQ,z(P1,'kW'),M,'(',fr(nf(n2),n1),')³',EQ,res(x,2,'kW')),satz:`Die Pumpe nimmt nur noch ${fmt(x,2)} kW auf – bei ${Math.round(f*100)} % Drehzahl sinkt die Leistung auf rund ${Math.round(f**3*100)} %.`,
+   tips:['Um welchen Faktor wurde die Drehzahl gesenkt (Verhältnis neue zu alter Drehzahl)? Was passiert laut Affinitätsgesetz mit diesem Verhältnis, bevor du mit der alten Leistung malnimmst?',
+     `Drehzahlverhältnis: ${F(fr(I('n','2'),I('n','1')),EQ,fr(nf(n2)+u('min⁻¹'),n1+u('min⁻¹')),EQ,fmt(n2/n1))} – die Einheit min⁻¹ kürzt sich weg.`,
+     `Nimm das Verhältnis ${fmt(n2/n1)} hoch 3 (Klammer zuerst) und multipliziere das Ergebnis mit ${z(P1,'kW')}. Runde auf 4 signifikante Stellen.`]}}}
 ];
 
 const examples={

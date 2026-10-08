@@ -117,6 +117,7 @@
 (function(){
 const {I,fr,F,M,MI,PL,EQ,u,nf,fmt,rnd,pick,res,sqr}=K;
 const z=(x,un)=>`${nf(x)}${u(un)}`;
+const lage=(v,lab,kw,un)=>{const r=v%lab;return r===0?`${z(v,un)} liegt genau auf einer beschrifteten Linie.`:`${z(v,un)} liegt ${nf(r/kw)} Kästchen rechts von der Beschriftung ${z(v-r,un)}.`};
 const Q=I('Q'),H=I('H'),h=I('h'),t=I('t'),A=I('A'),U=I('U'),R=I('R'),Ic=I('I'),eta=I('η'),m=I('m');
 
 /* ---------- Kurvenmodelle ---------- */
@@ -163,48 +164,75 @@ const tasks=[
  {L:'B',g(){const qn=rnd(160,300,10),qp=rnd(520,880,20),f=gangFn(qn,qp),ymax=Math.ceil((qp+40)/100)*100,hh=pick([2,5,7,9,11,13,14,16,18,20,22]),x=f(hh);
    return{tag:'Abwasser',ti:'Ganglinie ablesen',tx:`Die Ganglinie zeigt den Zufluss zur Kläranlage Schwierbach an einem Trockenwettertag. Wie groß ist der Zufluss um ${hh} Uhr?${gangChart(f,ymax)}`,x:Q,un:'m³/h',a:x,tol:12,
    geg:'Ganglinie (Diagramm)',steps:[['Kästchenwert','x-Achse: 4 h in 4 Kästchen → 1 Kästchen = 1 h. y-Achse: 100 m³/h in 5 Kästchen → 1 Kästchen = 20 m³/h.'],['Ablesen',`Bei ${hh} Uhr senkrecht nach oben bis zur Kurve, dann waagerecht zur y-Achse.`]],ein:'Wert an der y-Achse ablesen und zwischen den Linien schätzen.',
-   s:gangChart(f,ymax,{guides:[{x:hh,y:x}],points:[{x:hh,y:x,label:'≈ '+Math.round(x/10)*10+' m³/h'}]})+F(Q,' ≈ ',`<span class="result">${Math.round(x/10)*10}${u('m³/h')}</span>`),satz:`Um ${hh} Uhr fließen etwa ${Math.round(x/10)*10} m³/h zu.`}}},
+   s:gangChart(f,ymax,{guides:[{x:hh,y:x}],points:[{x:hh,y:x,label:'≈ '+Math.round(x/10)*10+' m³/h'}]})+F(Q,' ≈ ',`<span class="result">${Math.round(x/10)*10}${u('m³/h')}</span>`),satz:`Um ${hh} Uhr fließen etwa ${Math.round(x/10)*10} m³/h zu.`,
+   tips:[`Welche Achse zeigt die Uhrzeit, welche den Zufluss ${Q}? Wo auf der x-Achse findest du ${nf(hh)} Uhr?`,
+   `Kästchenwert: x-Achse ${z(4,'h')} in 4 Kästchen → 1 Kästchen = ${z(1,'h')}. y-Achse ${z(100,'m³/h')} in 5 Kästchen → 1 Kästchen = ${z(20,'m³/h')}. ${lage(hh,4,1,'h')}`,
+   `Geh bei ${z(hh,'h')} senkrecht nach oben bis zur Kurve, dann waagerecht nach links zur y-Achse. Zähle die Kästchen ab der letzten beschrifteten Linie (je ${z(20,'m³/h')}) und schätze den Rest auf etwa ${z(10,'m³/h')} genau.`]}}},
  {L:'B',g(){const tStar=pick([1.5,2,2.5,3,3.5,4,4.5,5,5.5,6]),h0=rnd(.4,1.2,.2),X=+(h0+rnd(1.2,3.2,.2)).toFixed(1),mm=(X-h0)/tStar,ymax=Math.ceil((h0+mm*8)+.5),x=tStar;
    const plot=o=>K.plot(Object.assign({x0:0,x1:8,dx:1,mx:4,y0:0,y1:ymax,dy:1,my:5,xl:'Zeit t in h',yl:'Füllstand h in m',aria:'Füllstand über die Zeit',series:[{f:tt=>h0+mm*tt}],hl:[{y:X,label:'h = '+nf(X)+' m'}]},o||{}));
    return{tag:'Abwasser',ti:'Wann ist das Speicherbecken voll genug?',tx:`Nach einem Regen füllt sich das Speicherbecken der Kläranlage Schwierbach. Ab einem Füllstand von ${z(X,'m')} soll die zweite Pumpe zugeschaltet werden. Nach wie vielen Stunden ist das der Fall?${plot()}`,x:t,un:'h',a:x,tol:.15,
    geg:'Füllstand über die Zeit (Diagramm)',steps:[['Kästchenwert','x-Achse: 1 h in 4 Kästchen → 1 Kästchen = 15 min = 0,25 h.'],['Ablesen umgekehrt',`Diesmal startest du an der y-Achse: bei ${nf(X)} m waagerecht bis zur Geraden, dann senkrecht nach unten zur x-Achse.`]],ein:'Wert an der x-Achse ablesen.',
-   s:plot({guides:[{x:tStar,y:X}],points:[{x:tStar,y:X,label:nf(tStar)+' h'}]})+F(t,' ≈ ',`<span class="result">${nf(tStar)}${u('h')}</span>`),satz:`Nach etwa ${nf(tStar)} Stunden wird die zweite Pumpe zugeschaltet.`}}},
+   s:plot({guides:[{x:tStar,y:X}],points:[{x:tStar,y:X,label:nf(tStar)+' h'}]})+F(t,' ≈ ',`<span class="result">${nf(tStar)}${u('h')}</span>`),satz:`Nach etwa ${nf(tStar)} Stunden wird die zweite Pumpe zugeschaltet.`,
+   tips:[`Diesmal ist der Füllstand gegeben und die Zeit gesucht. An welcher Achse startest du – und an welcher Achse liest du am Ende ab?`,
+   `Kästchenwert: x-Achse ${z(1,'h')} in 4 Kästchen → 1 Kästchen = ${z(0.25,'h')} (15 min). y-Achse ${z(1,'m')} in 5 Kästchen → 1 Kästchen = ${z(0.2,'m')}. Die waagerechte Linie im Diagramm markiert ${h} = ${z(X,'m')}.`,
+   `Geh von ${z(X,'m')} an der y-Achse waagerecht bis zur Geraden, dann senkrecht nach unten zur x-Achse. Zähle die Kästchen ab der letzten vollen Stunde (je ${z(0.25,'h')}) und gib die Zeit als Dezimalzahl in h an.`]}}},
 
  {L:'B',g(){const qn=rnd(160,300,10),qp=rnd(520,880,20),f=gangFn(qn,qp),ymax=Math.ceil((qp+40)/100)*100;let best=0;for(let x=0;x<=24;x+=.05)if(f(x)>f(best))best=x;const x=best;
    return{tag:'Abwasser',ti:'Wann kommt am meisten?',tx:`Zu welcher Uhrzeit fließt der Kläranlage Schwierbach an diesem Tag das meiste Abwasser zu? Gib die Uhrzeit in Stunden an (z. B. 10,5 für 10:30 Uhr).${gangChart(f,ymax)}`,x:t,un:'h',a:x,tol:.5,tolText:'Lies so genau ab, wie es geht. Erlaubte Abweichung: ±0,5 h (eine halbe Stunde).',
    geg:'Ganglinie (Diagramm)',steps:[['Höchster Punkt','Suche den höchsten Punkt der Kurve – die Spitze.'],['Ablesen','Von der Spitze senkrecht nach unten zur x-Achse. 1 Kästchen = 1 h.']],ein:'Uhrzeit an der x-Achse ablesen.',
-   s:gangChart(f,ymax,{guides:[{x,y:f(x)}],points:[{x,y:f(x),label:'Spitze',dx:10,dy:-6}]})+F(t,' ≈ ',`<span class="result">${nf(Math.round(x*2)/2)}${u('h')}</span>`),satz:`Der größte Zufluss kommt gegen ${nf(Math.round(x*2)/2)} Uhr – die Vormittagsspitze.`}}},
+   s:gangChart(f,ymax,{guides:[{x,y:f(x)}],points:[{x,y:f(x),label:'Spitze',dx:10,dy:-6}]})+F(t,' ≈ ',`<span class="result">${nf(Math.round(x*2)/2)}${u('h')}</span>`),satz:`Der größte Zufluss kommt gegen ${nf(Math.round(x*2)/2)} Uhr – die Vormittagsspitze.`,
+   tips:[`Gesucht ist eine Uhrzeit – also ein Wert auf der x-Achse. Welcher Punkt der Ganglinie gehört zum größten Zufluss?`,
+   `Die Ganglinie hat zwei Spitzen: eine vormittags, eine am frühen Abend. Vergleiche ihre Höhe an der y-Achse – die höhere Spitze zählt. Auf der x-Achse gilt: 1 Kästchen = ${z(1,'h')}.`,
+   `Geh vom höchsten Punkt der Kurve senkrecht nach unten zur x-Achse. Zähle die Kästchen ab der letzten beschrifteten Uhrzeit (je ${z(1,'h')}) und gib das Ergebnis als Dezimalzahl an – eine halbe Stunde ist ${z(0.5,'h')}.`]}}},
  /* Standard */
  {L:'S',g(){const p=pumpe(),qq=pick([10,20,30,40,50,60].filter(v=>v<p.Qx-5)),x=p.fp(qq);
    return{tag:'Rohrleitungsnetze',ti:'Pumpenkennlinie ablesen',tx:`Das Datenblatt der neuen Pumpe für das Pumpwerk Talstraße enthält diese Kennlinie. Welche Förderhöhe schafft die Pumpe bei ${Q} = ${z(qq,'L/s')}?${pumpChart(p)}`,x:H,un:'m',a:x,tol:.6,
    geg:'Pumpenkennlinie (Diagramm)',steps:[['Kästchenwert','x-Achse: 20 L/s in 4 Kästchen → 5 L/s. y-Achse: 5 m in 5 Kästchen → 1 m.'],['Ablesen',`Bei ${nf(qq)} L/s senkrecht hoch zur Kennlinie, dann waagerecht zur y-Achse.`]],ein:'Wert an der y-Achse ablesen, zwischen den Linien schätzen.',
-   s:pumpChart(p,{guides:[{x:qq,y:x}],points:[{x:qq,y:x,label:'≈ '+fmt(Math.round(x*2)/2)+' m'}]})+F(H,' ≈ ',`<span class="result">${nf(Math.round(x*2)/2)}${u('m')}</span>`),satz:`Bei ${nf(qq)} L/s schafft die Pumpe etwa ${nf(Math.round(x*2)/2)} m Förderhöhe.`}}},
+   s:pumpChart(p,{guides:[{x:qq,y:x}],points:[{x:qq,y:x,label:'≈ '+fmt(Math.round(x*2)/2)+' m'}]})+F(H,' ≈ ',`<span class="result">${nf(Math.round(x*2)/2)}${u('m')}</span>`),satz:`Bei ${nf(qq)} L/s schafft die Pumpe etwa ${nf(Math.round(x*2)/2)} m Förderhöhe.`,
+   tips:[`Gegeben ist der Förderstrom ${Q} = ${z(qq,'L/s')}. Auf welcher Achse findest du ihn, und an welcher Achse liest du die Förderhöhe ${H} ab?`,
+   `Kästchenwert: x-Achse ${z(20,'L/s')} in 4 Kästchen → 1 Kästchen = ${z(5,'L/s')}. y-Achse ${z(5,'m')} in 5 Kästchen → 1 Kästchen = ${z(1,'m')}. ${lage(qq,20,5,'L/s')}`,
+   `Geh bei ${z(qq,'L/s')} senkrecht nach oben bis zur Pumpenkennlinie, dann waagerecht nach links zur y-Achse. Zähle die Kästchen ab der letzten beschrifteten Linie (je ${z(1,'m')}) und schätze auf etwa ${z(0.5,'m')} genau.`]}}},
  {L:'S',g(){const qn=rnd(160,300,10),qp=rnd(520,880,20),f=gangFn(qn,qp),ymax=Math.ceil((qp+40)/100)*100,[h1,h2]=pick([[4,8],[5,9],[6,10],[4,10],[14,18],[15,19],[16,20]]),x=f(h2)-f(h1);
    return{tag:'Abwasser',ti:'Wie stark steigt der Zufluss?',tx:`Um wie viel m³/h steigt der Zufluss zur Kläranlage Schwierbach zwischen ${h1} Uhr und ${h2} Uhr?${gangChart(f,ymax)}`,x:'Δ'+Q,un:'m³/h',a:x,tol:24,
    geg:'Ganglinie (Diagramm)',steps:[['Zwei Werte ablesen',`Lies den Zufluss um ${h1} Uhr und um ${h2} Uhr ab.`],['Differenz','Änderung = späterer Wert − früherer Wert']],ein:`${F('Δ'+Q,EQ,I('Q',h2+' Uhr'),MI,I('Q',h1+' Uhr'))}`,
-   s:gangChart(f,ymax,{guides:[{x:h1,y:f(h1)},{x:h2,y:f(h2)}],points:[{x:h1,y:f(h1),label:'≈ '+Math.round(f(h1)/10)*10,dx:-8,anchor:'end'},{x:h2,y:f(h2),label:'≈ '+Math.round(f(h2)/10)*10}]})+F('Δ'+Q,' ≈ ',Math.round(f(h2)/10)*10+' − '+Math.round(f(h1)/10)*10,EQ,`<span class="result">${Math.round(f(h2)/10)*10-Math.round(f(h1)/10)*10}${u('m³/h')}</span>`),satz:`Der Zufluss ${x>=0?'steigt':'sinkt'} um etwa ${Math.abs(Math.round(f(h2)/10)*10-Math.round(f(h1)/10)*10)} m³/h.`}}},
+   s:gangChart(f,ymax,{guides:[{x:h1,y:f(h1)},{x:h2,y:f(h2)}],points:[{x:h1,y:f(h1),label:'≈ '+Math.round(f(h1)/10)*10,dx:-8,anchor:'end'},{x:h2,y:f(h2),label:'≈ '+Math.round(f(h2)/10)*10}]})+F('Δ'+Q,' ≈ ',Math.round(f(h2)/10)*10+' − '+Math.round(f(h1)/10)*10,EQ,`<span class="result">${Math.round(f(h2)/10)*10-Math.round(f(h1)/10)*10}${u('m³/h')}</span>`),satz:`Der Zufluss ${x>=0?'steigt':'sinkt'} um etwa ${Math.abs(Math.round(f(h2)/10)*10-Math.round(f(h1)/10)*10)} m³/h.`,
+   tips:[`Du brauchst zwei Ablesewerte: den Zufluss um ${nf(h1)} Uhr und um ${nf(h2)} Uhr. Wie berechnest du daraus die Änderung?`,
+   `Kästchenwert: x-Achse 1 Kästchen = ${z(1,'h')}, y-Achse ${z(100,'m³/h')} in 5 Kästchen → 1 Kästchen = ${z(20,'m³/h')}. Lies zuerst bei ${z(h1,'h')} ab: senkrecht hoch zur Kurve, waagerecht nach links. Danach genauso bei ${z(h2,'h')}.`,
+   `Rechne späterer Wert minus früherer Wert: ${F('Δ'+Q,EQ,I('Q',h2+' Uhr'),MI,I('Q',h1+' Uhr'))}, beide in m³/h. Wird der Zufluss kleiner, ist die Änderung negativ.`]}}},
  {L:'S',g(){const Rv=pick([20,25,40,50,80,100]),Imax=5,Umax=Math.ceil(Rv*Imax/100)*100,Ip=pick([2,3,4]),x=Rv;
    const plot=o=>K.plot(Object.assign({x0:0,x1:Imax,dx:1,mx:5,y0:0,y1:Umax,dy:Umax/5,my:5,xl:'Strom I in A',yl:'Spannung U in V',aria:'U-I-Kennlinie eines Widerstands',series:[{f:i=>Rv*i}]},o||{}));
    return{tag:'Elektrotechnik',ti:'Widerstand aus der Kennlinie',tx:`Für einen Heizwiderstand im Schaltschrank des Pumpwerks Talstraße wurde die U-I-Kennlinie gemessen. Lies bei ${Ic} = ${z(Ip,'A')} die Spannung ab und berechne den Widerstand ${R}.${plot()}`,x:R,un:'Ω',a:x,tol:Rv*0.04,tolText:`Lies so genau ab, wie es geht. Erlaubte Abweichung: ±${nf(+(Rv*0.04).toFixed(1))} Ω.`,
    geg:`U-I-Kennlinie (Diagramm);&nbsp; ${F(Ic,EQ,z(Ip,'A'))}`,steps:[['Ablesen',`Bei ${Ip} A hoch zur Geraden, dann nach links: ${U} ablesen.`],['Formel',F(R,EQ,fr(U,Ic))]],ein:F(R,EQ,fr(z(Rv*Ip,'V'),z(Ip,'A'))),
-   s:plot({guides:[{x:Ip,y:Rv*Ip}],points:[{x:Ip,y:Rv*Ip,label:z(Rv*Ip,'V')}]})+F(R,EQ,fr(z(Rv*Ip,'V'),z(Ip,'A')),EQ,res(x,0,'Ω')),satz:`Der Heizwiderstand hat ${nf(x)} Ω.`}}},
+   s:plot({guides:[{x:Ip,y:Rv*Ip}],points:[{x:Ip,y:Rv*Ip,label:z(Rv*Ip,'V')}]})+F(R,EQ,fr(z(Rv*Ip,'V'),z(Ip,'A')),EQ,res(x,0,'Ω')),satz:`Der Heizwiderstand hat ${nf(x)} Ω.`,
+   tips:[`Zwei Schritte: Erst liest du bei ${Ic} = ${z(Ip,'A')} die Spannung ${U} ab. Mit welcher Formel bekommst du aus ${U} und ${Ic} den Widerstand ${R}?`,
+   `Kästchenwert: x-Achse ${z(1,'A')} in 5 Kästchen → 1 Kästchen = ${z(0.2,'A')}. y-Achse: Zahlenabstand der Beschriftung durch 5 Kästchen → 1 Kästchen = ${z(Umax/25,'V')}. Formel: ${F(R,EQ,fr(U,Ic))}.`,
+   `Geh bei ${z(Ip,'A')} senkrecht hoch zur Geraden, dann waagerecht nach links: Dort liest du ${U} in V ab. Teile diese Spannung durch ${z(Ip,'A')} – V : A ergibt Ω.`]}}},
 
  /* Vertiefung */
  {L:'V',g(){const p=pumpe(),x=p.Qb,Hb=p.fp(x);
    const o={series:[{f:p.fp,label:'Pumpe',lx:p.Qx*0.12,ly:p.fp(p.Qx*0.12),anchor:'start',ldx:4,ldy:-10},{f:p.fa,color:'var(--lv)',label:'Anlage',lx:p.Qx*0.97,ly:Math.min(p.fa(p.Qx*0.97),Math.ceil((p.H0+3)/5)*5-1),ldx:-4,ldy:16}]};
    return{tag:'Rohrleitungsnetze',ti:'Betriebspunkt bestimmen',tx:`Für die Druckleitung vom Pumpwerk Talstraße zur Kläranlage Schwierbach sind Pumpen- und Anlagenkennlinie eingezeichnet. Welchen Förderstrom ${Q} liefert die Pumpe im Betriebspunkt?${pumpChart(p,o)}`,x:Q,un:'L/s',a:x,tol:2.5,
    geg:'Pumpen- und Anlagenkennlinie (Diagramm)',steps:[['Betriebspunkt','Suche den Schnittpunkt der beiden Kennlinien.'],['Ablesen','Vom Schnittpunkt senkrecht nach unten zur x-Achse. 1 Kästchen = 5 L/s.']],ein:'Q an der x-Achse ablesen.',
-   s:pumpChart(p,Object.assign({},o,{guides:[{x,y:Hb}],points:[{x,y:Hb,label:'BP',dx:10,dy:20}]}))+F(Q,' ≈ ',`<span class="result">${nf(Math.round(x))}${u('L/s')}</span>`,'; ',H,' ≈ ',nf(Math.round(Hb*2)/2)+u('m')),satz:`Im Betriebspunkt fördert die Pumpe etwa ${nf(Math.round(x))} L/s bei rund ${nf(Math.round(Hb*2)/2)} m Förderhöhe.`}}},
+   s:pumpChart(p,Object.assign({},o,{guides:[{x,y:Hb}],points:[{x,y:Hb,label:'BP',dx:10,dy:20}]}))+F(Q,' ≈ ',`<span class="result">${nf(Math.round(x))}${u('L/s')}</span>`,'; ',H,' ≈ ',nf(Math.round(Hb*2)/2)+u('m')),satz:`Im Betriebspunkt fördert die Pumpe etwa ${nf(Math.round(x))} L/s bei rund ${nf(Math.round(Hb*2)/2)} m Förderhöhe.`,
+   tips:[`Im Diagramm sind zwei Kurven eingezeichnet. In welchem Punkt liefert die Pumpe genau die Förderhöhe, die die Anlage verlangt? Und an welcher Achse steht der Förderstrom ${Q}?`,
+   `Der Betriebspunkt ist der Schnittpunkt der Pumpenkennlinie (fällt nach rechts ab) mit der Anlagenkennlinie (beginnt bei ${I('H','geo')} = ${z(p.Hg,'m')} und steigt). x-Achse: ${z(20,'L/s')} in 4 Kästchen → 1 Kästchen = ${z(5,'L/s')}.`,
+   `Geh vom Schnittpunkt senkrecht nach unten zur x-Achse. Zähle die Kästchen ab der letzten beschrifteten Linie (je ${z(5,'L/s')}) und schätze den Rest zwischen zwei Linien.`]}}},
  {L:'V',g(){const mm=pick([.2,.25,.3,.4,.5]),h0=rnd(.4,1.2,.2),A0=pick([150,200,250,300,400,500]),ymax=Math.ceil(h0+mm*6+.3),x=A0*mm;
    const plot=o=>K.plot(Object.assign({x0:0,x1:6,dx:1,mx:4,y0:0,y1:ymax,dy:1,my:5,xl:'Zeit t in h',yl:'Füllstand h in m',aria:'Füllstand im Speicherbecken',series:[{f:tt=>h0+mm*tt}]},o||{}));
    return{tag:'Abwasser',ti:'Zufluss aus der Füllstandskurve',tx:`Das Speicherbecken der Kläranlage Schwierbach hat eine Grundfläche von ${A} = ${z(A0,'m²')} und senkrechte Wände. Das Leitsystem zeichnet den Füllstand auf. Wie groß ist der Zufluss ${Q} in m³/h? Es gilt ${F(Q,EQ,A,M,fr('Δ'+h,'Δ'+t))}.${plot()}`,x:Q,un:'m³/h',a:x,tol:x*0.05,tolText:`Abgelesene Werte sind nicht ganz genau. Erlaubte Abweichung: ±${nf(+(x*0.05).toFixed(1))} m³/h.`,
    geg:`${F(A,EQ,z(A0,'m²'))};&nbsp; Füllstandskurve (Diagramm)`,steps:[['Steigung ablesen',`Zwei weit auseinanderliegende Punkte wählen, z. B. bei 0 h und 6 h: ${F('Δ'+h+'/Δ'+t)}`],['Formel',F(Q,EQ,A,M,fr('Δ'+h,'Δ'+t))]],ein:`${F(fr('Δ'+h,'Δ'+t),EQ,fr(nf(+(h0+mm*6).toFixed(2))+' m − '+nf(h0)+' m','6 h'),EQ,nf(mm)+u('m/h'))}`,
-   s:plot({points:[{x:0,y:h0,label:nf(h0)+' m',dx:8,dy:-8},{x:6,y:h0+mm*6,label:nf(+(h0+mm*6).toFixed(2))+' m',anchor:'end',dx:-8}]})+`${F(fr('Δ'+h,'Δ'+t),EQ,nf(mm)+u('m/h'))}<br>${F(Q,EQ,z(A0,'m²'),M,nf(mm)+u('m/h'),EQ,res(x,0,'m³/h'))}`,satz:`Es fließen etwa ${fmt(x)} m³/h zu.`}}},
+   s:plot({points:[{x:0,y:h0,label:nf(h0)+' m',dx:8,dy:-8},{x:6,y:h0+mm*6,label:nf(+(h0+mm*6).toFixed(2))+' m',anchor:'end',dx:-8}]})+`${F(fr('Δ'+h,'Δ'+t),EQ,nf(mm)+u('m/h'))}<br>${F(Q,EQ,z(A0,'m²'),M,nf(mm)+u('m/h'),EQ,res(x,0,'m³/h'))}`,satz:`Es fließen etwa ${fmt(x)} m³/h zu.`,
+   tips:[`Zwei Schritte: Um wie viele Meter steigt der Füllstand pro Stunde? Und wie wird daraus mit der Grundfläche ${A} ein Zufluss in m³/h?`,
+   `Kästchenwert: x-Achse ${z(1,'h')} in 4 Kästchen → ${z(0.25,'h')}, y-Achse ${z(1,'m')} in 5 Kästchen → ${z(0.2,'m')}. Lies den Füllstand bei ${z(0,'h')} und bei ${z(6,'h')} ab und bilde ${F(fr('Δ'+h,'Δ'+t),EQ,fr(I('h','6 h')+' − '+I('h','0 h'),z(6,'h')))}.`,
+   `Multipliziere die Steigung ${fr('Δ'+h,'Δ'+t)} (in m/h) mit der Grundfläche ${A} = ${z(A0,'m²')}. Einheiten: m² · m/h = m³/h.`]}}},
  {L:'V',g(){const p=pumpe(),eMax=rnd(.72,.84,.01),Qo=p.Qx*.6,fe=q=>Math.max(0,100*eMax*(1-((q-Qo)/Qo)**2)),qq=pick([20,30,40,50,70,80].filter(v=>v<p.Qx-5&&v!==Math.round(Qo))),x=fe(qq);
    const plot=o=>K.plot(Object.assign({x0:0,x1:p.Qx,dx:20,mx:4,y0:0,y1:100,dy:20,my:4,xl:'Förderstrom Q in L/s',yl:'Wirkungsgrad η in %',aria:'Wirkungsgradkennlinie',series:[{f:fe,color:'var(--ok)'}]},o||{}));
    return{tag:'Elektrotechnik',ti:'Wirkungsgrad schätzen',tx:`Für den Energiecheck im Pumpwerk Talstraße brauchst du den Pumpenwirkungsgrad. Schätze ihn aus der Kennlinie des Herstellers für ${Q} = ${z(qq,'L/s')}.${plot()}`,x:eta,un:'%',a:x,tol:2.5,
    geg:'Wirkungsgradkennlinie (Diagramm)',steps:[['Kästchenwert','y-Achse: 20 % in 4 Kästchen → 1 Kästchen = 5 %.'],['Schätzen','Die Kurve ist gekrümmt. Lies am Diagramm sorgfältig ab und schätze zwischen den Linien.']],ein:'η an der y-Achse ablesen.',
-   s:plot({guides:[{x:qq,y:x}],points:[{x:qq,y:x,label:'≈ '+Math.round(x)+' %'}]})+F(eta,' ≈ ',`<span class="result">${Math.round(x)}${u('%')}</span>`),satz:`Bei ${nf(qq)} L/s arbeitet die Pumpe mit einem Wirkungsgrad von etwa ${Math.round(x)} %.`}}}
+   s:plot({guides:[{x:qq,y:x}],points:[{x:qq,y:x,label:'≈ '+Math.round(x)+' %'}]})+F(eta,' ≈ ',`<span class="result">${Math.round(x)}${u('%')}</span>`),satz:`Bei ${nf(qq)} L/s arbeitet die Pumpe mit einem Wirkungsgrad von etwa ${Math.round(x)} %.`,
+   tips:[`Gegeben ist ${Q} = ${z(qq,'L/s')} auf der x-Achse. An welcher Achse liest du den Wirkungsgrad ${eta} ab, und in welcher Einheit?`,
+   `Kästchenwert: x-Achse ${z(20,'L/s')} in 4 Kästchen → 1 Kästchen = ${z(5,'L/s')}. y-Achse ${z(20,'%')} in 4 Kästchen → 1 Kästchen = ${z(5,'%')}. ${lage(qq,20,5,'L/s')}`,
+   `Geh bei ${z(qq,'L/s')} senkrecht nach oben bis zur Wirkungsgradkurve, dann waagerecht nach links zur y-Achse. Die Kurve ist gekrümmt: Zähle die Kästchen (je ${z(5,'%')}) und schätze sorgfältig auf etwa ${z(1,'%')} genau.`]}}}
 ];
 
 /* ---------- Schritt für Schritt ---------- */

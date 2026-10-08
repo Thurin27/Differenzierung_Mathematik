@@ -148,11 +148,20 @@ function tr(e0,e1){
 }
 function runde(o){
   const t=tr(o.e[0],o.e[1]),a=t.big?Math.round(t.raw):K.r4(t.raw);
+  const dg=t.txt.replace(/[^\d]/g,'').replace(/^0+/,''),ip=t.txt.split(',')[0].replace(/[^\d]/g,''),auf=t.d5>=5;
+  const tips=t.big?['Die Zahl ist 1000 oder größer. Dann schreibst du die ganze Zahl. Ohne Komma. Welche Ziffer entscheidet über das Runden?',
+      `Vor dem Komma stehen ${ip.length} Ziffern. Sie bleiben stehen. Die erste Ziffer nach dem Komma ist ${t.d5}. Sie entscheidet.`,
+      (auf?`${t.d5} ist 5 oder mehr. Also aufrunden. Die letzte Ziffer vor dem Komma wird um 1 größer.${ip.slice(-1)==='9'?' Sie ist eine 9. Dann wird sie 0. Die Ziffer davor wird um 1 größer.':''}`
+          :`${t.d5} ist kleiner als 5. Also abrunden. Die Ziffern vor dem Komma bleiben so.`)+` Lass alles nach dem Komma weg. Schreibe die Einheit ${o.un} dazu.`]
+    :['Wo fängst du an zu zählen? Die Nullen am Anfang zählen nicht. Wie viele Ziffern bleiben stehen?',
+      `Diese 4 Ziffern bleiben stehen: ${dg.slice(0,4).split('').join(', ')}. Die 5. Ziffer ist ${dg[4]}. Sie entscheidet.`,
+      (auf?`${dg[4]} ist 5 oder mehr. Also aufrunden. Die 4. Ziffer (${dg[3]}) wird um 1 größer.${dg[3]==='9'?' Sie ist eine 9. Dann wird sie 0. Die Ziffer davor wird um 1 größer.':''}`
+          :`${dg[4]} ist kleiner als 5. Also abrunden. Die 4 Ziffern bleiben so.`)+`${t.raw<1?' Die Nullen am Anfang bleiben stehen.':''} Das Komma bleibt an seinem Platz. Lass den Rest weg. Schreibe die Einheit ${o.un} dazu.`];
   return{tag:o.tag,ti:o.ti,tx:tx(o.sit,[['Anzeige',t.txt+u(o.un)]],t.big?'Die Zahl ist größer als 1000. Was schreibst du auf?':'Runde auf 4 Stellen. Was schreibst du auf?',o.start),
     x:o.x,un:o.un,a,raw:t.raw,sig:true,geg:`Anzeige: ${t.txt}${u(o.un)}`,
     steps:t.big?[['Regel','Die Zahl ist 1000 oder größer. Du schreibst die ganze Zahl ohne Komma.'],['Erste Ziffer nach dem Komma',`Sie ist ${t.d5}. Also ${t.d5>=5?'aufrunden':'abrunden'}.`]]
                :[['Regel','Zähle ab der ersten Ziffer, die nicht 0 ist. 4 Ziffern bleiben.'],['5. Ziffer',`Sie ist ${t.d5}. Also ${t.d5>=5?'aufrunden':'abrunden'}.`]],
-    ein:'Schreibe die gerundete Zahl auf.',s:F(t.txt+u(o.un),' ≈ ',`<span class="result">${K.fmt(t.raw)}${u(o.un)}</span>`),satz:o.satz(K.fmt(t.raw))};
+    ein:'Schreibe die gerundete Zahl auf.',s:F(t.txt+u(o.un),' ≈ ',`<span class="result">${K.fmt(t.raw)}${u(o.un)}</span>`),satz:o.satz(K.fmt(t.raw)),tips};
 }
 function lcd(mm,e){const ms=mm.toFixed(4).replace(/0+$/,'').replace(/\.$/,'');return `<span class="lcd lcd-inline"><span class="lcd-m">${ms}</span><span class="lcd-x">×10<sup>${e<0?'−':''}${String(Math.abs(e)).padStart(2,'0')}</sup></span></span>`}
 function anzeige(o){
@@ -164,13 +173,20 @@ function anzeige(o){
       for(const k of [-2,-1,1,2]){if(Math.abs(x/(a*Math.pow(10,k))-1)<0.002)return `Fast. Zähle noch einmal: Das Komma muss ${Math.abs(e)} Stellen nach ${dir}.`}
       return '';},
     geg:`Anzeige: ${lcd(mm,e)}`,steps:[['Hochzahl',`Die Hochzahl ist ${e<0?'−':''}${Math.abs(e)}. Komma ${Math.abs(e)} Stellen nach ${dir}.`],['Komma schieben',`${nf(mm)} → ${nf(a)}`]],
-    ein:`${nf(a)} auf 4 Stellen runden`,s:F(nf(mm),'&#8239;·&#8239;10'+sup(e),EQ,nf(a),' ≈ ',`<span class="result">${K.fmt(a)}${u(o.un)}</span>`),satz:o.satz(K.fmt(a))};
+    ein:`${nf(a)} auf 4 Stellen runden`,s:F(nf(mm),'&#8239;·&#8239;10'+sup(e),EQ,nf(a),' ≈ ',`<span class="result">${K.fmt(a)}${u(o.un)}</span>`),satz:o.satz(K.fmt(a)),
+    tips:[`Schau auf die Hochzahl bei ×10. Ist da ein Minus? Oder kein Minus? Das sagt dir die Richtung für das Komma.`,
+      `Die Hochzahl ist ${e<0?'−':''}${Math.abs(e)}. ${e<0?'Da ist ein Minus':'Da ist kein Minus'}. Also geht das Komma nach ${dir}. Es geht ${Math.abs(e)} Stellen weit. Die Zahl wird ${e<0?'klein':'groß'}.`,
+      e<0?`Schreibe ${nf(mm)} auf. Schiebe das Komma ${Math.abs(e)} Stellen nach links. Fülle vorne mit Nullen auf. Runde dann auf 4 Stellen. Schreibe die Einheit ${o.un} dazu.`
+         :`Schreibe ${nf(mm)} auf. Schiebe das Komma ${Math.abs(e)} Stellen nach rechts. Fehlen Ziffern? Dann hänge Nullen an. Die Zahl ist dann 1000 oder größer. Runde auf eine ganze Zahl. Schreibe die Einheit ${o.un} dazu.`]};
 }
 const tasks=[
  {L:'B',g(){const n0=rnd(2,6,1),p0=rnd(180,420,10),a0=rnd(45,120,5),x=n0*p0+a0;return{tag:'Kreislauf & Abfall',ti:'Rechnung für Container',
    tx:tx('Das Abfallzentrum Schwierbach schreibt eine Rechnung für Bauschutt-Container.',[['Anzahl Container',n0],['Preis pro Container',z(p0,'€')],['Anfahrt (einmal)',z(a0,'€')]],'Wie hoch ist die Rechnung?','Die Rechnung beträgt … €.'),
    x:K_,un:'€',a:x,dc:2,fix:true,geg:`${n0} Container je ${z(p0,'€')};&nbsp; Anfahrt ${z(a0,'€')}`,steps:[['Ansatz',`${n0} · ${nf(p0)} + ${nf(a0)}`],['Regel','Punkt vor Strich: erst mal, dann plus']],ein:`${n0} · ${nf(p0)} = ${nf(n0*p0)}`,
-   s:F(K_,EQ,n0+M+nf(p0)+PL+nf(a0),EQ,nf(n0*p0)+PL+nf(a0),EQ,K.resFix(x,2,'€')),satz:`Die Rechnung beträgt ${K.fix(x,2)} €.`}}},
+   s:F(K_,EQ,n0+M+nf(p0)+PL+nf(a0),EQ,nf(n0*p0)+PL+nf(a0),EQ,K.resFix(x,2,'€')),satz:`Die Rechnung beträgt ${K.fix(x,2)} €.`,
+   tips:['Die Rechnung hat zwei Teile. Teil 1: die Container. Teil 2: die Anfahrt. Was rechnest du zuerst: mal oder plus?',
+     `Punkt vor Strich. Erst mal: ${n0} · ${z(p0,'€')} = ${z(n0*p0,'€')}. So viel kosten die Container.`,
+     `Rechne jetzt ${z(n0*p0,'€')} plus ${z(a0,'€')}. Schreibe 2 Stellen nach dem Komma. Das sind die Cent.`]}}},
  {L:'B',g(){return pick([
    ()=>runde({e:[1,2],tag:'Abwasser',ti:'Runden: Volumen',x:V,un:'m³',sit:'Du hast das Volumen von einem Becken ausgerechnet.',start:'Das Becken fasst … m³.',satz:r=>`Das Becken fasst ${r} m³.`}),
    ()=>runde({e:[0,0],tag:'Kreislauf & Abfall',ti:'Runden: Masse',x:m,un:'t',sit:'Du hast die Masse von einer Container-Ladung ausgerechnet.',start:'Die Ladung wiegt … t.',satz:r=>`Die Ladung wiegt ${r} t.`})])()}},
