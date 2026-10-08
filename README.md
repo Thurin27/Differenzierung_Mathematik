@@ -23,6 +23,9 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 | `modul-05.html` | Modul 5: Mit Formeln rechnen (Einheiten angleichen, Einheitenkontrolle, Plausibilität) |
 | `modul-06.html` | Modul 6: Flächen |
 | `modul-07.html` | Modul 7: Volumen & Masse |
+| `modul-08.html` | Modul 8: Diagramme lesen (Ganglinie, Kennlinien, Betriebspunkt, Steigung; Ablese-Aufgaben mit Toleranz) |
+| `modul-09.html` | Modul 9: Die Berufsformeln (Formelübersicht je Bereich, Formel finden, mehrstufige Aufgaben) |
+| `modul-10.html` | Modul 10: Funktionen – Vertiefung (linear/4–20 mA, Anlagenkennlinie mit Kennlinien-Labor, Halbwertszeit, pH) |
 | `material/lerntagebuch-mathe-aufbaukurs.docx` | Lerntagebuch zum Ausdrucken: Übersicht zum Abhaken, 10 Terminseiten mit Reflexion |
 | `assets/kurs.css` | Gemeinsames Layout (hell/dunkel) |
 | `assets/kurs.js` | Gemeinsame Bausteine: Niveau-Wahl, Schritt-für-Schritt, Trainer, Aufgabengenerator, Lernstand |
@@ -61,6 +64,9 @@ Ausnahmen pro Aufgabe:
 - `exact:true` – Ergebnis geht genau auf (Umrechnungen); genauer Wert oder 4-Stellen-Wert werden akzeptiert.
 - `fix:true, dc:2` – feste Nachkommastellen (Geldbeträge), Anzeige mit `K.fix` / `K.resFix`.
 - `sig:true, raw:…` – Rundungsübung selbst (Modul 1); verlangt exakt den auf 4 Stellen gerundeten Wert.
+- `tol:…` (optional `tolText`) – feste Toleranz für Ablese-Aufgaben aus Diagrammen (Modul 8).
+
+Diagramme: `K.plot({x0,x1,dx,mx,y0,y1,dy,my,xl,yl,series:[{f|pts}],points,guides,hl})` erzeugt ein SVG mit Haupt- und Feinraster (mx/my Kästchen je Hauptteilung), Farben aus dem Theme.
 
 ### Trainer-Aufgabe (Multiple Choice)
 

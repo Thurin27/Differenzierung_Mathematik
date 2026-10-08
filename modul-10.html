@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modul 10 Funktionen – Mathe-Aufbaukurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="assets/kurs.css">
+</head>
+<body>
+<header class="site"><div class="wrap sitebar">
+  <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="modul-08.html" title="Modul 8 Diagramme lesen">M8</a><a href="modul-09.html" title="Modul 9 Die Berufsformeln">M9</a><a href="modul-10.html" aria-current="page" title="Modul 10 Funktionen">M10</a><a href="fortschritt.html">Fortschritt</a></nav>
+</div></header>
+
+<main class="wrap">
+<header class="top">
+  <div class="modnum" aria-hidden="true">10</div>
+  <div class="eyebrow">Mathe-Aufbaukurs · Modul 10 · Vertiefung</div>
+  <h1>Funktionen</h1>
+  <p class="ctx">Für alle, die tiefer einsteigen wollen: Hinter vielen Kurven aus Modul 8 steckt eine Funktion. Wer sie kennt, kann rechnen statt ablesen – den Füllstand aus dem Messsignal, den Betriebspunkt einer Pumpe, den Abbau eines Stoffes oder den pH-Wert.</p>
+</header>
+
+<div class="bar">
+  <nav aria-label="Abschnitte"><a href="#ziele">Ziele</a><a href="#funktion">Was ist eine Funktion?</a><a href="#linear">Linear</a><a href="#quadratisch">Quadratisch</a><a href="#labor">Kennlinien-Labor</a><a href="#exponentiell">Exponentiell</a><a href="#ph">pH-Wert</a><a href="#beispiel">Schritt für Schritt</a><a href="#trainer">Trainer</a><a href="#rechnen">Rechnen</a><a href="#stand">Lernstand</a></nav>
+  <div data-k="niveau"></div>
+</div>
+
+<section id="ziele">
+  <h2>Das kannst du nach diesem Modul</h2>
+  <div class="raster">
+    <div><span class="lvl B">Basis</span><ul><li>Ich kann mit linearen Funktionen <span class="f"><i>y</i> = <i>m</i> · <i>x</i> + <i>b</i></span> rechnen.</li><li>Ich rechne ein Messsignal 4–20 mA in einen Messwert um.</li></ul></div>
+    <div><span class="lvl S">Standard</span><ul><li>Ich rechne mit der Anlagenkennlinie <span class="f"><i>H</i> = <i>H</i><sub>geo</sub> + <i>k</i> · <i>Q</i>²</span>.</li><li>Ich weiß, was mit <i class="v">H</i> passiert, wenn <i class="v">Q</i> sich verdoppelt.</li></ul></div>
+    <div><span class="lvl V">Vertiefung</span><ul><li>Ich rechne mit Halbwertszeiten und Logarithmen.</li><li>Ich berechne pH-Werte und den Betriebspunkt einer Pumpe.</li></ul></div>
+  </div>
+</section>
+
+<section id="funktion">
+  <h2>Was ist eine Funktion?</h2>
+  <p>Eine Funktion ordnet jedem Wert <i class="v">x</i> <strong>genau einen</strong> Wert <i class="v">y</i> zu. Zu jeder Uhrzeit gibt es genau einen Füllstand, zu jedem Förderstrom genau eine Förderhöhe. Du kannst eine Funktion auf drei Arten darstellen:</p>
+  <div class="raster">
+    <div><h3>Gleichung</h3><p><span class="f"><i>h</i> = 0,4 · <i>t</i> + 1,2</span></p><p class="small">kompakt, zum Rechnen</p></div>
+    <div><h3>Wertetabelle</h3><p class="num">t: 0 · 1 · 2 · 3 h<br>h: 1,2 · 1,6 · 2,0 · 2,4 m</p><p class="small">gut für einzelne Werte</p></div>
+    <div><h3>Graph</h3><p>die Kurve im Diagramm</p><p class="small">zeigt den Verlauf auf einen Blick (Modul 8)</p></div>
+  </div>
+</section>
+
+<section id="linear">
+  <h2>Lineare Funktionen</h2>
+  <div class="grid2" style="align-items:start">
+    <div style="display:grid;gap:10px">
+      <div class="box"><p><span class="f" style="font-size:1.4em"><i>y</i> = <i>m</i> · <i>x</i> + <i>b</i></span></p>
+        <p><i class="v">m</i> ist die <strong>Steigung</strong>: Um so viel ändert sich <i class="v">y</i>, wenn <i class="v">x</i> um 1 größer wird.<br><i class="v">b</i> ist der <strong>Startwert</strong> (y-Achsenabschnitt): der Wert bei <span class="f"><i>x</i> = 0</span>.</p></div>
+      <p>Der Graph ist immer eine Gerade. Beispiele: Füllstand bei gleichmäßigem Zufluss, Kosten mit Grundgebühr, Messumformer.</p>
+    </div>
+    <div class="plotbox" id="lin-plot"></div>
+  </div>
+  <h3>Das Messsignal 4–20 mA</h3>
+  <p>Viele Sensoren im Pumpwerk Talstraße und in der Kläranlage senden ihren Messwert als Strom zwischen 4 mA (Messbereichsanfang) und 20 mA (Messbereichsende). Dazwischen ist der Zusammenhang linear:</p>
+  <div class="box"><p><span class="f"><i>h</i> = <span class="fr"><span><i>I</i> − 4 mA</span><span>16 mA</span></span> · <i>h</i><sub>max</sub></span></p><p class="small">Beispiel: Messbereich 0–5 m, Signal 12 mA → (12 − 4)/16 · 5 m = 2,5 m. Bei 4 mA zeigt der Sensor 0 m – fällt das Signal auf 0 mA, ist das Kabel unterbrochen. Deshalb beginnt der Bereich bei 4 und nicht bei 0 mA.</p></div>
+</section>
+
+<section id="quadratisch">
+  <h2>Quadratische Funktionen: die Anlagenkennlinie</h2>
+  <p>Je schneller Wasser durch ein Rohr strömt, desto größer ist die Reibung – und zwar mit dem <strong>Quadrat</strong> des Förderstroms. Deshalb ist die Anlagenkennlinie eine Parabel:</p>
+  <div class="box"><p><span class="f" style="font-size:1.3em"><i>H</i> = <i>H</i><sub>geo</sub> + <i>k</i> · <i>Q</i>²</span></p><p><i class="v">H</i><sub>geo</sub>: Höhenunterschied, den die Pumpe immer überwinden muss · <i class="v">k</i>: Widerstandsbeiwert der Leitung · <span class="f"><i>k</i> · <i>Q</i>²</span>: Reibungsverluste</p></div>
+  <div class="box merke"><p><strong>Doppelter Förderstrom, vierfache Reibung:</strong> Verdoppelt sich <i class="v">Q</i>, wird <span class="f"><i>k</i> · <i>Q</i>²</span> viermal so groß (2² = 4). Deshalb kosten hohe Förderströme überproportional viel Energie.</p></div>
+</section>
+
+<section id="labor">
+  <h2>Kennlinien-Labor</h2>
+  <p>Verändere die Anlage und beobachte, wie sich der Betriebspunkt der Pumpe verschiebt. Die Pumpenkennlinie bleibt gleich: <span class="f"><i>H</i> = 32 m − 0,0024 · <i>Q</i>²</span> (Q in L/s).</p>
+  <div class="card">
+    <div class="labctl">
+      <label for="lab-hg">Geodätische Höhe <span class="f"><i>H</i><sub>geo</sub></span>: <strong id="lab-hg-v"></strong></label>
+      <input type="range" id="lab-hg" min="0" max="24" step="1" value="10">
+      <label for="lab-k">Widerstandsbeiwert <span class="f"><i>k</i></span>: <strong id="lab-k-v"></strong></label>
+      <input type="range" id="lab-k" min="0.0005" max="0.006" step="0.0001" value="0.0025">
+    </div>
+    <div class="plotbox" id="lab-plot"></div>
+    <div class="row" id="lab-out"></div>
+    <p class="small">Probier aus: Was passiert, wenn das Becken höher liegt? Was passiert, wenn die Leitung verkrustet (größeres k)?</p>
+  </div>
+</section>
+
+<section id="exponentiell">
+  <h2>Exponentialfunktionen: Halbwertszeit</h2>
+  <p>Manche Stoffe werden so abgebaut, dass in gleichen Zeitabständen immer <strong>derselbe Anteil</strong> verschwindet – nicht dieselbe Menge. Nach der Halbwertszeit <span class="f"><i>T</i><sub>½</sub></span> ist nur noch die Hälfte da, nach der doppelten Zeit ein Viertel, dann ein Achtel …</p>
+  <div class="grid2" style="align-items:start">
+    <div class="box"><p><span class="f" style="font-size:1.3em"><i>c</i> = <i>c</i><sub>0</sub> · 0,5<sup><i>t</i> / <i>T</i><sub>½</sub></sup></span></p>
+      <p class="small">Umgestellt nach der Zeit (mit Logarithmus):</p>
+      <p><span class="f"><i>t</i> = <i>T</i><sub>½</sub> · <span class="fr"><span>lg(<i>c</i><sub>0</sub> / <i>c</i>)</span><span>lg 2</span></span></span></p>
+      <p class="small">Taschenrechner: Taste <code>log</code> (Zehnerlogarithmus lg).</p></div>
+    <div class="plotbox" id="exp-plot"></div>
+  </div>
+</section>
+
+<section id="ph">
+  <h2>Logarithmus und pH-Wert</h2>
+  <p>Der pH-Wert sagt, wie sauer eine Lösung ist. Er ist der negative Zehnerlogarithmus der Hydronium-Ionen-Konzentration:</p>
+  <div class="box"><p><span class="f" style="font-size:1.25em">pH = −lg <i>c</i>(H<sub>3</sub>O<sup>+</sup>)</span></p><p>umgekehrt: <span class="f" style="font-size:1.25em"><i>c</i>(H<sub>3</sub>O<sup>+</sup>) = 10<sup>−pH</sup>&#8239;mol/L</span></p></div>
+  <div class="tscroll"><table>
+    <thead><tr><th>pH</th><th>c(H₃O⁺) in mol/L</th><th>Beispiel</th></tr></thead>
+    <tbody>
+      <tr><td class="num">3</td><td class="num">10⁻³ = 0,001</td><td>saures Sickerwasser einer jungen Deponie</td></tr>
+      <tr><td class="num">6</td><td class="num">10⁻⁶</td><td>schwach sauer</td></tr>
+      <tr><td class="num">7</td><td class="num">10⁻⁷</td><td>neutral</td></tr>
+      <tr><td class="num">8</td><td class="num">10⁻⁸</td><td>Ablauf der Kläranlage, Trinkwasser (leicht basisch)</td></tr>
+      <tr><td class="num">12</td><td class="num">10⁻¹²</td><td>Kalkmilch in der Rauchgasreinigung</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box merke"><p><strong>Eine pH-Stufe = Faktor 10.</strong> Eine Lösung mit pH 5 enthält zehnmal so viele H₃O⁺-Ionen wie eine mit pH 6 und hundertmal so viele wie eine mit pH 7.</p></div>
+</section>
+
+<section id="beispiel">
+  <h2>Schritt für Schritt</h2>
+  <p>Klicke dich durch die Beispiele und schreibe jeden Schritt mit.</p>
+  <div data-k="stepper"></div>
+</section>
+
+<section id="trainer">
+  <h2>Funktionen-Trainer</h2>
+  <p>Erst überlegen, dann wählen. Es zählt nur der erste Versuch.</p>
+  <div data-k="trainer"></div>
+</section>
+
+<section id="rechnen">
+  <h2>Rechnen im Betrieb</h2>
+  <p>Jede Aufgabe wird mit neuen Zahlen erzeugt. Du kannst bis zu drei Tipps aufdecken.</p>
+  <div data-k="rechnen"></div>
+</section>
+
+<section id="stand">
+  <h2>Mein Lernstand</h2>
+  <p>Hier siehst du deinen Stand in diesem Modul. Am Ende der Stunde hakst du geschaffte Stufen in deinem Lerntagebuch ab.</p>
+  <div data-k="stand"></div>
+</section>
+
+<nav class="weiter" aria-label="Weiter"><a href="modul-09.html">← Modul 9 Die Berufsformeln</a><a href="index.html">→ Zur Übersicht</a></nav>
+</main>
+<footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
+
+<script src="assets/kurs.js"></script>
+<script>
+(function(){
+const {I,fr,sq,F,M,MI,PL,EQ,u,nf,fmt,rnd,pick,res,sqr}=K;
+const z=(x,un)=>`${nf(x)}${u(un)}`;
+const x_=I('x'),y_=I('y'),mm=I('m'),bb=I('b'),h=I('h'),t=I('t'),Q=I('Q'),H=I('H'),Hg=I('H','geo'),k=I('k'),c=I('c'),c0=I('c','0'),Th=I('T','½'),Ic=I('I'),R=I('R'),P=I('P'),Kk=I('K'),n=I('n'),hmax=I('h','max');
+const cH='<i>c</i>(H<sub>3</sub>O<sup>+</sup>)';
+const sup=s=>`<sup>${s}</sup>`;
+
+/* ---------- Graphen im Erklärteil ---------- */
+document.getElementById('lin-plot').innerHTML=K.plot({x0:0,x1:6,dx:1,mx:2,y0:0,y1:4,dy:1,my:2,w:420,h:280,xl:'Zeit t in h',yl:'Füllstand h in m',aria:'Lineare Funktion h = 0,4 t + 1,2',series:[{f:x=>0.4*x+1.2,label:'h = 0,4 · t + 1,2',lx:0.3,ly:1.32,anchor:'start',ldx:4,ldy:-14}],points:[{x:0,y:1.2,label:'b = 1,2 m',dx:10,dy:16},{x:5,y:3.2}],guides:[]});
+document.getElementById('exp-plot').innerHTML=K.plot({x0:0,x1:40,dx:10,mx:5,y0:0,y1:100,dy:20,my:4,w:420,h:280,xl:'Zeit t in h',yl:'Anteil in %',aria:'Exponentieller Abbau mit Halbwertszeit 10 Stunden',series:[{f:x=>100*Math.pow(.5,x/10),color:'var(--lv)'}],points:[{x:10,y:50,label:'50 %'},{x:20,y:25,label:'25 %'},{x:30,y:12.5,label:'12,5 %'}],guides:[{x:10,y:50},{x:20,y:25},{x:30,y:12.5}]});
+
+/* ---------- Kennlinien-Labor ---------- */
+(function(){
+  const H0=32,a=0.0024,hg=document.getElementById('lab-hg'),kk=document.getElementById('lab-k'),plot=document.getElementById('lab-plot'),out=document.getElementById('lab-out');
+  function draw(){
+    const g=+hg.value,kv=+kk.value;
+    document.getElementById('lab-hg-v').textContent=K.nf(g)+' m';
+    document.getElementById('lab-k-v').textContent=K.nf(kv)+' m/(L/s)²';
+    const ok=H0>g,Qb=ok?Math.sqrt((H0-g)/(a+kv)):0,Hb=H0-a*Qb*Qb;
+    const o={x0:0,x1:120,dx:20,mx:4,y0:0,y1:40,dy:5,my:5,xl:'Förderstrom Q in L/s',yl:'Förderhöhe H in m',aria:'Pumpen- und Anlagenkennlinie mit Betriebspunkt',
+      series:[{f:q=>H0-a*q*q,label:'Pumpe',lx:8,ly:H0-a*64,anchor:'start',ldx:4,ldy:-10},{f:q=>g+kv*q*q,color:'var(--lv)',label:'Anlage',lx:Math.min(115,Math.sqrt(Math.max(0,(38-g)/kv))),ly:Math.min(38,g+kv*115*115),ldx:-6,ldy:4}],
+      hl:[{y:g,label:'H geo',color:'var(--muted)'}]};
+    if(ok){o.points=[{x:Qb,y:Hb,label:'BP',dx:10,dy:20}];o.guides=[{x:Qb,y:Hb}]}
+    plot.innerHTML=K.plot(o);
+    out.innerHTML=ok?`<span class="tag">Betriebspunkt</span> <span class="f"><i>Q</i> = ${K.fmt(Qb)}&#8239;L/s</span> <span class="f"><i>H</i> = ${K.fmt(Hb)}&#8239;m</span>`
+      :'<span class="tag">Kein Betriebspunkt</span> Die Pumpe schafft die geodätische Höhe nicht.';
+  }
+  hg.addEventListener('input',draw);kk.addEventListener('input',draw);draw();
+})();
+
+/* ---------- Trainer ---------- */
+const T=(L,nm,prompt,ok,w,h_,ask)=>({L,n:nm,prompt,ask:ask||'Welche Antwort ist richtig?',ok,w,h:h_});
+const trainer=[
+ T('B','Steigung',`In ${F(y_,EQ,'3',M,x_,PL,'2')} ist die Steigung …`,'3',['2','5','3x'],'Die Zahl vor x ist die Steigung m.'),
+ T('B','Startwert',`In ${F(h,EQ,'0,4',M,t,PL,'1,2')} ist der Füllstand bei t = 0 …`,'1,2 m',['0,4 m','1,6 m','0 m'],'Bei t = 0 bleibt nur b übrig.'),
+ T('B','Funktion','Was bedeutet „Funktion“?','Zu jedem x gehört genau ein y',['Zu jedem y gehört genau ein x','x und y sind immer gleich','Der Graph ist immer eine Gerade'],'Eindeutige Zuordnung: ein x → ein y.'),
+ T('B','4–20 mA','Ein Sensor misst 0–5 m. Er sendet 4 mA. Welcher Füllstand?','0 m',['5 m','1,25 m','0,8 m'],'4 mA ist der Messbereichsanfang.'),
+ T('B','4–20 mA','Ein Sensor misst 0–5 m. Er sendet 12 mA. Welcher Füllstand?','2,5 m',['3 m','2,4 m','1,25 m'],'12 mA liegt genau in der Mitte zwischen 4 und 20 mA.'),
+ T('B','Graph','Der Graph einer linearen Funktion ist …','eine Gerade',['eine Parabel','eine Kurve, die sich der x-Achse nähert','ein Kreis'],'Linear heißt: gleichmäßige Änderung – eine Gerade.'),
+ T('S','Anlagenkennlinie',`Der Förderstrom Q wird verdoppelt. Der Anteil ${F(k,M,sqr(Q))} wird …`,'viermal so groß',['doppelt so groß','gleich groß','halb so groß'],'2² = 4.'),
+ T('S','Anlagenkennlinie',`${F(H,EQ,'8 m',PL,'0,002',M,sqr(Q))}. Wie groß ist H bei Q = 0?`,'8 m',['0 m','8,002 m','0,002 m'],'Ohne Strömung bleibt nur die geodätische Höhe.'),
+ T('S','Funktionstyp',`Welcher Graph gehört zu ${F(H,EQ,Hg,PL,k,M,sqr(Q))}?`,'eine nach oben geöffnete Parabel, die bei H_geo beginnt',['eine Gerade durch den Ursprung','eine fallende Gerade','eine Kurve, die sich null nähert'],'Quadratische Funktion: Parabel. Startwert H_geo.'),
+ T('S','Elektrotechnik',`Die Verlustleistung in einer Leitung ist ${F(P,EQ,R,M,sqr(Ic))}. Der Strom halbiert sich. Die Verluste …`,'sinken auf ein Viertel',['halbieren sich','bleiben gleich','verdoppeln sich'],'(½)² = ¼ – deshalb überträgt man große Leistungen mit hoher Spannung und kleinem Strom.'),
+ T('S','Betriebspunkt','Die Leitung verkrustet, k wird größer. Was passiert mit dem Förderstrom im Betriebspunkt?','er wird kleiner',['er wird größer','er bleibt gleich','er wird null'],'Die Anlagenkennlinie wird steiler und schneidet die Pumpenkennlinie weiter links.'),
+ T('V','Halbwertszeit','Halbwertszeit 6 h. Nach 18 h ist noch wie viel da?','ein Achtel',['ein Drittel','die Hälfte','ein Sechstel'],'18 h = 3 Halbwertszeiten: ½ · ½ · ½ = ⅛.'),
+ T('V','pH','pH 5 im Vergleich zu pH 7: Die H₃O⁺-Konzentration ist …','100-mal so groß',['2-mal so groß','20-mal so groß','100-mal so klein'],'Zwei pH-Stufen = 10 · 10.'),
+ T('V','pH','c(H₃O⁺) = 10⁻⁸ mol/L. pH = ?','8',['−8','0,8','10'],'pH = −lg 10⁻⁸ = 8.'),
+ T('V','Logarithmus','lg 1000 = ?','3',['1000','30','0,001'],'10³ = 1000.'),
+ T('V','Exponentiell','Was unterscheidet exponentiellen von linearem Abbau?','Es verschwindet immer derselbe Anteil, nicht dieselbe Menge',['Er geht schneller bis null','Er ist eine Gerade','Es verschwindet immer dieselbe Menge'],'Exponentiell: pro Zeitabschnitt z. B. immer die Hälfte des Restes.'),
+ T('V','Betriebspunkt',`Pumpe ${F(H,EQ,'30',MI,'0,002',M,sqr(Q))}, Anlage ${F(H,EQ,'12',PL,'0,003',M,sqr(Q))}. Welche Gleichung liefert den Betriebspunkt?`,F('30',MI,'0,002',M,sqr(Q),EQ,'12',PL,'0,003',M,sqr(Q)),[F('30',PL,'12',EQ,'0,005',M,sqr(Q)),F('30',MI,'0,002',M,Q,EQ,'12',PL,'0,003',M,Q),F('0,002',M,sqr(Q),EQ,'0,003',M,sqr(Q))],'Im Betriebspunkt sind beide Förderhöhen gleich: gleichsetzen.')
+];
+
+/* ---------- Aufgaben ---------- */
+const tasks=[
+ /* Basis */
+ {L:'B',g(){const hm=pick([3,4,5,6,8,10]),Iv=rnd(4.4,19.6,.1),x=(Iv-4)/16*hm;return{tag:'Elektrotechnik',ti:'Messsignal in Füllstand umrechnen',tx:`Der Füllstandssensor im Pumpensumpf des Pumpwerks Talstraße hat den Messbereich 0–${hm} m und sendet 4–20 mA. Das Leitsystem empfängt ${Ic} = ${z(Iv,'mA')}. Wie hoch steht das Wasser?`,x:h,un:'m',a:x,
+   geg:`${F(Ic,EQ,z(Iv,'mA'))};&nbsp; ${F(hmax,EQ,z(hm,'m'))};&nbsp; Signal 4–20 mA`,steps:[['Formel',F(h,EQ,fr(Ic+MI+'4 mA','16 mA'),M,hmax)],['Idee','Erst den Anteil am Messbereich bestimmen: (I − 4 mA) von 16 mA. Dann mal Messbereich.']],ein:F(h,EQ,fr(z(Iv,'mA')+MI+'4 mA','16 mA'),M,z(hm,'m')),
+   s:F(h,EQ,fr(z(+(Iv-4).toFixed(1),'mA'),'16 mA'),M,z(hm,'m'),EQ,res(x,0,'m')),satz:`Das Wasser steht ${fmt(x)} m hoch.`,
+   diag:x2=>Math.abs(x2-Iv/20*hm)<0.01*hm?'Du hast mit 0–20 mA gerechnet. Der Messbereich beginnt bei 4 mA – erst 4 mA abziehen, dann durch 16 mA teilen.':''}}},
+ {L:'B',g(){const G=rnd(60,150,5),Pv=rnd(4.5,9.5,.25),nv=pick([13,26,52]),x=G+Pv*nv;return{tag:'Kreislauf & Abfall',ti:'Abfallgebühr als Funktion',tx:`Das Abfall- &amp; Energiezentrum Schwierbach berechnet für eine Restmülltonne eine Grundgebühr von ${z(G,'€')} pro Jahr plus ${z(Pv,'€')} je Leerung: ${F(Kk,EQ,nf(Pv)+u('€'),M,n,PL,nf(G)+u('€'))}. Was kostet ein Jahr mit ${nf(nv)} Leerungen?`,x:Kk,un:'€',a:x,dc:2,fix:true,
+   geg:`${F(bb,EQ,z(G,'€'))} (Grundgebühr);&nbsp; ${F(mm,EQ,z(Pv,'€'))} je Leerung;&nbsp; ${F(n,EQ,nv)}`,steps:[['Funktion',F(Kk,EQ,mm,M,n,PL,bb)],['Einsetzen','Punkt vor Strich: erst die Leerungen, dann die Grundgebühr.']],ein:F(Kk,EQ,nf(Pv),M,nv,PL,nf(G)),
+   s:F(Kk,EQ,nf(Pv)+u('€'),M,nv,PL,nf(G)+u('€'),EQ,K.resFix(x,2,'€')),satz:`Ein Jahr mit ${nv} Leerungen kostet ${K.fix(x,2)} €.`}}},
+ {L:'B',g(){const h0=rnd(.4,1.6,.1),mv=pick([.15,.2,.25,.3,.35,.4,.45,.5]),t1=pick([1,2]),t2=t1+pick([2,3,4]),h1=+(h0+mv*t1).toFixed(2),h2=+(h0+mv*t2).toFixed(2),x=(h2-h1)/(t2-t1);return{tag:'Abwasser',ti:'Steigung aus zwei Messwerten',tx:`Im Speicherbecken der Kläranlage Schwierbach steigt der Wasserspiegel gleichmäßig. Um ${t1} Uhr steht er bei ${z(h1,'m')}, um ${t2} Uhr bei ${z(h2,'m')}. Um wie viel Meter steigt er pro Stunde?`,x:mm,un:'m/h',a:x,
+   geg:`(${t1} h | ${nf(h1)} m) und (${t2} h | ${nf(h2)} m)`,steps:[['Formel',F(mm,EQ,fr(I('y','2')+MI+I('y','1'),I('x','2')+MI+I('x','1')))],['Einsetzen','y-Werte sind die Füllstände, x-Werte die Uhrzeiten.']],ein:F(mm,EQ,fr(z(h2,'m')+MI+z(h1,'m'),z(t2,'h')+MI+z(t1,'h'))),
+   s:F(mm,EQ,fr(z(h2,'m')+MI+z(h1,'m'),z(t2,'h')+MI+z(t1,'h')),EQ,res(x,0,'m/h')),satz:`Der Wasserspiegel steigt um ${fmt(x)} m pro Stunde.`}}},
+ {L:'B',g(){const h0=rnd(.4,1.4,.1),mv=pick([.2,.25,.3,.4,.5]),hz=+(h0+mv*rnd(2,8,.5)).toFixed(1),x=(hz-h0)/mv;return{tag:'Abwasser',ti:'Wann ist der Grenzwert erreicht?',tx:`Der Füllstand im Speicherbecken folgt der Funktion ${F(h,EQ,nf(mv)+u('m/h'),M,t,PL,nf(h0)+u('m'))}. Bei ${z(hz,'m')} schaltet die Pumpe ein. Nach wie vielen Stunden ist das?`,x:t,un:'h',a:x,
+   geg:`${F(mm,EQ,z(mv,'m/h'))};&nbsp; ${F(bb,EQ,z(h0,'m'))};&nbsp; ${F(h,EQ,z(hz,'m'))}`,steps:[['Funktion',F(h,EQ,mm,M,t,PL,bb)],['Umstellen',`erst − ${bb}, dann : ${mm} → ${F(t,EQ,fr(h+MI+bb,mm))}`]],ein:F(t,EQ,fr(z(hz,'m')+MI+z(h0,'m'),z(mv,'m/h'))),
+   s:F(t,EQ,fr(z(hz,'m')+MI+z(h0,'m'),z(mv,'m/h')),EQ,res(x,0,'h')),satz:`Nach ${fmt(x)} Stunden schaltet die Pumpe ein.`}}},
+
+ /* Standard */
+ {L:'S',g(){const g=rnd(4,18,.5),kv=rnd(.0015,.005,.0001),qv=rnd(30,90,5),x=g+kv*qv*qv;return{tag:'Rohrleitungsnetze',ti:'Förderhöhe aus der Anlagenkennlinie',tx:`Die Druckleitung vom Pumpwerk Talstraße hat die Anlagenkennlinie ${F(H,EQ,nf(g)+u('m'),PL,nf(kv),M,sqr(Q))} (Q in L/s, H in m). Welche Förderhöhe muss die Pumpe bei ${Q} = ${z(qv,'L/s')} liefern?`,x:H,un:'m',a:x,
+   geg:`${F(Hg,EQ,z(g,'m'))};&nbsp; ${F(k,EQ,nf(kv))};&nbsp; ${F(Q,EQ,z(qv,'L/s'))}`,steps:[['Funktion',F(H,EQ,Hg,PL,k,M,sqr(Q))],['Reihenfolge','Erst Q² ausrechnen, dann mal k, dann H_geo addieren (Potenz vor Punkt vor Strich).']],ein:F(H,EQ,nf(g),PL,nf(kv),M,nf(qv)+'²'),
+   s:F(H,EQ,nf(g),PL,nf(kv),M,nf(qv*qv),EQ,res(x,0,'m')),satz:`Die Pumpe muss ${fmt(x)} m Förderhöhe liefern.`}}},
+ {L:'S',g(){const g=rnd(4,16,.5),kv=rnd(.0015,.005,.0001),qv=rnd(40,90,5),Hm=+(g+kv*qv*qv).toFixed(1),x=(Hm-g)/(qv*qv);return{tag:'Rohrleitungsnetze',ti:'Widerstandsbeiwert aus einer Messung',tx:`Bei einer Messung im Pumpwerk Talstraße fördert die Pumpe ${z(qv,'L/s')} bei einer Förderhöhe von ${z(Hm,'m')}. Die geodätische Höhe beträgt ${z(g,'m')}. Berechne den Widerstandsbeiwert ${k} der Anlagenkennlinie ${F(H,EQ,Hg,PL,k,M,sqr(Q))}.`,x:k,un:'m/(L/s)²',a:x,
+   geg:`${F(Q,EQ,z(qv,'L/s'))};&nbsp; ${F(H,EQ,z(Hm,'m'))};&nbsp; ${F(Hg,EQ,z(g,'m'))}`,steps:[['Funktion',F(H,EQ,Hg,PL,k,M,sqr(Q))],['Umstellen',`erst − ${Hg}, dann : ${sqr(Q)} → ${F(k,EQ,fr(H+MI+Hg,sqr(Q)))}`]],ein:F(k,EQ,fr(nf(Hm)+MI+nf(g),nf(qv)+'²')),
+   s:F(k,EQ,fr(nf(Hm)+MI+nf(g),nf(qv*qv)),EQ,res(x,0,'')),satz:`Der Widerstandsbeiwert beträgt ${fmt(x)} m/(L/s)². Du darfst auch 2,345·10^-3 eingeben.`}}},
+ {L:'S',g(){const g=rnd(4,16,.5),kv=rnd(.0015,.005,.0001),Hz=+(g+rnd(4,14,.5)).toFixed(1),x=Math.sqrt((Hz-g)/kv);return{tag:'Rohrleitungsnetze',ti:'Förderstrom bei gegebener Förderhöhe',tx:`Die Anlagenkennlinie einer Leitung im Kanalnetz Schwierbach lautet ${F(H,EQ,nf(g)+u('m'),PL,nf(kv),M,sqr(Q))} (Q in L/s). Bei welchem Förderstrom verlangt die Anlage ${z(Hz,'m')} Förderhöhe?`,x:Q,un:'L/s',a:x,
+   geg:`${F(Hg,EQ,z(g,'m'))};&nbsp; ${F(k,EQ,nf(kv))};&nbsp; ${F(H,EQ,z(Hz,'m'))}`,steps:[['Umstellen',`${F(H,MI,Hg,EQ,k,M,sqr(Q))} → ${F(sqr(Q),EQ,fr(H+MI+Hg,k))} → ${F(Q,EQ,sq(fr(H+MI+Hg,k)))}`],['Reihenfolge','Minus, dann geteilt, zum Schluss Wurzel (Modul 4).']],ein:F(Q,EQ,sq(fr(nf(Hz)+MI+nf(g),nf(kv)))),
+   s:F(Q,EQ,sq(fr(nf(+(Hz-g).toFixed(1)),nf(kv))),EQ,res(x,0,'L/s')),satz:`Bei ${fmt(x)} L/s verlangt die Anlage ${nf(Hz)} m.`}}},
+ {L:'S',g(){const Rv=rnd(.1,.5,.01),Iv=rnd(10,60,1),x=Rv*Iv*Iv;return{tag:'Elektrotechnik',ti:'Verluste in der Zuleitung',tx:`Die Zuleitung zum Gebläse der Kläranlage Schwierbach hat den Widerstand ${R} = ${z(Rv,'Ω')}. Es fließt ein Strom von ${Ic} = ${z(Iv,'A')}. Wie groß ist die Verlustleistung ${F(P,EQ,R,M,sqr(Ic))}?`,x:P,un:'W',a:x,
+   geg:`${F(R,EQ,z(Rv,'Ω'))};&nbsp; ${F(Ic,EQ,z(Iv,'A'))}`,steps:[['Funktion',F(P,EQ,R,M,sqr(Ic))],['Reihenfolge','Erst I², dann mal R. Einheiten: Ω · A² = V/A · A² = V · A = W.']],ein:F(P,EQ,z(Rv,'Ω'),M,'('+z(Iv,'A')+')²'),
+   s:F(P,EQ,z(Rv,'Ω'),M,z(Iv*Iv,'A²'),EQ,res(x,0,'W')),satz:`In der Leitung gehen ${fmt(x)} W als Wärme verloren.`}}},
+
+ /* Vertiefung */
+ {L:'V',g(){const cz=rnd(.4,1.2,.05),T=pick([4,6,8,10,12]),tv=pick([T,1.5*T,2*T,2.5*T,3*T,T/2]),x=cz*Math.pow(.5,tv/T);return{tag:'Wasserversorgung',ti:'Chlorgehalt im Netz',tx:`Im Wasserwerk Schwierbach wird Trinkwasser mit ${c0} = ${z(cz,'mg/L')} Chlor desinfiziert. Im Netz wird das Chlor mit einer Halbwertszeit von ${Th} = ${z(T,'h')} abgebaut. Wie hoch ist der Chlorgehalt nach ${z(tv,'h')}?`,x:c,un:'mg/L',a:x,
+   geg:`${F(c0,EQ,z(cz,'mg/L'))};&nbsp; ${F(Th,EQ,z(T,'h'))};&nbsp; ${F(t,EQ,z(tv,'h'))}`,steps:[['Funktion',F(c,EQ,c0,M,'0,5'+sup(t.replace(/<[^>]+>/g,'')+'/T<sub>½</sub>'))],['Hochzahl',`${nf(tv)} h : ${nf(T)} h = ${nf(tv/T)} Halbwertszeiten`]],ein:F(c,EQ,z(cz,'mg/L'),M,'0,5'+sup(nf(tv/T))),
+   s:F(c,EQ,z(cz,'mg/L'),M,'0,5'+sup(nf(tv/T)),EQ,res(x,0,'mg/L')),satz:`Nach ${nf(tv)} Stunden sind noch ${fmt(x)} mg/L Chlor im Wasser.`}}},
+ {L:'V',g(){const cz=rnd(200,800,10),T=pick([2,3,4,5,6]),cg=rnd(5,40,1),x=T*Math.log10(cz/cg)/Math.log10(2);return{tag:'Abwasser',ti:'Abbauzeit bis zum Grenzwert',tx:`Ein Stoff im Abwasser der Kläranlage Schwierbach wird mit einer Halbwertszeit von ${Th} = ${z(T,'h')} abgebaut. Am Anfang liegen ${z(cz,'mg/L')} vor. Nach welcher Zeit ist der Wert auf ${z(cg,'mg/L')} gesunken?`,x:t,un:'h',a:x,
+   geg:`${F(c0,EQ,z(cz,'mg/L'))};&nbsp; ${F(c,EQ,z(cg,'mg/L'))};&nbsp; ${F(Th,EQ,z(T,'h'))}`,steps:[['Formel',F(t,EQ,Th,M,fr('lg('+c0+' / '+c+')','lg 2'))],['Verhältnis',`${nf(cz)} : ${nf(cg)} = ${fmt(cz/cg)}`]],ein:F(t,EQ,z(T,'h'),M,fr('lg '+fmt(cz/cg),'lg 2')),
+   s:F(t,EQ,z(T,'h'),M,fr(fmt(Math.log10(cz/cg)),fmt(Math.log10(2))),EQ,res(x,0,'h')),satz:`Nach ${fmt(x)} Stunden ist der Grenzwert erreicht.`}}},
+ {L:'V',g(){const mant=rnd(1.1,9.9,.1),e=-pick([3,4,5,6,7,8,9]),cv=mant*Math.pow(10,e),x=-Math.log10(cv);return{tag:'Abwasser',ti:'pH-Wert aus der Konzentration',tx:`Im Labor der Kläranlage Schwierbach wird in einer Probe eine Konzentration von ${cH} = ${nf(mant)}&#8239;·&#8239;10<sup>${String(e).replace('-','−')}</sup> mol/L bestimmt. Wie groß ist der pH-Wert?`,x:'pH',un:'',a:x,
+   geg:`${F(cH,EQ,nf(mant)+'&#8239;·&#8239;10'+sup(String(e).replace('-','−'))+u('mol/L'))}`,steps:[['Formel','pH = −lg '+cH],['Taschenrechner',`(−) log ( ${nf(mant)} × 10^${e} ) – die Klammer nicht vergessen.`]],ein:`pH = −lg(${nf(mant)}&#8239;·&#8239;10<sup>${String(e).replace('-','−')}</sup>)`,
+   s:F('pH',EQ,'−lg(',nf(mant),'&#8239;·&#8239;10'+sup(String(e).replace('-','−')),')',EQ,res(x,0,'')),satz:`Die Probe hat einen pH-Wert von ${fmt(x)}${x<6.5?' – sauer':x>8.5?' – basisch':''}.`,
+   diag:x2=>Math.abs(x2+x)<0.01?'Das Vorzeichen fehlt: pH = −lg c. Der pH-Wert ist hier positiv.':''}}},
+ {L:'V',g(){const pv=rnd(2.5,11.5,.1),x=Math.pow(10,-pv),exp=Math.floor(Math.log10(x));return{tag:'Kreislauf & Abfall',ti:'Konzentration aus dem pH-Wert',tx:`Das Sickerwasser aus dem Deponieabschnitt im Abfallzentrum Schwierbach hat den pH-Wert ${nf(pv)}. Wie groß ist die Konzentration ${cH} in mol/L? Gib das Ergebnis in Zehnerpotenz-Schreibweise ein, z. B. 3,162·10^-7.`,x:cH,un:'mol/L',a:x,
+   geg:`pH = ${nf(pv)}`,steps:[['Formel',F(cH,EQ,'10'+sup('−pH'))],['Taschenrechner',`10^(−${nf(pv)}) – mit der Taste 10ˣ (oft Shift + log).`]],ein:F(cH,EQ,'10'+sup('−'+nf(pv))+u('mol/L')),
+   s:F(cH,EQ,'10'+sup('−'+nf(pv)),EQ,`<span class="result">${fmt(x/Math.pow(10,exp))}&#8239;·&#8239;10<sup>${String(exp).replace('-','−')}</sup>${u('mol/L')}</span>`),satz:`Die Konzentration beträgt ${fmt(x/Math.pow(10,exp))}·10<sup>${String(exp).replace('-','−')}</sup> mol/L.`}}},
+ {L:'V',g(){const H0=pick([28,30,32,35,40]),a=rnd(.0015,.003,.0001),g=rnd(6,16,.5),kv=rnd(.0015,.004,.0001),x=Math.sqrt((H0-g)/(a+kv));return{tag:'Rohrleitungsnetze',ti:'Betriebspunkt berechnen',tx:`Im Pumpwerk Talstraße gilt für die Pumpe ${F(H,EQ,nf(H0),MI,nf(a),M,sqr(Q))} und für die Anlage ${F(H,EQ,nf(g),PL,nf(kv),M,sqr(Q))} (Q in L/s, H in m). Berechne den Förderstrom im Betriebspunkt.`,x:Q,un:'L/s',a:x,
+   geg:`Pumpe: ${F('H',EQ,nf(H0),MI,nf(a),M,sqr(Q))};&nbsp; Anlage: ${F('H',EQ,nf(g),PL,nf(kv),M,sqr(Q))}`,steps:[['Gleichsetzen',F(nf(H0),MI,nf(a),M,sqr(Q),EQ,nf(g),PL,nf(kv),M,sqr(Q))],['Umstellen',`${F(nf(H0),MI,nf(g),EQ,'(',nf(a),PL,nf(kv),')',M,sqr(Q))} → ${F(Q,EQ,sq(fr(nf(H0)+MI+nf(g),nf(a)+PL+nf(kv))))}`]],ein:F(Q,EQ,sq(fr(nf(+(H0-g).toFixed(1)),nf(+(a+kv).toFixed(4))))),
+   s:F(Q,EQ,sq(fr(nf(+(H0-g).toFixed(1)),nf(+(a+kv).toFixed(4)))),EQ,res(x,0,'L/s')),satz:`Im Betriebspunkt fördert die Pumpe ${fmt(x)} L/s bei ${fmt(H0-a*x*x)} m Förderhöhe.`}}}
+];
+
+/* ---------- Schritt für Schritt ---------- */
+const examples={
+ B:{tab:'4–20 mA',intro:'Ein Füllstandssensor mit Messbereich 0–4 m sendet 9,2 mA. Wie hoch steht das Wasser?',s:[
+   {e:F(Ic,MI,'4 mA',EQ,'9,2 mA − 4 mA',EQ,'5,2'+u('mA')),o:'Schritt 1',w:'Den Startwert 4 mA abziehen – erst ab 4 mA zeigt der Sensor mehr als 0 m.'},
+   {e:F(fr('5,2 mA','16 mA'),EQ,'0,325'),o:'Schritt 2',w:'Anteil am gesamten Signalbereich (4 bis 20 mA sind 16 mA).'},
+   {e:F(h,EQ,'0,325',M,'4 m',EQ,res(1.3,1,'m')),o:'Schritt 3',w:'Anteil mal Messbereich.'}]},
+ S:{tab:'Anlagenkennlinie',intro:`Anlagenkennlinie ${F(H,EQ,'10 m',PL,'0,003',M,sqr(Q))}. Welche Förderhöhe bei 40 L/s und bei 80 L/s?`,s:[
+   {e:F(H,EQ,'10',PL,'0,003',M,'40²',EQ,'10',PL,'4,8',EQ,'14,8'+u('m')),o:'40 L/s',w:'Potenz vor Punkt vor Strich.'},
+   {e:F(H,EQ,'10',PL,'0,003',M,'80²',EQ,'10',PL,'19,2',EQ,'29,2'+u('m')),o:'80 L/s',w:'Doppelter Förderstrom …'},
+   {e:'4,8 m → 19,2 m: viermal so viel',o:'Erkenntnis',w:'… vierfache Reibungsverluste. Die geodätische Höhe bleibt gleich.'}]},
+ V:{tab:'pH-Wert',intro:`Eine Probe hat ${cH} = 2,5 · 10<sup>−4</sup> mol/L. pH?`,s:[
+   {e:'pH = −lg '+cH,o:'Formel',w:'Negativer Zehnerlogarithmus.'},
+   {e:'pH = −lg(2,5 · 10<sup>−4</sup>)',o:'Einsetzen',w:'Taschenrechner: (−) log ( 2,5 × 10^(−4) ).'},
+   {e:F('pH',EQ,res(3.602,3,'')),o:'Ergebnis',w:'Zwischen pH 3 und 4 – klar sauer. Plausibel? 10⁻⁴ ergibt pH 4, und 2,5 · 10⁻⁴ ist etwas mehr Säure – also etwas kleiner als 4.'}]}
+};
+
+K.module({id:'m10',nr:10,examples,trainer,tasks});
+})();
+</script>
+</body>
+</html>

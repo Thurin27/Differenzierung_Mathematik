@@ -20,13 +20,51 @@ K.MODS=[
   {id:'m4',nr:4,href:'modul-04.html',t:'Formeln umstellen',p:true},
   {id:'m5',nr:5,href:'modul-05.html',t:'Mit Formeln rechnen',p:true},
   {id:'m6',nr:6,href:'modul-06.html',t:'Flächen'},
-  {id:'m7',nr:7,href:'modul-07.html',t:'Volumen & Masse',p:true}
+  {id:'m7',nr:7,href:'modul-07.html',t:'Volumen & Masse',p:true},
+  {id:'m8',nr:8,href:'modul-08.html',t:'Diagramme lesen'},
+  {id:'m9',nr:9,href:'modul-09.html',t:'Die Berufsformeln'},
+  {id:'m10',nr:10,href:'modul-10.html',t:'Funktionen (Vertiefung)'}
 ];
 K.NEED={T:5,R:3};K.RW_NEED=4;
 /* Status einer Niveaustufe: offen · angefangen · geschafft */
 K.status=(st,L)=>{const t=(st.T||{})[L]||0,r=(st.R||{})[L]||0;return t>=K.NEED.T&&r>=K.NEED.R?'geschafft':(t||r)?'angefangen':'offen'};
 K.today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 K.dDE=iso=>iso?iso.slice(8,10)+'.'+iso.slice(5,7)+'.':'';
+
+/* ---------- Diagramme (SVG, Farben aus dem Theme) ----------
+   K.plot({x0,x1,dx,y0,y1,dy,mx,my,xl,yl,w,h,series:[{f|pts,color,width,dash,label}],points:[{x,y,label}],guides:[{x,y}],hl:[{y}],vl:[{x}]})
+   mx/my: Anzahl Kästchen je Hauptteilung (Feinraster) */
+let plotId=0;
+K.plot=function(o){
+  const W=o.w||600,H=o.h||320,L=58,R=18,T=16,B=48,pw=W-L-R,ph=H-T-B,id='pc'+(++plotId);
+  const X=x=>L+(x-o.x0)/(o.x1-o.x0)*pw, Y=y=>T+ph-(y-o.y0)/(o.y1-o.y0)*ph;
+  const eps=1e-9,lines=[],txt=[];
+  const mx=o.mx||5,my=o.my||5;
+  for(let x=o.x0;x<=o.x1+eps;x+=o.dx/mx){const maj=Math.abs(Math.round((x-o.x0)/o.dx)*o.dx-(x-o.x0))<eps*1e3;
+    lines.push(`<line x1="${X(x).toFixed(1)}" y1="${T}" x2="${X(x).toFixed(1)}" y2="${T+ph}" stroke="var(--${maj?'line':'grid'})" stroke-width="${maj?1:.6}"/>`);
+    if(maj)txt.push(`<text x="${X(x).toFixed(1)}" y="${T+ph+18}" text-anchor="middle" font-size="12.5" fill="var(--muted)">${K.nf(+x.toFixed(6))}</text>`)}
+  for(let y=o.y0;y<=o.y1+eps;y+=o.dy/my){const maj=Math.abs(Math.round((y-o.y0)/o.dy)*o.dy-(y-o.y0))<eps*1e3;
+    lines.push(`<line x1="${L}" y1="${Y(y).toFixed(1)}" x2="${L+pw}" y2="${Y(y).toFixed(1)}" stroke="var(--${maj?'line':'grid'})" stroke-width="${maj?1:.6}"/>`);
+    if(maj)txt.push(`<text x="${L-7}" y="${(Y(y)+4).toFixed(1)}" text-anchor="end" font-size="12.5" fill="var(--muted)">${K.nf(+y.toFixed(6))}</text>`)}
+  const ser=(o.series||[]).map(sr=>{
+    let pts=sr.pts;
+    if(sr.f){pts=[];const n=sr.n||240,a=sr.from??o.x0,b=sr.to??o.x1;for(let i=0;i<=n;i++){const x=a+(b-a)*i/n,y=sr.f(x);if(isFinite(y))pts.push([x,y])}}
+    const d=pts.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)).join('');
+    const lab=sr.label?`<text x="${(X(sr.lx??pts[pts.length-1][0])+(sr.ldx||-4)).toFixed(1)}" y="${(Y(sr.ly??pts[pts.length-1][1])+(sr.ldy||-8)).toFixed(1)}" text-anchor="${sr.anchor||'end'}" font-size="13" font-weight="600" fill="${sr.color||'var(--blue)'}">${sr.label}</text>`:'';
+    return `<path d="${d}" fill="none" stroke="${sr.color||'var(--blue)'}" stroke-width="${sr.width||2.6}" ${sr.dash?`stroke-dasharray="${sr.dash}"`:''} stroke-linejoin="round" stroke-linecap="round" clip-path="url(#${id})"/>`+lab;
+  }).join('');
+  const hl=(o.hl||[]).map(h=>`<line x1="${L}" y1="${Y(h.y).toFixed(1)}" x2="${L+pw}" y2="${Y(h.y).toFixed(1)}" stroke="${h.color||'var(--lv)'}" stroke-width="1.6" stroke-dasharray="6 4"/>`+(h.label?`<text x="${L+6}" y="${(Y(h.y)-6).toFixed(1)}" text-anchor="start" font-size="12.5" fill="${h.color||'var(--lv)'}">${h.label}</text>`:'')).join('');
+  const vl=(o.vl||[]).map(v=>`<line x1="${X(v.x).toFixed(1)}" y1="${T}" x2="${X(v.x).toFixed(1)}" y2="${T+ph}" stroke="${v.color||'var(--lv)'}" stroke-width="1.6" stroke-dasharray="6 4"/>`).join('');
+  const gd=(o.guides||[]).map(g=>`<path d="M${X(g.x).toFixed(1)} ${T+ph}V${Y(g.y).toFixed(1)}H${L}" fill="none" stroke="var(--ok)" stroke-width="1.6" stroke-dasharray="5 4"/>`).join('');
+  const pt=(o.points||[]).map(p=>`<circle cx="${X(p.x).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="5" fill="${p.color||'var(--navy)'}" stroke="var(--surface)" stroke-width="1.5"/>`+(p.label?`<text x="${(X(p.x)+(p.dx??8)).toFixed(1)}" y="${(Y(p.y)+(p.dy??-8)).toFixed(1)}" font-size="13" font-weight="600" text-anchor="${p.anchor||'start'}" fill="${p.color||'var(--navy)'}">${p.label}</text>`:'')).join('');
+  return `<svg class="plot" viewBox="0 0 ${W} ${H}" role="img" aria-label="${(o.aria||'Diagramm').replace(/"/g,'')}">
+    <defs><clipPath id="${id}"><rect x="${L}" y="${T}" width="${pw}" height="${ph}"/></clipPath></defs>
+    <rect x="${L}" y="${T}" width="${pw}" height="${ph}" fill="var(--surface)"/>${lines.join('')}
+    <line x1="${L}" y1="${T+ph}" x2="${L+pw}" y2="${T+ph}" stroke="var(--ink)" stroke-width="1.4"/><line x1="${L}" y1="${T}" x2="${L}" y2="${T+ph}" stroke="var(--ink)" stroke-width="1.4"/>
+    ${txt.join('')}${hl}${vl}${ser}${gd}${pt}
+    <text x="${L+pw}" y="${H-8}" text-anchor="end" font-size="13.5" fill="var(--ink)">${o.xl||''}</text>
+    <text x="14" y="${T+ph/2}" text-anchor="middle" font-size="13.5" fill="var(--ink)" transform="rotate(-90 14 ${T+ph/2})">${o.yl||''}</text></svg>`;
+};
 
 /* ---------- Speicher ---------- */
 K.load=id=>{try{return JSON.parse(localStorage.getItem('mak-'+id)||'{}')||{}}catch(e){return{}}};
@@ -198,7 +236,8 @@ K.module=function(cfg){
       const lv=$('.lvl',rHost);lv.className='lvl '+L;lv.textContent=LV[L];
       $('.tag',rHost).textContent=cur.tag;$('.r-title',rHost).textContent=cur.ti;$('.r-text',rHost).innerHTML=cur.tx;
       $('.r-want',rHost).innerHTML=`<span class="f">${cur.x}</span>`;$('.unit',rHost).innerHTML=cur.un;
-      $('.r-round',rHost).innerHTML=cur.sig?'Gib die gerundete Zahl ein. Dezimalzeichen: Komma.'
+      $('.r-round',rHost).innerHTML=cur.tol!=null?(cur.tolText||`Lies so genau ab, wie es geht. Erlaubte Abweichung: ±${K.nf(cur.tol)} ${cur.un}.`)
+        :cur.sig?'Gib die gerundete Zahl ein. Dezimalzeichen: Komma.'
         :cur.exact?'Das Ergebnis geht genau auf – gib es vollständig an. Dezimalzeichen: Komma.'
         :cur.fix?`Geldbeträge rundest du auf ${cur.dc} Nachkommastellen (Cent). Dezimalzeichen: Komma.`
         :'Gib das Ergebnis mit <strong>4 signifikanten Stellen</strong> an (<a href="modul-01.html#runden">Regel in Modul 1</a>) – genauer ist auch in Ordnung. Dezimalzeichen: Komma.';
@@ -207,7 +246,7 @@ K.module=function(cfg){
     };
     const solution=(head,cls)=>{
       const fb=$('.r-fb',rHost);fb.hidden=false;fb.className='r-fb fb '+cls;
-      fb.innerHTML=`<div>${head}</div>`+K.schema([['Gegeben',cur.geg],['Gesucht',`<span class="f">${cur.x}</span> in ${cur.un}`],...cur.steps,['Rechnung',cur.s],['Antwort',cur.satz]]);
+      fb.innerHTML=`<div>${head}</div>`+K.schema([['Gegeben',cur.geg],['Gesucht',`<span class="f">${cur.x}</span>${cur.un?' in '+cur.un:''}`],...cur.steps,['Rechnung',cur.s],['Antwort',cur.satz]]);
       inp.disabled=true;$('.r-hint',rHost).disabled=true;$('.r-sol',rHost).disabled=true;
     };
     $('form',rHost).addEventListener('submit',e=>{
@@ -227,6 +266,10 @@ K.module=function(cfg){
           else if(nd<4&&Math.abs(x-cur.raw)<=Math.abs(cur.raw)*0.01)hint='Zu stark gerundet – es sollen vier signifikante Stellen sein.';
           else hint='Zähle ab der ersten Ziffer, die keine Null ist. Führende Nullen zählen nicht mit.';
         }
+      }else if(cur.tol!=null){
+        /* Ablesen aus Diagrammen: feste Toleranz */
+        ok=Math.abs(x-cur.a)<=cur.tol*1.0001;
+        if(!ok&&Math.abs(x-cur.a)<=cur.tol*3)hint='Fast – lies noch einmal genau ab. Wie viel ist ein Kästchen auf der Achse wert?';
       }else if(cur.exact){
         /* geht genau auf: genauer Wert oder nach der Rundungsregel */
         ok=same(x,cur.a)||Math.abs(x-cur.a)<=ulp*3.001;

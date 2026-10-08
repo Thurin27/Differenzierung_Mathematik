@@ -107,9 +107,9 @@ const MODS = [
   [5, 'Mit Formeln rechnen', true],
   [6, 'Flächen'],
   [7, 'Volumen & Masse', true],
-  [8, 'Diagramme'],
+  [8, 'Diagramme lesen'],
   [9, 'Die Berufsformeln'],
-  [10, 'Vertiefung'],
+  [10, 'Funktionen (Vertiefung)'],
 ];
 const MW = Math.round(4.4 * CM), LW = Math.round(4.2 * CM);               // Modulspalte + 3 Niveauspalten = 17 cm
 const tick = (label) => p([box({ size: 22 }), run(' ' + label, { size: 18 }), new TextRun({ text: '\t____.____.', font: FONT, size: 20, color: LINE })], { spacing: { before: 50, after: 50 }, tabStops: [{ type: TabStopType.RIGHT, position: LW - 230 }] });
