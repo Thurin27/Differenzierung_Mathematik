@@ -7,6 +7,7 @@
 (function(){
 "use strict";
 const K=window.K={};
+document.documentElement.classList.add('js');   /* blendet den Hinweis „Übungen können nicht starten“ aus */
 const $=(s,root)=>(root||document).querySelector(s);
 const LV={B:'Basis',S:'Standard',V:'Vertiefung'};
 K.LV=LV;

@@ -28,6 +28,7 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 | `modul-10.html` | Modul 10: Funktionen – Vertiefung (linear/4–20 mA, Anlagenkennlinie mit Kennlinien-Labor, Halbwertszeit, pH) |
 | `einfach/` | **Mathe einfach**: reduzierte Version in einfacher Sprache (Start + Schritt 0–7), feste Stufe Basis, Vorlese-Funktion |
 | `material/lerntagebuch-mathe-aufbaukurs.docx` | Lerntagebuch zum Ausdrucken: Übersicht zum Abhaken, 10 Terminseiten mit Reflexion |
+| `assets/fonts.css`, `assets/fonts/` | Schriften lokal (Barlow Semi Condensed, Source Sans 3, STIX Two Text; SIL Open Font License, Lizenztexte im Ordner) |
 | `assets/kurs.css` | Gemeinsames Layout (hell/dunkel) |
 | `assets/kurs.js` | Gemeinsame Bausteine: Niveau-Wahl, Schritt-für-Schritt, Trainer, Aufgabengenerator, Lernstand |
 
@@ -39,6 +40,14 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 4. Nach ca. 1 Minute erreichbar unter `https://<benutzername>.github.io/mathe-aufbaukurs/`.
 
 Lokal testen: `index.html` einfach im Browser öffnen.
+
+## Ohne Webserver nutzen (IServ, Netzlaufwerk, USB-Stick)
+
+Der Kurs lädt nichts von fremden Servern (keine Google Fonts, keine CDNs) und läuft komplett offline.
+Den ganzen Ordner (inkl. `assets/`) z. B. in einen nur lesbaren IServ-Gruppenordner legen und an Schulrechnern `index.html` vom Netzlaufwerk öffnen.
+Getestet in Chromium (Chrome/Edge): Seiten, Schriften und der gemeinsame Fortschritt über alle Module funktionieren auch beim Öffnen direkt aus dem Ordner (`file://`).
+Firefox bitte einmal vor Ort prüfen (Modul öffnen, eine Trainer-Aufgabe lösen, dann „Mein Fortschritt“ ansehen).
+Achtung IServ-Weboberfläche: Öffnet man `index.html` direkt in der IServ-Dateiansicht, werden Seiten und Layout angezeigt, aber IServ blockiert JavaScript in hochgeladenen Dateien. Trainer, Rechenaufgaben, Beispiele und Fortschritt fehlen dann; die Seiten zeigen in diesem Fall oben einen roten Hinweis. Für Handy und Tablet daher die Website (GitHub Pages o. ä.) verwenden und den Link in IServ ablegen.
 
 ## Lernstand
 
