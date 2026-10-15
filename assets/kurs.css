@@ -399,3 +399,18 @@ details.mehr>:not(summary)+:not(summary){margin-top:10px}
 .start-cta .eyebrow{margin:0}
 .infolinks{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 22px;font:600 1rem var(--f-display)}
 .infolinks a{text-decoration:none}
+
+/* ---------- Lesen vs. Mitmachen ----------
+   Mitmachen-Abschnitte: sandfarbenes Band über die ganze Breite, Stift-Kennzeichen, kräftigere Karten */
+:root{--do-bg:#f5eedd;--do-line:#e2d3ae;--do-ink:#7a4f00}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--do-bg:#231d10;--do-line:#4a3c1c;--do-ink:#e8b25c}}
+:root[data-theme="dark"]{--do-bg:#231d10;--do-line:#4a3c1c;--do-ink:#e8b25c}
+section.zone-do{position:relative;background:var(--do-bg);box-shadow:0 0 0 100vmax var(--do-bg);clip-path:inset(0 -100vmax);padding-block:36px 40px;margin-block:28px 0;border-top:1px solid var(--do-line)}
+section.zone-do+section.zone-do{margin-top:0;border-top:1px dashed var(--do-line)}
+section.zone-do>h2{color:var(--do-ink)}
+.zone-chip{display:inline-flex;align-items:center;gap:8px;justify-self:start;background:var(--do-ink);color:var(--do-bg);font:700 .8rem var(--f-display);letter-spacing:.07em;text-transform:uppercase;padding:5px 12px 5px 10px;border-radius:999px;margin-bottom:-6px}
+section.zone-do .card{border:1.5px solid var(--do-line);box-shadow:0 2px 8px rgba(90,60,0,.10)}
+section.zone-do input:not([type=checkbox]){border-width:2px}
+.bar nav.flow a[data-flow="trainer"],.bar nav.flow a[data-flow="rechnen"]{border-color:var(--do-line);background:var(--do-bg)}
+.bar nav.flow a[data-flow="trainer"] .fn,.bar nav.flow a[data-flow="rechnen"] .fn{background:var(--do-ink);color:var(--do-bg)}
+.bar nav.flow a.done[data-flow] .fn{background:var(--ok);color:var(--surface)}

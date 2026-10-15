@@ -140,6 +140,23 @@ K.umstell=(L,n,lhs,rhs,x,ok,w,h)=>({L,n,prompt:K.F(lhs,K.EQ,rhs),ask:`Stelle nac
 /* Rechenweg-Schema als HTML */
 K.schema=rows=>`<dl class="schema">${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
 
+/* ---------- Lesen vs. Mitmachen: Abschnitte, in denen man etwas eingibt, bekommen ein eigenes Band ----------
+   automatisch für [data-k="trainer"] und [data-k="rechnen"], sonst per class="mitmachen" data-zone="Text" */
+const PENCIL='<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+K.zones=()=>{
+  document.querySelectorAll('main section').forEach(sec=>{
+    if(sec.classList.contains('zone-do'))return;
+    let t=sec.dataset.zone;
+    if(!t&&sec.querySelector('[data-k="trainer"]'))t='Jetzt du: Antwort auswählen';
+    if(!t&&sec.querySelector('[data-k="rechnen"]'))t='Jetzt du: rechnen und Ergebnis eintragen';
+    if(!t&&sec.classList.contains('mitmachen'))t='Jetzt du';
+    if(!t)return;
+    sec.classList.add('zone-do');
+    const c=document.createElement('div');c.className='zone-chip';c.innerHTML=PENCIL+'<span>'+t+'</span>';
+    sec.prepend(c);
+  });
+};
+
 /* ---------- Stufen: Inhalte filtern ----------
    data-lv="S"  → sichtbar ab Standard (S und V), data-lv="V" → nur Vertiefung
    data-only="B" bzw. "B S" → nur auf diesen Stufen sichtbar (z. B. Lernziele) */
@@ -166,6 +183,7 @@ K.testGate=(root)=>{
 /* ---------- Modul ---------- */
 K.module=function(cfg){
   const need=Object.assign({T:5,R:3},cfg.need);
+  K.zones();
   /* einfache Version: lock = feste Stufe (ohne Wahl), simple = kurze, einfache Rückmeldungen, root = Pfad zur Hauptseite */
   const lock=cfg.lock||null,simple=!!cfg.simple,root=cfg.root||'',S=(a,b)=>simple?b:a;
   const raw=K.load(cfg.id);
