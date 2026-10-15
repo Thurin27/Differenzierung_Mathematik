@@ -79,6 +79,10 @@ Für die schwächsten Lernenden, auch mit Sprachschwierigkeiten. Der Link wird g
 - Die Leiste unter dem Modulkopf wird automatisch zu „1 Verstehen · 2 Beispiel · 3 Üben · 4 Rechnen · Stand“ (Häkchen, wenn Trainer bzw. Rechnen der Stufe geschafft). Beispiel-Reiter erscheinen nur bis zur gewählten Stufe.
 - Startstufe eines Moduls: zuletzt gewählte Stufe im Modul → Empfehlung aus dem Eingangstest (`mak-test`) → Basis.
 
+## Neue Version hochladen
+
+Die Links auf `assets/kurs.css`, `kurs.js`, `fonts.css` und `einfach.js` tragen eine Versionsnummer (`?v=20261015`). Ändert sich eine dieser Dateien, die Nummer in allen HTML-Seiten erhöhen (Suchen & Ersetzen), damit Browser nicht die alte Fassung aus dem Zwischenspeicher nehmen. `.nojekyll` im Repository nicht löschen.
+
 ## Neues Modul anlegen
 
 1. `modul-04.html` kopieren, z. B. als `modul-07.html`. Kopf, Ziele und Erklärteil anpassen.
