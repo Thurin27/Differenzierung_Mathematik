@@ -81,7 +81,7 @@ Für die schwächsten Lernenden, auch mit Sprachschwierigkeiten. Der Link wird g
 
 ## Neue Version hochladen
 
-Die Links auf `assets/kurs.css`, `kurs.js`, `fonts.css` und `einfach.js` tragen eine Versionsnummer (`?v=20261015b`). Ändert sich eine dieser Dateien, die Nummer in allen HTML-Seiten erhöhen (Suchen & Ersetzen), damit Browser nicht die alte Fassung aus dem Zwischenspeicher nehmen. `.nojekyll` im Repository nicht löschen.
+Die Links auf `assets/kurs.css`, `kurs.js`, `fonts.css` und `einfach.js` tragen eine Versionsnummer (`?v=20261015c`). Ändert sich eine dieser Dateien, die Nummer in allen HTML-Seiten erhöhen (Suchen & Ersetzen), damit Browser nicht die alte Fassung aus dem Zwischenspeicher nehmen. `.nojekyll` im Repository nicht löschen.
 
 ## Neues Modul anlegen
 

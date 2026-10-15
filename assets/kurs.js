@@ -210,9 +210,9 @@ K.module=function(cfg){
   }
 
   /* Modul-Ablauf als 4 Schritte in der Leiste: Verstehen – Beispiel – Üben – Rechnen (+ Stand) */
-  const flowNav=!lock&&cfg.flow!==false?$('.bar nav'):null;
+  const flowNav=cfg.flow!==false?$('.bar nav'):null;
   if(flowNav){
-    const steps=[['ziele','Verstehen'],['beispiel','Beispiel'],['trainer','Üben'],['rechnen','Rechnen']].filter(([id])=>document.getElementById(id));
+    const steps=[[document.getElementById('ziele')?'ziele':'ziel','Verstehen'],['beispiel','Beispiel'],['trainer','Üben'],['rechnen','Rechnen']].filter(([id])=>document.getElementById(id));
     flowNav.classList.add('flow');flowNav.setAttribute('aria-label','Ablauf im Modul');
     flowNav.innerHTML=steps.map(([id,t],i)=>`<a href="#${id}" data-flow="${id}"><span class="fn">${i+1}</span>${t}</a>`).join('')+(document.getElementById('stand')?'<a href="#stand" class="fstand">Stand</a>':'');
   }
