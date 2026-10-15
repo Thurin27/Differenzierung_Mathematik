@@ -14,6 +14,9 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 | Datei | Inhalt |
 |---|---|
 | `index.html` | Startseite: Ablauf, Niveaus, Modulübersicht mit Status (angefangen/geschafft) |
+| `eingangstest.html` | Eingangstest (Pflicht vor dem ersten Modul): 3 Fragen zur Selbsteinschätzung + 16 Aufgaben (je Pflichtmodul Basis + Standard), automatische Empfehlung je Modul; „Schon gemacht?“ → Stufe direkt wählen |
+| `so-gehts.html` | So funktioniert der Kurs (Ablauf, Stufen, Rundungsregel, Lernstand) |
+| `lehrkraefte.html` | Hinweise für die Lernbegleitung (inkl. Auswertungsregeln des Eingangstests) |
 | `fortschritt.html` | Mein Fortschritt: alle Module × Niveaus mit Status und Datum (begonnen/geschafft) aus dem Browser-Speicher |
 | `rechenweg.html` | Modul 0: Die sechs Schritte des Rechenwegs, Musterlösung, typische Fehler, Rechenweg-Detektiv, Checkliste |
 | `modul-01.html` | Modul 1: Zahlen & Rechenregeln (inkl. ×10-Anzeige lesen, Rundungsregel, Taschenrechner-Führerschein) |
@@ -68,6 +71,13 @@ Für die schwächsten Lernenden, auch mit Sprachschwierigkeiten. Der Link wird g
 - Vorlesen über die Sprachausgabe des Browsers (Web Speech API, deutsche Stimme, Einheiten werden ausgesprochen). Fehlt die Funktion im Browser, werden die Knöpfe ausgeblendet.
 - Fortschritt zählt in dieselben Module des normalen Kurses, Stufe Basis (Schritt 0 unter `mak-rwe`; zählt als „Rechenweg geschafft“). Wer fertig ist, macht im normalen Kurs mit Standard weiter.
 - Technik: dieselbe Engine mit `K.module({lock:'B', simple:true, root:'../'})`, Helfer in `einfach/einfach.js` (`K.E.tx`, `K.E.T`, `K.E.run`). Elemente mit `class="sayable"` bekommen einen Vorlese-Knopf (Text aus `data-say` oder dem sichtbaren Text).
+
+## Übersichtlichkeit: Inhalte nach Stufe
+
+- `data-lv="S"` → sichtbar ab Standard, `data-lv="V"` → nur Vertiefung, `data-only="B"` (bzw. `"B S"`) → nur auf diesen Stufen (z. B. Lernziel-Spalten). Gilt für jedes HTML-Element (nicht für einzelne SVG-Teile – Grafik dann in ein `div` packen).
+- Merkkarte oben im Modul: `<div class="merkkarte"><h2>Das Wichtigste</h2><ul>…</ul></div>`; Hintergrund/Sonderfälle in `<details class="mehr"><summary>Mehr dazu: …</summary>…</details>`.
+- Die Leiste unter dem Modulkopf wird automatisch zu „1 Verstehen · 2 Beispiel · 3 Üben · 4 Rechnen · Stand“ (Häkchen, wenn Trainer bzw. Rechnen der Stufe geschafft). Beispiel-Reiter erscheinen nur bis zur gewählten Stufe.
+- Startstufe eines Moduls: zuletzt gewählte Stufe im Modul → Empfehlung aus dem Eingangstest (`mak-test`) → Basis.
 
 ## Neues Modul anlegen
 

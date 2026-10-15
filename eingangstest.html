@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eingangstest – Mathe-Aufbaukurs</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/kurs.css">
+</head>
+<body>
+<header class="site"><div class="wrap sitebar">
+  <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="eingangstest.html" aria-current="page">Test</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="modul-08.html" title="Modul 8 Diagramme lesen">M8</a><a href="modul-09.html" title="Modul 9 Die Berufsformeln">M9</a><a href="modul-10.html" title="Modul 10 Funktionen">M10</a><a href="fortschritt.html">Fortschritt</a></nav>
+</div></header>
+
+<main class="wrap">
+<div class="js-hinweis" role="alert"><strong>Der Test kann hier nicht starten.</strong> Diese Seite wurde so geöffnet, dass der Browser keine Programme (JavaScript) ausführen darf – zum Beispiel direkt in der IServ-Dateiansicht. Öffne den Kurs über den Link deiner Lehrkraft oder am Schulrechner direkt aus dem Ordner (Chrome, Edge oder Firefox).</div>
+
+<header class="top plain">
+  <div class="eyebrow">Mathe-Aufbaukurs · Start</div>
+  <h1>Eingangstest</h1>
+</header>
+
+<div id="test" class="et"></div>
+</main>
+<footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
+
+<script src="assets/kurs.js"></script>
+<script>
+(function(){
+const {I,fr,F,M,EQ,u,nf}=K;
+const host=document.getElementById('test');
+const LVN={E:'Mathe einfach',B:'Basis',S:'Standard',V:'Vertiefung'};
+const MODS=[['rw','0','Der Rechenweg','rechenweg.html'],['m1','1','Zahlen & Rechenregeln','modul-01.html'],['m2','2','Einheiten umrechnen','modul-02.html'],['m3','3','Dreisatz und Prozent','modul-03.html'],
+  ['m4','4','Formeln umstellen','modul-04.html'],['m5','5','Mit Formeln rechnen','modul-05.html'],['m6','6','Flächen','modul-06.html'],['m7','7','Volumen & Masse','modul-07.html']];
+const esc=s=>s.replace(/&/g,'&amp;');
+const q=(x,un)=>`${x}${u(un)}`;
+
+/* ---------- Teil A: Selbsteinschätzung ---------- */
+const SELF=[
+ {id:'abschluss',t:'Welchen Schulabschluss hast du?',o:[['hs','Hauptschulabschluss (nach Klasse 9 oder 10)'],['for','Mittlerer Schulabschluss (FOR)'],['abi','Fachhochschulreife oder Abitur'],['ausl','Abschluss aus einem anderen Land'],['and','Anderer Abschluss']]},
+ {id:'note',t:'Welche Note hattest du zuletzt in Mathe?',o:[['12','1 oder 2'],['3','3'],['4','4'],['56','5 oder 6'],['wn','Weiß ich nicht mehr']]},
+ {id:'text',t:'Wie leicht fällt es dir, lange Aufgabentexte auf Deutsch zu verstehen?',o:[['leicht','Leicht'],['geht','Es geht'],['schwer','Schwer']]}
+];
+
+/* ---------- Teil B: 16 Aufgaben (je Pflichtmodul eine Basis- und eine Standard-Aufgabe) ---------- */
+const ITEMS=[
+ /* Basis */
+ {m:'rw',L:'B',type:'mc',t:'Womit beginnst du den Rechenweg im Heft?',o:['Gegeben','Antwortsatz','Rechnung','Formel umstellen']},
+ {m:'m1',L:'B',type:'num',t:`Rechne ohne Taschenrechner: ${F('4 + 6 · 3')}`,a:22,un:''},
+ {m:'m2',L:'B',type:'num',t:`Ein Tank enthält ${q('2,5','m³')} Fällmittel. Wie viele Liter sind das?`,a:2500,un:'L'},
+ {m:'m3',L:'B',type:'num',t:`In 4 Tagen verbraucht die Kläranlage ${q('300','L')} Fällmittel. Wie viel braucht sie in 10 Tagen? Der Verbrauch ist jeden Tag gleich.`,a:750,un:'L'},
+ {m:'m4',L:'B',type:'mc',t:`Stelle ${F(I('U'),EQ,I('R'),M,I('I'))} nach ${I('I')} um.`,o:[F(I('I'),EQ,fr(I('U'),I('R'))),F(I('I'),EQ,I('U'),M,I('R')),F(I('I'),EQ,fr(I('R'),I('U'))),F(I('I'),EQ,I('U'),' − ',I('R'))]},
+ {m:'m5',L:'B',type:'num',t:`Ein Gerät im Pumpwerk liegt an ${F(I('U'),EQ,q('230','V'))} und nimmt ${F(I('I'),EQ,q('4','A'))} auf. Wie groß ist die Leistung ${F(I('P'),EQ,I('U'),M,I('I'))}?`,a:920,un:'W'},
+ {m:'m6',L:'B',type:'num',t:`Ein rechteckiges Dach ist ${q('12','m')} lang und ${q('7,5','m')} breit. Wie groß ist die Dachfläche?`,a:90,un:'m²'},
+ {m:'m7',L:'B',type:'num',t:`Ein Becken ist ${q('10','m')} lang, ${q('4','m')} breit und ${q('2,5','m')} tief. Wie viele Kubikmeter Wasser passen hinein?`,a:100,un:'m³'},
+ /* Standard */
+ {m:'rw',L:'S',type:'mc',t:`Eine Pumpe fördert ${q('40','m³/h')}. Sie läuft ${q('3','h')}. Welcher Antwortsatz ist vollständig und richtig?`,o:['Die Pumpe fördert 120 m³.','120','Die Pumpe fördert 120 m³/h.','Die Pumpe fördert 43 m³.']},
+ {m:'m1',L:'S',type:'mc',t:`Der Taschenrechner zeigt ${'<span class="lcd lcd-inline"><span class="lcd-m">3.2</span><span class="lcd-x">×10<sup>−03</sup></span></span>'}. Welche Zahl ist das?`,o:['0,0032','3,2','3200','0,032']},
+ {m:'m2',L:'S',type:'num',t:`Eine Pumpe fördert ${q('18','m³/h')}. Wie viele Liter pro Sekunde sind das?`,a:5,un:'L/s'},
+ {m:'m3',L:'S',type:'num',t:`Im Abfallzentrum sind ${q('120','t')} Altpapier angekommen. Das sind 30 % der ganzen Abfallmenge des Tages. Wie viele Tonnen Abfall sind es insgesamt?`,a:400,un:'t'},
+ {m:'m4',L:'S',type:'mc',t:`Der Wirkungsgrad ist ${F('η',EQ,fr(I('P','ab'),I('P','zu')))}. Stelle nach ${I('P','zu')} um.`,o:[F(I('P','zu'),EQ,fr(I('P','ab'),'η')),F(I('P','zu'),EQ,I('P','ab'),M,'η'),F(I('P','zu'),EQ,fr('η',I('P','ab'))),F(I('P','zu'),EQ,I('P','ab'),' − ','η')]},
+ {m:'m5',L:'S',type:'num',t:`Ein Heizlüfter mit ${F(I('P'),EQ,q('1500','W'))} läuft ${q('30','min')}. Wie viel Energie braucht er in kWh? (${F(I('E'),EQ,I('P'),M,I('t'))})`,a:0.75,un:'kWh'},
+ {m:'m6',L:'S',type:'num',t:`Ein rundes Becken hat den Durchmesser ${F(I('d'),EQ,q('4','m'))}. Wie groß ist die Grundfläche? (${F(I('A'),EQ,fr('π · '+I('d')+'²','4'))})`,a:Math.PI*4,un:'m²',tol:0.01},
+ {m:'m7',L:'S',type:'num',t:`Ein runder Behälter hat ${F(I('d'),EQ,q('2','m'))} und ist ${q('3','m')} hoch. Wie viele Kubikmeter passen hinein? (${F(I('V'),EQ,fr('π · '+I('d')+'²','4'),M,I('h'))})`,a:Math.PI*3,un:'m³',tol:0.01}
+];
+/* Auswahl-Antworten mischen, richtige Antwort merken (immer die erste in der Liste) */
+ITEMS.forEach(it=>{if(it.type==='mc'){it.ok=it.o[0];it.oo=K.shuffle(it.o)}});
+
+const STEPS=[...SELF.map(s=>({k:'self',s})),...ITEMS.map(it=>({k:'item',it}))];
+let pos=-1;const ans={self:{},item:[]};
+
+function intro(){
+  host.innerHTML=`<section class="et-intro">
+    <p class="lead">Der Test zeigt dir, mit welcher Stufe du in jedem Modul anfangen solltest. <strong>Er ist keine Klassenarbeit und gibt keine Note.</strong></p>
+    <ul class="kurz">
+      <li><b>Dauer:</b> etwa 20 Minuten – 3 Fragen zu dir, dann 16 kurze Aufgaben.</li>
+      <li><b>Dabei:</b> Taschenrechner, Heft für Nebenrechnungen.</li>
+      <li><b>Nicht sicher?</b> Klicke auf „Weiß ich nicht“. Das ist besser als raten.</li>
+    </ul>
+    <div class="row"><button class="btn" id="et-go">Test starten</button></div>
+    <p class="small" id="schon-link"><a href="#schon">Ich habe den Test schon gemacht</a> – zum Beispiel, wenn der Fortschritt im Browser gelöscht wurde.</p>
+  </section>`;
+  document.getElementById('et-go').onclick=()=>{pos=0;show()};
+}
+
+function bar(){const n=STEPS.length;return `<div class="et-bar" aria-hidden="true"><div style="width:${Math.round(pos/n*100)}%"></div></div><p class="small muted">${pos<SELF.length?'Teil 1 · Fragen zu dir':'Teil 2 · Aufgaben'} – ${pos+1} von ${n}</p>`}
+
+function show(){
+  if(pos>=STEPS.length)return result();
+  const st=STEPS[pos];
+  if(st.k==='self'){
+    const s=st.s,cur=ans.self[s.id];
+    host.innerHTML=`${bar()}<div class="card et-card"><h2 class="et-q">${s.t}</h2>
+      <div class="et-opts">${s.o.map(([v,t])=>`<button class="opt${cur===v?' sel':''}" data-v="${v}">${t}</button>`).join('')}</div>
+      <div class="row"><button class="btn ghost" id="et-back">Zurück</button></div></div>`;
+    host.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ans.self[s.id]=b.dataset.v;pos++;show()});
+  }else{
+    const it=st.it,idx=pos-SELF.length,cur=ans.item[idx];
+    host.innerHTML=`${bar()}<div class="card et-card"><h2 class="et-q">${it.t}</h2>
+      ${it.type==='mc'?`<div class="et-opts">${it.oo.map((o,i)=>`<button class="opt${cur&&cur.v===o?' sel':''}" data-i="${i}">${o}</button>`).join('')}</div>`
+        :`<form class="ans" autocomplete="off"><input id="et-in" inputmode="decimal" placeholder="Ergebnis" value="${cur&&cur.raw?esc(cur.raw):''}"><span class="unit">${it.un?u(it.un):''}</span><button class="btn" type="submit">Weiter</button></form><p class="small et-msg" hidden>Gib eine Zahl ein, zum Beispiel 12,5 – oder klicke auf „Weiß ich nicht“.</p>`}
+      <div class="row"><button class="btn ghost" id="et-back">Zurück</button><button class="btn ghost" id="et-skip">Weiß ich nicht</button></div></div>`;
+    if(it.type==='mc')host.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const v=it.oo[+b.dataset.i];ans.item[idx]={v,ok:v===it.ok};pos++;show()});
+    else{
+      const inp=document.getElementById('et-in');inp.focus();
+      host.querySelector('form').onsubmit=e=>{e.preventDefault();const x=K.parse(inp.value);
+        if(isNaN(x)){host.querySelector('.et-msg').hidden=false;return}
+        const tol=it.tol||0.005;ans.item[idx]={raw:inp.value,ok:Math.abs(x-it.a)<=Math.abs(it.a)*tol+1e-9};pos++;show()};
+    }
+    document.getElementById('et-skip').onclick=()=>{ans.item[idx]={skip:true,ok:false};pos++;show()};
+  }
+  const bk=document.getElementById('et-back');bk.onclick=()=>{pos--;if(pos<0)intro();else show()};
+  window.scrollTo(0,0);
+}
+
+/* ---------- Auswertung ---------- */
+function evaluate(){
+  const res={};let score=0;
+  ITEMS.forEach((it,i)=>{const ok=!!(ans.item[i]&&ans.item[i].ok);if(ok)score++;(res[it.m]=res[it.m]||{})[it.L]=ok});
+  const s=ans.self;
+  const selfLow=s.abschluss==='hs'||s.note==='4'||s.note==='56';
+  const selfHigh=s.abschluss==='abi'&&(s.note==='12'||s.note==='3')&&s.text!=='schwer';
+  const recs={};let nS=0;
+  MODS.forEach(([id])=>{const r=res[id]||{};let L=r.B&&r.S?'S':'B';
+    if(L==='S'&&selfLow&&score<12)L='B';            /* unklar → einfacher */
+    recs[id]=L;if(L==='S'&&id!=='rw')nS++});
+  let overall=(score<=5||(s.text==='schwer'&&score<=8))?'E':nS>=4?'S':'B';
+  if(overall==='E')Object.keys(recs).forEach(k=>recs[k]='B');
+  ['m8','m9','m10'].forEach(id=>recs[id]=overall==='S'?'S':'B');
+  return {res,score,max:ITEMS.length,recs,overall,selfLow,selfHigh,
+    vHint:overall==='S'&&score>=15&&selfHigh,
+    unklar:(selfHigh&&score<=8)||(selfLow&&score>=12)};
+}
+
+function result(){
+  const r=evaluate();
+  K.save('test',{date:K.today(),score:r.score,max:r.max,recs:r.recs,overall:r.overall,self:ans.self});
+  const big={E:['Starte mit „Mathe einfach“','Dort lernst du Schritt für Schritt, mit kurzen Texten und Vorlese-Funktion. Danach machst du im normalen Kurs weiter.','einfach/index.html','Zu Mathe einfach'],
+    B:['Starte auf der Stufe Basis','Du frischst zuerst die Grundlagen auf. Wenn es dir leicht fällt, wechselst du im Modul schnell auf Standard.','rechenweg.html','Los geht\'s: Der Rechenweg'],
+    S:['Starte auf der Stufe Standard','Du hast schon eine gute Grundlage. Wo die Tabelle Basis empfiehlt, fängst du dort an.','rechenweg.html','Los geht\'s: Der Rechenweg']}[r.overall];
+  const ic=ok=>ok?'<span class="et-ok" title="richtig">✓</span>':'<span class="et-no" title="noch nicht">–</span>';
+  host.innerHTML=`<section class="et-res">
+    <div class="merkkarte et-big"><p class="eyebrow">Deine Empfehlung</p><h2>${big[0]}</h2><p>${big[1]}</p>
+      <div class="row"><a class="btn" href="${big[2]}">${big[3]}</a>${r.overall==='E'?'<a class="btn ghost" href="index.html">Zur Kursübersicht</a>':''}</div></div>
+    <p><strong>${r.score} von ${r.max} Aufgaben richtig.</strong> ${r.score>=12?'Stark!':r.score>=7?'Gute Ausgangslage.':'Kein Problem – genau dafür ist der Kurs da.'}
+      ${r.unklar?' Deine Angaben und dein Testergebnis passen nicht ganz zusammen. Wir empfehlen deshalb die einfachere Stufe – wechsle hoch, sobald es leicht geht.':''}
+      ${r.vHint?' Wenn dir Standard zu leicht ist, probiere in den Modulen ruhig auch Vertiefung.':''}</p>
+    <h2>So startest du in den Modulen</h2>
+    <div class="tscroll"><table class="ptable et-table"><thead><tr><th>Modul</th><th>Basis-Aufgabe</th><th>Standard-Aufgabe</th><th>Start auf</th></tr></thead><tbody>
+      ${MODS.map(([id,nr,t,href])=>{const x=r.res[id]||{};const L=id==='rw'?null:r.recs[id];
+        return `<tr><th scope="row"><a href="${href}">${nr} · ${esc(t)}</a></th><td>${ic(x.B)}</td><td>${ic(x.S)}</td><td>${L?`<span class="lvl ${L}">${LVN[L]}</span>`:'<span class="small">für alle</span>'}</td></tr>`}).join('')}
+    </tbody></table></div>
+    <p class="small">Die Module öffnen sich jetzt auf der empfohlenen Stufe. Du kannst die Stufe dort jederzeit selbst wechseln. Module 8–10 sind Wahlmodule für später.</p>
+    <div class="box merke"><p><strong>Ins Lerntagebuch:</strong> Trage auf der ersten Seite ein: Eingangstest am ${K.dDE(K.today())}${new Date().getFullYear()}, <strong>${r.score} von ${r.max}</strong> Punkten, Empfehlung <strong>${LVN[r.overall]}</strong>.</p></div>
+    <p class="small"><button class="btn ghost" id="et-again">Test wiederholen</button></p>
+  </section>`;
+  document.getElementById('et-again').onclick=()=>{ans.self={};ans.item=[];ITEMS.forEach(it=>{if(it.oo)it.oo=K.shuffle(it.o)});pos=0;show()};
+  window.scrollTo(0,0);
+}
+
+/* ---------- Test schon gemacht: Stufe direkt wählen ---------- */
+function schon(){
+  host.innerHTML=`<section><div class="card et-card"><h2 class="et-q">Du hast den Test schon gemacht?</h2>
+    <p>Dann wähle die Stufe, die damals empfohlen wurde. Sie steht in deinem Lerntagebuch. Alle Module starten dann auf dieser Stufe.</p>
+    <div class="et-opts">${['E','B','S','V'].map(L=>`<button class="opt" data-l="${L}">${LVN[L]}</button>`).join('')}</div>
+    <div class="row"><a class="btn ghost" href="eingangstest.html" id="et-cancel">Abbrechen – Test machen</a></div></div></section>`;
+  host.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const L=b.dataset.l,ml=L==='E'?'B':L,recs={};
+    ['rw','m1','m2','m3','m4','m5','m6','m7','m8','m9','m10'].forEach(id=>recs[id]=ml);
+    K.save('test',{date:K.today(),skipped:true,recs,overall:L});
+    host.innerHTML=`<div class="merkkarte et-big"><p class="eyebrow">Gespeichert</p><h2>Alle Module starten auf: ${LVN[L]}</h2>
+      <div class="row"><a class="btn" href="${L==='E'?'einfach/index.html':'index.html'}">${L==='E'?'Zu Mathe einfach':'Zur Kursübersicht'}</a></div></div>`});
+  document.getElementById('et-cancel').onclick=e=>{e.preventDefault();history.replaceState(null,'','eingangstest.html');intro()};
+}
+
+function route(){if(location.hash==='#schon')schon();else intro()}
+window.addEventListener('hashchange',route);
+/* Schon erledigt? Ergebnis-Hinweis über der Einleitung */
+route();
+const t0=K.load('test');
+if(t0.date&&location.hash!=='#schon'){
+  const d=document.createElement('div');d.className='testgate';
+  d.innerHTML=`<span>Du hast den Test am ${K.dDE(t0.date)} ${t0.skipped?'übersprungen':'gemacht'}${t0.score!=null?` (${t0.score} von ${t0.max} Punkten)`:''}. Empfehlung: <strong>${LVN[t0.overall]}</strong>. Du kannst ihn wiederholen.</span>`;
+  host.before(d);
+}
+})();
+</script>
+</body>
+</html>

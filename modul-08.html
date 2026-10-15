@@ -10,7 +10,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="modul-08.html" aria-current="page" title="Modul 8 Diagramme lesen">M8</a><a href="modul-09.html" title="Modul 9 Die Berufsformeln">M9</a><a href="modul-10.html" title="Modul 10 Funktionen">M10</a><a href="fortschritt.html">Fortschritt</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="eingangstest.html">Test</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="modul-08.html" aria-current="page" title="Modul 8 Diagramme lesen">M8</a><a href="modul-09.html" title="Modul 9 Die Berufsformeln">M9</a><a href="modul-10.html" title="Modul 10 Funktionen">M10</a><a href="fortschritt.html">Fortschritt</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -20,7 +20,7 @@
   <div class="modnum" aria-hidden="true">8</div>
   <div class="eyebrow">Mathe-Aufbaukurs · Modul 8</div>
   <h1>Diagramme lesen</h1>
-  <p class="ctx">Im Prozessleitsystem der Kläranlage Schwierbach, auf dem Datenblatt einer Pumpe, im Laborbericht: Überall stehen Messwerte als Kurven. Wer ein Diagramm sicher liest, erkennt auf einen Blick, wann die Anlage am stärksten belastet ist und in welchem Punkt eine Pumpe arbeitet.</p>
+  <p class="ctx">Leitsystem der Kläranlage Schwierbach, Pumpendatenblatt, Laborbericht: Überall stehen Messwerte als Kurven. Lies sie sicher – dann siehst du Belastungsspitzen und den Arbeitspunkt einer Pumpe.</p>
 </header>
 
 <div class="bar">
@@ -28,84 +28,100 @@
   <div data-k="niveau"></div>
 </div>
 
+<div class="merkkarte">
+  <h2>Das Wichtigste</h2>
+  <ul>
+    <li>Achse = Größe + Einheit: Zufluss in m³/h</li>
+    <li><span class="f">Kästchenwert = Zahlenabstand : Kästchen</span> – 100 : 5 = 20</li>
+    <li>Ablesen: bei 10 Uhr senkrecht hoch zur Kurve, dann waagerecht zur y-Achse</li>
+    <li data-lv="S"><span class="f"><i>m</i> = Δ<i>y</i> : Δ<i>x</i></span> – 1,8&#8239;m : 6&#8239;h = 0,3&#8239;m/h</li>
+    <li data-lv="V">Betriebspunkt = Schnittpunkt Pumpen- und Anlagenkennlinie</li>
+  </ul>
+</div>
+
 <section id="ziele">
   <h2>Das kannst du nach diesem Modul</h2>
   <div class="raster">
-    <div><span class="lvl B">Basis</span><ul><li>Ich erkenne Größen und Einheiten an den Achsen.</li><li>Ich lese Werte aus einer Ganglinie ab – in beide Richtungen.</li></ul></div>
-    <div><span class="lvl S">Standard</span><ul><li>Ich lese Werte aus Kennlinien ab, auch bei ungewöhnlicher Achsenteilung.</li><li>Ich bestimme Änderungen und rechne mit abgelesenen Werten weiter.</li></ul></div>
-    <div><span class="lvl V">Vertiefung</span><ul><li>Ich finde den Betriebspunkt einer Pumpe.</li><li>Ich bestimme eine Steigung aus dem Diagramm und nutze sie in einer Rechnung.</li></ul></div>
+    <div data-only="B"><span class="lvl B">Basis</span><ul><li>Ich erkenne Größen und Einheiten an den Achsen.</li><li>Ich lese Werte aus einer Ganglinie ab – in beide Richtungen.</li></ul></div>
+    <div data-only="S"><span class="lvl S">Standard</span><ul><li>Ich lese Werte aus Kennlinien ab, auch bei ungewöhnlicher Achsenteilung.</li><li>Ich bestimme Änderungen und rechne mit abgelesenen Werten weiter.</li><li>Ich bestimme die Steigung einer Geraden, z. B. in m pro Stunde.</li></ul></div>
+    <div data-only="V"><span class="lvl V">Vertiefung</span><ul><li>Ich finde den Betriebspunkt einer Pumpe.</li><li>Ich bestimme eine Steigung aus dem Diagramm und nutze sie in einer Rechnung.</li></ul></div>
   </div>
 </section>
 
 <section id="lesen">
   <h2>Ein Diagramm lesen – in vier Schritten</h2>
   <ol class="sechs">
-    <li><h3>Achsen ansehen</h3><p>Welche Größe steht an der x-Achse, welche an der y-Achse – und in welcher Einheit?</p><p class="bsp">Uhrzeit in h · Zufluss in m³/h</p></li>
-    <li><h3>Kästchenwert bestimmen</h3><p>Wie viel ist ein Kästchen auf jeder Achse wert? Die Achsen können unterschiedlich geteilt sein.</p><p class="bsp">0 bis 100 in 5 Kästchen → 1 Kästchen = 20</p></li>
-    <li><h3>Ablesen</h3><p>Vom gegebenen Wert senkrecht (oder waagerecht) bis zur Kurve, dann rechtwinklig zur anderen Achse. Mit Lineal oder Geodreieck wird es genauer.</p><p class="bsp">bei 10 Uhr hoch zur Kurve, dann nach links</p></li>
-    <li><h3>Prüfen</h3><p>Passt der Wert zur Kurve und zum Betrieb? Zwischen zwei Linien schätzt du sinnvoll – genauer als ein halbes Kästchen geht es selten.</p><p class="bsp">Mittags mehr Zufluss als nachts – passt.</p></li>
+    <li><h3>Achsen ansehen</h3><p>Welche Größe, welche Einheit?</p><p class="bsp">Uhrzeit in h · Zufluss in m³/h</p></li>
+    <li><h3>Kästchenwert bestimmen</h3><p>Jede Achse kann anders geteilt sein.</p><p class="bsp">0 bis 100 in 5 Kästchen → 20</p></li>
+    <li><h3>Ablesen</h3><p>Bis zur Kurve, dann rechtwinklig zur anderen Achse.</p><p class="bsp">10 Uhr: hoch, dann nach links</p></li>
+    <li><h3>Prüfen</h3><p>Passt der Wert zum Betrieb?</p><p class="bsp">Mittags mehr Zufluss als nachts.</p></li>
   </ol>
+  <details class="mehr"><summary>Mehr dazu: Wie genau kann ich ablesen?</summary>
+    <p>Mit Lineal oder Geodreieck wird das Ablesen genauer. Zwischen zwei Linien schätzt du sinnvoll – genauer als ein halbes Kästchen geht es selten.</p>
+  </details>
 </section>
 
 <section id="kaestchen">
   <h2>Der Kästchenwert</h2>
-  <div class="box"><p><span class="f">Kästchenwert = <span class="fr"><span>Zahlenabstand</span><span>Kästchen</span></span></span></p><p class="small">Zahlenabstand: Unterschied zwischen zwei beschrifteten Linien, z. B. 100 − 0. Kästchen: Anzahl der Kästchen dazwischen.</p></div>
+  <div class="box"><p><span class="f">Kästchenwert = <span class="fr"><span>Zahlenabstand</span><span>Kästchen</span></span></span></p><p class="small">Zahlenabstand: zwischen zwei beschrifteten Linien, z. B. 100 − 0.</p></div>
   <div class="tscroll"><table>
     <thead><tr><th>Beschriftung</th><th>Kästchen dazwischen</th><th>1 Kästchen ist</th></tr></thead>
     <tbody>
       <tr><td class="num">0 – 100 m³/h</td><td class="num">5</td><td class="num">20 m³/h</td></tr>
       <tr><td class="num">0 – 10 m</td><td class="num">5</td><td class="num">2 m</td></tr>
-      <tr><td class="num">0 – 20 L/s</td><td class="num">4</td><td class="num">5 L/s</td></tr>
-      <tr><td class="num">0 – 50 %</td><td class="num">10</td><td class="num">5 %</td></tr>
+      <tr data-lv="S"><td class="num">0 – 20 L/s</td><td class="num">4</td><td class="num">5 L/s</td></tr>
+      <tr data-lv="S"><td class="num">0 – 50 %</td><td class="num">10</td><td class="num">5 %</td></tr>
     </tbody>
   </table></div>
 </section>
 
 <section id="ganglinie">
   <h2>Ganglinie: der Zufluss über den Tag</h2>
-  <p>Eine <strong>Ganglinie</strong> zeigt, wie sich eine Größe über die Zeit ändert. Der Zufluss zur Kläranlage Schwierbach ist nachts am kleinsten und hat zwei Spitzen: vormittags und am frühen Abend.</p>
+  <p>Eine <strong>Ganglinie</strong> zeigt eine Größe über die Zeit. Zufluss: nachts am kleinsten, Spitzen vormittags und am frühen Abend.</p>
   <div class="plotbox" id="demo-gang"></div>
-  <p class="small">Beispiel: Um 10 Uhr senkrecht nach oben bis zur Kurve, dann waagerecht nach links: etwa 640 m³/h.</p>
-</section>
+  <p class="small">Beispiel: Um 10 Uhr fließen etwa <span id="demo-wert">700&#8239;m³/h</span> zu – von 10&#8239;h senkrecht hoch bis zur Kurve, dann waagerecht nach links zur Achse.</p>
+  </section>
 
-<section id="kennlinie">
+<section id="kennlinie" data-lv="S">
   <h2>Kennlinien: Pumpe und Anlage</h2>
-  <p>Eine <strong>Pumpenkennlinie</strong> zeigt, welche Förderhöhe <i class="v">H</i> eine Pumpe bei welchem Förderstrom <i class="v">Q</i> schafft. Je mehr sie fördert, desto kleiner die Förderhöhe. Die <strong>Anlagenkennlinie</strong> zeigt, welche Förderhöhe die Rohrleitung verlangt. Sie beginnt bei der geodätischen Höhe <span class="f"><i>H</i><sub>geo</sub></span> und steigt mit dem Förderstrom. Wo sich beide schneiden, liegt der <strong>Betriebspunkt</strong>.</p>
+  <p><strong>Pumpenkennlinie:</strong> Förderhöhe <i class="v">H</i> über Förderstrom <i class="v">Q</i>. Mehr <i class="v">Q</i> → weniger <i class="v">H</i>.</p>
+  <p data-lv="V"><strong>Anlagenkennlinie:</strong> Förderhöhe, die die Rohrleitung verlangt. Beginnt bei <span class="f"><i>H</i><sub>geo</sub></span>, steigt mit <i class="v">Q</i>. Schnittpunkt = <strong>Betriebspunkt</strong>.</p>
   <div class="plotbox" id="demo-kenn"></div>
-  <div class="box merke"><p><strong>Gekrümmte Kurven sorgfältig schätzen.</strong> Liegt ein Wert zwischen zwei Rasterlinien, schätzt du ihn am Diagramm. Bei gekrümmten Kurven wie Wirkungsgrad- oder Pumpenkennlinien ist das genauer, als zwischen Tabellenwerten zu rechnen.</p></div>
+  <div class="box merke" data-lv="V"><p><strong>Gekrümmte Kurven:</strong> Zwischen Rasterlinien am Diagramm sorgfältig schätzen.</p>
+    <details class="mehr"><summary>Mehr dazu: Warum schätzen statt rechnen?</summary><p>Bei gekrümmten Kurven wie Wirkungsgrad- oder Pumpenkennlinien ist Schätzen am Diagramm genauer, als zwischen Tabellenwerten zu rechnen.</p></details></div>
 </section>
 
-<section id="steigung">
+<section id="steigung" data-lv="S">
   <h2>Steigung: Wie schnell ändert sich etwas?</h2>
-  <p>Bei einer Geraden ändert sich die y-Größe in gleichen Zeitabschnitten um denselben Betrag. Diese Änderung pro Einheit heißt <strong>Steigung</strong>.</p>
-  <div class="grid2" style="align-items:start">
-    <div class="box"><p><span class="f"><i>m</i> = <span class="fr"><span>Δ<i>y</i></span><span>Δ<i>x</i></span></span> = <span class="fr"><span><i>y</i><sub>2</sub> − <i>y</i><sub>1</sub></span><span><i>x</i><sub>2</sub> − <i>x</i><sub>1</sub></span></span></span></p>
-      <p class="small">Zwei gut ablesbare Punkte auf der Geraden wählen – möglichst weit auseinander.</p></div>
-    <div class="box"><p>Füllstand im Speicherbecken: von 1,2 m (0 h) auf 3,0 m (6 h).</p><p><span class="f"><i>m</i> = <span class="fr"><span>3,0 m − 1,2 m</span><span>6 h − 0 h</span></span> = 0,3 m/h</span></p><p class="small">Der Wasserspiegel steigt um 30 cm pro Stunde.</p></div>
-  </div>
+  <p>Die <strong>Steigung</strong> einer Geraden ist die Änderung von y pro Einheit von x.</p>
+  <div class="box"><p><span class="f"><i>m</i> = <span class="fr"><span>Δ<i>y</i></span><span>Δ<i>x</i></span></span> = <span class="fr"><span><i>y</i><sub>2</sub> − <i>y</i><sub>1</sub></span><span><i>x</i><sub>2</sub> − <i>x</i><sub>1</sub></span></span></span></p>
+    <p class="small">Zwei gut ablesbare Punkte, weit auseinander.</p></div>
+  <details class="mehr"><summary>Mehr dazu: Beispiel Füllstand im Speicherbecken</summary>
+    <p>Bei einer Geraden ändert sich die y-Größe in gleichen Abschnitten um denselben Betrag.</p>
+    <div class="box"><p>Füllstand im Speicherbecken: von 1,2&#8239;m (0&#8239;h) auf 3,0&#8239;m (6&#8239;h).</p><p><span class="f"><i>m</i> = <span class="fr"><span>3,0&#8239;m − 1,2&#8239;m</span><span>6&#8239;h − 0&#8239;h</span></span> = 0,3&#8239;m/h</span></p><p class="small">Der Wasserspiegel steigt um 30&#8239;cm pro Stunde.</p></div>
+  </details>
 </section>
 
 <section id="beispiel">
   <h2>Schritt für Schritt</h2>
-  <p>Klicke dich durch die Beispiele.</p>
   <div data-k="stepper"></div>
 </section>
 
 <section id="trainer">
   <h2>Diagramm-Trainer</h2>
-  <p>Erst überlegen, dann wählen. Es zählt nur der erste Versuch.</p>
+  <p>Es zählt nur der erste Versuch.</p>
   <div data-k="trainer"></div>
 </section>
 
 <section id="rechnen">
   <h2>Ablesen und rechnen</h2>
-  <p>Jedes Diagramm wird neu erzeugt. Beim Ablesen gibt es eine erlaubte Abweichung – sie steht unter dem Eingabefeld.</p>
+  <p>Die erlaubte Abweichung steht unter dem Eingabefeld.</p>
   <div data-k="rechnen"></div>
 </section>
 
 <section id="stand">
   <h2>Mein Lernstand</h2>
-  <p>Hier siehst du deinen Stand in diesem Modul. Am Ende der Stunde hakst du geschaffte Stufen in deinem Lerntagebuch ab.</p>
+  <p>Geschafft? Im Lerntagebuch abhaken.</p>
   <div data-k="stand"></div>
 </section>
 
@@ -135,6 +151,7 @@ function pumpChart(p,o){return K.plot(Object.assign({x0:0,x1:p.Qx,dx:20,mx:4,y0:
 /* Beispieldiagramme im Erklärteil */
 const demoF=gangFn(240,760);
 document.getElementById('demo-gang').innerHTML=gangChart(demoF,800,{guides:[{x:10,y:demoF(10)}],points:[{x:10,y:demoF(10),label:'≈ '+Math.round(demoF(10)/10)*10+' m³/h'}]});
+document.getElementById('demo-wert').textContent=Math.round(demoF(10)/10)*10+'\u202Fm³/h';
 (function(){const p={Qx:100,H0:30,a:0.72*30/1e4,Hg:10};p.fp=q=>p.H0-p.a*q*q;const Qb=64,k=(p.H0-p.Hg-p.a*Qb*Qb)/(Qb*Qb);p.fa=q=>p.Hg+k*q*q;
   document.getElementById('demo-kenn').innerHTML=pumpChart(p,{series:[{f:p.fp,label:'Pumpenkennlinie',lx:8,ly:p.fp(8),anchor:'start',ldx:4,ldy:-10},{f:p.fa,color:'var(--lv)',label:'Anlagenkennlinie',lx:84,ly:p.fa(84),ldx:-6,ldy:4}],points:[{x:Qb,y:p.fp(Qb),label:'Betriebspunkt',dx:10,dy:22}],guides:[{x:Qb,y:p.fp(Qb)}],hl:[{y:p.Hg,label:'H geo',color:'var(--muted)'}]})})();
 

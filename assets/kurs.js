@@ -140,13 +140,36 @@ K.umstell=(L,n,lhs,rhs,x,ok,w,h)=>({L,n,prompt:K.F(lhs,K.EQ,rhs),ask:`Stelle nac
 /* Rechenweg-Schema als HTML */
 K.schema=rows=>`<dl class="schema">${rows.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
 
+/* ---------- Stufen: Inhalte filtern ----------
+   data-lv="S"  → sichtbar ab Standard (S und V), data-lv="V" → nur Vertiefung
+   data-only="B" bzw. "B S" → nur auf diesen Stufen sichtbar (z. B. Lernziele) */
+const RANK={B:0,S:1,V:2};
+K.applyLvl=L=>{
+  document.body.dataset.lvl=L;
+  document.querySelectorAll('[data-lv]').forEach(el=>{el.hidden=RANK[L]<RANK[el.dataset.lv]});
+  document.querySelectorAll('[data-only]').forEach(el=>{el.hidden=!el.dataset.only.split(/\s+/).includes(L)});
+  document.querySelectorAll('.raster').forEach(r=>{const n=[...r.children].filter(c=>!c.hidden).length;r.style.gridTemplateColumns=n&&n<3?`repeat(${n},minmax(0,1fr))`:''});
+};
+
+/* ---------- Eingangstest: Empfehlungen ---------- */
+K.testLvl=id=>{const t=K.load('test');if(!t.date)return null;if(t.recs&&t.recs[id])return t.recs[id];
+  return t.overall==='S'||t.overall==='V'?'S':'B'};
+K.testGate=(root)=>{
+  const main=document.querySelector('main');if(!main||document.querySelector('.testgate'))return;
+  const d=document.createElement('div');d.className='testgate';
+  d.innerHTML=`<strong>Starte zuerst mit dem Eingangstest.</strong> Er dauert etwa 20 Minuten und zeigt dir, mit welcher Stufe du in jedem Modul anfangen solltest.
+    <span class="row"><a class="btn" href="${root||''}eingangstest.html">Zum Eingangstest</a><a class="btn ghost" href="${root||''}eingangstest.html#schon">Schon gemacht?</a></span>`;
+  const hd=main.querySelector('header.top');
+  if(hd)hd.after(d);else main.prepend(d);
+};
+
 /* ---------- Modul ---------- */
 K.module=function(cfg){
   const need=Object.assign({T:5,R:3},cfg.need);
   /* einfache Version: lock = feste Stufe (ohne Wahl), simple = kurze, einfache Rückmeldungen, root = Pfad zur Hauptseite */
   const lock=cfg.lock||null,simple=!!cfg.simple,root=cfg.root||'',S=(a,b)=>simple?b:a;
   const raw=K.load(cfg.id);
-  const st={lvl:lock||raw.lvl||K.load('global').lvl||'B',T:Object.assign({B:0,S:0,V:0},raw.T),R:Object.assign({B:0,S:0,V:0},raw.R),D:Object.assign({B:{},S:{},V:{}},raw.D)};
+  const st={lvl:lock||raw.lvl||K.testLvl(cfg.id)||K.load('global').lvl||'B',T:Object.assign({B:0,S:0,V:0},raw.T),R:Object.assign({B:0,S:0,V:0},raw.R),D:Object.assign({B:{},S:{},V:{}},raw.D)};
   /* Datum merken: begonnen (erster Erfolg) und geschafft */
   const save=()=>{['B','S','V'].forEach(L=>{const s=K.status(st,L);st.D[L]=st.D[L]||{};
       if(s!=='offen'&&!st.D[L].b)st.D[L].b=K.today();if(s==='geschafft'&&!st.D[L].g)st.D[L].g=K.today()});
@@ -163,8 +186,25 @@ K.module=function(cfg){
     if(lock)L=lock;
     st.lvl=L;save();if(!lock)K.save('global',{lvl:L});
     if(segHost)segHost.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===L));
+    K.applyLvl(L);
     hooks.forEach(f=>f(L));
+    flowTicks();
   }
+
+  /* Modul-Ablauf als 4 Schritte in der Leiste: Verstehen – Beispiel – Üben – Rechnen (+ Stand) */
+  const flowNav=!lock&&cfg.flow!==false?$('.bar nav'):null;
+  if(flowNav){
+    const steps=[['ziele','Verstehen'],['beispiel','Beispiel'],['trainer','Üben'],['rechnen','Rechnen']].filter(([id])=>document.getElementById(id));
+    flowNav.classList.add('flow');flowNav.setAttribute('aria-label','Ablauf im Modul');
+    flowNav.innerHTML=steps.map(([id,t],i)=>`<a href="#${id}" data-flow="${id}"><span class="fn">${i+1}</span>${t}</a>`).join('')+(document.getElementById('stand')?'<a href="#stand" class="fstand">Stand</a>':'');
+  }
+  function flowTicks(){
+    if(!flowNav)return;const L=st.lvl;
+    const t=flowNav.querySelector('[data-flow="trainer"]'),r=flowNav.querySelector('[data-flow="rechnen"]');
+    if(t)t.classList.toggle('done',st.T[L]>=need.T);if(r)r.classList.toggle('done',st.R[L]>=need.R);
+  }
+  /* Hinweis, solange der Eingangstest fehlt */
+  if(!lock&&cfg.testGate!==false&&!K.load('test').date)K.testGate(root);
 
   /* Schritt für Schritt */
   const stHost=$('[data-k="stepper"]');
@@ -186,7 +226,12 @@ K.module=function(cfg){
     $('[data-a="next"]',stHost).onclick=()=>{shown++;render()};
     $('[data-a="all"]',stHost).onclick=()=>{shown=cfg.examples[key].s.length;render()};
     $('[data-a="reset"]',stHost).onclick=()=>{shown=1;render()};
-    hooks.push(L=>{if(cfg.examples[L])show(L)});
+    hooks.push(L=>{
+      /* nur Beispiele bis zur gewählten Stufe als Reiter zeigen */
+      const tabs=[...stHost.querySelectorAll('.tabs button')];
+      tabs.forEach(b=>{b.hidden=RANK[b.dataset.ex]>RANK[L]});
+      $('.tabs',stHost).hidden=tabs.filter(b=>!b.hidden).length<2;
+      if(cfg.examples[L])show(L)});
   }
 
   /* Trainer */
@@ -233,10 +278,10 @@ K.module=function(cfg){
     const heft=cfg.heft||(['rwe','m1','m2','m3','m4','m5','m6','m7'].includes(cfg.id)?'check':'hint');
     const PEN='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M13.5 6.5l4 4" stroke="currentColor" stroke-width="2"/></svg>';
     const heftBox=heft==='check'
-      ?`<div class="heft">${PEN}<div><p>${S('<strong>Zuerst ins Heft:</strong> Gegeben – Gesucht – Formel – Umstellung – Rechnung – Antwortsatz.','<strong>Zuerst ins Heft.</strong> Schreibe alle 6 Schritte auf: Gegeben, Gesucht, Formel, Umstellen, Rechnung, Antwortsatz.')}</p>
+      ?`<div class="heftbox">${PEN}<div><p>${S('<strong>Zuerst ins Heft:</strong> Gegeben – Gesucht – Formel – Umstellung – Rechnung – Antwortsatz.','<strong>Zuerst ins Heft.</strong> Schreibe alle 6 Schritte auf: Gegeben, Gesucht, Formel, Umstellen, Rechnung, Antwortsatz.')}</p>
           <p class="small">${S('Das Eingabefeld ist nur die Kontrolle für dein Ergebnis. Bewertet wird dein Rechenweg im Heft.','Hier gibst du nur das Ergebnis ein. So kontrollierst du dich.')}</p>
           <label class="heftok"><input type="checkbox"> ${S('Mein Rechenweg steht im Heft','Mein Rechenweg steht im Heft')}</label></div></div>`
-      :`<div class="heft kompakt">${PEN}<p><strong>Rechenweg ins Heft</strong> – hier trägst du nur das Ergebnis zur Kontrolle ein.</p></div>`;
+      :`<div class="heftbox kompakt">${PEN}<p><strong>Rechenweg ins Heft</strong> – hier trägst du nur das Ergebnis zur Kontrolle ein.</p></div>`;
     rHost.innerHTML=`<div class="card"><div class="head"><div class="row"><span class="lvl"></span><span class="tag"></span></div><span class="counter"></span></div>
       <div style="display:grid;gap:8px"><h3 class="r-title"></h3><div class="r-text"></div>${simple?'<button class="say" type="button" data-say-r></button>':''}</div>
       ${heftBox}
@@ -346,6 +391,7 @@ K.module=function(cfg){
   /* Lernstand */
   const pHost=$('[data-k="stand"]');
   function renderProg(){
+    flowTicks();
     if(!pHost)return;
     $('.prog',pHost).innerHTML=(lock?[lock]:['B','S','V']).map(L=>{
       const tp=Math.min(st.T[L],need.T),rp=Math.min(st.R[L],need.R),ok=tp>=need.T&&rp>=need.R;
@@ -435,10 +481,35 @@ K.overview=function(){
     const host=document.querySelector(`[data-mod="${m.id}"] .st`);if(!host)return;
     if(m.rw){const r=K.rwState();
       host.insertAdjacentHTML('beforeend',`<span class="pill ${r.s==='geschafft'?'ok':r.s==='angefangen'?'half':''}">${r.s==='geschafft'?'geschafft ✓':'Detektiv '+Math.min(r.n,K.RW_NEED)+'/'+K.RW_NEED}</span>`);return}
-    const st=K.load(m.id);
+    const st=K.load(m.id),rec=st.lvl||K.testLvl(m.id);
     ['B','S','V'].forEach(L=>{const s=K.status(st,L);
-      host.insertAdjacentHTML('beforeend',`<span class="pill ${s==='geschafft'?'ok':s==='angefangen'?'half':''}" title="${LV[L]}: ${s}">${LV[L]}${MARK[s]}</span>`)});
+      host.insertAdjacentHTML('beforeend',`<span class="pill ${s==='geschafft'?'ok':s==='angefangen'?'half':''}" title="${LV[L]}: ${s}${rec===L?' – deine Stufe':''}">${rec===L&&s!=='geschafft'?'▸ ':''}${LV[L]}${MARK[s]}</span>`)});
   });
+};
+
+/* ---------- Startseite: „Dein Start“ (Eingangstest bzw. Weitermachen) ---------- */
+K.nextStep=()=>{
+  for(const m of K.MODS){
+    if(!m.p)continue;const st=Object.assign({T:{},R:{},D:{}},K.load(m.id));
+    if(!K.pflichtOk(m,st))return {m,L:m.rw?null:(st.lvl||K.testLvl(m.id)||'B')};
+  }
+  const m8=K.MODS.find(m=>m.id==='m8');return {m:m8,L:K.load('m8').lvl||K.testLvl('m8')||'S',frei:true};
+};
+K.startCta=host=>{
+  if(!host)return;const t=K.load('test');
+  if(!t.date){
+    host.innerHTML=`<p class="eyebrow">Schritt 1</p><h2>Starte mit dem Eingangstest</h2>
+      <p>Etwa 20 Minuten, keine Note. Danach weißt du, auf welcher Stufe du in jedem Modul anfängst.</p>
+      <div class="row"><a class="btn" href="eingangstest.html">Zum Eingangstest</a><a class="btn ghost" href="eingangstest.html#schon">Schon gemacht?</a></div>`;return}
+  const n=K.nextStep(),LVN={E:'Mathe einfach',B:'Basis',S:'Standard',V:'Vertiefung'};
+  const einf=t.overall==='E'&&!K.pflichtOk(K.MODS[1],K.load('m1'));
+  host.innerHTML=einf
+    ?`<p class="eyebrow">Weitermachen</p><h2>Mathe einfach</h2><p>Deine Empfehlung aus dem Eingangstest. Wenn du dort fertig bist, machst du hier im Kurs auf Standard weiter.</p>
+      <div class="row"><a class="btn" href="einfach/index.html">Zu Mathe einfach</a></div>`
+    :`<p class="eyebrow">${n.frei?'Pflicht geschafft – weiter mit einem Wahlmodul':'Weitermachen'}</p>
+      <h2><a href="${n.m.href}">${n.m.nr} · ${n.m.t}</a>${n.L?` <span class="lvl ${n.L}">${LVN[n.L]}</span>`:''}</h2>
+      <div class="row"><a class="btn" href="${n.m.href}">Los geht's</a></div>
+      <p class="small">Eingangstest am ${K.dDE(t.date)}: Empfehlung ${LVN[t.overall]}. <a href="eingangstest.html">Ergebnis/Test wiederholen</a></p>`;
 };
 
 /* ---------- Seite „Mein Fortschritt“ ---------- */

@@ -10,7 +10,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" aria-current="page" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="modul-08.html" title="Modul 8 Diagramme lesen">M8</a><a href="modul-09.html" title="Modul 9 Die Berufsformeln">M9</a><a href="modul-10.html" title="Modul 10 Funktionen">M10</a><a href="fortschritt.html">Fortschritt</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="eingangstest.html">Test</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" aria-current="page" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="modul-08.html" title="Modul 8 Diagramme lesen">M8</a><a href="modul-09.html" title="Modul 9 Die Berufsformeln">M9</a><a href="modul-10.html" title="Modul 10 Funktionen">M10</a><a href="fortschritt.html">Fortschritt</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -20,7 +20,7 @@
   <div class="modnum" aria-hidden="true">2</div>
   <div class="eyebrow">Mathe-Aufbaukurs · Modul 2</div>
   <h1>Einheiten umrechnen</h1>
-  <p class="ctx">Die Pumpe im Wasserwerk fördert in Litern pro Sekunde, die Betriebsstatistik zählt in Kubikmetern pro Tag, das Labor misst in Milligramm pro Liter. Wer sicher umrechnet, vermeidet die teuersten Fehler im Betrieb – meistens liegt man sonst um den Faktor 1000 daneben.</p>
+  <p class="ctx">Pumpe in L/s, Statistik in m³/d, Labor in mg/L: Wer sicher umrechnet, vermeidet den teuersten Fehler – meist den Faktor 1000.</p>
 </header>
 
 <div class="bar">
@@ -28,13 +28,24 @@
   <div data-k="niveau"></div>
 </div>
 
+<div class="merkkarte">
+  <h2>Das Wichtigste</h2>
+  <ul>
+    <li><strong>Große → kleine Einheit: mal.</strong> 2,4&#8239;m³ = 2,4 · 1000 = 2400&#8239;L</li>
+    <li><strong>Kleine → große Einheit: geteilt.</strong> 750&#8239;L = 750 : 1000 = 0,75&#8239;m³</li>
+    <li data-only="B"><strong>Länge:</strong> 1&#8239;m = 100&#8239;cm = 1000&#8239;mm, also 2,5&#8239;m = 250&#8239;cm</li>
+    <li data-lv="S"><strong>Faustregel je Stufe:</strong> Länge 10, Fläche 100, Volumen 1000 – z.&#8239;B. 1&#8239;m² = 10&#8239;000&#8239;cm²</li>
+    <li data-lv="S"><strong>Mit Bruchstrich:</strong> Zähler und Nenner einzeln umrechnen – 1&#8239;L/s = 3,6&#8239;m³/h, 1&#8239;mg/L = 1&#8239;g/m³</li>
+    <li data-lv="V"><strong>Fracht:</strong> <span class="f">B = c · Q</span> – erst Einheiten passend machen: g/m³ · m³/d = g/d</li>
+  </ul>
+</div>
+
 <section id="ziele">
   <h2>Das kannst du nach diesem Modul</h2>
-  <p class="lead">Wähle oben dein Niveau. Wenn du in einer Stufe sicher bist, gehst du zur nächsten. Den Rechenweg schreibst du immer ins Heft.</p>
   <div class="raster">
-    <div><span class="lvl B">Basis</span><ul><li>Ich kann Längen, Massen, Volumen und Zeiten in benachbarte Einheiten umrechnen.</li><li>Ich weiß: 1 m³ = 1000 L.</li></ul></div>
-    <div><span class="lvl S">Standard</span><ul><li>Ich kann Flächen und Volumen über mehrere Stufen umrechnen.</li><li>Ich kann zusammengesetzte Einheiten wie L/s, m³/h und mg/L umrechnen.</li></ul></div>
-    <div><span class="lvl V">Vertiefung</span><ul><li>Ich kann Umrechnungen in einer Rechnung mit Formel verbinden, z. B. bei der Fracht.</li><li>Ich rechne auch mit µg, mL und Tagen sicher.</li></ul></div>
+    <div data-only="B"><span class="lvl B">Basis</span><ul><li>Ich kann Längen, Massen, Volumen und Zeiten in benachbarte Einheiten umrechnen.</li><li>Ich weiß: 1 m³ = 1000 L.</li></ul></div>
+    <div data-only="S"><span class="lvl S">Standard</span><ul><li>Ich kann Flächen und Volumen über mehrere Stufen umrechnen.</li><li>Ich kann zusammengesetzte Einheiten wie L/s, m³/h und mg/L umrechnen.</li></ul></div>
+    <div data-only="V"><span class="lvl V">Vertiefung</span><ul><li>Ich kann Umrechnungen in einer Rechnung mit Formel verbinden, z. B. bei der Fracht.</li><li>Ich rechne auch mit µg, mL und Tagen sicher.</li></ul></div>
   </div>
 </section>
 
@@ -42,9 +53,9 @@
   <h2>Die Grundregel</h2>
   <div class="grid2">
     <div style="display:grid;gap:12px">
-      <p>Eine Menge bleibt gleich, egal in welcher Einheit du sie angibst. 1 m³ Wasser sind genau so viel wie 1000 L.</p>
-      <p><strong>Große Einheit → kleine Einheit:</strong> Die Zahl wird größer. Du rechnest <strong>mal</strong> die Umrechnungszahl.</p>
-      <p><strong>Kleine Einheit → große Einheit:</strong> Die Zahl wird kleiner. Du rechnest <strong>geteilt</strong> durch die Umrechnungszahl.</p>
+      <p>Die Menge bleibt gleich, nur die Einheit ändert sich.</p>
+      <p><strong>Große → kleine Einheit:</strong> Zahl wird größer: <strong>mal</strong> Umrechnungszahl.</p>
+      <p><strong>Kleine → große Einheit:</strong> Zahl wird kleiner: <strong>geteilt</strong> durch Umrechnungszahl.</p>
     </div>
     <div class="figure">
     <svg viewBox="0 0 400 220" role="img" aria-label="Einheitentreppe für Volumen: Kubikmeter, Kubikdezimeter gleich Liter, Kubikzentimeter gleich Milliliter, Kubikmillimeter. Nach unten mal 1000, nach oben geteilt durch 1000." style="max-width:100%;min-width:320px">
@@ -67,57 +78,83 @@
     </svg>
     </div>
   </div>
-  <div class="box merke"><strong>Merke die Faustregel:</strong> Bei Längen ist der Schritt zwischen m, dm, cm und mm jeweils 10, bei Flächen 100 (weil hoch 2) und bei Volumen 1000 (weil hoch 3).</div>
+  <details class="mehr" data-lv="S"><summary>Mehr dazu: Warum Flächen 100 und Volumen 1000</summary>
+    <p>Bei Längen ist der Schritt zwischen m, dm, cm und mm jeweils 10. Flächen sind „Länge hoch 2“: 10 · 10 = 100. Volumen sind „Länge hoch 3“: 10 · 10 · 10 = 1000.</p>
+  </details>
 </section>
 
 <section id="tabellen">
   <h2>Umrechnungszahlen</h2>
   <div class="tscroll"><table>
-    <thead><tr><th>Größe</th><th>Umrechnung</th><th>Typischer Einsatz</th></tr></thead>
+    <thead><tr><th>Größe</th><th>Umrechnung</th></tr></thead>
     <tbody>
-      <tr><td>Länge</td><td class="op">1 km = 1000 m;&nbsp; 1 m = 10 dm = 100 cm = 1000 mm</td><td>Kanalhaltung, Rohrdurchmesser in mm</td></tr>
-      <tr><td>Fläche</td><td class="op">1 m² = 100 dm² = 10&#8239;000 cm²;&nbsp; 1 ha = 10&#8239;000 m²</td><td>Rohrquerschnitt, Einzugsgebiet</td></tr>
-      <tr><td>Volumen</td><td class="op">1 m³ = 1000 dm³ = 1000 L;&nbsp; 1 L = 1000 mL = 1000 cm³</td><td>Becken, Container, Laborprobe</td></tr>
-      <tr><td>Masse</td><td class="op">1 t = 1000 kg;&nbsp; 1 kg = 1000 g;&nbsp; 1 g = 1000 mg;&nbsp; 1 mg = 1000 µg</td><td>Abfallmengen, Laborwerte</td></tr>
-      <tr><td>Zeit</td><td class="op">1 d = 24 h;&nbsp; 1 h = 60 min = 3600 s</td><td>Durchfluss pro Tag oder Sekunde</td></tr>
+      <tr><td>Länge</td><td class="op">1 km = 1000 m;&nbsp; 1 m = 10 dm = 100 cm = 1000 mm</td></tr>
+      <tr data-lv="S"><td>Fläche</td><td class="op">1 m² = 100 dm² = 10&#8239;000 cm²<span data-lv="V">;&nbsp; 1 ha = 10&#8239;000 m²</span></td></tr>
+      <tr><td>Volumen</td><td class="op">1 m³ = 1000 dm³ = 1000 L;&nbsp; 1 L = 1000 mL<span data-lv="S"> = 1000 cm³</span></td></tr>
+      <tr><td>Masse</td><td class="op">1 t = 1000 kg;&nbsp; 1 kg = 1000 g;&nbsp; 1 g = 1000 mg<span data-lv="V">;&nbsp; 1 mg = 1000 µg</span></td></tr>
+      <tr><td>Zeit</td><td class="op"><span data-lv="S">1 d = 24 h;&nbsp; </span>1 h = 60 min<span data-lv="S"> = 3600 s</span></td></tr>
+      <tr><td>Strom</td><td class="op">1 A = 1000 mA</td></tr>
+      <tr><td>Leistung</td><td class="op">1 kW = 1000 W<span data-lv="V">;&nbsp; 1 MW = 1000 kW = 1&#8239;000&#8239;000 W</span></td></tr>
+      <tr data-lv="S"><td>Energie</td><td class="op">1 MWh = 1000 kWh;&nbsp; 1 kWh = 3,6 MJ</td></tr>
     </tbody>
   </table></div>
+  <details class="mehr"><summary>Mehr dazu: Wo du diese Einheiten brauchst</summary>
+    <ul>
+      <li><strong>Länge:</strong> Kanalhaltung, Rohrdurchmesser in mm</li>
+      <li data-lv="S"><strong>Fläche:</strong> Rohrquerschnitt<span data-lv="V">, Einzugsgebiet</span></li>
+      <li><strong>Volumen:</strong> Becken, Container, Laborprobe</li>
+      <li><strong>Masse:</strong> Abfallmengen, Laborwerte</li>
+      <li><strong>Zeit:</strong> Durchfluss pro Tag oder Sekunde</li>
+      <li><strong>Strom, Leistung:</strong> Messsignal 4–20 mA, Typenschild von Pumpen und Gebläsen</li>
+      <li data-lv="S"><strong>Energie:</strong> Stromverbrauch in kWh oder MWh, Heizwert in MJ</li>
+    </ul>
+  </details>
+  <div data-lv="S" style="margin-top:20px">
   <h3>Zusammengesetzte Einheiten</h3>
-  <p>Bei Einheiten mit Bruchstrich rechnest du Zähler und Nenner <strong>einzeln</strong> um. Diese Ergebnisse brauchst du so oft, dass du sie dir merken solltest:</p>
-  <div class="tscroll"><table>
-    <thead><tr><th>Umrechnung</th><th>Warum?</th></tr></thead>
-    <tbody>
-      <tr><td class="op">1 L/s = 3,6 m³/h</td><td>1 L = 0,001 m³ und 1 h = 3600 s: 0,001 · 3600 = 3,6</td></tr>
-      <tr><td class="op">1 m³/d = 1/24 m³/h</td><td>Ein Tag hat 24 Stunden</td></tr>
-      <tr><td class="op">1 mg/L = 1 g/m³</td><td>Oben und unten jeweils Faktor 1000 – das hebt sich auf</td></tr>
-      <tr><td class="op">1 kg/m³ = 1 g/L = 1000 mg/L</td><td>Zähler mal 1000, Nenner mal 1000</td></tr>
-      <tr><td class="op">1 µg/L = 1 mg/m³</td><td>Wie bei mg/L: Faktor 1000 oben und unten</td></tr>
-      <tr><td class="op">1 t/m³ = 1 kg/L = 1 g/cm³</td><td>Dichte von Wasser: ungefähr 1 t/m³</td></tr>
-    </tbody>
-  </table></div>
+  <p>Zähler und Nenner rechnest du <strong>einzeln</strong> um. Diese Werte solltest du dir merken:</p>
+  <ul>
+    <li>1 L/s = 3,6 m³/h</li>
+    <li>1 m³/d = 1/24 m³/h</li>
+    <li>1 mg/L = 1 g/m³</li>
+    <li>1 kg/m³ = 1 g/L = 1000 mg/L</li>
+    <li data-lv="V">1 µg/L = 1 mg/m³</li>
+    <li data-lv="V">1 t/m³ = 1 kg/L = 1 g/cm³</li>
+  </ul>
+  <details class="mehr"><summary>Mehr dazu: Warum diese Werte stimmen</summary>
+  <ul>
+    <li><strong>1 L/s = 3,6 m³/h:</strong> 1 L = 0,001 m³ und 1 h = 3600 s: 0,001 · 3600 = 3,6</li>
+    <li><strong>1 m³/d = 1/24 m³/h:</strong> Ein Tag hat 24 Stunden</li>
+    <li><strong>1 mg/L = 1 g/m³:</strong> Oben und unten jeweils Faktor 1000 – das hebt sich auf</li>
+    <li><strong>1 kg/m³ = 1 g/L = 1000 mg/L:</strong> Zähler mal 1000, Nenner mal 1000</li>
+    <li data-lv="V"><strong>1 µg/L = 1 mg/m³:</strong> Wie bei mg/L: Faktor 1000 oben und unten</li>
+    <li data-lv="V"><strong>1 t/m³ = 1 kg/L = 1 g/cm³:</strong> Dichte von Wasser: ungefähr 1 t/m³</li>
+    <li><strong>1 kWh = 3,6 MJ:</strong> 1 kW · 1 h = 1000 W · 3600 s = 3&#8239;600&#8239;000 J (1 W · 1 s = 1 J)</li>
+  </ul>
+  </details>
+  </div>
 </section>
 
 <section id="beispiel">
   <h2>Schritt für Schritt</h2>
-  <p>Klicke dich durch die Beispiele und schreibe jeden Schritt mit.</p>
+  <p>Klick dich durch und schreib jeden Schritt ins Heft.</p>
   <div data-k="stepper"></div>
 </section>
 
 <section id="trainer">
   <h2>Umrechnungs-Trainer</h2>
-  <p>Welche Angabe stimmt? Rechne zuerst im Kopf oder im Heft, dann wähle. Es zählt nur der erste Versuch.</p>
+  <p>Erst rechnen, dann wählen – es zählt der erste Versuch.</p>
   <div data-k="trainer"></div>
 </section>
 
 <section id="rechnen">
   <h2>Rechnen im Betrieb</h2>
-  <p>Jede Aufgabe wird mit neuen Zahlen erzeugt. Du kannst bis zu drei Tipps aufdecken. Die Lösung zeigt dir den vollständigen Rechenweg.</p>
+  <p>Immer neue Zahlen, bis zu drei Tipps.</p>
   <div data-k="rechnen"></div>
 </section>
 
 <section id="stand">
   <h2>Mein Lernstand</h2>
-  <p>Hier siehst du deinen Stand in diesem Modul. Am Ende der Stunde hakst du geschaffte Stufen in deinem Lerntagebuch ab.</p>
+  <p>Hak geschaffte Stufen im Lerntagebuch ab.</p>
   <div data-k="stand"></div>
 </section>
 
@@ -265,7 +302,7 @@ const trainer=[
  T('V','Elektrotechnik','0,75 MW = ?','750 000 W',['75 000 W','7500 W','750 W'],'1 MW = 1 000 000 W.'),
  T('B','Volumen','1&#8239;m³ = ?','1000 L',['100 L','10 L','10&#8239;000 L'],'1 m³ = 1000 dm³ und 1 dm³ = 1 L.'),
  T('B','Länge','1&#8239;km = ?','1000 m',['100 m','10 m','10&#8239;000 m'],'k steht für kilo = tausend.'),
- T('B','Länge','1&#8239;m = ?','1000 mm',['100 mm','10 mm','10&#8239;000 mm'],'m steht für milli = ein Tausendstel. 1 m hat 1000 mm.'),
+ T('B','Länge','1&#8239;m = ?','1000 mm',['100 mm','10 mm','10&#8239;000 mm'],'Die Vorsilbe milli (das m vor dem zweiten m in mm) heißt: ein Tausendstel. 1 m hat 1000 mm.'),
  T('B','Zeit','1&#8239;h = ?','60 min',['100 min','3600 min','24 min'],'Eine Stunde hat 60 Minuten. 3600 sind die Sekunden.'),
  T('B','Masse','1&#8239;t = ?','1000 kg',['100 kg','10&#8239;000 kg','1&#8239;000&#8239;000 kg'],'Eine Tonne sind 1000 Kilogramm.'),
  T('B','Volumen','1&#8239;L = ?','1000 mL',['100 mL','10 mL','1&#8239;000&#8239;000 mL'],'milli = ein Tausendstel: 1 L hat 1000 mL.'),
@@ -281,7 +318,7 @@ const trainer=[
  T('V','Durchfluss','1&#8239;L/s = ?','3,6 m³/h',['0,36 m³/h','36 m³/h','60 m³/h'],'0,001 m³ pro Sekunde, mal 3600 Sekunden: 3,6 m³ pro Stunde.'),
  T('V','Konzentration','1&#8239;µg/L = ?','0,001 mg/L',['1000 mg/L','0,01 mg/L','0,000001 mg/L'],'µ (mikro) ist ein Tausendstel von milli.'),
  T('V','Fläche','1&#8239;ha = ?','10&#8239;000 m²',['1000 m²','100&#8239;000 m²','100 m²'],'Ein Hektar ist ein Quadrat von 100 m mal 100 m.'),
- T('V','Dichte','1&#8239;kg/L = ?','1 t/m³',['1000 t/m³','0,001 t/m³','1 kg/m³'],'Zähler mal 1000 (kg → t ist geteilt), Nenner L → m³ ebenfalls: hebt sich auf.'),
+ T('V','Dichte','1&#8239;kg/L = ?','1 t/m³',['1000 t/m³','0,001 t/m³','1 kg/m³'],'Zähler: kg → t heißt durch 1000. Nenner: L → m³ heißt auch durch 1000. Beides durch 1000 – der Wert bleibt gleich.'),
  T('V','Fläche','1&#8239;mm² = ?','0,000001 m²',['0,001 m²','0,0001 m²','0,01 m²'],'1 m² = 1 000 000 mm², also umgekehrt geteilt durch eine Million.'),
  T('V','Dichte','1&#8239;g/cm³ = ?','1000 kg/m³',['1 kg/m³','100 kg/m³','0,001 kg/m³'],'g → kg: geteilt durch 1000. cm³ → m³: 1 m³ hat eine Million cm³. Zusammen: mal 1000.'),
  T('V','Durchfluss','100&#8239;m³/d = ?','1,16 L/s',['11,6 L/s','0,116 L/s','4,17 L/s'],'100 000 L in 86 400 s: 100 000 : 86 400 ≈ 1,16. Die 4,17 sind m³/h.')

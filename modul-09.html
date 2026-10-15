@@ -10,7 +10,7 @@
 <body>
 <header class="site"><div class="wrap sitebar">
   <a class="brand" href="index.html">Mathe-Aufbaukurs <span>Umwelttechnik</span></a>
-  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="modul-08.html" title="Modul 8 Diagramme lesen">M8</a><a href="modul-09.html" aria-current="page" title="Modul 9 Die Berufsformeln">M9</a><a href="modul-10.html" title="Modul 10 Funktionen">M10</a><a href="fortschritt.html">Fortschritt</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">Start</a><a href="eingangstest.html">Test</a><a href="rechenweg.html">Rechenweg</a><a href="modul-01.html" title="Modul 1 Zahlen &amp; Rechenregeln">M1</a><a href="modul-02.html" title="Modul 2 Einheiten umrechnen">M2</a><a href="modul-03.html" title="Modul 3 Dreisatz, Prozent, Verhältnisse">M3</a><a href="modul-04.html" title="Modul 4 Formeln umstellen">M4</a><a href="modul-05.html" title="Modul 5 Mit Formeln rechnen">M5</a><a href="modul-06.html" title="Modul 6 Flächen">M6</a><a href="modul-07.html" title="Modul 7 Volumen &amp; Masse">M7</a><a href="modul-08.html" title="Modul 8 Diagramme lesen">M8</a><a href="modul-09.html" aria-current="page" title="Modul 9 Die Berufsformeln">M9</a><a href="modul-10.html" title="Modul 10 Funktionen">M10</a><a href="fortschritt.html">Fortschritt</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -20,7 +20,7 @@
   <div class="modnum" aria-hidden="true">9</div>
   <div class="eyebrow">Mathe-Aufbaukurs · Modul 9</div>
   <h1>Die Berufsformeln</h1>
-  <p class="ctx">Jetzt kommt alles zusammen: Einheiten umrechnen, Formeln umstellen, mit Einheiten rechnen. In diesem Modul übst du die Formeln, die in deinem Beruf immer wieder vorkommen – und vor allem, die richtige Formel für eine Aufgabe zu finden.</p>
+  <p class="ctx">Hier kommt alles zusammen: Du übst die Formeln deines Berufs – und findest die richtige Formel für jede Aufgabe.</p>
 </header>
 
 <div class="bar">
@@ -28,73 +28,122 @@
   <div data-k="niveau"></div>
 </div>
 
+<div class="merkkarte">
+  <h2>Das Wichtigste</h2>
+  <ul>
+    <li>Die Einheit verrät die Formel: kg/d → Fracht, kWh → Energie</li>
+    <li>Fracht: <span class="f"><i>B</i> = <i>c</i> · <i>Q</i></span> – z. B. g/m³ · m³/d = g/d</li>
+    <li>Einwohnerwert: <span class="f">EW = <span class="fr"><span><i>B</i><sub>BSB</sub></span><span>60 g/(E·d)</span></span></span> – 2400&#8239;kg/d → 40&#8239;000 E</li>
+    <li data-lv="S">Fehlt ein Wert, rechne ihn zuerst mit einer zweiten Formel aus – z. B. erst <span class="f"><i>A</i> = π · <i>d</i>²/4</span>, dann <span class="f"><i>Q</i> = <i>v</i> · <i>A</i></span></li>
+  </ul>
+</div>
+
 <section id="ziele">
   <h2>Das kannst du nach diesem Modul</h2>
   <div class="raster">
-    <div><span class="lvl B">Basis</span><ul><li>Ich finde zu einer Fragestellung die passende Formel.</li><li>Ich rechne mit einer Berufsformel, wenn die Einheiten schon passen.</li></ul></div>
-    <div><span class="lvl S">Standard</span><ul><li>Ich gleiche Einheiten an und verbinde zwei Formeln.</li><li>Ich beurteile, ob das Ergebnis im üblichen Bereich liegt.</li></ul></div>
-    <div><span class="lvl V">Vertiefung</span><ul><li>Ich löse mehrstufige Aufgaben mit drei und mehr Schritten.</li><li>Ich plane den Rechenweg selbst, ohne dass die Formeln vorgegeben sind.</li></ul></div>
+    <div data-only="B"><span class="lvl B">Basis</span><ul><li>Ich finde zu einer Fragestellung die passende Formel.</li><li>Ich rechne mit einer Berufsformel, wenn die Einheiten schon passen.</li></ul></div>
+    <div data-only="S"><span class="lvl S">Standard</span><ul><li>Ich gleiche Einheiten an und verbinde zwei Formeln.</li><li>Ich beurteile, ob das Ergebnis im üblichen Bereich liegt.</li></ul></div>
+    <div data-only="V"><span class="lvl V">Vertiefung</span><ul><li>Ich löse mehrstufige Aufgaben mit drei und mehr Schritten.</li><li>Ich plane den Rechenweg selbst, ohne dass die Formeln vorgegeben sind.</li></ul></div>
   </div>
 </section>
 
 <section id="finden">
   <h2>Welche Formel brauche ich?</h2>
   <ol class="sechs">
-    <li><h3>Gesuchte Größe bestimmen</h3><p>Was ist gefragt – und in welcher Einheit? Die Einheit verrät oft schon die Formel.</p><p class="bsp">kg/d → eine Fracht · m³/h → ein Durchfluss · kWh → eine Energie</p></li>
-    <li><h3>Gegebene Größen sortieren</h3><p>Schreibe alle Werte mit Formelzeichen und Einheit heraus (Rechenweg, Schritt 1).</p><p class="bsp">c in mg/L, Q in m³/d</p></li>
-    <li><h3>Formel suchen, die beides verbindet</h3><p>Suche in der Formelsammlung eine Formel, in der die gesuchte Größe und möglichst alle gegebenen vorkommen.</p><p class="bsp">B = c · Q verbindet B, c und Q</p></li>
-    <li><h3>Fehlt etwas? Zweite Formel</h3><p>Fehlt ein Wert, berechnest du ihn zuerst mit einer anderen Formel. Das ist ein Zwischenergebnis.</p><p class="bsp">erst A = π · d²/4, dann Q = v · A</p></li>
+    <li><h3>Gesuchte Größe bestimmen</h3><p>Was ist gefragt – in welcher Einheit?</p><p class="bsp">kg/d → eine Fracht · m³/h → ein Durchfluss · kWh → eine Energie</p></li>
+    <li><h3>Gegebene Größen sortieren</h3><p>Alle Werte mit Formelzeichen und Einheit herausschreiben.</p><p class="bsp">c in mg/L, Q in m³/d</p></li>
+    <li><h3>Formel suchen, die beides verbindet</h3><p>Gesuchte und gegebene Größen kommen vor.</p><p class="bsp">B = c · Q verbindet B, c und Q</p></li>
+    <li data-lv="S"><h3>Fehlt etwas? Zweite Formel</h3><p>Den fehlenden Wert zuerst mit einer anderen Formel berechnen (Zwischenergebnis).</p><p class="bsp">erst A = π · d²/4, dann Q = v · A</p></li>
   </ol>
-  <div class="box merke"><p><strong>Einheiten als Wegweiser:</strong> Gesucht ist kg/(m³·d), gegeben sind kg/d und m³ – dann muss geteilt werden: kg/d : m³. Die Einheit führt dich zur Formel <span class="f"><i>B</i><sub>R</sub> = <i>B</i> / <i>V</i></span>.</p></div>
+  <details class="mehr">
+    <summary>Mehr dazu: Die Einheit als Wegweiser</summary>
+    <p>Die Einheit verrät oft schon die Formel. Beispiel: Gesucht ist kg/(m³·d), gegeben sind kg/d und m³ – dann musst du teilen: kg/d : m³. So kommst du zur Formel <span class="f"><i>B</i><sub>R</sub> = <i>B</i> / <i>V</i></span>.</p>
+    <p>Bei den Werten hilft dir der Rechenweg, Schritt 1 (Gegeben).</p>
+  </details>
 </section>
 
 <section id="formeln">
   <h2>Formelübersicht nach Bereichen</h2>
-  <p class="small">Formelzeichen wie in der „Formelsammlung für Berufe der Umwelttechnik“ – prüfe im Zweifel dort nach.</p>
-  <div class="tscroll"><table>
-    <thead><tr><th>Bereich</th><th>Größe</th><th>Formel</th><th>Typische Einheit</th></tr></thead>
-    <tbody>
-      <tr><td rowspan="5">Abwasser</td><td>Fracht</td><td class="op"><span class="f"><i>B</i> = <i>c</i> · <i>Q</i></span></td><td>kg/d</td></tr>
-      <tr><td>Einwohnerwert (BSB₅)</td><td class="op"><span class="f">EW = <span class="fr"><span><i>B</i><sub>BSB</sub></span><span>60 g/(E·d)</span></span></span></td><td>E</td></tr>
-      <tr><td>Raumbelastung</td><td class="op"><span class="f"><i>B</i><sub>R</sub> = <span class="fr"><span><i>B</i></span><span><i>V</i></span></span></span></td><td>kg/(m³·d)</td></tr>
-      <tr><td>Schlammvolumenindex</td><td class="op"><span class="f">ISV = <span class="fr"><span>VSV</span><span>TS</span></span></span></td><td>mL/g</td></tr>
-      <tr><td>Verweilzeit, Oberflächenbeschickung</td><td class="op"><span class="f"><i>Q</i> = <span class="fr"><span><i>V</i></span><span><i>t</i></span></span>;&nbsp; <i>q</i><sub>A</sub> = <span class="fr"><span><i>Q</i></span><span><i>A</i></span></span></span></td><td>h · m/h</td></tr>
-      <tr><td rowspan="3">Wasserversorgung</td><td>Tagesbedarf</td><td class="op"><span class="f"><i>Q</i><sub>d</sub> = <i>E</i> · <i>q</i></span></td><td>m³/d</td></tr>
-      <tr><td>Spitzenstunde</td><td class="op"><span class="f"><i>Q</i><sub>h,max</sub> = <i>f</i> · <span class="fr"><span><i>Q</i><sub>d</sub></span><span>24 h</span></span></span></td><td>m³/h</td></tr>
-      <tr><td>Ruhedruck</td><td class="op"><span class="f"><i>p</i> = <i>ρ</i> · <i>g</i> · <i>h</i></span></td><td>Pa, bar</td></tr>
-      <tr><td rowspan="3">Kreislauf &amp; Abfall</td><td>Massenbilanz</td><td class="op"><span class="f"><i>m</i><sub>ein</sub> = <i>m</i><sub>1</sub> + <i>m</i><sub>2</sub> + … + <i>m</i><sub>Rest</sub></span></td><td>t</td></tr>
-      <tr><td>Energieinhalt</td><td class="op"><span class="f"><i>E</i> = <i>m</i> · <i>H</i><sub>u</sub></span></td><td>MJ</td></tr>
-      <tr><td>Verdichtung</td><td class="op"><span class="f"><i>V</i><sub>2</sub> = <span class="fr"><span><i>V</i><sub>1</sub></span><span><i>f</i></span></span></span></td><td>m³</td></tr>
-      <tr><td rowspan="2">Rohrleitungsnetze</td><td>Durchfluss, Kontinuität</td><td class="op"><span class="f"><i>Q</i> = <i>v</i> · <i>A</i>;&nbsp; <i>A</i><sub>1</sub> · <i>v</i><sub>1</sub> = <i>A</i><sub>2</sub> · <i>v</i><sub>2</sub></span></td><td>m³/s</td></tr>
-      <tr><td>Gefälle</td><td class="op"><span class="f"><i>J</i> = <span class="fr"><span>Δ<i>h</i></span><span><i>l</i></span></span></span></td><td>‰</td></tr>
-      <tr><td rowspan="3">Elektrotechnik</td><td>Leistung</td><td class="op"><span class="f"><i>P</i> = <i>U</i> · <i>I</i>;&nbsp; <i>P</i> = √3 · <i>U</i> · <i>I</i> · cos <i>φ</i></span></td><td>W, kW</td></tr>
-      <tr><td>Energie</td><td class="op"><span class="f"><i>E</i> = <i>P</i> · <i>t</i></span></td><td>kWh</td></tr>
-      <tr><td>Hydraulische Leistung</td><td class="op"><span class="f"><i>P</i> = <i>ρ</i> · <i>g</i> · <i>Q</i> · <i>H</i></span></td><td>W</td></tr>
-    </tbody>
-  </table></div>
+  <p class="small">Wie in der „Formelsammlung für Berufe der Umwelttechnik“. Tippe einen Bereich an.</p>
+  <details class="mehr">
+    <summary>Abwasser: Fracht, Einwohnerwert, Raumbelastung, ISV, Verweilzeit</summary>
+    <div class="tscroll"><table>
+      <thead><tr><th>Größe</th><th>Formel</th><th>Typische Einheit</th></tr></thead>
+      <tbody>
+        <tr><td>Fracht</td><td class="op"><span class="f"><i>B</i> = <i>c</i> · <i>Q</i></span></td><td>kg/d</td></tr>
+        <tr><td>Einwohnerwert (BSB₅)</td><td class="op"><span class="f">EW = <span class="fr"><span><i>B</i><sub>BSB</sub></span><span>60 g/(E·d)</span></span></span></td><td>E</td></tr>
+        <tr><td>Raumbelastung</td><td class="op"><span class="f"><i>B</i><sub>R</sub> = <span class="fr"><span><i>B</i></span><span><i>V</i></span></span></span></td><td>kg/(m³·d)</td></tr>
+        <tr><td>Schlammvolumenindex</td><td class="op"><span class="f">ISV = <span class="fr"><span>VSV</span><span>TS</span></span></span></td><td>mL/g</td></tr>
+        <tr><td>Verweilzeit, Oberflächenbeschickung</td><td class="op"><span class="f"><i>Q</i> = <span class="fr"><span><i>V</i></span><span><i>t</i></span></span>;&nbsp; <i>q</i><sub>A</sub> = <span class="fr"><span><i>Q</i></span><span><i>A</i></span></span></span></td><td>h · m/h</td></tr>
+      </tbody>
+    </table></div>
+  </details>
+  <details class="mehr">
+    <summary>Wasserversorgung: Tagesbedarf<span data-lv="S">, Spitzenstunde</span><span data-lv="V">, Ruhedruck</span></summary>
+    <div class="tscroll"><table>
+      <thead><tr><th>Größe</th><th>Formel</th><th>Typische Einheit</th></tr></thead>
+      <tbody>
+        <tr><td>Tagesbedarf</td><td class="op"><span class="f"><i>Q</i><sub>d</sub> = <i>E</i> · <i>q</i></span></td><td>m³/d</td></tr>
+        <tr data-lv="S"><td>Spitzenstunde</td><td class="op"><span class="f"><i>Q</i><sub>h,max</sub> = <i>f</i> · <span class="fr"><span><i>Q</i><sub>d</sub></span><span>24 h</span></span></span></td><td>m³/h</td></tr>
+        <tr data-lv="V"><td>Ruhedruck</td><td class="op"><span class="f"><i>p</i> = <i>ρ</i> · <i>g</i> · <i>h</i></span></td><td>Pa, bar</td></tr>
+      </tbody>
+    </table></div>
+  </details>
+  <details class="mehr">
+    <summary>Kreislauf &amp; Abfall: Massenbilanz, Energieinhalt<span data-lv="S">, Verdichtung</span></summary>
+    <div class="tscroll"><table>
+      <thead><tr><th>Größe</th><th>Formel</th><th>Typische Einheit</th></tr></thead>
+      <tbody>
+        <tr><td>Massenbilanz</td><td class="op"><span class="f"><i>m</i><sub>ein</sub> = <i>m</i><sub>1</sub> + <i>m</i><sub>2</sub> + … + <i>m</i><sub>Rest</sub></span></td><td>t</td></tr>
+        <tr><td>Energieinhalt</td><td class="op"><span class="f"><i>E</i> = <i>m</i> · <i>H</i><sub>u</sub></span></td><td>MJ</td></tr>
+        <tr data-lv="S"><td>Verdichtung</td><td class="op"><span class="f"><i>V</i><sub>2</sub> = <span class="fr"><span><i>V</i><sub>1</sub></span><span><i>f</i></span></span></span></td><td>m³</td></tr>
+      </tbody>
+    </table></div>
+  </details>
+  <details class="mehr" data-lv="S">
+    <summary>Rohrleitungsnetze: Durchfluss, Kontinuität, Gefälle</summary>
+    <div class="tscroll"><table>
+      <thead><tr><th>Größe</th><th>Formel</th><th>Typische Einheit</th></tr></thead>
+      <tbody>
+        <tr><td>Durchfluss, Kontinuität</td><td class="op"><span class="f"><i>Q</i> = <i>v</i> · <i>A</i>;&nbsp; <i>A</i><sub>1</sub> · <i>v</i><sub>1</sub> = <i>A</i><sub>2</sub> · <i>v</i><sub>2</sub></span></td><td>m³/s</td></tr>
+        <tr><td>Gefälle</td><td class="op"><span class="f"><i>J</i> = <span class="fr"><span>Δ<i>h</i></span><span><i>l</i></span></span></span></td><td>‰</td></tr>
+      </tbody>
+    </table></div>
+  </details>
+  <details class="mehr">
+    <summary>Elektrotechnik: Energie<span data-lv="V">, Leistung, hydraulische Leistung</span></summary>
+    <div class="tscroll"><table>
+      <thead><tr><th>Größe</th><th>Formel</th><th>Typische Einheit</th></tr></thead>
+      <tbody>
+        <tr data-lv="V"><td>Leistung</td><td class="op"><span class="f"><i>P</i> = <i>U</i> · <i>I</i>;&nbsp; <i>P</i> = √3 · <i>U</i> · <i>I</i> · cos <i>φ</i></span></td><td>W, kW</td></tr>
+        <tr><td>Energie</td><td class="op"><span class="f"><i>E</i> = <i>P</i> · <i>t</i></span></td><td>kWh</td></tr>
+        <tr data-lv="V"><td>Hydraulische Leistung</td><td class="op"><span class="f"><i>P</i> = <i>ρ</i> · <i>g</i> · <i>Q</i> · <i>H</i></span></td><td>W</td></tr>
+      </tbody>
+    </table></div>
+  </details>
 </section>
 
 <section id="beispiel">
   <h2>Schritt für Schritt</h2>
-  <p>Klicke dich durch die Beispiele und schreibe jeden Schritt mit.</p>
+  <p>Schreib jeden Schritt mit.</p>
   <div data-k="stepper"></div>
 </section>
 
 <section id="trainer">
   <h2>Formel-Trainer</h2>
-  <p>Welche Formel passt zur Frage? Es zählt nur der erste Versuch.</p>
+  <p>Welche Formel passt? Es zählt der erste Versuch.</p>
   <div data-k="trainer"></div>
 </section>
 
 <section id="rechnen">
   <h2>Rechnen im Betrieb</h2>
-  <p>Hier ist die Formel nicht immer angegeben – such sie dir selbst. Die Tipps helfen dir dabei.</p>
+  <p>Die Formel suchst du selbst – die Tipps helfen.</p>
   <div data-k="rechnen"></div>
 </section>
 
 <section id="stand">
   <h2>Mein Lernstand</h2>
-  <p>Hier siehst du deinen Stand in diesem Modul. Am Ende der Stunde hakst du geschaffte Stufen in deinem Lerntagebuch ab.</p>
+  <p>Hake geschaffte Stufen im Lerntagebuch ab.</p>
   <div data-k="stand"></div>
 </section>
 
@@ -148,8 +197,8 @@ const tasks=[
     `Formel: ${F(ISV,EQ,fr(VSV,TS))}. In den Zähler kommt ${F(VSV,EQ,z(VSVv,'mL/L'))}, in den Nenner ${F(TS,EQ,z(TSv,'g/L'))}. Einheiten: (mL/L) : (g/L) = mL/g.`,
     `Teile ${z(VSVv,'mL/L')} durch ${z(TSv,'g/L')}. Der Liter kürzt sich, übrig bleibt mL/g. Runde auf 4 signifikante Stellen.`]}}},
  {L:'B',g(){const mi=rnd(6,18,.5),f1=rnd(.08,.18,.01),f2=rnd(.15,.3,.01),f3=rnd(.04,.09,.01),m1=+(mi*f1).toFixed(2),m2=+(mi*f2).toFixed(2),m3=+(mi*f3).toFixed(2),x=mi-m1-m2-m3;return{tag:'Kreislauf & Abfall',ti:'Massenbilanz der Sortieranlage',tx:`In die Sortieranlage im Abfall- &amp; Energiezentrum Schwierbach laufen in einer Stunde ${z(mi,'t')} Leichtverpackungen. Aussortiert werden ${z(m1,'t')} Folien, ${z(m2,'t')} Kunststoffe und ${z(m3,'t')} Metalle. Der Rest geht als Sortierrest in die Verbrennung. Wie viel Sortierrest fällt pro Stunde an?`,x:I('m','Rest'),un:'t',a:x,
-   geg:`${F(I('m','ein'),EQ,z(mi,'t'))};&nbsp; Folien ${z(m1,'t')};&nbsp; Kunststoffe ${z(m2,'t')};&nbsp; Metalle ${z(m3,'t')}`,steps:[['Formel',F(I('m','ein'),EQ,I('m','1'),PL,I('m','2'),PL,I('m','3'),PL,I('m','Rest'))],['Umstellung',F(I('m','Rest'),EQ,I('m','ein'),MI,I('m','1'),MI,I('m','2'),MI,I('m','3'))]],ein:F(I('m','Rest'),EQ,nf(mi),MI,nf(m1),MI,nf(m2),MI,nf(m3)),
-   s:F(I('m','Rest'),EQ,nf(mi),MI,nf(m1),MI,nf(m2),MI,nf(m3)+u('t'),EQ,res(x,0,'t')),satz:`Pro Stunde fallen ${fmt(x)} t Sortierrest an.`,
+   geg:`${F(I('m','ein'),EQ,z(mi,'t'))};&nbsp; Folien ${z(m1,'t')};&nbsp; Kunststoffe ${z(m2,'t')};&nbsp; Metalle ${z(m3,'t')}`,steps:[['Formel',F(I('m','ein'),EQ,I('m','1'),PL,I('m','2'),PL,I('m','3'),PL,I('m','Rest'))],['Umstellung',F(I('m','Rest'),EQ,I('m','ein'),MI,I('m','1'),MI,I('m','2'),MI,I('m','3'))]],ein:F(I('m','Rest'),EQ,z(mi,'t'),MI,z(m1,'t'),MI,z(m2,'t'),MI,z(m3,'t')),
+   s:F(I('m','Rest'),EQ,z(mi,'t'),MI,z(m1,'t'),MI,z(m2,'t'),MI,z(m3,'t'),EQ,res(x,0,'t')),satz:`Pro Stunde fallen ${fmt(x)} t Sortierrest an.`,
    tips:['Alles, was in die Sortieranlage hineinläuft, kommt auch wieder heraus – als Folien, Kunststoffe, Metalle oder Sortierrest. Was musst du also vom Input abziehen?',
     `Massenbilanz: ${F(I('m','ein'),EQ,I('m','1'),PL,I('m','2'),PL,I('m','3'),PL,I('m','Rest'))}. Ziehe zuerst die Folien vom Input ab: ${F(z(mi,'t'),MI,z(m1,'t'),EQ,z(+(mi-m1).toFixed(2),'t'))}.`,
     `Ziehe von ${z(+(mi-m1).toFixed(2),'t')} noch die Kunststoffe (${z(m2,'t')}) und die Metalle (${z(m3,'t')}) ab. Was übrig bleibt, ist der Sortierrest in t.`]}}},
@@ -206,8 +255,8 @@ const tasks=[
     `Erst die Fracht: ${F(B,EQ,z(EWv,'E'),M,'60 g/(E·d)',EQ,z(EWv*60,'g/d'),EQ,z(Bk,'kg/d'))}.`,
     `Stelle ${F(BR,EQ,fr(B,V))} nach ${V} um: ${F(V,EQ,fr(B,BR))}. Teile also ${z(Bk,'kg/d')} durch ${z(BRv,'kg/(m³·d)')}. Runde auf 4 signifikante Stellen.`]}}},
  {L:'V',g(){const mt=rnd(300,800,10),H=rnd(9,11.5,.1),e=rnd(.2,.27,.01),Emj=mt*1000*H,x=Emj/3600*e;return{tag:'Kreislauf & Abfall',ti:'Strom aus Restabfall',tx:`Die Verbrennung im Abfall- &amp; Energiezentrum Schwierbach verbrennt ${z(mt,'t')} Restabfall pro Tag mit einem Heizwert von ${z(H,'MJ/kg')}. Der elektrische Wirkungsgrad beträgt ${F(eta,EQ,nf(e))}. Wie viel Strom in MWh wird pro Tag erzeugt? (1 MWh = 3600 MJ)`,x:I('E','el'),un:'MWh',a:x,
-   geg:`${F(m,EQ,z(mt,'t'),EQ,z(mt*1000,'kg'))};&nbsp; ${F(Hu,EQ,z(H,'MJ/kg'))};&nbsp; ${F(eta,EQ,nf(e))}`,steps:[['Energieinhalt',F(E,EQ,m,M,Hu,EQ,z(mt*1000,'kg'),M,z(H,'MJ/kg'),EQ,fmt(Emj)+u('MJ'))],['Umrechnen und Wirkungsgrad',`${fmt(Emj)} MJ : 3600 = ${fmt(Emj/3600)} MWh, davon wird der Anteil ${nf(e)} zu Strom.`]],ein:F(I('E','el'),EQ,fmt(Emj/3600)+u('MWh'),M,nf(e)),
-   s:`${F(E,EQ,fmt(Emj)+u('MJ'),EQ,fmt(Emj/3600)+u('MWh'))}<br>${F(I('E','el'),EQ,fmt(Emj/3600)+u('MWh'),M,nf(e),EQ,res(x,0,'MWh'))}`,satz:`Pro Tag werden ${fmt(x)} MWh Strom erzeugt.`,
+   geg:`${F(m,EQ,z(mt,'t'),EQ,z(mt*1000,'kg'))};&nbsp; ${F(Hu,EQ,z(H,'MJ/kg'))};&nbsp; ${F(eta,EQ,nf(e))}`,steps:[['Energieinhalt',F(E,EQ,m,M,Hu,EQ,z(mt*1000,'kg'),M,z(H,'MJ/kg'),EQ,fmt(Emj)+u('MJ'))],['Umrechnen und Wirkungsgrad',`${fmt(Emj)} MJ : 3600 MJ/MWh = ${fmt(Emj/3600)} MWh (1 MWh = 3600 MJ), davon wird der Anteil ${nf(e)} zu Strom.`]],ein:F(I('E','el'),EQ,fmt(Emj/3600)+u('MWh'),M,nf(e)),
+   s:`${F(E,EQ,fr(fmt(Emj)+u('MJ'),'3600'+u('MJ/MWh')),EQ,fmt(Emj/3600)+u('MWh'))}<br>${F(I('E','el'),EQ,fmt(Emj/3600)+u('MWh'),M,nf(e),EQ,res(x,0,'MWh'))}`,satz:`Pro Tag werden ${fmt(x)} MWh Strom erzeugt.`,
    tips:['Plan in drei Schritten: Wie viel Energie steckt im Abfall (Formel Energieinhalt)? Wie viele MWh sind das? Welcher Anteil davon wird zu Strom?',
     `Masse in kg: ${F(m,EQ,z(mt,'t'),EQ,z(mt*1000,'kg'))}. Energieinhalt: ${F(E,EQ,m,M,Hu,EQ,z(mt*1000,'kg'),M,z(H,'MJ/kg'),EQ,fmt(Emj)+u('MJ'))}.`,
     `Teile ${fmt(Emj)+u('MJ')} durch 3600 MJ/MWh, dann hast du die Energie in MWh. Multipliziere sie mit dem Wirkungsgrad ${eta} = ${nf(e)}. Runde auf 4 signifikante Stellen.`]}}},

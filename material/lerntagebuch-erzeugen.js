@@ -64,6 +64,11 @@ const fields = new Table({
     new TableRow({ height: { value: 620, rule: HeightRule.ATLEAST }, children: [
       cell(p([run('Fachrichtung', { bold: true, color: NAVY })]), 4 * CM, { borders: { top: none, left: none, right: none, bottom: none }, v: VerticalAlign.BOTTOM }),
       cell([p([box(), run(' Abwasserbewirtschaftung      '), box(), run(' Wasserversorgung')], { spacing: { after: 60 } }), p([box(), run(' Kreislauf- und Abfallwirtschaft')])], W - 4 * CM, { borders: { top: none, left: none, right: none, bottom: none }, v: VerticalAlign.BOTTOM })
+    ] }),
+    new TableRow({ height: { value: 620, rule: HeightRule.ATLEAST }, children: [
+      cell(p([run('Eingangstest', { bold: true, color: NAVY })]), 4 * CM, { borders: { top: none, left: none, right: none, bottom: none }, v: VerticalAlign.BOTTOM }),
+      cell([p([run('am '), run('____.____.______', { color: LINE }), run('     Punkte: '), run('______', { color: LINE }), run(' von 16')], { spacing: { after: 60 } }),
+            p([run('Empfehlung:  '), box(), run(' Mathe einfach   '), box(), run(' Basis   '), box(), run(' Standard')])], W - 4 * CM, { borders: { top: none, left: none, right: none, bottom: none }, v: VerticalAlign.BOTTOM })
     ] })]
 });
 const fachrichtung = p('', { spacing: { after: 120 } });
@@ -84,6 +89,7 @@ const cover = [
   fields,
   fachrichtung,
   h2('So arbeitest du mit dem Lerntagebuch'),
+  step([run('Zu Beginn machst du den '), run('Eingangstest', { bold: true }), run(' im Kurs und trägst Datum, Punkte und Empfehlung oben ein.')]),
   step([run('Am Ende jeder Stunde öffnest du im Kurs die Seite '), run(LQ + 'Mein Fortschritt' + RQ, { bold: true }), run('.')]),
   step([run('Auf der '), run('Übersicht', { bold: true }), run(' (nächste Seite) hakst du ab, welche Niveaustufen du '), run('begonnen', { bold: true }), run(' und welche du '), run('geschafft', { bold: true }), run(' hast – jeweils mit Datum.')]),
   step([run('Dann füllst du die '), run('Seite für den heutigen Termin', { bold: true }), run(' aus. Das dauert etwa fünf Minuten.')]),
