@@ -437,7 +437,7 @@ body.druck section.zone-do>h2{color:var(--navy)}
 .druck-mc .o span,.druck-mc .q{font-family:var(--f-body)}
 .druck-aufg{border-top:1px solid var(--line);padding-top:12px;margin-top:6px;display:grid;gap:10px;break-inside:avoid}
 .druck-aufg h3{font-size:1.05rem}
-.druck-heft{height:7.5cm;border:1px solid var(--line);border-radius:4px;background-color:#fff;background-image:linear-gradient(#dbe5f1 1px,transparent 1px),linear-gradient(90deg,#dbe5f1 1px,transparent 1px);background-size:5mm 5mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.druck-heft{height:7.5cm;border:1px solid var(--line);border-radius:4px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cpath d='M20 0H0V20' fill='none' stroke='%23c9d6e6' stroke-width='1'/%3E%3C/svg%3E") 0 0/5mm 5mm repeat;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .druck-erg{font-size:1.05rem}
 .druck-erg .linie{display:inline-block;width:9rem;border-bottom:1px solid var(--ink);margin:0 6px}
 .druck-anhang{break-before:page}
@@ -475,3 +475,27 @@ body.druck section:has([data-k="rechnen"]),body.druck section:has(.druck-aufg){b
 .et-p>li{break-inside:avoid}
 .neue-seite{break-before:page}
 @media print{body.einfach{font-size:12pt}}
+
+/* Druck: Raster-Layouts als Block (Safari/WebKit bricht Grid-Container beim Drucken schlecht um) */
+@media print{
+  section,.druck-aufg,.card,.box,.merkkarte,.druck-kopf,.druck-bsp,.et-res,.et,.et-intro,.r-text,.grid2,.raster,.mods{display:block!important}
+  section>*+*,.druck-aufg>*+*,.box>*+*,.card>*+*,.merkkarte>*+*,.grid2>*+*,.raster>*+*,.druck-kopf>*+*{margin-top:8px}
+  .druck-mc .o{display:block}
+  .druck-mc .o span{display:inline-block;width:48%;vertical-align:top;margin:2px 0}
+  .schema{display:block!important}
+  .schema dt{display:block;margin-top:6px;break-after:avoid;page-break-after:avoid}
+  .schema dd{display:block;margin:0 0 0 1.2em;break-inside:avoid;page-break-inside:avoid}
+  .druck-mc li,.druck-bsp li,.druck-loes h4,.druck-tipps li,tr,.f,.fr,.eqn{break-inside:avoid;page-break-inside:avoid}
+  h2,h3,h4{break-after:avoid;page-break-after:avoid}
+  .druck-aufg,.druck-loes{break-inside:avoid;page-break-inside:avoid}
+  .druck-anhang,body.druck #trainer,.neue-seite{page-break-before:always}
+  body.druck section:has(.druck-aufg){page-break-before:always}
+  .heft{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cpath d='M20 0H0V20' fill='none' stroke='%23c9d6e6' stroke-width='1'/%3E%3C/svg%3E") 0 0/5mm 5mm repeat!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media print{
+  .tscroll{overflow:visible!important}
+  table{width:100%;table-layout:auto}
+  td,th,.op{white-space:normal!important;overflow-wrap:anywhere}
+  .druck-bsp ol>li{padding-left:2px}
+  .druck-bsp .eqn{margin-bottom:2px}
+}

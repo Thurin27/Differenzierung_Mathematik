@@ -199,7 +199,7 @@ K.printModule=function(cfg,L){
   const bar=document.createElement('div');bar.className='druck-toolbar';
   bar.innerHTML=`<strong>Druckansicht</strong> <span class="small">Stufe ${LV[L]} · jedes Neuladen erzeugt neue Zahlen</span>
     <span class="row">${cfg.lock?'':['B','S','V'].map(l=>`<a class="btn ghost${l===L?' on':''}" href="?druck=1&lvl=${l}">${LV[l]}</a>`).join('')}
-    <button class="btn" onclick="window.print()">Drucken / als PDF</button><a class="btn ghost" href="${location.pathname.split('/').pop()}">Zurück</a></span>`;
+    <button class="btn" onclick="this.blur();setTimeout(function(){window.print()},150)">Drucken / als PDF</button><a class="btn ghost" href="${location.pathname.split('/').pop()}">Zurück</a></span>`;
   document.body.prepend(bar);
   const sec=id=>{const h=document.querySelector(`[data-k="${id}"]`);return h&&h.closest('section')};
   const reset=(se,txt)=>{if(!se)return null;const h2=se.querySelector('h2');[...se.children].forEach(c=>{if(c!==h2)c.remove()});

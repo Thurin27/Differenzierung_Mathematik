@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Eingangstest – Mathe-Aufbaukurs</title>
-<link rel="stylesheet" href="assets/fonts.css?v=20261016">
-<link rel="stylesheet" href="assets/kurs.css?v=20261016">
+<link rel="stylesheet" href="assets/fonts.css?v=20261016b">
+<link rel="stylesheet" href="assets/kurs.css?v=20261016b">
 </head>
 <body>
 <header class="site"><div class="wrap sitebar">
@@ -25,7 +25,7 @@
 </main>
 <footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
 
-<script src="assets/kurs.js?v=20261016"></script>
+<script src="assets/kurs.js?v=20261016b"></script>
 <script>
 (function(){
 const {I,fr,F,M,EQ,u,nf}=K;
@@ -180,7 +180,7 @@ function papier(){
   const ord=(it,i)=>{const n=it.o.length,r=(i*3+1)%n;return it.o.map((_,k)=>it.o[(k+r)%n])};   /* feste, gemischte Reihenfolge */
   const key=[];
   const bar=document.createElement('div');bar.className='druck-toolbar';
-  bar.innerHTML='<strong>Eingangstest – Papierfassung</strong><span class="row"><button class="btn" onclick="window.print()">Drucken / als PDF</button><a class="btn ghost" href="eingangstest.html">Zurück</a></span>';
+  bar.innerHTML='<strong>Eingangstest – Papierfassung</strong><span class="row"><button class="btn" onclick="this.blur();setTimeout(function(){window.print()},150)">Drucken / als PDF</button><a class="btn ghost" href="eingangstest.html">Zurück</a></span>';
   document.body.prepend(bar);
   const fn=t=>t.replace(/^Rechne ohne Taschenrechner: /,'Rechne ohne Taschenrechner: ');
   host.innerHTML=`<div class="druck-kopf"><div><strong>Eingangstest</strong> · etwa 20 Minuten · keine Note</div>

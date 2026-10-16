@@ -86,7 +86,7 @@ Jede Modulseite liefert mit `?druck=1&lvl=B|S|V` ein Arbeitsheft (Erklärungen d
 
 ## Neue Version hochladen
 
-Die Links auf `assets/kurs.css`, `kurs.js`, `fonts.css` und `einfach.js` tragen eine Versionsnummer (`?v=20261016`). Ändert sich eine dieser Dateien, die Nummer in allen HTML-Seiten erhöhen (Suchen & Ersetzen), damit Browser nicht die alte Fassung aus dem Zwischenspeicher nehmen. `.nojekyll` im Repository nicht löschen.
+Die Links auf `assets/kurs.css`, `kurs.js`, `fonts.css` und `einfach.js` tragen eine Versionsnummer (`?v=20261016b`). Ändert sich eine dieser Dateien, die Nummer in allen HTML-Seiten erhöhen (Suchen & Ersetzen), damit Browser nicht die alte Fassung aus dem Zwischenspeicher nehmen. `.nojekyll` im Repository nicht löschen.
 
 ## Neues Modul anlegen
 
