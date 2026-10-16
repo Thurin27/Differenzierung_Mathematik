@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Der Rechenweg – Mathe-Aufbaukurs</title>
-<link rel="stylesheet" href="assets/fonts.css?v=20261015c">
-<link rel="stylesheet" href="assets/kurs.css?v=20261015c">
+<link rel="stylesheet" href="assets/fonts.css?v=20261016">
+<link rel="stylesheet" href="assets/kurs.css?v=20261016">
 </head>
 <body>
 <header class="site"><div class="wrap sitebar">
@@ -126,11 +126,12 @@
   </ul>
 </section>
 
+<p class="small druck-zeile">Lieber auf Papier? <a class="btn ghost druck-link" href="rechenweg.html?druck=1" target="_blank" rel="noopener">Arbeitsheft drucken</a></p>
 <nav class="weiter" aria-label="Weiter"><a href="index.html">← Zur Übersicht</a><a href="modul-01.html">→ Weiter zu: Modul 1 Zahlen &amp; Rechenregeln</a></nav>
 </main>
 <footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
 
-<script src="assets/kurs.js?v=20261015c"></script>
+<script src="assets/kurs.js?v=20261016"></script>
 <script>K.zones();if(!K.load('test').date)K.testGate('');</script>
 <script>
 (function(){
@@ -182,6 +183,23 @@ function pick(b,k){
     b.classList.add('wrong');b.disabled=true;fb.className='fb no';
     fb.innerHTML='<div><strong>Diese Zeile stimmt.</strong> Prüfe die nächsten Zeilen genauer.</div>';
   }
+}
+if(new URLSearchParams(location.search).has('druck')){
+  /* Papierfassung: alle Fälle untereinander, Lösungen im Anhang */
+  document.body.classList.add('druck');document.querySelectorAll('details').forEach(d=>d.open=true);
+  const bar=document.createElement('div');bar.className='druck-toolbar';
+  bar.innerHTML='<strong>Druckansicht</strong><span class="row"><button class="btn" onclick="window.print()">Drucken / als PDF</button><a class="btn ghost" href="rechenweg.html">Zurück</a></span>';
+  document.body.prepend(bar);
+  const top=document.querySelector('header.top'),kopf=document.createElement('div');kopf.className='druck-kopf';
+  kopf.innerHTML='<div><strong>Arbeitsheft</strong> · Der Rechenweg</div><div class="druck-felder"><span>Name: <i></i></span><span>Klasse: <i></i></span><span>Datum: <i></i></span></div>';
+  if(top)top.after(kopf);
+  const sec=document.getElementById('detektiv'),h2=sec.querySelector('h2');[...sec.children].forEach(c=>{if(c!==h2)c.remove()});
+  sec.insertAdjacentHTML('beforeend','<p class="druck-hinweis">In jeder Lösung steckt ein Fehler. Kreise die Zeile ein, in der er zuerst passiert.</p>'+
+    CASES.map((cs,n)=>`<div class="druck-aufg"><h3>Fall ${n+1}</h3><p>${cs.task}</p>${K.schema(cs.lines)}</div>`).join(''));
+  const anh=document.createElement('section');anh.className='druck-anhang';
+  anh.innerHTML='<h2>Lösungen: Rechenweg-Detektiv</h2>'+CASES.map((cs,n)=>{const b=[].concat(cs.bad)[0];return `<div class="druck-loes"><h4>Fall ${n+1}: Fehler in der Zeile „${cs.lines[b][0]}“</h4><p>${cs.why}</p></div>`}).join('');
+  const w=document.querySelector('nav.weiter');if(w)w.before(anh);else document.querySelector('main').append(anh);
+  return;
 }
 $('#detPrev').onclick=()=>{if(i>0){i--;render()}};
 $('#detNext').onclick=()=>{if(i<CASES.length-1){i++;render()}};

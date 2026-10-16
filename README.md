@@ -30,6 +30,7 @@ Reine statische Website: kein Build-Schritt, keine Abhängigkeiten außer Google
 | `modul-09.html` | Modul 9: Die Berufsformeln (Formelübersicht je Bereich, Formel finden, mehrstufige Aufgaben) |
 | `modul-10.html` | Modul 10: Funktionen – Vertiefung (linear/4–20 mA, Anlagenkennlinie mit Kennlinien-Labor, Halbwertszeit, pH) |
 | `einfach/` | **Mathe einfach**: reduzierte Version in einfacher Sprache (Start + Schritt 0–7), feste Stufe Basis, Vorlese-Funktion |
+| `material/arbeitshefte/` | Druckfassung: Arbeitshefte je Modul und Stufe, Rechenweg, Mathe einfach, Eingangstest mit Auswertungsbogen (PDF) |
 | `material/lerntagebuch-mathe-aufbaukurs.docx` | Lerntagebuch zum Ausdrucken: Übersicht zum Abhaken, 10 Terminseiten mit Reflexion |
 | `assets/fonts.css`, `assets/fonts/` | Schriften lokal (Barlow Semi Condensed, Source Sans 3, STIX Two Text; SIL Open Font License, Lizenztexte im Ordner) |
 | `assets/kurs.css` | Gemeinsames Layout (hell/dunkel) |
@@ -79,9 +80,13 @@ Für die schwächsten Lernenden, auch mit Sprachschwierigkeiten. Der Link wird g
 - Die Leiste unter dem Modulkopf wird automatisch zu „1 Verstehen · 2 Beispiel · 3 Üben · 4 Rechnen · Stand“ (Häkchen, wenn Trainer bzw. Rechnen der Stufe geschafft). Beispiel-Reiter erscheinen nur bis zur gewählten Stufe.
 - Startstufe eines Moduls: zuletzt gewählte Stufe im Modul → Empfehlung aus dem Eingangstest (`mak-test`) → Basis.
 
+## Druckfassung
+
+Jede Modulseite liefert mit `?druck=1&lvl=B|S|V` ein Arbeitsheft (Erklärungen der Stufe, Beispiel, Trainerfragen zum Ankreuzen, Rechenaufgaben mit Kästchenfeld, Anhang mit Tipps und Lösungen; jedes Laden neue Zahlen). `rechenweg.html?druck=1` und `eingangstest.html?druck=1` (mit Auswertungsbogen) entsprechend. Die PDFs in `material/arbeitshefte/` wurden daraus mit Chromium erzeugt.
+
 ## Neue Version hochladen
 
-Die Links auf `assets/kurs.css`, `kurs.js`, `fonts.css` und `einfach.js` tragen eine Versionsnummer (`?v=20261015c`). Ändert sich eine dieser Dateien, die Nummer in allen HTML-Seiten erhöhen (Suchen & Ersetzen), damit Browser nicht die alte Fassung aus dem Zwischenspeicher nehmen. `.nojekyll` im Repository nicht löschen.
+Die Links auf `assets/kurs.css`, `kurs.js`, `fonts.css` und `einfach.js` tragen eine Versionsnummer (`?v=20261016`). Ändert sich eine dieser Dateien, die Nummer in allen HTML-Seiten erhöhen (Suchen & Ersetzen), damit Browser nicht die alte Fassung aus dem Zwischenspeicher nehmen. `.nojekyll` im Repository nicht löschen.
 
 ## Neues Modul anlegen
 

@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Eingangstest – Mathe-Aufbaukurs</title>
-<link rel="stylesheet" href="assets/fonts.css?v=20261015c">
-<link rel="stylesheet" href="assets/kurs.css?v=20261015c">
+<link rel="stylesheet" href="assets/fonts.css?v=20261016">
+<link rel="stylesheet" href="assets/kurs.css?v=20261016">
 </head>
 <body>
 <header class="site"><div class="wrap sitebar">
@@ -25,7 +25,7 @@
 </main>
 <footer class="site-foot"><div class="wrap">Hans-Schwier-Berufskolleg Gelsenkirchen · Fachbereich Umweltschutztechnik · Umwelttechnolog(inn)en</div></footer>
 
-<script src="assets/kurs.js?v=20261015c"></script>
+<script src="assets/kurs.js?v=20261016"></script>
 <script>
 (function(){
 const {I,fr,F,M,EQ,u,nf}=K;
@@ -80,6 +80,7 @@ function intro(){
     </ul>
     <div class="row"><button class="btn" id="et-go">Test starten</button></div>
     <p class="small" id="schon-link"><a href="#schon">Ich habe den Test schon gemacht</a> – zum Beispiel, wenn der Fortschritt im Browser gelöscht wurde.</p>
+    <p class="small">Für die Lehrkraft: <a href="eingangstest.html?druck=1" target="_blank" rel="noopener">Papierfassung mit Auswertungsbogen</a></p>
   </section>`;
   document.getElementById('et-go').onclick=()=>{pos=0;show()};
 }
@@ -173,12 +174,52 @@ function schon(){
   document.getElementById('et-cancel').onclick=e=>{e.preventDefault();history.replaceState(null,'','eingangstest.html');intro()};
 }
 
-function route(){if(location.hash==='#schon')schon();else intro()}
+/* ---------- Papierfassung: eingangstest.html?druck=1 ---------- */
+function papier(){
+  document.body.classList.add('druck');
+  const ord=(it,i)=>{const n=it.o.length,r=(i*3+1)%n;return it.o.map((_,k)=>it.o[(k+r)%n])};   /* feste, gemischte Reihenfolge */
+  const key=[];
+  const bar=document.createElement('div');bar.className='druck-toolbar';
+  bar.innerHTML='<strong>Eingangstest – Papierfassung</strong><span class="row"><button class="btn" onclick="window.print()">Drucken / als PDF</button><a class="btn ghost" href="eingangstest.html">Zurück</a></span>';
+  document.body.prepend(bar);
+  const fn=t=>t.replace(/^Rechne ohne Taschenrechner: /,'Rechne ohne Taschenrechner: ');
+  host.innerHTML=`<div class="druck-kopf"><div><strong>Eingangstest</strong> · etwa 20 Minuten · keine Note</div>
+      <div class="druck-felder"><span>Name: <i></i></span><span>Klasse: <i></i></span><span>Datum: <i></i></span></div></div>
+    <p>Der Test zeigt, mit welcher Stufe du in jedem Modul anfängst. Taschenrechner erlaubt. Weißt du etwas nicht, lass das Feld frei – das ist besser als raten.</p>
+    <section><h2>Teil 1 · Fragen zu dir</h2><ol class="druck-mc">${SELF.map(q=>`<li><div class="q">${q.t}</div><div class="o">${q.o.map(([,t])=>`<span>☐ ${t}</span>`).join('')}</div></li>`).join('')}</ol></section>
+    <section><h2>Teil 2 · Aufgaben</h2><ol class="druck-mc et-p">${ITEMS.map((it,i)=>{
+      if(it.type==='mc'){const o=ord(it,i),r=o.indexOf(it.ok);key.push([i+1,it,'ABCD'[r]]);
+        return `<li><div class="q">${it.t}</div><div class="o">${o.map((x,j)=>`<span>☐ ${'ABCD'[j]}) ${x}</span>`).join('')}</div></li>`}
+      key.push([i+1,it,`${K.fmt(it.a)}${it.un?' '+it.un:''}`]);
+      return `<li><div class="q">${fn(it.t)}</div><p class="druck-erg">Ergebnis: <span class="linie"></span> ${it.un||''}</p><div class="et-neben"></div></li>`}).join('')}</ol></section>
+    <section class="druck-anhang"><h2>Auswertung (für die Lehrkraft)</h2>
+      <h3>Lösungen</h3>
+      <table class="druck-tab"><thead><tr><th>Nr.</th><th>Modul</th><th>Stufe</th><th>Lösung</th></tr></thead><tbody>
+        ${key.map(([n,it,l])=>`<tr><td>${n}</td><td>${MODS.find(m=>m[0]===it.m)[1]} · ${esc(MODS.find(m=>m[0]===it.m)[2])}</td><td>${LVN[it.L]}</td><td><strong>${l}</strong>${it.tol?' (±1 %)':''}</td></tr>`).join('')}
+      </tbody></table>
+      <p class="small">Zahlenwerte: kleine Rundungsabweichungen (ca. ±0,5 %, bei π-Aufgaben ±1 %) gelten als richtig.</p>
+      <h3 class="neue-seite">Empfehlung je Modul</h3>
+      <table class="druck-tab et-auswert"><thead><tr><th>Modul</th><th>Basis-Aufgabe (Nr.)</th><th>Standard-Aufgabe (Nr.)</th><th>Start auf</th></tr></thead><tbody>
+        ${MODS.map(([id,nr,t])=>{const b=ITEMS.findIndex(x=>x.m===id&&x.L==='B')+1,s2=ITEMS.findIndex(x=>x.m===id&&x.L==='S')+1;
+          return `<tr><td>${nr} · ${esc(t)}</td><td>☐ richtig (${b})</td><td>☐ richtig (${s2})</td><td>${id==='rw'?'für alle':'☐ Basis ☐ Standard'}</td></tr>`}).join('')}
+      </tbody></table>
+      <h3>Regeln</h3>
+      <ul>
+        <li><strong>Je Modul:</strong> beide Aufgaben richtig → Standard, sonst Basis.</li>
+        <li><strong>Unklare Fälle → einfachere Stufe:</strong> Hauptschulabschluss oder letzte Mathenote 4 bis 6 und weniger als 12 Punkte → auch dort Basis, wo beide Aufgaben richtig sind.</li>
+        <li><strong>Gesamtempfehlung:</strong> „Mathe einfach“ bei höchstens 5 Punkten oder bei „lange Texte: schwer“ und höchstens 8 Punkten. Sonst Standard, wenn mindestens 4 der Module 1–7 auf Standard stehen, ansonsten Basis.</li>
+        <li><strong>Mathe einfach:</strong> Bei dieser Empfehlung starten alle Module auf Basis.</li>
+        <li><strong>Im Kurs eintragen:</strong> Auf der Testseite „Ich habe den Test schon gemacht“ wählen und die Gesamtempfehlung einstellen. Einzelne Module stellen die Lernenden im Modul selbst um.</li>
+      </ul>
+      <div class="druck-kopf"><div class="druck-felder"><span>Punkte: <i></i> von 16</span><span>Empfehlung: ☐ Mathe einfach ☐ Basis ☐ Standard</span></div></div>
+    </section>`;
+}
+function route(){if(new URLSearchParams(location.search).has('druck'))return papier();if(location.hash==='#schon')schon();else intro()}
 window.addEventListener('hashchange',route);
 /* Schon erledigt? Ergebnis-Hinweis über der Einleitung */
 route();
 const t0=K.load('test');
-if(t0.date&&location.hash!=='#schon'){
+if(t0.date&&location.hash!=='#schon'&&!document.body.classList.contains('druck')){
   const d=document.createElement('div');d.className='testgate';
   d.innerHTML=`<span>Du hast den Test am ${K.dDE(t0.date)} ${t0.skipped?'übersprungen':'gemacht'}${t0.score!=null?` (${t0.score} von ${t0.max} Punkten)`:''}. Empfehlung: <strong>${LVN[t0.overall]}</strong>. Du kannst ihn wiederholen.</span>`;
   host.before(d);

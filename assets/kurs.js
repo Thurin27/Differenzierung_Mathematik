@@ -180,9 +180,77 @@ K.testGate=(root)=>{
   if(hd)hd.after(d);else main.prepend(d);
 };
 
+/* ---------- Druckfassung „Arbeitsheft“: modul-xx.html?druck=1&lvl=S ----------
+   Erklärungen der Stufe, Beispiel ausgeschrieben, Trainerfragen zum Ankreuzen, Rechenaufgaben mit Platz,
+   Anhang mit Tipps und Lösungen. Jeder Aufruf erzeugt neue Zahlen. */
+K.printModule=function(cfg,L){
+  const nT=cfg.printT||8,nR=cfg.printR||6,simple=!!cfg.simple;
+  document.body.classList.add('druck');document.documentElement.classList.add('druck');
+  K.applyLvl(L);
+  document.querySelectorAll('details').forEach(d=>d.open=true);
+  const main=document.querySelector('main'),top=main.querySelector('header.top');
+  const title=(document.querySelector('header.top h1')||{}).textContent||document.title;
+  /* Kopf mit Namensfeldern */
+  const kopf=document.createElement('div');kopf.className='druck-kopf';
+  kopf.innerHTML=`<div><strong>Arbeitsheft</strong> · Stufe <span class="lvl ${L}">${LV[L]}</span></div>
+    <div class="druck-felder"><span>Name: <i></i></span><span>Klasse: <i></i></span><span>Datum: <i></i></span></div>`;
+  if(top)top.after(kopf);
+  /* Bildschirm-Leiste (wird nicht gedruckt) */
+  const bar=document.createElement('div');bar.className='druck-toolbar';
+  bar.innerHTML=`<strong>Druckansicht</strong> <span class="small">Stufe ${LV[L]} · jedes Neuladen erzeugt neue Zahlen</span>
+    <span class="row">${cfg.lock?'':['B','S','V'].map(l=>`<a class="btn ghost${l===L?' on':''}" href="?druck=1&lvl=${l}">${LV[l]}</a>`).join('')}
+    <button class="btn" onclick="window.print()">Drucken / als PDF</button><a class="btn ghost" href="${location.pathname.split('/').pop()}">Zurück</a></span>`;
+  document.body.prepend(bar);
+  const sec=id=>{const h=document.querySelector(`[data-k="${id}"]`);return h&&h.closest('section')};
+  const reset=(se,txt)=>{if(!se)return null;const h2=se.querySelector('h2');[...se.children].forEach(c=>{if(c!==h2)c.remove()});
+    const p=document.createElement('p');p.className='druck-hinweis';p.innerHTML=txt;se.append(p);const box=document.createElement('div');se.append(box);return box};
+  const ans=[];  /* Anhang */
+  /* Beispiel */
+  if(cfg.examples){
+    const keys=Object.keys(cfg.examples),k=cfg.examples[L]?L:keys.filter(x=>RANK[x]<=RANK[L]).pop()||keys[0],ex=cfg.examples[k];
+    const box=reset(sec('stepper'),'Lies das Beispiel Schritt für Schritt.');
+    if(box)box.innerHTML=`<div class="druck-bsp"><p>${ex.intro}</p><ol>${ex.s.map(s=>`<li><div class="eqn">${s.e}</div><div class="small"><strong>${s.o||''}</strong> ${s.w}</div></li>`).join('')}</ol></div>`;
+  }
+  /* Trainer */
+  if(cfg.trainer){
+    const pool=K.shuffle(cfg.trainer.filter(x=>x.L===L)).slice(0,nT);
+    const box=reset(sec('trainer'),simple?'Kreuze die richtige Antwort an.':'Kreuze jeweils die richtige Antwort an.');
+    const rows=[];
+    if(box)box.innerHTML=`<ol class="druck-mc">${pool.map((q,i)=>{const opts=K.shuffle([{h:q.ok,ok:1},...q.w.map(h=>({h}))]);
+      const r=opts.findIndex(o=>o.ok);rows.push([i+1,'ABCD'[r],q.h]);
+      const ask=q.ask&&!/^(Welche Antwort ist richtig|Was ist richtig)\?$/.test(q.ask)?` <span class="small">${q.ask}</span>`:'';
+      return `<li><div class="q"><span class="eyebrow">${q.n}</span><br>${q.prompt}${ask}</div>
+        <div class="o">${opts.map((o,j)=>`<span>☐ ${'ABCD'[j]}) ${o.h}</span>`).join('')}</div></li>`}).join('')}</ol>`;
+    ans.push(`<h3>Antworten: Trainer</h3><table class="druck-tab"><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td><strong>${r[1]}</strong></td><td>${r[2]}</td></tr>`).join('')}</tbody></table>`);
+  }
+  /* Rechenaufgaben */
+  if(cfg.tasks){
+    const gens=cfg.tasks.filter(x=>x.L===L);let bag=[];const list=[];
+    for(let i=0;i<nR&&gens.length;i++){if(!bag.length)bag=K.shuffle(gens);list.push(bag.shift().g())}
+    const box=reset(sec('rechnen'),simple?'Schreibe alle 6 Schritte in den Kasten. Schreibe das Ergebnis unten hin.':'Schreibe den Rechenweg in den Kasten: Gegeben – Gesucht – Formel – Umstellung – Rechnung – Antwortsatz. Runde auf 4 signifikante Stellen.');
+    if(box)box.innerHTML=list.map((c,i)=>`<div class="druck-aufg"><h3>Aufgabe ${i+1}: ${c.ti} <span class="small muted">(${c.tag})</span></h3><div class="r-text">${c.tx}</div>
+      <div class="druck-heft"></div><p class="druck-erg"><span class="f">${c.x}</span> = <span class="linie"></span> ${c.un||''}</p></div>`).join('');
+    ans.push(`<h3>Tipps und Lösungen: Rechenaufgaben</h3>`+list.map((c,i)=>{
+      const tips=c.tips||c.steps.concat([['Eingesetzt',c.ein]]).slice(0,3).map(x=>x[0]+': '+x[1]);
+      return `<div class="druck-loes"><h4>Aufgabe ${i+1}: ${c.ti}</h4><ol class="druck-tipps">${tips.map(t=>`<li>${t}</li>`).join('')}</ol>`+
+        K.schema([['Gegeben',c.geg],['Gesucht',`<span class="f">${c.x}</span>${c.un?' in '+c.un:''}`],...c.steps,['Rechnung',c.s],['Antwort',c.satz]])+`</div>`}).join(''));
+  }
+  /* Lernstand-Abschnitt entfällt, Anhang anhängen */
+  const st=sec('stand');if(st)st.remove();
+  const anh=document.createElement('section');anh.className='druck-anhang';
+  anh.innerHTML=`<h2>Lösungen</h2><p class="small">Erst selbst rechnen. Dann einen Tipp lesen. Die Lösung ist zum Vergleichen.</p>${ans.join('')}`;
+  const weiter=main.querySelector('nav.weiter');if(weiter)weiter.before(anh);else main.append(anh);
+  if(PQS().has('auto'))setTimeout(()=>window.print(),400);
+};
+const PQS=()=>new URLSearchParams(location.search);
+/* Knopf „Arbeitsheft drucken“ */
+K.printLink=(L,lock)=>`<a class="btn ghost druck-link" href="?druck=1&lvl=${lock||L}" target="_blank" rel="noopener">Arbeitsheft drucken${lock?'':' ('+LV[L]+')'}</a>`;
+
 /* ---------- Modul ---------- */
 K.module=function(cfg){
   const need=Object.assign({T:5,R:3},cfg.need);
+  const PQ=new URLSearchParams(location.search);
+  if(PQ.has('druck'))return K.printModule(cfg,cfg.lock||PQ.get('lvl')||K.load(cfg.id).lvl||K.testLvl(cfg.id)||'B');
   K.zones();
   /* einfache Version: lock = feste Stufe (ohne Wahl), simple = kurze, einfache Rückmeldungen, root = Pfad zur Hauptseite */
   const lock=cfg.lock||null,simple=!!cfg.simple,root=cfg.root||'',S=(a,b)=>simple?b:a;
@@ -422,7 +490,7 @@ K.module=function(cfg){
     pHost.innerHTML=`<div class="prog"></div>
       <p class="small">${simple?`Das speichert nur dieser Browser. Alle Schritte siehst du auf der <a href="${cfg.standLink||'index.html'}">Startseite</a>. Wenn du fertig bist: Hake im Lerntagebuch ab (Spalte Basis).`
         :`Gespeichert nur in diesem Browser. Alle Module auf einen Blick: <a href="${root}fortschritt.html">Mein Fortschritt</a>. Geschaffte Stufen hakst du in deinem Lerntagebuch ab.`}</p>
-      <div class="confirm p-reset"></div>`;
+      <div class="confirm p-reset"></div><p class="small druck-zeile">Lieber auf Papier? <span class="druck-link-host"></span></p>`;
     const resetUI=()=>{
       const box=$('.p-reset',pHost);
       box.innerHTML=`<button class="btn ghost">${S('Lernstand dieses Moduls zurücksetzen','Alles auf null setzen')}</button>`;
@@ -435,6 +503,7 @@ K.module=function(cfg){
     };
     resetUI();renderProg();
   }
+  const drHook=()=>{const h=pHost&&$('.druck-link-host',pHost);if(h)h.innerHTML=K.printLink(st.lvl,lock)};hooks.push(drHook);
   setLvl(st.lvl);
   if(simple){
     const tb=$('[data-say-t]'),rb=$('[data-say-r]');

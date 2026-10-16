@@ -9,7 +9,7 @@ E.tx=(sit,geg,frage,start)=>`<p>${sit}</p><p class="small muted">Das weißt du:<
 /* Trainer-Frage (immer Basis) */
 E.T=(n,prompt,ok,w,h,ask)=>({L:'B',n,prompt,ask:ask||'Was ist richtig?',ok,w,h});
 /* Modul starten: feste Stufe Basis, einfache Rückmeldungen */
-E.run=cfg=>K.module(Object.assign({lock:'B',simple:true,root:'../',standLink:'index.html'},cfg));
+E.run=cfg=>K.module(Object.assign({lock:'B',simple:true,root:'../',standLink:'index.html',printT:6,printR:4},cfg));
 /* Startseite: Status je Schritt */
 E.overview=()=>{
   document.querySelectorAll('[data-step]').forEach(a=>{
